@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "消息中心",
+  "navigationBarBackgroundColor": "#1cbbb4",
+  "navigationBarTextStyle": "white",
+  "usingComponents": {
+    "uni-segmented-control": "/uni_modules/uni-segmented-control/components/uni-segmented-control/uni-segmented-control",
+    "uni-card": "/uni_modules/uni-card/components/uni-card/uni-card",
+    "tabbar": "/components/tabbar/tabbar"
+  }
+}

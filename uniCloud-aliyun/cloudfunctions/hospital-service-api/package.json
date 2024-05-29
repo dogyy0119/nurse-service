@@ -1,0 +1,7 @@
+{
+  "name": "hospital-service-api",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

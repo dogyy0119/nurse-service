@@ -1,0 +1,7 @@
+{
+  "name": "hospital-service-item",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

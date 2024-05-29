@@ -1,0 +1,14 @@
+{
+  "name": "hospital-service-get",
+  "version": "1.0.0",
+  "description": "医院服务",
+  "main": "index.js",
+  "dependencies": {},
+  "cloudfunction-config": {
+  	"triggers": [{
+  		"name": "hospital-service-get",
+  		"type": "timer",
+  		"config": "0 0 */2 * * * *"
+  	}]
+  }
+}
