@@ -179,18 +179,24 @@
 			// 列表条目点击事件
 			goProDetail(item) {
 
-				console.log("条目数据 = " + JSON.stringify(item));
-				uni.showModal({
-					title: '选择条目',
-					content: '选择条目数据 = ' + JSON.stringify(item)
-				})
+				uni.navigateTo({
+					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+				// console.log("条目数据 = " + JSON.stringify(item));
+				// uni.showModal({
+				// 	title: '选择条目',
+				// 	content: '选择条目数据 = ' + JSON.stringify(item)
+				// })
 			},
 
 			tapGrid(index) {
 				this.navIndex = index
 				uni.navigateTo({
-					// url: `/pages/hushizhan/hushizhan?index=${index}`,
-					url: `/pages/index/indexservice/indexservice?index=${index}`,
+					url: `/pages/hushizhan/hushizhan?index=${index}`,
+					// url: `/pages/index/indexservice/indexservice?index=${index}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}

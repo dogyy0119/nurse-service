@@ -129,7 +129,7 @@
 					
 				    name: "nurse-hospital-get",
 				    data: {
-						city: "沈阳"
+						city: "沈阳市"
 				    },
 				    success: (res) => {
 						// if(res.result.data.length==0){
