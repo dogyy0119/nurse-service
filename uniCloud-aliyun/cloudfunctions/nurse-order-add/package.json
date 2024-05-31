@@ -1,0 +1,7 @@
+{
+  "name": "nurse-order-add",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

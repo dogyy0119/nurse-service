@@ -27,15 +27,22 @@
 					<uni-datetime-picker type="datetime" return-type="timestamp"
 						v-model="baseFormData.datetimesingle" />
 				</uni-forms-item>
-				
-				<uni-section title=" 非必填项  " type="line">
-					
-				</uni-section>
-				
-				<uni-forms-item label="选择城市">
+								
+<!-- 				<uni-forms-item label="选择城市">
 					<uni-data-picker v-model="baseFormData.city" :localdata="cityData" popup-title="选择城市">
 					</uni-data-picker>
-				</uni-forms-item>
+				</uni-forms-item> -->
+				
+				<uni-section title=" 套餐信息:  " type="line">					
+				</uni-section>
+				
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">套餐: {{taocan}}</text></view>
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">耗材类型：{{haocaiName}}</text></view>
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">耗材详细：{{haocaiDetail}}</text></view>
+				
 			</uni-forms>
 			<div class="flex-container">
 				<button class="amount">金额：￥{{totalPrice}}</button>
@@ -50,6 +57,9 @@
 	export default {
 		data() {
 			return {
+				taocan: '',
+				haocaiName: '',
+				haocaiDetail: '',
 				totalPrice: 0,
 				// 基础表单数据
 				baseFormData: {
@@ -182,8 +192,18 @@
 				return 'left'
 			}
 		},
-		onLoad(event) {
-			this.totalPrice = event.totalPrice
+		onLoad(options) {
+			// this.totalPrice = options.totalPrice
+			
+		    if (options.params) {
+		        let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
+		        console.log(params);
+				this.totalPrice = params.totalPrice;
+				this.taocan = params.taocan;
+				this.haocaiName = params.haocaiName;
+				this.haocaiDetail = params.haocaiDetail;
+				
+		    }
 		},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行
@@ -191,6 +211,26 @@
 		},
 		methods: {
 			goSubmit() {
+				
+				
+				// {
+				//     "title": "拆线",
+				//     "type": "医美拆线",
+				//     "service_id": "6649e8630d2b315faf6af0a0",
+				//     "total_fee": 121,
+				//     "user_id": "li'yong'sheng",
+				//     "servants_name": "ss",
+				//     "servants_address": "和平区1111",
+				//     "servants_phone": "12345678901",
+				//     "reservation_time": 1717048840000,
+				//     "nurse_id": "使命召唤",
+				//     "nurse_phone": "1234567890",
+				//     "status": 2,
+				//     "transaction_id": "123456565655665",
+				//     "update_time": 1716998400000,
+				//     "paid_time": 1717048883000,
+				//     "info": "上门服务",
+				// }
 				
 			},
 			onClickItem(e) {
@@ -260,29 +300,6 @@
 		margin-left: 10px;
 	}
 	
-	// .reserve-btn {
-	// 	flex: 1; 
-	// 	height: 30px; /* 设置按钮高度为14像素 */
-	//     background-color: #DD524D; /* 设置背景色为粉色 */
-	//     color: #fff; /* 设置字体颜色为白色 */
-	//     border: none; /* 移除按钮边框 */
-	//     padding: 1px 10px; /* 设置按钮内边距 */
-	//     border-radius: 5px; /* 添加圆角 */
-	//     cursor: pointer; /* 设置鼠标指针为手型 */
-	// 	font-size: 12px;		
-	// }
-	
-	// .amount {
-	// 	flex: 1; 
-	// 	height: 30px; /* 设置按钮高度为14像素 */
-	//     background-color: #1CBBB4; /* 设置背景色为粉色 */
-	//     color: #fff; /* 设置字体颜色为白色 */
-	//     // border: none; /* 移除按钮边框 */
-	//     // padding: 1px 1px; /* 设置按钮内边距 */
-	//     border-radius: 5px; /* 添加圆角 */
-	//     cursor: pointer; /* 设置鼠标指针为手型 */
-	// 	font-size: 12px;		    
-	// }
 	.reserve-btn {
 	    flex: 1; 
 	    height: 30px; /* 设置按钮高度为14像素 */

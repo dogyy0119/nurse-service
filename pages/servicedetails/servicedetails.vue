@@ -57,7 +57,7 @@
 			</view>
 			
 			<div class="flex-container">
-				<button class="amount" @click="toggle('bottom')" >金额：￥{{totalPrice}}</button>
+				<button class="amount" @click="toggle('bottom')" >金额:￥{{totalPrice}} 详情...</button>
 			    <button class="reserve-btn" @click="goToAppointment">立即预约</button>
 			</div>
 		</view>
@@ -131,8 +131,22 @@
 				this.$refs.popup.open(type)
 			},
 			goToAppointment() {
+				
+				let obj = { 
+					totalPrice: this.totalPrice,
+					taocan: this.taocan[this.taocanValue].text, 
+					haocaiName: this.toolObj.name,
+					haocaiDetals: this.toolObj.detail,	
+				};
+				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+				
+				// uni.navigateTo({
+				//     url: 'pages/example?params=' + params
+				// });
+				
 				uni.navigateTo({
-					 url: `/pages/appointment/appointment?totalPrice=${this.totalPrice}`,
+					// url: `/pages/appointment/appointment?totalPrice=${this.totalPrice}`,
+					url: '/pages/appointment/appointment?params=' + params,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}

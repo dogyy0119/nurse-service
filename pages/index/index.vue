@@ -116,15 +116,12 @@
 			// this.requestData();
 		},
 		
-		onShow() {
-			
+		onShow() {			
 			this.getNewsData();
 		},
-		
-		
+				
 		onNavigationBarButtonTap(e) {
-			
-			
+				
 		},
 		
 		methods: {
@@ -132,8 +129,7 @@
 			      // 处理城市选择逻辑
 			      console.log('选择城市');
 				  uni.navigateTo({
-				    url: '/pages/city/city'
-					
+				    url: '/pages/city/city'	
 				  });
 			},
 			getNewsData(id=0){
@@ -185,11 +181,6 @@
 					fail: () => {},
 					complete: () => {}
 				});
-				// console.log("条目数据 = " + JSON.stringify(item));
-				// uni.showModal({
-				// 	title: '选择条目',
-				// 	content: '选择条目数据 = ' + JSON.stringify(item)
-				// })
 			},
 
 			tapGrid(index) {
@@ -219,17 +210,14 @@
 			},
 
 			searchClick: function() {
-
 				console.log("点击了搜索框");
-				
-				
+								
 				uni.navigateTo({
 					url:'./search'
 				})
 
 			},
 			rigIconClick() {
-
 				console.log("点击了右侧图标");
 				uni.showModal({
 					title: '温馨提示',

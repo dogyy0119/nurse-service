@@ -11,31 +11,18 @@
 				"navigationStyle": "custom",
 
 				"app-plus": {
-							"titleNView": {
-								"buttons": [
-									{
-										"color":"#fff",
-										"float":"left",
-										"fontSize":"15",
-										"text": "北京",
-										"select" : true
-										// "type": "menu",  //使用	
-				      //                   "signType": "menuBtn" 
-				//onNavigationBarButtonTap里会监听出当前点击的导航栏按钮的配置对象，故这里可定义一个参数如signType，
-				//当监听出点击的按钮对象时，可根据对象中的signType参数的值，判断当前点击的是哪一个按钮
-									}
-									// {
-									// 	"color":"#fff",
-									// 	"float":"right",
-									// 	"fontSize":"20px",
-									// 	// "fontSrc":"/static/iconfont/iconfont.ttf",  //此处有说明，见下方
-									// 	"fontSrc":"/uni_modules/uni-icons/components/uni-icons/uniicons.ttf",  //此处有说明，见下方
-									// 	"text": "\ue672",  //自定义按钮
-				     //                    "signType": "homeBtn"
-									// }
-								]
+					"titleNView": {
+						"buttons": [
+							{
+								"color":"#fff",
+								"float":"left",
+								"fontSize":"15",
+								"text": "北京",
+								"select" : true
 							}
-						}
+						]
+					}
+				}
 			}
 		},
 		{
@@ -46,26 +33,25 @@
 				"navigationBarTextStyle": "white",
 				"enablePullDownRefresh": false,
 				"app-plus" : {  
-				            "titleNView" : {  
-				                "titleText" : "",  
-				                "tags" : [  
-				                    {  
-				                        "tag" : "img",  
-				                        "src" : "/static/search.png",  
-				                        "position" : {  
-				                            "left" : "auto",  
-				                            "top" : "auto",  
-				                            "width" : "110px",  
-				                            "height" : "26px"  
-				                        }  
-				                    }  
-				                ]  
-				            }  
-				        }  
+		            "titleNView" : {  
+		                "titleText" : "",  
+		                "tags" : [  
+		                    {  
+		                        "tag" : "img",  
+		                        "src" : "/static/search.png",  
+		                        "position" : {  
+		                            "left" : "auto",  
+		                            "top" : "auto",  
+		                            "width" : "110px",  
+		                            "height" : "26px"  
+		                        }  
+		                    }  
+		                ]  
+		            }  
+		        }  
 			}
 
 		},
-		
 		
 		
 		{

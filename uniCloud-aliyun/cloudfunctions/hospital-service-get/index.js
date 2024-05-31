@@ -13,17 +13,12 @@ exports.main = async (event, context) => {
 	// 	city:"沈阳"
 	// }}).orderBy("_id","asc").get()
 	
-	console.log("liuhang type: event.type : " + event.type)
 	
 	let res = await collection.where({
 		type: event.type
 	}).get()
 	
-	//event为客户端上传的参数
-	 console.log('liuhang result : ', JSON.stringify(res.data))
-	
-	//返回数据给客户端
-	// return res
+
 	
 	return  {
 	    code: 200, // 成功状态码
@@ -31,8 +26,5 @@ exports.main = async (event, context) => {
 	    data: res.data // 返回的数据
 	}
 
-	// return {
-	// 	code: 500,
-	// 	msg: '请求错误'
-	// };
+
 };

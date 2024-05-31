@@ -7,8 +7,7 @@ exports.main = async (event, context) => {
 	
 	let res = await collection.add(event)
 	
-	//event为客户端上传的参数
-	 console.log('add res : ', res)
+
 	
 	//返回数据给客户端
 	return  {
@@ -17,8 +16,4 @@ exports.main = async (event, context) => {
 	    data: res.data // 返回的数据
 	}
 	
-	// return {
-	// 	code: 500,
-	// 	msg: '请求错误'
-	// };
 };
