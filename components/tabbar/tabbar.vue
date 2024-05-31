@@ -35,20 +35,20 @@
 						selectedIconPath: "../../static/tabbar/homefill.png",
 						pagePath: "/pages/index/index"
 					},
-					{
-						text: "护士站",
-						isbulge: false,
-						iconPath: "../../static/tabbar/we.png",
-						selectedIconPath: "../../static/tabbar/wefill.png",
-						pagePath: "/pages/hospital/hospital"
-					},
-					{
-						text: "加入",
-						isbulge: true,//是滞显示为凸起来的样式
-						iconPath: "../../static/tabbar/add.png",
-						selectedIconPath: "../../static/tabbar/add.png",
-						pagePath: "/pages/join/join"
-					},
+					// {
+					// 	text: "护士站",
+					// 	isbulge: false,
+					// 	iconPath: "../../static/tabbar/we.png",
+					// 	selectedIconPath: "../../static/tabbar/wefill.png",
+					// 	pagePath: "/pages/hospital/hospital"
+					// },
+					// {
+					// 	text: "加入",
+					// 	isbulge: true,//是滞显示为凸起来的样式
+					// 	iconPath: "../../static/tabbar/add.png",
+					// 	selectedIconPath: "../../static/tabbar/add.png",
+					// 	pagePath: "/pages/join/join"
+					// },
 					{
 						text: "订单",
 						isbulge: false,

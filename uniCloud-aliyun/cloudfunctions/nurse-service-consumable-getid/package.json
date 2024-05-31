@@ -1,0 +1,7 @@
+{
+  "name": "nurse-service-consumable-getid",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

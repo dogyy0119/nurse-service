@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar left-icon="back" :left-text="cityName"
-				title="服务详情" @clickLeft="backToTop" />
+	<!-- 	<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar left-icon="back" :left-text="cityName"
+				title="服务详情" @clickLeft="backToTop" /> -->
 		<view class="detail">
 			
 			<view class="pic">
@@ -11,30 +11,38 @@
 			<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
 					<!-- <view class="price" >￥：{{detailObj.price}}</view> -->
-					<uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
-						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />
-					
+<!-- 					<uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
+						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" /> -->					
 				</view>
-				
 			</uni-section>
-						
-			<view class="title">
-	<!-- 			<view class="name" >{{detailObj.name}}</view> -->
+<!-- 		<view class="title">
 				<view class="price" >￥：{{detailObj.price}}</view>
-			</view>
+			</view> -->
 			<view class="tool">
 				<view class="author">套餐选择：{{detailObj.service_desc}}</view>
+				<view class="uni-px-5">
+					<!-- <view class="text">选中：{{taocan[taocanValue].text}}</view> -->
+					<uni-data-checkbox mode="tag" v-model="taocanValue" :localdata="taocan" @change="taocanCheckboxChange(taocanValue)"></uni-data-checkbox>
+				</view>
 				<view class="time">发布时间：{{detailObj._add_time_str}}</view>
+				<view class="price" >￥：{{price}}</view>
 			</view>
 			
+	
+			
 			<view class="tool">
+				
 				<view class="author">选择耗材：</view>
 				<view class="author">类型：{{toolObj.name}}</view>
 				<view class="author">详细：{{toolObj.detail}}</view>
-				<view class="price">￥：{{toolObj.price}}</view>
+				<view class="price">￥：{{customPrice}}</view>
+				<!-- <uni-section type="line"> -->
+					<view class="uni-px-5">
+						<!-- <view class="text">{{JSON.stringify(haocaiValue)}}</view> -->
+						<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
+					</view>
+				<!-- </uni-section> -->
 			</view>
-			
-			
 			
 			<!-- <view class="info">
 				<view class="author">套餐选择：{{detailObj.service_desc}}</view>
@@ -47,6 +55,23 @@
 			<view class="pic">
 				<image v-for="(item, index) in detailObj.service_banner_imgs" :key="index" :src="item" mode="widthFix"></image>
 			</view>
+			
+			<div class="flex-container">
+				<button class="amount" @click="toggle('bottom')" >金额：￥{{totalPrice}}</button>
+			    <button class="reserve-btn" @click="goToAppointment">立即预约</button>
+			</div>
+		</view>
+		
+		<view>
+			<!-- 普通弹窗 -->
+			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">套餐: {{taocan[taocanValue].text}}</text></view>
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">耗材类型：{{toolObj.name}}</text></view>
+				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="text">耗材详细：{{toolObj.detail}}</text></view>
+			</uni-popup>
 		</view>
 	</view>
 </template>
@@ -58,20 +83,94 @@
 	export default {
 		data() {
 			return {
+				type: '',
+				cityName: "",
 				checkList: [false, false, false, false, false, false],
 				detailObj:{},
-				toolObj:{}
+				toolObj:{},
+				taocanValue: 0,
+				price: 0,
+				customPrice: 0,
+				totalPrice: 0,
+				sex: [{
+					text: '购买耗材',
+					value: 0
+				}, {
+					text: '自带耗材',
+					value: 1
+				}],
+				haocaiValue: 0,
+				taocan: [
+					{
+						text: '套餐1',
+						value: 0,
+						price: 100
+					}, {
+						text: '套餐2',
+						value: 1,
+						price: 200
+					}
+				]
 			};
 		},
-		onLoad(event){
-			options=event;
-			this.getDetail(options)
-			this.getConsumaList(options)
-
+		async onLoad(event) {
+		    options = event;
+		    await this.getDetail(options);
+		    await this.getConsumaList(options);
+				
+		    this.getPackageList(this.detailObj.package_list);
+		},
+		mounted() {
+			    this.calculateTotalPrice();
 		},
 		methods:{
+			toggle(type) {
+				console.log("type:" + type)
+				this.type = type
+				// open 方法传入参数 等同在 uni-popup 组件上绑定 type属性
+				this.$refs.popup.open(type)
+			},
+			goToAppointment() {
+				uni.navigateTo({
+					 url: `/pages/appointment/appointment?totalPrice=${this.totalPrice}`,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
+			calculateTotalPrice() {
+				 this.price = this.taocan[0].price
+			    if(this.haocaiValue === 0) {
+			        this.totalPrice = this.price + this.customPrice;
+			    } else if (this.haocaiValue === 1) {
+			        this.totalPrice = this.price;
+			    }
+			},
+			taocanCheckboxChange(value) {
+				 console.log('选中的值：', value);
+				 console.log(this.taocan[value].price)
+				 if(this.haocaiValue==0) {
+					this.price = this.taocan[value].price
+				 	this.totalPrice = this.price + this.customPrice
+				 } else if (this.haocaiValue==1) {
+					this.price = this.taocan[value].price 
+				 	this.totalPrice = this.price
+				 }
+			},
+			haochaiCheckboxChange(value) {
+			        // 处理点击事件，value 是选中的值
+			        console.log('选中的值：', value);
+			        // 在这里执行你想要的逻辑
+					if(this.haocaiValue==0) {
+						this.totalPrice = this.price + this.customPrice
+					} else if (this.haocaiValue==1) {
+						this.totalPrice = this.price
+					}
+			},
 			backToTop() {
-				
+				uni.switchTab({
+				    url: '/pages/index/index'
+				})
 			},
 			favClick(index) {
 				this.checkList[index] = !this.checkList[index]
@@ -86,27 +185,27 @@
 				uniCloud.callFunction({
 				    name: "nurse-service-getid",
 				    data: {						
-				        id: id 
+				        id:id 
 				    },
 				    success: (res) => {
 						this.loading=2
 						console.log(res.result.data);
 						this.detailObj = res.result.data[0]
-				    },
+						// this.price = this.detailObj.price
+						this.totalPrice = this.customPrice + this.price
+						
+					},
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
 				    },
 				    complete: (res) => {
 				        console.log("请求完成");
 				    }
-				});
-				
-				
+				});								
 			},
 			
 			getConsumaList(options){
 				let consumableid = "66496ec0ee97ef5896909378"
-				
 				uniCloud.callFunction({
 				    name: "nurse-service-consumable-getid",
 				    data: {						
@@ -116,6 +215,42 @@
 						this.loading=2
 						console.log(res.result.data);
 						this.toolObj = res.result.data[0]
+						this.customPrice = this.toolObj.price
+						this.totalPrice = this.customPrice + this.price
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("请求完成");
+				    }
+				});
+			},
+			
+			getPackageList(packageIds){
+				let packageIdss= [ "66498e790d2b315faf5d1e8b", "66496e8ae0ec199b1835a385" ]
+					
+				console.log( "packageIds:" + packageIdss)
+				uniCloud.callFunction({
+				    name: "nurse-service-package-getids",
+				    data: {						
+				        ids: packageIdss
+				    },
+				    success: (res) => {
+						this.loading=2
+						console.log(res.result.data);
+						
+						this.taocan = [];
+						let i = 0;
+						res.result.data.forEach(item => {
+							this.taocan.push({
+								'text': item.name,
+								'value': i,
+								'price': item.price,
+							});
+							console.log("i:" + i)
+							i = i+1;
+						});
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -132,6 +267,26 @@
 <style lang="scss">
 .detail{
 	// padding:50rpx 30rpx;
+	
+
+	
+	.popup-height {
+		// @include height;
+		width: 200px;
+	}
+	.popup-content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 50px;
+		padding: 15px;
+		font-size: 10px;
+	}
+	
+	.text {
+		font-size: 10px;
+		color: #333;
+	}
 	
 	.pic {
 		// width: 230rpx;
@@ -168,21 +323,43 @@
 		}
 	}
 	
-	.tool {
-		padding:0 30rpx;
-		margin:50rpx 0;
-	    display: flex;
-		background: #f6f6f6;
-	    flex-direction: column; /* 设置flex子项垂直排列 */
-	    align-items: left; /* 子项在水平方向上居中对齐 */
-	    justify-content: flex-start; /* 子项在垂直方向上从顶部开始排列 */
-		margin-bottom: 10px;
+	// .tool {
+	// 	padding:0 30rpx;
+	// 	margin:50rpx 0;
+	//     display: flex;
+	// 	background: #f6f6f6;
+	//     flex-direction: column; /* 设置flex子项垂直排列 */
+	//     align-items: left; /* 子项在水平方向上居中对齐 */
+	//     justify-content: flex-start; /* 子项在垂直方向上从顶部开始排列 */
+	// 	margin-bottom: 10px;
 		
-		.price {
-			font-size: 30rpx;
-			color: #F5C2C1;
-			line-height: 1.6em;
-		}
+	// 	.price {
+	// 		font-size: 30rpx;
+	// 		color: #F5C2C1;
+	// 		line-height: 1.6em;
+	// 	}
+	// }
+	
+	.tool {
+	    display: flex;
+	    flex-direction: column; /* 设置flex子项垂直排列 */
+	    align-items: flex-start; /* 子项在水平方向上从左侧开始对齐 */
+	    justify-content: flex-start; /* 子项在垂直方向上从顶部开始排列 */
+	    padding: 10px; /* 添加内边距 */
+	    border: 1px solid #ccc; /* 添加边框 */
+	    border-radius: 5px; /* 添加圆角 */
+	    margin-bottom: 20px; /* 添加底部间距 */
+	}
+	
+	.author,
+	.price {
+	    margin-bottom: 5px; /* 设置各项之间的垂直间距 */
+	    color: #666; /* 设置字体颜色 */
+	}
+	
+	.price {
+	    color: #f00; /* 设置价格文字颜色 */
+	    font-weight: bold; /* 设置价格文字加粗 */
 	}
 	
 	.info{
@@ -203,6 +380,56 @@
 		color:#F89898;
 		line-height: 1.8em;
 	}
+	
+	.text {
+		font-size: 12px;
+		color: #666;
+		margin-top: 5px;
+	}
+	
+	.uni-px-5 {
+		padding-left: 1px;
+		padding-right: 10px;
+	}
+	
+	.uni-pb-5 {
+		padding-bottom: 10px;
+	}
+	
+	.flex-container {
+	    display: flex;
+	    justify-content: space-between; /* 将元素分别放在行的两端 */
+	    align-items: center; /* 垂直居中对齐 */
+		width: 100%; /* 让.flex-container占据其父元素的整个宽度 */
+
+		.reserve-btn {
+			flex: 1; 
+			height: 30px; /* 设置按钮高度为14像素 */
+		    background-color: #DD524D; /* 设置背景色为粉色 */
+		    color: #fff; /* 设置字体颜色为白色 */
+		    border: none; /* 移除按钮边框 */
+		    padding: 1px 10px; /* 设置按钮内边距 */
+		    border-radius: 5px; /* 添加圆角 */
+		    cursor: pointer; /* 设置鼠标指针为手型 */
+			font-size: 12px;		
+		}
+		
+		.amount {
+			flex: 1; 
+			 height: 30px; /* 设置按钮高度为14像素 */
+		    background-color: #DD524D; /* 设置背景色为粉色 */
+		    color: #fff; /* 设置字体颜色为白色 */
+		    // border: none; /* 移除按钮边框 */
+		    // padding: 1px 1px; /* 设置按钮内边距 */
+		    border-radius: 5px; /* 添加圆角 */
+		    // cursor: pointer; /* 设置鼠标指针为手型 */
+			 font-size: 12px;		    
+		}
+	}
+	
+	
+
+	
 	
 }
 </style>

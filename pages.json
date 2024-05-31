@@ -346,7 +346,19 @@
 			"path" : "pages/servicedetails/servicedetails",
 			"style" : 
 			{
-				"navigationBarTitleText" : "服务详情"
+				"navigationBarBackgroundColor": "#1cbbb4",
+				"navigationBarTitleText" : "服务详情",
+				"navigationStyle": "default"
+				
+			}
+		},
+		{
+			"path" : "pages/appointment/appointment",
+			"style" : 
+			{
+				"navigationBarBackgroundColor": "#1cbbb4",
+				"navigationBarTitleText" : "预约",
+				"navigationStyle": "default"
 			}
 		}
 	],
@@ -371,22 +383,26 @@
 			"iconPath": "static/tabbar/home.png",
 			"selectedIconPath": "static/tabbar/homefill.png",
 			"text": "首页"
-		}, {
-			"pagePath": "pages/hospital/hospital",
-			"iconPath": "static/tabbar/we.png",
-			"selectedIconPath": "static/tabbar/wefill.png",
-			"text": "护士站"
-		}, {
-			"pagePath": "pages/join/join",
-			"iconPath": "static/tabbar/add.png",
-			"selectedIconPath": "static/tabbar/add.png",
-			"text": "加入"
-		}, {
+		}, 
+		// {
+		// 	"pagePath": "pages/hospital/hospital",
+		// 	"iconPath": "static/tabbar/we.png",
+		// 	"selectedIconPath": "static/tabbar/wefill.png",
+		// 	"text": "护士站"
+		// }, 
+		// {
+		// 	"pagePath": "pages/join/join",
+		// 	"iconPath": "static/tabbar/add.png",
+		// 	"selectedIconPath": "static/tabbar/add.png",
+		// 	"text": "加入"
+		// }, 
+		{
 			"pagePath": "pages/messge/messge",
 			"iconPath": "static/tabbar/message.png",
 			"selectedIconPath": "static/tabbar/messagefill.png",
 			"text": "订单"
-		}, {
+		}, 
+		{
 			"pagePath": "pages/ucenter/ucenter",
 			"iconPath": "static/tabbar/my.png",
 			"selectedIconPath": "static/tabbar/myfill.png",

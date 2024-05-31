@@ -19,11 +19,11 @@
 			</div>
 		</view> -->
 		<view  class="content" >
-			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
+			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
 		</view> 
-		<view class="nodata" v-if="!newsArr.length">
+<!-- 		<view class="nodata" v-if="!newsArr.length">
 			<image src="/static/images/nodata.png" mode="widthFix"></image>
-		</view>
+		</view> -->
 		
 		<view class="loading" v-if="newsArr.length">			
 			<view v-if="loading==1">数据加载中...</view>
@@ -122,7 +122,15 @@
 
 		
 		methods: {
-			
+			goProDetail(item) {
+				console.log("goProDetail: goProDetail" )
+				uni.navigateTo({
+					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			},
 			//点击导航切换
 			clickNav(index,id){
 				console.log("index:" + index)

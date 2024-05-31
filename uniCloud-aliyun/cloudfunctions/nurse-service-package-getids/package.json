@@ -1,0 +1,7 @@
+{
+  "name": "nurse-service-package-getids",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
