@@ -174,9 +174,10 @@
 			},
 			// 列表条目点击事件
 			goProDetail(item) {
-
+				// console.log(item.id)
+				// return;
 				uni.navigateTo({
-					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					 url: `/pages/servicedetails/servicedetails?item=${item.id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}

@@ -46,6 +46,7 @@
 		},
 		data() {
 			return {
+				type: '',
 				projectList: [],
 				navIndex:0,
 				navArr:[],

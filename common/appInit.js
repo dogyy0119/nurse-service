@@ -245,7 +245,7 @@ export default async function() {
 			});
 		},
 		success: (e) => {
-			console.log("success:" + JSON.stringify(e))
+			// console.log("success:" + JSON.stringify(e))
 			const {
 				token,
 				tokenExpired

@@ -1,5 +1,9 @@
 {
-	"pages": [		
+	"easycom": {
+		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+	},
+	"pages": [
+				
 		{
 			"path" : "pages/index/index" ,
 			"style" :
@@ -59,11 +63,43 @@
 			"style" :
 			{
 				"navigationBarBackgroundColor": "#1cbbb4",
-				"navigationBarTitleText" : "商品搜索"
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText" : "服务搜索"
 			}
 		},
 		
-
+		{
+			"path": "pages/order/OrderList",
+			"style": {
+				"navigationBarBackgroundColor": "#1cbbb4",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+		{
+			"path": "pages/order/OrderEvaluate",
+			"style": {
+				"navigationBarBackgroundColor": "#1cbbb4",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "评价"
+			}
+		},
+		{
+			"path": "pages/order/MoreEvaluate",
+			"style": {
+				"navigationBarBackgroundColor": "#1cbbb4",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "更多评价"
+			}
+		},
 		
 		
 		{
@@ -382,8 +418,14 @@
 		// 	"selectedIconPath": "static/tabbar/add.png",
 		// 	"text": "加入"
 		// }, 
+		// {
+		// 	"pagePath": "pages/messge/messge",
+		// 	"iconPath": "static/tabbar/message.png",
+		// 	"selectedIconPath": "static/tabbar/messagefill.png",
+		// 	"text": "订单"
+		// }, 
 		{
-			"pagePath": "pages/messge/messge",
+			"pagePath": "pages/order/OrderList",
 			"iconPath": "static/tabbar/message.png",
 			"selectedIconPath": "static/tabbar/messagefill.png",
 			"text": "订单"

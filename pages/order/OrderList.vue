@@ -15,7 +15,10 @@
 								<text>订单编号：</text>
 								<text>{{item.odNumber}}</text>
 							</view>
-							<view class="pay-type" :class="getStatusClass(item.odStatus)">
+						<!-- 	<view class="pay-type" :class="getStatusClass(item.odStatus)">
+								<text>{{allList[item.odStatus].name}}</text>
+							</view> -->
+							<view class="pay-type" >
 								<text>{{allList[item.odStatus].name}}</text>
 							</view>
 						</view>
@@ -58,53 +61,110 @@
 				</ul>
 			</view>
 		</view>
+		<tabbar index="2"></tabbar>
 	</view>
 </template>
 <script>
+	
+	// import uSticky  from '@/node_modules/uview-ui/components/u-sticky/u-sticky.vue';
+	
 	export default {
+		// components:{
+		//     uSticky,
+		// },
 		data() {
 			return {
 				tabsIndex: 0,
+				userName: "",
 				allList: [
 					{tabId: 0,name: '全部'},
 					{tabId: 1,name: '待支付'},
 					{tabId: 2,name: '已支付'},
-					{tabId: 3,name: '已完成'},
-					{tabId: 4,name: '已取消'},
-					{tabId: 5,name: '售后'},
+					{tabId: 3,name: '已派单'},
+					{tabId: 4,name: '已接受'},
+					{tabId: 5,name: '已拒绝'},
+					{tabId: 6,name: '已完成'},
+					{tabId: 7,name: '退款审核中'},
+					{tabId: 8,name: '退款中'},
+					{tabId: 8,name: '已退款'},
 				],
-				orderList: [
-					{
-						picUrl: '/static/logo.png',
-						odNumber: '2023070611124267',
-						odName: '名称1',
-						odPrice: '236',
-						odAddress: '订单地址',
-						odTime: '2023-06-23',
-						odStatus: 1,
-					},
-					{
-						picUrl: '/static/logo.png',
-						odNumber: '2023070611124268',
-						odName: '名称2',
-						odPrice: '135',
-						odAddress: '订单地址',
-						odTime: '2023-06-23',
-						odStatus: 3,
-					}
-				],
+				// "订单状态，1：待付款，2：已付款，3：已派单，4：已接受，5：已拒绝，6：已完成，7：退款审核中，8：退款中，9：已退款，-1：已取消付款/退款，-2：退款拒绝，-3：退款失败"
+				
+				orderList: [],
 
 			}
 		},
-		onLoad() {
-			
+		onShow() {
+			console.log( "onLoad" );
+			this.userName = uni.getStorageSync('username');
+			console.log("username :" + this.userName)
+			this.getOrderData(0);
 		},
 
-		methods: {
+		methods: {		
+			getOrderData(type) {
+				// console.log( "getOrderData" )
+				
+						
+				let remoteQuery = {};
+				if ( type !== 0 ) {
+					remoteQuery.status = type,
+					remoteQuery.userId = this.userName
+				} else {
+					remoteQuery.userId = this.userName
+				}
+				
+				uniCloud.callFunction({
+				    name: "nurse-order-list",
+				    data: remoteQuery,
+					// {
+				 //        status: 3,
+				 //        userId: "liyongsheng"
+				 //    },
+				    success: (res) => {					
+
+						
+						this.orderList = [];
+						res.result.data.forEach(item => {
+						    
+						    this.orderList.push({
+						        'picUrl': '/static/logo.png',
+						        'odNumber': item.name,
+						        'odName': item._id,
+						        'odPrice': item.total_fee,
+						        'odAddress': item.servants_address,
+						        'odTime': item.reservation_time,
+						        'odStatus': item.status
+						    });
+						});
+						
+						// this.orderList.forEach((item) => {
+						//     if (item.odNumber !== undefined) {
+						//         console.log(item.odNumber);
+						//     } else {
+						//         console.log("odNumber is undefined for this item");
+						//     }
+						// });
+						
+						// console.log(this.orderList)						
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("请求完成");
+				    }
+				});
+				
+			},
+			
 			tabClick(item){
 				this.tabsIndex = item.index
+				this.getOrderData(item.index)
+				
 			},
 			getStatusClass(status) {
+							
 			    return {
 			        'status-red': status == 1,
 					'status-2': status == 2,

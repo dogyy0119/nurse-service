@@ -49,12 +49,19 @@
 					// 	selectedIconPath: "../../static/tabbar/add.png",
 					// 	pagePath: "/pages/join/join"
 					// },
+					// {
+					// 	text: "订单",
+					// 	isbulge: false,
+					// 	iconPath: "../../static/tabbar/message.png",
+					// 	selectedIconPath: "../../static/tabbar/messagefill.png",
+					// 	pagePath: "/pages/messge/messge"
+					// },
 					{
 						text: "订单",
 						isbulge: false,
 						iconPath: "../../static/tabbar/message.png",
 						selectedIconPath: "../../static/tabbar/messagefill.png",
-						pagePath: "/pages/messge/messge"
+						pagePath: "/pages/order/OrderList"
 					},
 					{
 						text: "我的",

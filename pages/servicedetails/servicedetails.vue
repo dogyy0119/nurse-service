@@ -89,6 +89,10 @@
 				detailObj:{},
 				toolObj:{},
 				taocanValue: 0,
+				taocanType: '',
+				serviceId: '',
+				packageList: [],
+				consumableList: [],
 				price: 0,
 				customPrice: 0,
 				totalPrice: 0,
@@ -114,11 +118,14 @@
 			};
 		},
 		async onLoad(event) {
-		    options = event;
-		    await this.getDetail(options);
-		    await this.getConsumaList(options);
+			console.log(event.item)
+			console.log(event)
+			
+			this.serviceId = event.item
+		    await this.getDetail(event.item);
+		    // await this.getConsumaList(options);
 				
-		    this.getPackageList(this.detailObj.package_list);
+		    // this.getPackageList(this.detailObj.package_list);
 		},
 		mounted() {
 			    this.calculateTotalPrice();
@@ -134,7 +141,11 @@
 				
 				let obj = { 
 					totalPrice: this.totalPrice,
-					taocan: this.taocan[this.taocanValue].text, 
+					taocan: this.taocan[this.taocanValue].text,
+					taocanId: this.serviceId ,
+					taocanType: this.taocanType,
+					consumableList: this.consumableList,
+					packageList: this.packageList,
 					haocaiName: this.toolObj.name,
 					haocaiDetals: this.toolObj.detail,	
 				};
@@ -191,15 +202,13 @@
 				console.log(this.checkList[index]);
 				this.$forceUpdate()
 			},
+			
 			//获取详情
-			getDetail(options){
-				let id
-				id = "6648ad28f08210b07d323e0a"
-				console.log("this.navIndex :" + id)	
+			getDetail(serviceid){
 				uniCloud.callFunction({
 				    name: "nurse-service-getid",
 				    data: {						
-				        id:id 
+				        id:serviceid 
 				    },
 				    success: (res) => {
 						this.loading=2
@@ -207,7 +216,15 @@
 						this.detailObj = res.result.data[0]
 						// this.price = this.detailObj.price
 						this.totalPrice = this.customPrice + this.price
+						this.taocanType = this.detailObj.category_id
+						this.packageList = this.detailObj.package_list
+						this.consumableList = this.detailObj.consumable_list
 						
+						// 获取耗材
+						this.getConsumaList(this.consumableList[0])
+						
+						// 
+						this.getPackageList(this.detailObj.package_list);						
 					},
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -218,6 +235,7 @@
 				});								
 			},
 			
+			// 获取耗材
 			getConsumaList(options){
 				let consumableid = "66496ec0ee97ef5896909378"
 				uniCloud.callFunction({
@@ -231,6 +249,7 @@
 						this.toolObj = res.result.data[0]
 						this.customPrice = this.toolObj.price
 						this.totalPrice = this.customPrice + this.price
+
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -241,14 +260,15 @@
 				});
 			},
 			
+			//
 			getPackageList(packageIds){
-				let packageIdss= [ "66498e790d2b315faf5d1e8b", "66496e8ae0ec199b1835a385" ]
-					
-				console.log( "packageIds:" + packageIdss)
+				
+				// console.log( "packageIds:" + packageIds)
+				console.log( "packageList:" + this.packageList)
 				uniCloud.callFunction({
 				    name: "nurse-service-package-getids",
 				    data: {						
-				        ids: packageIdss
+				        ids: packageIds
 				    },
 				    success: (res) => {
 						this.loading=2

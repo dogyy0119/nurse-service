@@ -73,7 +73,9 @@
 					success: ({result}) => {
 						console.log(result);
 						if (result.code === 0) {
-							this.loginSuccess(result)
+							this.loginSuccess(result)							
+							uni.setStorageSync('username', this.username);
+							
 						} else {
 							if (result.needCaptcha) {
 								uni.showToast({

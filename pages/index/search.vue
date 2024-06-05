@@ -11,8 +11,8 @@
 			<view class="search-btn" @tap="doSearch" data-key="false" :style="'background:' + colors">搜索</view>
 		</view>
 		
-		<view class="search-keyword">
-			
+		<!-- <view class="search-keyword">
+		
 			<scroll-view class="keyword-box"  scroll-y>
 				<view class="keyword-block" v-if="oldKeywordList.length>0">
 					<view class="keyword-list-header">
@@ -27,7 +27,13 @@
 					</view>
 				</view>
 			</scroll-view>
+		</view> -->
+		
+		<view  class="content" >
+			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
 		</view>
+		
+		<tabbar index="10"></tabbar>
 	</view>
 </template>
 
@@ -94,9 +100,16 @@
 
 	var app = getApp();
 
+	const db = uniCloud.database();
+	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
+	
 	export default {
+		components: {
+			CcWaterListView
+		},
 		data() {
 			return {
+				projectList: [],
 				defaultKeyword: "",
 				keyword: "",
 				oldKeywordList: [],
@@ -109,7 +122,7 @@
 			};
 		},
 
-		components: {},
+		// components: {},
 		props: {},
 
 		/**
@@ -171,10 +184,12 @@
 				
 				
 				uni.hideLoading()
-				uni.showModal({
-					title:"温馨提示",
-					content:'搜索的内容 = ' + this.keyword
-				})
+				// uni.showModal({
+				// 	title:"温馨提示",
+				// 	content:'搜索的内容 = ' + this.keyword
+				// })
+				
+				this.getNewsData(this.keyword)
 				
 				// uni.showToast({
 				// 	title: '暂无结果',
@@ -249,7 +264,6 @@
 			},
 			
 			
-
 			clears() {
 				this.setData({
 					keyword: '',
@@ -259,13 +273,60 @@
 			//点击历史记录搜索
 			doHisSearch(item) { 
 				console.log(item)
+				this.getNewsData(item)
 				uni.showModal({
 					title: '点击的历史搜索条目',
 					content: '点击的历史搜索条目 = ' + item
 				})
 			},
 
+			getNewsData(key){
+				
+				console.log("this.key :" + key);
+	
+				uniCloud.callFunction({
+				    name: "nurse-service-get",
+				    data: {						
+				        name: key 
+				    },
+				    success: (res) => {
+						this.loading=2
+					
+						console.log(res.result.data);
+						// this.newsArr = res.result.data
+						this.projectList = [];
+						res.result.data.forEach(item => {
+							this.projectList.push({
+								'proImg': item.service_thumb,
+								'proName': item.name,
+								'proDetail': item.service_desc,
+								'proPrice': item.price,
+								// 'status': item.consumable == 1? "可退款":"不可退款",
+								'id': item._id
+							});
+						});
+						
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("请求完成");
+				    }
+				});	
+				console.log("this.projectList")
+				console.log(this.projectList)
+			},
 			
+			goProDetail(item) {
+				console.log("goProDetail: goProDetail" )
+				uni.navigateTo({
+					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+			}
 
 		}
 	};

@@ -7,7 +7,7 @@
 		
 		<view class="example">
 			<!-- 基础用法，不包含校验规则 -->
-			<uni-forms ref="baseForm" :model="baseFormData" labelWidth="80px">
+			<uni-forms ref="baseForm"  :rules="customRules" :model="baseFormData" labelWidth="80px">
 				<uni-forms-item label="姓名" required>
 					<uni-easyinput v-model="baseFormData.name" placeholder="请输入姓名" />
 				</uni-forms-item>
@@ -46,7 +46,7 @@
 			</uni-forms>
 			<div class="flex-container">
 				<button class="amount">金额：￥{{totalPrice}}</button>
-			    <button class="reserve-btn" @click="goSubmit">确定预约</button>
+			    <button class="reserve-btn" @click="submit('baseForm')">确定预约</button>
 			</div>
 		</view>
 
@@ -57,7 +57,13 @@
 	export default {
 		data() {
 			return {
+				type: 'exampleValue',
 				taocan: '',
+				taocanId: '',
+				taocanType: '',
+				packageList: [],
+				consumableList: [],
+				// haocaiId: [],
 				haocaiName: '',
 				haocaiDetail: '',
 				totalPrice: 0,
@@ -68,7 +74,7 @@
 					address: '',
 					phoneNum: '',
 					datetimesingle: 1627529992399,
-					city: '',
+					// city: '',
 				},
 				// 城市数据
 				cityData: [{
@@ -92,7 +98,7 @@
 					introduction: '',
 				},
 				// 校验规则
-				rules: {
+				baseRules: {
 					name: {
 						rules: [{
 							required: true,
@@ -193,16 +199,19 @@
 			}
 		},
 		onLoad(options) {
-			// this.totalPrice = options.totalPrice
 			
 		    if (options.params) {
 		        let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
 		        console.log(params);
 				this.totalPrice = params.totalPrice;
 				this.taocan = params.taocan;
+				this.taocanId = params.taocanId;
+				this.taocanType = params.taocanType;
+				this.consumableList = params.consumableList;
+				this.packageList = params.packageList;
+				// this.haocaiId = params.haocaiId;
 				this.haocaiName = params.haocaiName;
-				this.haocaiDetail = params.haocaiDetail;
-				
+				this.haocaiDetail = params.haocaiDetail;	
 		    }
 		},
 		onReady() {
@@ -210,28 +219,9 @@
 			// this.$refs.customForm.setRules(this.customRules)
 		},
 		methods: {
+			
 			goSubmit() {
-				
-				
-				// {
-				//     "title": "拆线",
-				//     "type": "医美拆线",
-				//     "service_id": "6649e8630d2b315faf6af0a0",
-				//     "total_fee": 121,
-				//     "user_id": "li'yong'sheng",
-				//     "servants_name": "ss",
-				//     "servants_address": "和平区1111",
-				//     "servants_phone": "12345678901",
-				//     "reservation_time": 1717048840000,
-				//     "nurse_id": "使命召唤",
-				//     "nurse_phone": "1234567890",
-				//     "status": 2,
-				//     "transaction_id": "123456565655665",
-				//     "update_time": 1716998400000,
-				//     "paid_time": 1717048883000,
-				//     "info": "上门服务",
-				// }
-				
+				this.$refs.customForm.setRules(this.customRules)				
 			},
 			onClickItem(e) {
 				console.log(e);
@@ -254,14 +244,88 @@
 			},
 			submit(ref) {
 				console.log(this.baseFormData);
-				this.$refs[ref].validate().then(res => {
-					console.log('success', res);
-					uni.showToast({
-						title: `校验通过`
-					})
-				}).catch(err => {
-					console.log('err', err);
-				})
+				// this.$refs[ref].validate().then(res => {
+				// 	console.log('success', res);
+				// 	uni.showToast({
+				// 		title: `校验通过`
+				// 	})
+				// }).catch(err => {
+				// 	console.log('err', err);
+				// })
+				if (
+				  !this.baseFormData.name ||
+				  !this.baseFormData.name.trim() || // Additional check to handle whitespace
+				  !this.baseFormData.sfid ||
+				  !this.baseFormData.phoneNum ||
+				  !this.baseFormData.address ||
+				  !this.baseFormData.datetimesingle
+				) {
+				  uni.showToast({
+				    title: `校验未通过`
+				  });
+				  return;
+				}
+				
+				let userName = uni.getStorageSync('username');
+				console.log("username :" + userName)
+				
+				
+				// uniCloud.callFunction({
+				//     name: "nurse-order-get",
+				//     data: orderData,
+				//     success: (res) => {
+						
+				//     },
+				//     fail: (err) => {
+				//         console.error("请求失败: " + err);
+				//     },
+				//     complete: (res) => {
+				//         console.log("请求完成");
+				//     }
+				// });	
+				
+				let orderData = {};
+				
+				{
+				    orderData.title = this.taocan,
+				    orderData.type = "",
+				    orderData.service_id = this.taocanId,
+				    orderData.total_fee = this.totalPrice,
+				    orderData.user_id = userName,
+				    orderData.servants_name = this.baseFormData.name,
+				    orderData.servants_address = this.baseFormData.address,
+				    orderData.servants_phone = this.baseFormData.phoneNum,
+				    orderData.reservation_time = this.baseFormData.datetimesingle,
+				    orderData.nurse_id = "66431ae8816a3f647e16530b",
+				    orderData.nurse_phone = "12345678901",
+				    orderData.status = 1,
+				    orderData.transaction_id = "",
+				    orderData.paid_time = "",
+				    orderData.info = "",
+				    orderData.consumable_id = this.consumableList,
+				    orderData.package_id = this.packageList
+				}
+				
+				this.addOrder(orderData)
+			},
+			
+			addOrder(orderData) {
+				// 派单
+								
+				uniCloud.callFunction({
+				    name: "nurse-order-add",
+				    data: orderData,
+				    success: (res) => {
+						// 跳转到支付
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("请求完成");
+				    }
+				});	
+				
 			},
 		}
 	}

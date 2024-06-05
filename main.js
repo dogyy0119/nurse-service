@@ -5,6 +5,12 @@ import i18n from './lang/i18n'
 
 // #ifndef VUE3
 import Vue from 'vue'
+
+import uView from "uview-ui";
+import './uni.promisify.adaptor'
+
+Vue.use(uView);
+
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 App.mpType = 'app'
