@@ -18,8 +18,9 @@
 				<uni-icons type="gear" color="#dadada" size="26"></uni-icons>
 			</view>
 		</view>
+		
 		<!-- 充值优惠 - 开始 -->
-		<view class="user-recharge-wrapper">
+		<!-- <view class="user-recharge-wrapper">
 			<view class="user-recharge-box">
 				<view class="recharge-info">
 					<view class="info-title">
@@ -41,7 +42,7 @@
 				<view class="recharge-money-title">储值：</view>
 				<view class="recharge-money">¥ {{userInfo.money}}</view>
 			</view>
-		</view>
+		</view> -->
 		
 		<uni-list class="center-list" v-for="(sublist , index) in ucenterList" :key="index">
 			<uni-list-item v-for="(item,i) in sublist" :title="item.title" link :rightText="item.rightText" :key="i"
@@ -55,7 +56,7 @@
 				</template>
 			</uni-list-item>
 		</uni-list>
-		<tabbar index="4"></tabbar>
+		<tabbar index="2"></tabbar>
 	</view>
 </template>
 
@@ -103,6 +104,12 @@
 							"to": '/pages/ucenter/read-news-log/read-news-log',
 							"icon": "flag"
 						},
+						// {
+						// 	"title": "我的订单",
+						// 	"to": '/pages/order/OrderList',
+						// 	"icon": "flag"
+						// },
+						
 						{
 							"title": "我的积分",
 							"to": '',
@@ -205,6 +212,8 @@
 			 * 个人中心项目列表点击事件
 			 */
 			ucenterListClick(item) {
+				
+				console.log(item.to)
 				if (!item.to && item.event) {
 					this[item.event]();
 				}
@@ -449,7 +458,8 @@
 	}
 
 	.userInfo {
-		background-image: linear-gradient(to top, #00aaff, #1cbbb4);
+		// background-image: linear-gradient(to top, #00aaff, #1cbbb4);
+		background-image: linear-gradient(to top, #1cbbb4, #1cbbb4);
 	}
 
 	.userInfo-center {

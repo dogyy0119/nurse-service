@@ -1,4 +1,5 @@
 {
+  "navigationBarBackgroundColor": "#1cbbb4",
   "navigationBarTitleText": "创建医院服务",
   "usingComponents": {}
 }

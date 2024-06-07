@@ -3,6 +3,7 @@
   "usingComponents": {
     "uni-sign-in": "/uni_modules/uni-sign-in/components/uni-sign-in/uni-sign-in",
     "uni-icons": "/uni_modules/uni-icons/components/uni-icons/uni-icons",
+    "u-line": "/node-modules/uview-ui/components/u-line/u-line",
     "uni-list": "/uni_modules/uni-list/components/uni-list/uni-list",
     "uni-list-item": "/uni_modules/uni-list/components/uni-list-item/uni-list-item",
     "tabbar": "/components/tabbar/tabbar"

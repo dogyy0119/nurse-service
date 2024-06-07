@@ -1,4 +1,4 @@
-﻿<!--本页面由uniapp切片工具生成，uni-app切片-可视化设计工具(一套代码编译到7个平台iOS、Android、H5、小程序)，软件下载地址：http://www.ymznkf.com/new_view_669.htm -->
+<!--本页面由uniapp切片工具生成，uni-app切片-可视化设计工具(一套代码编译到7个平台iOS、Android、H5、小程序)，软件下载地址：http://www.ymznkf.com/new_view_669.htm -->
 <template>
 	<view class="YmContent" :animation="animationData">
 			<view class="voucher_center__1">
@@ -35,6 +35,8 @@
 <script>
 import voucher_center_ from "./voucher_center_.js";
 export default voucher_center_;
+
+
 </script>
 
 <style lang="scss" scoped>

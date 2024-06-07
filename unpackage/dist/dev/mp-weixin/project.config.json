@@ -1,7 +1,8 @@
 {
   "description": "项目配置文件。",
   "packOptions": {
-    "ignore": []
+    "ignore": [],
+    "include": []
   },
   "setting": {
     "urlCheck": false,
@@ -9,28 +10,40 @@
     "postcss": false,
     "minified": false,
     "newFeature": true,
-    "bigPackageSizeSupport": true
+    "bigPackageSizeSupport": true,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
   },
   "compileType": "miniprogram",
-  "libVersion": "",
-  "appid": "PYIBZ-IMQL3-44634-R54XC-ZWZNJ-DOFHI",
+  "libVersion": "3.4.6",
+  "appid": "wx6aaa77f8d65f25ef",
   "projectname": "云端一体集成多端登陆自定义tabar项目模板",
   "condition": {
-    "search": {
-      "current": -1,
-      "list": []
-    },
-    "conversation": {
-      "current": -1,
-      "list": []
-    },
-    "game": {
-      "current": -1,
-      "list": []
-    },
     "miniprogram": {
-      "current": -1,
-      "list": []
+      "list": [
+        {
+          "name": "首页",
+          "pathName": "pages/index/index",
+          "query": ""
+        },
+        {
+          "name": "订单",
+          "pathName": "pages/order/OrderList",
+          "query": ""
+        },
+        {
+          "name": "我的",
+          "pathName": "pages/ucenter/ucenter",
+          "query": ""
+        }
+      ]
     }
+  },
+  "editorSetting": {
+    "tabIndent": "insertSpaces",
+    "tabSize": 2
   }
 }

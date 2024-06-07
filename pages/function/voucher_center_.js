@@ -27,6 +27,18 @@ import app from "../../App.vue"
 		onLoad(options) {
 			_self = this;
 			
+			let data={};
+			if (options.params) {
+			    let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
+			    console.log(params);
+				this.money = params.totalFee;
+				// this.data.totalFee = params.totalFee;
+				// this.data.userName = params.userName;
+				// this.data.serviceId = params.serviceId;
+				// this.data.serviceName = params.serviceName;
+			}
+			
+			// this.money = this.data.totalFee;
 			//检查是否登录参考代码,需要用的时候，可以把注释取掉
 			//if(this.checkLogin()==false){
 			//	return;
@@ -88,13 +100,20 @@ import app from "../../App.vue"
 			*/
 			btSubmit_21_click:function(event){
 			  if(this.money==''){
-			      uni.showToast({title: '充值金额不能为空！',icon: 'none',duration: 2000});
+			      uni.showToast({title: '充值金额不能为空！',icon: 'none',duration: 2000});				  
 			     return; 
 			  }
 			  if(this.payType==''){
 			      uni.showToast({title: '充值方式不能为空！',icon: 'none',duration: 2000});
 			     return; 
 			  }
+			  
+			  if(this.money <= 0) {
+				  uni.showToast({title: '充值不能小于零！',icon: 'none',duration: 2000});
+				  return; 
+			  }
+				uni.showToast({title: '充值成功！',icon: 'none',duration: 2000});
+				return;
 			
 			},
 			

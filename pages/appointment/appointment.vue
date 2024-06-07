@@ -267,9 +267,7 @@
 				}
 				
 				let userName = uni.getStorageSync('username');
-				console.log("username :" + userName)
-				
-				
+								
 				// uniCloud.callFunction({
 				//     name: "nurse-order-get",
 				//     data: orderData,
@@ -296,8 +294,8 @@
 				    orderData.servants_address = this.baseFormData.address,
 				    orderData.servants_phone = this.baseFormData.phoneNum,
 				    orderData.reservation_time = this.baseFormData.datetimesingle,
-				    orderData.nurse_id = "66431ae8816a3f647e16530b",
-				    orderData.nurse_phone = "12345678901",
+				    orderData.nurse_id = "",
+				    orderData.nurse_phone = "",
 				    orderData.status = 1,
 				    orderData.transaction_id = "",
 				    orderData.paid_time = "",
@@ -307,6 +305,21 @@
 				}
 				
 				this.addOrder(orderData)
+				
+				// let obj = {
+				// 	totalFee: this.totalPrice,
+				// 	userName: userName,
+				// 	serviceId: this.taocanId,
+				// 	serviceName: this.taocan
+				// };
+				// let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+							
+				// uni.navigateTo({
+				// 	url: '/pages/function/voucher_center_?params=' + params,
+				// 	success: res => {},
+				// 	fail: () => {},
+				// 	complete: () => {}
+				// });
 			},
 			
 			addOrder(orderData) {
@@ -317,6 +330,22 @@
 				    data: orderData,
 				    success: (res) => {
 						// 跳转到支付
+						
+						let obj = {
+							totalFee: orderData.total_fee,
+							userName: orderData.userName,
+							serviceId: orderData.service_id,
+							serviceName: orderData.title,
+						};
+						let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+									
+						uni.navigateTo({
+							url: '/pages/function/voucher_center_?params=' + params,
+							success: res => {},
+							fail: () => {},
+							complete: () => {}
+						});
+						
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);

@@ -61,7 +61,7 @@
 				</ul>
 			</view>
 		</view>
-		<tabbar index="2"></tabbar>
+		<tabbar index="1"></tabbar>
 	</view>
 </template>
 <script>
@@ -129,8 +129,8 @@
 						    
 						    this.orderList.push({
 						        'picUrl': '/static/logo.png',
-						        'odNumber': item.name,
-						        'odName': item._id,
+						        'odNumber': item._id,
+						        'odName': item.title,
 						        'odPrice': item.total_fee,
 						        'odAddress': item.servants_address,
 						        'odTime': item.reservation_time,
@@ -173,7 +173,7 @@
 			},
 				
 			// 取消
-			cancelClick(item){
+			cancelClick(option){
 				uni.showModal({
 					title: '温馨提示',
 					content: '确定要取消该订单吗？',
@@ -181,6 +181,25 @@
 					confirmText: '确定',
 					success: (res=> {
 						if (res.confirm) {
+							// 删除订单
+							console.log( option.odNumber )
+							uniCloud.callFunction({
+							    name: "nurse-order-del",
+							    data:
+								 {
+							         id:option.odNumber
+							     },
+							    success: (res) => {					
+									console.log(res)
+									this.orderList = this.orderList.filter(item => item.odNumber !== option.odNumber);
+							    },
+							    fail: (err) => {
+							        console.error("请求失败: " + err);
+							    },
+							    complete: (res) => {
+							        console.log("请求完成");
+							    }
+							});
 							
 						}
 					})
@@ -188,12 +207,30 @@
 			},
 			
 			payClick(item){
+				
 				console.log("item===支付====",item)
-			},
-			evaluateClick(item){
+				
+				let userName = uni.getStorageSync('username');
+				
+				let obj = {
+					totalFee: item.odPrice,
+					userName: userName,
+					serviceId: this.odNumber,
+					serviceName: this.odName
+				};
+				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+							
 				uni.navigateTo({
-					url: '../order/OrderEvaluate?detailDate=' + encodeURIComponent(JSON.stringify(item))
+					url: '/pages/function/voucher_center_?params=' + params,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
 				});
+				
+			},
+			// 评价
+			evaluateClick(item){
+				
 			},
 			
 		}

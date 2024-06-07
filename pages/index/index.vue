@@ -259,7 +259,7 @@
 	}
 	
 	.tips {
-	    font-size: 20px; /* 设置文字大小 */
+	    font-size: 32rpx; /* 设置文字大小 */
 	    color: #40C6C0; /* 设置文字颜色 */
 	    font-weight: bold; /* 设置文字加粗 */
 	    text-align: center; /* 设置文字居中 */

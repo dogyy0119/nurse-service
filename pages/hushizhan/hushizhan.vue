@@ -239,7 +239,7 @@
 		display: block;
 	}
 	.item{
-		font-size: 40rpx;
+		font-size: 31upx;
 		display: inline-block;
 		line-height: 100rpx;
 		padding:0 30rpx;

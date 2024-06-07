@@ -1,6 +1,12 @@
 {
   "pages": [
+    "pages/index/index",
     "pages/home/home",
+    "pages/index/search",
+    "pages/order/OrderList",
+    "pages/order/OrderEvaluate",
+    "pages/order/MoreEvaluate",
+    "pages/index/indexservice/indexservice",
     "pages/list/list",
     "pages/ucenter/login-page/index/index",
     "pages/list/search/search",
@@ -24,11 +30,19 @@
     "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
     "pages/join/join",
     "pages/messge/messge",
-    "pages/creatService/creatService"
+    "pages/creatService/creatService",
+    "pages/hushizhan/hushizhan",
+    "pages/hospital/hospital",
+    "pages/coupon-card/coupon-card",
+    "pages/function/voucher_center_",
+    "pages/hospitalservice/hospitalservice",
+    "pages/city/city",
+    "pages/servicedetails/servicedetails",
+    "pages/appointment/appointment"
   ],
   "subPackages": [],
   "window": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-starter",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#F8F8F8",
@@ -43,25 +57,13 @@
     "backgroundColor": "#FFFFFF",
     "list": [
       {
-        "pagePath": "pages/home/home",
+        "pagePath": "pages/index/index",
         "iconPath": "static/tabbar/home.png",
         "selectedIconPath": "static/tabbar/homefill.png",
         "text": "首页"
       },
       {
-        "pagePath": "pages/list/list",
-        "iconPath": "static/tabbar/we.png",
-        "selectedIconPath": "static/tabbar/wefill.png",
-        "text": "护士站"
-      },
-      {
-        "pagePath": "pages/join/join",
-        "iconPath": "static/tabbar/add.png",
-        "selectedIconPath": "static/tabbar/add.png",
-        "text": "加入"
-      },
-      {
-        "pagePath": "pages/messge/messge",
+        "pagePath": "pages/order/OrderList",
         "iconPath": "static/tabbar/message.png",
         "selectedIconPath": "static/tabbar/messagefill.png",
         "text": "订单"

@@ -1,6 +1,6 @@
-(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],{
-
-/***/ 1:
+(global["webpackJsonp"] = global["webpackJsonp"] || []).push([["common/vendor"],[
+/* 0 */,
+/* 1 */
 /*!*********************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js ***!
   \*********************************************************/
@@ -43,528 +43,7 @@ var _default = target[key];
 exports.default = _default;
 
 /***/ }),
-
-/***/ 10:
-/*!****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
-  \****************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _nonIterableRest() {
-  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
-}
-module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 11:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 12);
-function _defineProperty(obj, key, value) {
-  key = toPropertyKey(key);
-  if (key in obj) {
-    Object.defineProperty(obj, key, {
-      value: value,
-      enumerable: true,
-      configurable: true,
-      writable: true
-    });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
-module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 115:
-/*!*********************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-upgrade-center-app/utils/check-update.js ***!
-  \*********************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-var _callCheckVersion = _interopRequireDefault(__webpack_require__(/*! ./call-check-version */ 116));
-// 推荐再App.vue中使用
-var PACKAGE_INFO_KEY = '__package_info__';
-function _default() {}
-
-/**
- * 使用 uni.showModal 升级
- */
-function updateUseModal(packageInfo) {
-  var title = packageInfo.title,
-    contents = packageInfo.contents,
-    is_mandatory = packageInfo.is_mandatory,
-    url = packageInfo.url,
-    platform = packageInfo.platform,
-    type = packageInfo.type;
-  var isWGT = type === 'wgt';
-  var isiOS = !isWGT ? platform.includes('iOS') : false;
-  var confirmText = isiOS ? '立即跳转更新' : '立即下载更新';
-  return uni.showModal({
-    title: title,
-    content: contents,
-    showCancel: !is_mandatory,
-    confirmText: confirmText,
-    success: function success(res) {
-      if (res.cancel) return;
-
-      // 安装包下载
-      if (isiOS) {
-        plus.runtime.openURL(url);
-        return;
-      }
-      uni.showToast({
-        title: '后台下载中……',
-        duration: 1000
-      });
-
-      // wgt 和 安卓下载更新
-      downloadTask = uni.downloadFile({
-        url: url,
-        success: function success(res) {
-          if (res.statusCode !== 200) {
-            console.error('下载安装包失败', err);
-            return;
-          }
-          // 下载好直接安装，下次启动生效
-          plus.runtime.install(res.tempFilePath, {
-            force: false
-          }, function () {
-            if (is_mandatory) {
-              //更新完重启app
-              plus.runtime.restart();
-              return;
-            }
-            uni.showModal({
-              title: '安装成功是否重启？',
-              success: function success(res) {
-                if (res.confirm) {
-                  //更新完重启app
-                  plus.runtime.restart();
-                }
-              }
-            });
-          }, function (err) {
-            uni.showModal({
-              title: '更新失败',
-              content: err.message,
-              showCancel: false
-            });
-          });
-        }
-      });
-    }
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 116:
-/*!***************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-upgrade-center-app/utils/call-check-version.js ***!
-  \***************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-function _default() {
-  return new Promise(function (resolve, reject) {
-    reject({
-      message: '请在App中使用'
-    });
-  });
-}
-
-/***/ }),
-
-/***/ 12:
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
-function toPropertyKey(t) {
-  var i = toPrimitive(t, "string");
-  return "symbol" == _typeof(i) ? i : i + "";
-}
-module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 13:
-/*!*******************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
-  \*******************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _typeof(o) {
-  "@babel/helpers - typeof";
-
-  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
-    return typeof o;
-  } : function (o) {
-    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(o);
-}
-module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 14:
-/*!************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
-  \************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
-function toPrimitive(t, r) {
-  if ("object" != _typeof(t) || !t) return t;
-  var e = t[Symbol.toPrimitive];
-  if (void 0 !== e) {
-    var i = e.call(t, r || "default");
-    if ("object" != _typeof(i)) return i;
-    throw new TypeError("@@toPrimitive must return a primitive value.");
-  }
-  return ("string" === r ? String : Number)(t);
-}
-module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 15:
-/*!**********************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
-  \**********************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
-var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
-function _construct(t, e, r) {
-  if (isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
-  var o = [null];
-  o.push.apply(o, e);
-  var p = new (t.bind.apply(t, o))();
-  return r && setPrototypeOf(p, r.prototype), p;
-}
-module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 151:
-/*!***************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/settings/dc-push/push.js ***!
-  \***************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-/**
- * 判断Push是否开启
- */
-function isTurnedOnPush() {
-  var isOn = undefined;
-  try {
-    if ('iOS' == plus.os.name) {
-      var types = 0;
-      var app = plus.ios.invoke('UIApplication', 'sharedApplication');
-      var settings = plus.ios.invoke(app, 'currentUserNotificationSettings');
-      if (settings) {
-        types = settings.plusGetAttribute('types');
-        plus.ios.deleteObject(settings);
-      } else {
-        types = plus.ios.invoke(app, 'enabledRemoteNotificationTypes');
-      }
-      plus.ios.deleteObject(app);
-      isOn = 0 != types;
-    } else {
-      var main = plus.android.runtimeMainActivity();
-      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
-      isOn = plus.android.invoke(manager, 'isPushTurnedOn', main);
-    }
-  } catch (e) {
-    console.error('exception in isTurnedOnPush@dc-push!!');
-  }
-  return isOn;
-}
-
-/**
- * 打开Push
- * Android平台 - 打开个推（UniPush）的推送通道
- * iOS平台 - 如果开启通知功能，则打开应用的设置页面引导用户开启通知
- */
-function turnOnPush() {
-  try {
-    if ('iOS' == plus.os.name) {
-      // 如果设置中没有开启通知，则打开应用的设置界面
-      if (!isTurnedOnPush()) {
-        settingInIos();
-      }
-    } else {
-      var main = plus.android.runtimeMainActivity();
-      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
-      plus.android.invoke(manager, 'turnOnPush', main);
-    }
-  } catch (e) {
-    console.error('exception in turnOnPush@dc-push!!');
-  }
-}
-
-/**
- * 关闭Push
- * Android平台 - 关闭个推（UniPush）的推送通道
- * iOS平台 - 不做任何操作
- */
-function trunOffPush() {
-  try {
-    if ('iOS' == plus.os.name) {
-      // 这里不做任何操作（不引导用户关闭应用的推送能力），应该通知业务服务器不向此用户下发推送消息
-    } else {
-      var main = plus.android.runtimeMainActivity();
-      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
-      plus.android.invoke(manager, 'turnOffPush', main);
-    }
-  } catch (e) {
-    console.error('exception in trunOffPush@dc-push!!');
-  }
-}
-
-/**
- * iOS平台打开应用设置界面
- */
-function settingInIos() {
-  try {
-    if ('iOS' == plus.os.name) {
-      var app = plus.ios.invoke('UIApplication', 'sharedApplication');
-      var setting = plus.ios.invoke('NSURL', 'URLWithString:', 'app-settings:');
-      plus.ios.invoke(app, 'openURL:', setting);
-      plus.ios.deleteObject(setting);
-      plus.ios.deleteObject(app);
-    }
-  } catch (e) {
-    console.error('exception in settingInIos@dc-push!!');
-  }
-}
-/**
- * android打开应用设置页面
- */
-function settingInAndroid() {
-  if (uni.getSystemInfoSync().platform == "android") {
-    var main = plus.android.runtimeMainActivity();
-    var Intent = plus.android.importClass('android.content.Intent');
-    var Settings = plus.android.importClass('android.provider.Settings');
-    var intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-    // 安卓跳转设置页面详细查看(https://ask.dcloud.net.cn/question/14732)
-    main.startActivity(intent);
-  }
-}
-/**
- * 打开应用设置界面
- */
-function setting() {
-  if (uni.getSystemInfoSync().platform == "ios") {
-    settingInIos();
-  }
-  if (uni.getSystemInfoSync().platform == "android") {
-    settingInAndroid();
-  }
-}
-var _default = {
-  isOn: isTurnedOnPush,
-  iosSetting: settingInIos,
-  on: turnOnPush,
-  off: trunOffPush,
-  setting: setting
-};
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 16:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
-  \***************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _setPrototypeOf(o, p) {
-  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
-    o.__proto__ = p;
-    return o;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
-  return _setPrototypeOf(o, p);
-}
-module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 17:
-/*!*************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
-  \*************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _isNativeReflectConstruct() {
-  try {
-    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
-  } catch (t) {}
-  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
-    return !!t;
-  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
-}
-module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 176:
-/*!****************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/common/login-page.mixin.js ***!
-  \****************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _vuex = __webpack_require__(/*! vuex */ 46);
-var _loginSuccess2 = _interopRequireDefault(__webpack_require__(/*! ./loginSuccess.js */ 177));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-var mixin = {
-  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)({
-    setUserInfo: 'user/login'
-  })), {}, {
-    loginSuccess: function loginSuccess(result) {
-      (0, _loginSuccess2.default)(result);
-      delete result.userInfo.token;
-      if (result.type == "register") {
-        result.userInfo._id = result.uid;
-      }
-      this.setUserInfo(result.userInfo);
-    }
-  })
-};
-var _default = mixin;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 177:
-/*!************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/common/loginSuccess.js ***!
-  \************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = _default;
-function _default(result) {
-  uni.showToast({
-    title: '登录成功',
-    icon: 'none'
-  });
-  console.log('登录成功', result);
-  var delta = 0; //判断需要返回几层
-  var pages = getCurrentPages();
-  // console.log(pages);
-  pages.forEach(function (page, index) {
-    // console.log(pages[pages.length-index-1].route.split('/')[2]);
-    pages[pages.length - index - 1].route.split('/');
-    if (pages[pages.length - index - 1].route.split('/')[2] == 'login-page') {
-      delta++;
-    }
-  });
-  // console.log('判断需要返回几层',delta);
-  uni.navigateBack({
-    delta: delta
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 18:
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
-var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
-var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
-function _toConsumableArray(arr) {
-  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
-}
-module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 19:
-/*!******************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
-  \******************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _arrayWithoutHoles(arr) {
-  if (Array.isArray(arr)) return arrayLikeToArray(arr);
-}
-module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 2:
+/* 2 */
 /*!************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js ***!
   \************************************************************/
@@ -2971,8 +2450,336 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
+/* 3 */
+/*!***********************************!*\
+  !*** (webpack)/buildin/global.js ***!
+  \***********************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-/***/ 20:
+var g;
+
+// This works in non-strict mode
+g = (function() {
+	return this;
+})();
+
+try {
+	// This works if eval is allowed (see CSP)
+	g = g || new Function("return this")();
+} catch (e) {
+	// This works if the window reference is available
+	if (typeof window === "object") g = window;
+}
+
+// g can still be undefined, but nothing to do about it...
+// We return undefined, instead of nothing here, so it's
+// easier to handle this case. if(!global) { ...}
+
+module.exports = g;
+
+
+/***/ }),
+/* 4 */
+/*!**********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _interopRequireDefault(obj) {
+  return obj && obj.__esModule ? obj : {
+    "default": obj
+  };
+}
+module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 5 */
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 6);
+var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ 7);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 10);
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
+}
+module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 6 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 7 */
+/*!*********************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
+  \*********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _iterableToArrayLimit(r, l) {
+  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
+  if (null != t) {
+    var e,
+      n,
+      i,
+      u,
+      a = [],
+      f = !0,
+      o = !1;
+    try {
+      if (i = (t = t.call(r)).next, 0 === l) {
+        if (Object(t) !== t) return;
+        f = !1;
+      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
+        ;
+      }
+    } catch (r) {
+      o = !0, n = r;
+    } finally {
+      try {
+        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
+      } finally {
+        if (o) throw n;
+      }
+    }
+    return a;
+  }
+}
+module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 8 */
+/*!***************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
+  \***************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _unsupportedIterableToArray(o, minLen) {
+  if (!o) return;
+  if (typeof o === "string") return arrayLikeToArray(o, minLen);
+  var n = Object.prototype.toString.call(o).slice(8, -1);
+  if (n === "Object" && o.constructor) n = o.constructor.name;
+  if (n === "Map" || n === "Set") return Array.from(o);
+  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+}
+module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 9 */
+/*!*****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
+  \*****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _arrayLikeToArray(arr, len) {
+  if (len == null || len > arr.length) len = arr.length;
+  for (var i = 0, arr2 = new Array(len); i < len; i++) {
+    arr2[i] = arr[i];
+  }
+  return arr2;
+}
+module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 10 */
+/*!****************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/nonIterableRest.js ***!
+  \****************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+module.exports = _nonIterableRest, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 11 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/defineProperty.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var toPropertyKey = __webpack_require__(/*! ./toPropertyKey.js */ 12);
+function _defineProperty(obj, key, value) {
+  key = toPropertyKey(key);
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+  return obj;
+}
+module.exports = _defineProperty, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 12 */
+/*!**************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPropertyKey.js ***!
+  \**************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+var toPrimitive = __webpack_require__(/*! ./toPrimitive.js */ 14);
+function toPropertyKey(t) {
+  var i = toPrimitive(t, "string");
+  return "symbol" == _typeof(i) ? i : i + "";
+}
+module.exports = toPropertyKey, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 13 */
+/*!*******************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/typeof.js ***!
+  \*******************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _typeof(o) {
+  "@babel/helpers - typeof";
+
+  return (module.exports = _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) {
+    return typeof o;
+  } : function (o) {
+    return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports), _typeof(o);
+}
+module.exports = _typeof, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 14 */
+/*!************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toPrimitive.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var _typeof = __webpack_require__(/*! ./typeof.js */ 13)["default"];
+function toPrimitive(t, r) {
+  if ("object" != _typeof(t) || !t) return t;
+  var e = t[Symbol.toPrimitive];
+  if (void 0 !== e) {
+    var i = e.call(t, r || "default");
+    if ("object" != _typeof(i)) return i;
+    throw new TypeError("@@toPrimitive must return a primitive value.");
+  }
+  return ("string" === r ? String : Number)(t);
+}
+module.exports = toPrimitive, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 15 */
+/*!**********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/construct.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var setPrototypeOf = __webpack_require__(/*! ./setPrototypeOf.js */ 16);
+var isNativeReflectConstruct = __webpack_require__(/*! ./isNativeReflectConstruct.js */ 17);
+function _construct(t, e, r) {
+  if (isNativeReflectConstruct()) return Reflect.construct.apply(null, arguments);
+  var o = [null];
+  o.push.apply(o, e);
+  var p = new (t.bind.apply(t, o))();
+  return r && setPrototypeOf(p, r.prototype), p;
+}
+module.exports = _construct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 16 */
+/*!***************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/setPrototypeOf.js ***!
+  \***************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _setPrototypeOf(o, p) {
+  module.exports = _setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf(o, p) {
+    o.__proto__ = p;
+    return o;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports;
+  return _setPrototypeOf(o, p);
+}
+module.exports = _setPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 17 */
+/*!*************************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/isNativeReflectConstruct.js ***!
+  \*************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+function _isNativeReflectConstruct() {
+  try {
+    var t = !Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {}));
+  } catch (t) {}
+  return (module.exports = _isNativeReflectConstruct = function _isNativeReflectConstruct() {
+    return !!t;
+  }, module.exports.__esModule = true, module.exports["default"] = module.exports)();
+}
+module.exports = _isNativeReflectConstruct, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 18 */
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toConsumableArray.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithoutHoles = __webpack_require__(/*! ./arrayWithoutHoles.js */ 19);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableSpread = __webpack_require__(/*! ./nonIterableSpread.js */ 21);
+function _toConsumableArray(arr) {
+  return arrayWithoutHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableSpread();
+}
+module.exports = _toConsumableArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 19 */
+/*!******************************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/arrayWithoutHoles.js ***!
+  \******************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
+function _arrayWithoutHoles(arr) {
+  if (Array.isArray(arr)) return arrayLikeToArray(arr);
+}
+module.exports = _arrayWithoutHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 20 */
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/iterableToArray.js ***!
   \****************************************************************/
@@ -2985,79 +2792,7 @@ function _iterableToArray(iter) {
 module.exports = _iterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 208:
-/*!***********************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/register/validator.js ***!
-  \***********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  "username": {
-    "rules": [{
-      required: true,
-      errorMessage: '请输入用户名'
-    }, {
-      minLength: 3,
-      maxLength: 32,
-      errorMessage: '用户名长度在 {minLength} 到 {maxLength} 个字符'
-    }, {
-      validateFunction: function validateFunction(rule, value, data, callback) {
-        console.log(value);
-        if (/^1\d{10}$/.test(value) || /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
-          callback('用户名不能是：手机号或邮箱');
-        }
-        ;
-        return true;
-      }
-    }],
-    "label": "用户名"
-  },
-  "password": {
-    "rules": [{
-      required: true,
-      errorMessage: '请输入密码'
-    }, {
-      minLength: 6,
-      maxLength: 20,
-      errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符'
-    }],
-    "label": "密码"
-  },
-  "pwd2": {
-    "rules": [{
-      required: true,
-      errorMessage: '再次输入密码'
-    }, {
-      minLength: 6,
-      maxLength: 20,
-      errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符'
-    }, {
-      validateFunction: function validateFunction(rule, value, data, callback) {
-        console.log(value);
-        if (value != data.password) {
-          callback('两次输入密码不一致');
-        }
-        ;
-        return true;
-      }
-    }],
-    "label": "确认密码"
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 21:
+/* 21 */
 /*!******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/nonIterableSpread.js ***!
   \******************************************************************/
@@ -3070,8 +2805,7 @@ function _nonIterableSpread() {
 module.exports = _nonIterableSpread, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 22:
+/* 22 */
 /*!*************************************************************!*\
   !*** ./node_modules/@dcloudio/uni-i18n/dist/uni-i18n.es.js ***!
   \*************************************************************/
@@ -3607,8 +3341,7 @@ function resolveLocaleChain(locale) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-
-/***/ 23:
+/* 23 */
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/classCallCheck.js ***!
   \***************************************************************/
@@ -3623,8 +3356,7 @@ function _classCallCheck(instance, Constructor) {
 module.exports = _classCallCheck, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 24:
+/* 24 */
 /*!************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/createClass.js ***!
   \************************************************************/
@@ -3652,130 +3384,7 @@ function _createClass(Constructor, protoProps, staticProps) {
 module.exports = _createClass, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 241:
-/*!*************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-feedback/js_sdk/validator/opendb-feedback.js ***!
-  \*************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.enumConverter = void 0;
-exports.filterToWhere = filterToWhere;
-exports.validator = void 0;
-var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-// 表单校验规则由 schema2code 生成，不建议直接修改校验规则，而建议通过 schema2code 生成, 详情: https://uniapp.dcloud.net.cn/uniCloud/schema
-
-var validator = {
-  "content": {
-    "rules": [{
-      "required": true
-    }, {
-      "format": "string"
-    }],
-    "label": "留言内容/回复内容"
-  },
-  "imgs": {
-    "rules": [{
-      "format": "array"
-    }, {
-      "arrayType": "file"
-    }, {
-      "maxLength": 6
-    }],
-    "label": "图片列表"
-  },
-  "contact": {
-    "rules": [{
-      "format": "string"
-    }],
-    "label": "联系人"
-  },
-  "mobile": {
-    "rules": [{
-      "format": "string"
-    }, {
-      "pattern": "^\\+?[0-9-]{3,20}$"
-    }],
-    "label": "联系电话"
-  }
-};
-exports.validator = validator;
-var enumConverter = {};
-exports.enumConverter = enumConverter;
-function filterToWhere(filter, command) {
-  var where = {};
-  for (var field in filter) {
-    var _filter$field = filter[field],
-      type = _filter$field.type,
-      value = _filter$field.value;
-    switch (type) {
-      case "search":
-        if (typeof value === 'string' && value.length) {
-          where[field] = new RegExp(value);
-        }
-        break;
-      case "select":
-        if (value.length) {
-          var selectValue = [];
-          var _iterator = _createForOfIteratorHelper(value),
-            _step;
-          try {
-            for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var s = _step.value;
-              selectValue.push(command.eq(s));
-            }
-          } catch (err) {
-            _iterator.e(err);
-          } finally {
-            _iterator.f();
-          }
-          where[field] = command.or(selectValue);
-        }
-        break;
-      case "range":
-        if (value.length) {
-          var gt = value[0];
-          var lt = value[1];
-          where[field] = command.and([command.gte(gt), command.lte(lt)]);
-        }
-        break;
-      case "date":
-        if (value.length) {
-          var _value = (0, _slicedToArray2.default)(value, 2),
-            _s = _value[0],
-            e = _value[1];
-          var startDate = new Date(_s);
-          var endDate = new Date(e);
-          where[field] = command.and([command.gte(startDate), command.lte(endDate)]);
-        }
-        break;
-      case "timestamp":
-        if (value.length) {
-          var _value2 = (0, _slicedToArray2.default)(value, 2),
-            _startDate = _value2[0],
-            _endDate = _value2[1];
-          where[field] = command.and([command.gte(_startDate), command.lte(_endDate)]);
-        }
-        break;
-    }
-  }
-  return where;
-}
-
-/***/ }),
-
-/***/ 25:
+/* 25 */
 /*!******************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js ***!
   \******************************************************************************************/
@@ -9856,8 +9465,7 @@ internalMixin(Vue);
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-
-/***/ 26:
+/* 26 */
 /*!***********************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages.json ***!
   \***********************************************************************************************/
@@ -9867,8 +9475,7 @@ internalMixin(Vue);
 
 
 /***/ }),
-
-/***/ 27:
+/* 27 */
 /*!************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js ***!
   \************************************************************************************/
@@ -10350,9 +9957,9 @@ var S = "development" === "development",
         "169.254.125.142",
         "10.15.122.28"
     ],
-    "debugPort": 9000,
+    "debugPort": 9001,
     "initialLaunchType": "local",
-    "servePort": 7000,
+    "servePort": 7001,
     "skipFiles": [
         "<node_internals>/**",
         "D:/Program Files/HBuilderX/plugins/unicloud/**/*.js"
@@ -17710,98 +17317,7 @@ exports.default = Bs;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3), __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
 
 /***/ }),
-
-/***/ 271:
-/*!************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/index.js ***!
-  \************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _en_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en.json */ 272);
-var _en_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./en.json */ 272, 1);
-/* harmony import */ var _es_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./es.json */ 273);
-var _es_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./es.json */ 273, 1);
-/* harmony import */ var _fr_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fr.json */ 274);
-var _fr_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./fr.json */ 274, 1);
-/* harmony import */ var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./zh-Hans.json */ 275);
-var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hans.json */ 275, 1);
-/* harmony import */ var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./zh-Hant.json */ 276);
-var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hant.json */ 276, 1);
-
-
-
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  en: _en_json__WEBPACK_IMPORTED_MODULE_0__,
-  es: _es_json__WEBPACK_IMPORTED_MODULE_1__,
-  fr: _fr_json__WEBPACK_IMPORTED_MODULE_2__,
-  'zh-Hans': _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__,
-  'zh-Hant': _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__
-});
-
-
-/***/ }),
-
-/***/ 272:
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/en.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"Success\",\"uniCloud.component.update.success\":\"Success\",\"uniCloud.component.update.showModal.title\":\"Tips\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"Tips\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-
-/***/ 273:
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/es.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-
-/***/ 274:
-/*!***********************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/fr.json ***!
-  \***********************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-
-/***/ 275:
-/*!****************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hans.json ***!
-  \****************************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
-
-/***/ }),
-
-/***/ 276:
-/*!****************************************************************************!*\
-  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hant.json ***!
-  \****************************************************************************/
-/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否刪除數據\"}");
-
-/***/ }),
-
-/***/ 28:
+/* 28 */
 /*!************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/@babel/runtime/regenerator/index.js ***!
   \************************************************************************************************/
@@ -17814,8 +17330,7 @@ var runtime = __webpack_require__(/*! @babel/runtime/helpers/regeneratorRuntime 
 module.exports = runtime;
 
 /***/ }),
-
-/***/ 29:
+/* 29 */
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/regeneratorRuntime.js ***!
   \*******************************************************************/
@@ -18136,39 +17651,7 @@ function _regeneratorRuntime() {
 module.exports = _regeneratorRuntime, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 3:
-/*!***********************************!*\
-  !*** (webpack)/buildin/global.js ***!
-  \***********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-var g;
-
-// This works in non-strict mode
-g = (function() {
-	return this;
-})();
-
-try {
-	// This works if eval is allowed (see CSP)
-	g = g || new Function("return this")();
-} catch (e) {
-	// This works if the window reference is available
-	if (typeof window === "object") g = window;
-}
-
-// g can still be undefined, but nothing to do about it...
-// We return undefined, instead of nothing here, so it's
-// easier to handle this case. if(!global) { ...}
-
-module.exports = g;
-
-
-/***/ }),
-
-/***/ 30:
+/* 30 */
 /*!**********************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/assertThisInitialized.js ***!
   \**********************************************************************/
@@ -18184,1030 +17667,7 @@ function _assertThisInitialized(self) {
 module.exports = _assertThisInitialized, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 303:
-/*!****************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-icons/components/uni-icons/icons.js ***!
-  \****************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  "id": "2852637",
-  "name": "uniui图标库",
-  "font_family": "uniicons",
-  "css_prefix_text": "uniui-",
-  "description": "",
-  "glyphs": [{
-    "icon_id": "25027049",
-    "name": "yanse",
-    "font_class": "color",
-    "unicode": "e6cf",
-    "unicode_decimal": 59087
-  }, {
-    "icon_id": "25027048",
-    "name": "wallet",
-    "font_class": "wallet",
-    "unicode": "e6b1",
-    "unicode_decimal": 59057
-  }, {
-    "icon_id": "25015720",
-    "name": "settings-filled",
-    "font_class": "settings-filled",
-    "unicode": "e6ce",
-    "unicode_decimal": 59086
-  }, {
-    "icon_id": "25015434",
-    "name": "shimingrenzheng-filled",
-    "font_class": "auth-filled",
-    "unicode": "e6cc",
-    "unicode_decimal": 59084
-  }, {
-    "icon_id": "24934246",
-    "name": "shop-filled",
-    "font_class": "shop-filled",
-    "unicode": "e6cd",
-    "unicode_decimal": 59085
-  }, {
-    "icon_id": "24934159",
-    "name": "staff-filled-01",
-    "font_class": "staff-filled",
-    "unicode": "e6cb",
-    "unicode_decimal": 59083
-  }, {
-    "icon_id": "24932461",
-    "name": "VIP-filled",
-    "font_class": "vip-filled",
-    "unicode": "e6c6",
-    "unicode_decimal": 59078
-  }, {
-    "icon_id": "24932462",
-    "name": "plus_circle_fill",
-    "font_class": "plus-filled",
-    "unicode": "e6c7",
-    "unicode_decimal": 59079
-  }, {
-    "icon_id": "24932463",
-    "name": "folder_add-filled",
-    "font_class": "folder-add-filled",
-    "unicode": "e6c8",
-    "unicode_decimal": 59080
-  }, {
-    "icon_id": "24932464",
-    "name": "yanse-filled",
-    "font_class": "color-filled",
-    "unicode": "e6c9",
-    "unicode_decimal": 59081
-  }, {
-    "icon_id": "24932465",
-    "name": "tune-filled",
-    "font_class": "tune-filled",
-    "unicode": "e6ca",
-    "unicode_decimal": 59082
-  }, {
-    "icon_id": "24932455",
-    "name": "a-rilidaka-filled",
-    "font_class": "calendar-filled",
-    "unicode": "e6c0",
-    "unicode_decimal": 59072
-  }, {
-    "icon_id": "24932456",
-    "name": "notification-filled",
-    "font_class": "notification-filled",
-    "unicode": "e6c1",
-    "unicode_decimal": 59073
-  }, {
-    "icon_id": "24932457",
-    "name": "wallet-filled",
-    "font_class": "wallet-filled",
-    "unicode": "e6c2",
-    "unicode_decimal": 59074
-  }, {
-    "icon_id": "24932458",
-    "name": "paihangbang-filled",
-    "font_class": "medal-filled",
-    "unicode": "e6c3",
-    "unicode_decimal": 59075
-  }, {
-    "icon_id": "24932459",
-    "name": "gift-filled",
-    "font_class": "gift-filled",
-    "unicode": "e6c4",
-    "unicode_decimal": 59076
-  }, {
-    "icon_id": "24932460",
-    "name": "fire-filled",
-    "font_class": "fire-filled",
-    "unicode": "e6c5",
-    "unicode_decimal": 59077
-  }, {
-    "icon_id": "24928001",
-    "name": "refreshempty",
-    "font_class": "refreshempty",
-    "unicode": "e6bf",
-    "unicode_decimal": 59071
-  }, {
-    "icon_id": "24926853",
-    "name": "location-ellipse",
-    "font_class": "location-filled",
-    "unicode": "e6af",
-    "unicode_decimal": 59055
-  }, {
-    "icon_id": "24926735",
-    "name": "person-filled",
-    "font_class": "person-filled",
-    "unicode": "e69d",
-    "unicode_decimal": 59037
-  }, {
-    "icon_id": "24926703",
-    "name": "personadd-filled",
-    "font_class": "personadd-filled",
-    "unicode": "e698",
-    "unicode_decimal": 59032
-  }, {
-    "icon_id": "24923351",
-    "name": "back",
-    "font_class": "back",
-    "unicode": "e6b9",
-    "unicode_decimal": 59065
-  }, {
-    "icon_id": "24923352",
-    "name": "forward",
-    "font_class": "forward",
-    "unicode": "e6ba",
-    "unicode_decimal": 59066
-  }, {
-    "icon_id": "24923353",
-    "name": "arrowthinright",
-    "font_class": "arrow-right",
-    "unicode": "e6bb",
-    "unicode_decimal": 59067
-  }, {
-    "icon_id": "24923353",
-    "name": "arrowthinright",
-    "font_class": "arrowthinright",
-    "unicode": "e6bb",
-    "unicode_decimal": 59067
-  }, {
-    "icon_id": "24923354",
-    "name": "arrowthinleft",
-    "font_class": "arrow-left",
-    "unicode": "e6bc",
-    "unicode_decimal": 59068
-  }, {
-    "icon_id": "24923354",
-    "name": "arrowthinleft",
-    "font_class": "arrowthinleft",
-    "unicode": "e6bc",
-    "unicode_decimal": 59068
-  }, {
-    "icon_id": "24923355",
-    "name": "arrowthinup",
-    "font_class": "arrow-up",
-    "unicode": "e6bd",
-    "unicode_decimal": 59069
-  }, {
-    "icon_id": "24923355",
-    "name": "arrowthinup",
-    "font_class": "arrowthinup",
-    "unicode": "e6bd",
-    "unicode_decimal": 59069
-  }, {
-    "icon_id": "24923356",
-    "name": "arrowthindown",
-    "font_class": "arrow-down",
-    "unicode": "e6be",
-    "unicode_decimal": 59070
-  }, {
-    "icon_id": "24923356",
-    "name": "arrowthindown",
-    "font_class": "arrowthindown",
-    "unicode": "e6be",
-    "unicode_decimal": 59070
-  }, {
-    "icon_id": "24923349",
-    "name": "arrowdown",
-    "font_class": "bottom",
-    "unicode": "e6b8",
-    "unicode_decimal": 59064
-  }, {
-    "icon_id": "24923349",
-    "name": "arrowdown",
-    "font_class": "arrowdown",
-    "unicode": "e6b8",
-    "unicode_decimal": 59064
-  }, {
-    "icon_id": "24923346",
-    "name": "arrowright",
-    "font_class": "right",
-    "unicode": "e6b5",
-    "unicode_decimal": 59061
-  }, {
-    "icon_id": "24923346",
-    "name": "arrowright",
-    "font_class": "arrowright",
-    "unicode": "e6b5",
-    "unicode_decimal": 59061
-  }, {
-    "icon_id": "24923347",
-    "name": "arrowup",
-    "font_class": "top",
-    "unicode": "e6b6",
-    "unicode_decimal": 59062
-  }, {
-    "icon_id": "24923347",
-    "name": "arrowup",
-    "font_class": "arrowup",
-    "unicode": "e6b6",
-    "unicode_decimal": 59062
-  }, {
-    "icon_id": "24923348",
-    "name": "arrowleft",
-    "font_class": "left",
-    "unicode": "e6b7",
-    "unicode_decimal": 59063
-  }, {
-    "icon_id": "24923348",
-    "name": "arrowleft",
-    "font_class": "arrowleft",
-    "unicode": "e6b7",
-    "unicode_decimal": 59063
-  }, {
-    "icon_id": "24923334",
-    "name": "eye",
-    "font_class": "eye",
-    "unicode": "e651",
-    "unicode_decimal": 58961
-  }, {
-    "icon_id": "24923335",
-    "name": "eye-filled",
-    "font_class": "eye-filled",
-    "unicode": "e66a",
-    "unicode_decimal": 58986
-  }, {
-    "icon_id": "24923336",
-    "name": "eye-slash",
-    "font_class": "eye-slash",
-    "unicode": "e6b3",
-    "unicode_decimal": 59059
-  }, {
-    "icon_id": "24923337",
-    "name": "eye-slash-filled",
-    "font_class": "eye-slash-filled",
-    "unicode": "e6b4",
-    "unicode_decimal": 59060
-  }, {
-    "icon_id": "24923305",
-    "name": "info-filled",
-    "font_class": "info-filled",
-    "unicode": "e649",
-    "unicode_decimal": 58953
-  }, {
-    "icon_id": "24923299",
-    "name": "reload-01",
-    "font_class": "reload",
-    "unicode": "e6b2",
-    "unicode_decimal": 59058
-  }, {
-    "icon_id": "24923195",
-    "name": "mic_slash_fill",
-    "font_class": "micoff-filled",
-    "unicode": "e6b0",
-    "unicode_decimal": 59056
-  }, {
-    "icon_id": "24923165",
-    "name": "map-pin-ellipse",
-    "font_class": "map-pin-ellipse",
-    "unicode": "e6ac",
-    "unicode_decimal": 59052
-  }, {
-    "icon_id": "24923166",
-    "name": "map-pin",
-    "font_class": "map-pin",
-    "unicode": "e6ad",
-    "unicode_decimal": 59053
-  }, {
-    "icon_id": "24923167",
-    "name": "location",
-    "font_class": "location",
-    "unicode": "e6ae",
-    "unicode_decimal": 59054
-  }, {
-    "icon_id": "24923064",
-    "name": "starhalf",
-    "font_class": "starhalf",
-    "unicode": "e683",
-    "unicode_decimal": 59011
-  }, {
-    "icon_id": "24923065",
-    "name": "star",
-    "font_class": "star",
-    "unicode": "e688",
-    "unicode_decimal": 59016
-  }, {
-    "icon_id": "24923066",
-    "name": "star-filled",
-    "font_class": "star-filled",
-    "unicode": "e68f",
-    "unicode_decimal": 59023
-  }, {
-    "icon_id": "24899646",
-    "name": "a-rilidaka",
-    "font_class": "calendar",
-    "unicode": "e6a0",
-    "unicode_decimal": 59040
-  }, {
-    "icon_id": "24899647",
-    "name": "fire",
-    "font_class": "fire",
-    "unicode": "e6a1",
-    "unicode_decimal": 59041
-  }, {
-    "icon_id": "24899648",
-    "name": "paihangbang",
-    "font_class": "medal",
-    "unicode": "e6a2",
-    "unicode_decimal": 59042
-  }, {
-    "icon_id": "24899649",
-    "name": "font",
-    "font_class": "font",
-    "unicode": "e6a3",
-    "unicode_decimal": 59043
-  }, {
-    "icon_id": "24899650",
-    "name": "gift",
-    "font_class": "gift",
-    "unicode": "e6a4",
-    "unicode_decimal": 59044
-  }, {
-    "icon_id": "24899651",
-    "name": "link",
-    "font_class": "link",
-    "unicode": "e6a5",
-    "unicode_decimal": 59045
-  }, {
-    "icon_id": "24899652",
-    "name": "notification",
-    "font_class": "notification",
-    "unicode": "e6a6",
-    "unicode_decimal": 59046
-  }, {
-    "icon_id": "24899653",
-    "name": "staff",
-    "font_class": "staff",
-    "unicode": "e6a7",
-    "unicode_decimal": 59047
-  }, {
-    "icon_id": "24899654",
-    "name": "VIP",
-    "font_class": "vip",
-    "unicode": "e6a8",
-    "unicode_decimal": 59048
-  }, {
-    "icon_id": "24899655",
-    "name": "folder_add",
-    "font_class": "folder-add",
-    "unicode": "e6a9",
-    "unicode_decimal": 59049
-  }, {
-    "icon_id": "24899656",
-    "name": "tune",
-    "font_class": "tune",
-    "unicode": "e6aa",
-    "unicode_decimal": 59050
-  }, {
-    "icon_id": "24899657",
-    "name": "shimingrenzheng",
-    "font_class": "auth",
-    "unicode": "e6ab",
-    "unicode_decimal": 59051
-  }, {
-    "icon_id": "24899565",
-    "name": "person",
-    "font_class": "person",
-    "unicode": "e699",
-    "unicode_decimal": 59033
-  }, {
-    "icon_id": "24899566",
-    "name": "email-filled",
-    "font_class": "email-filled",
-    "unicode": "e69a",
-    "unicode_decimal": 59034
-  }, {
-    "icon_id": "24899567",
-    "name": "phone-filled",
-    "font_class": "phone-filled",
-    "unicode": "e69b",
-    "unicode_decimal": 59035
-  }, {
-    "icon_id": "24899568",
-    "name": "phone",
-    "font_class": "phone",
-    "unicode": "e69c",
-    "unicode_decimal": 59036
-  }, {
-    "icon_id": "24899570",
-    "name": "email",
-    "font_class": "email",
-    "unicode": "e69e",
-    "unicode_decimal": 59038
-  }, {
-    "icon_id": "24899571",
-    "name": "personadd",
-    "font_class": "personadd",
-    "unicode": "e69f",
-    "unicode_decimal": 59039
-  }, {
-    "icon_id": "24899558",
-    "name": "chatboxes-filled",
-    "font_class": "chatboxes-filled",
-    "unicode": "e692",
-    "unicode_decimal": 59026
-  }, {
-    "icon_id": "24899559",
-    "name": "contact",
-    "font_class": "contact",
-    "unicode": "e693",
-    "unicode_decimal": 59027
-  }, {
-    "icon_id": "24899560",
-    "name": "chatbubble-filled",
-    "font_class": "chatbubble-filled",
-    "unicode": "e694",
-    "unicode_decimal": 59028
-  }, {
-    "icon_id": "24899561",
-    "name": "contact-filled",
-    "font_class": "contact-filled",
-    "unicode": "e695",
-    "unicode_decimal": 59029
-  }, {
-    "icon_id": "24899562",
-    "name": "chatboxes",
-    "font_class": "chatboxes",
-    "unicode": "e696",
-    "unicode_decimal": 59030
-  }, {
-    "icon_id": "24899563",
-    "name": "chatbubble",
-    "font_class": "chatbubble",
-    "unicode": "e697",
-    "unicode_decimal": 59031
-  }, {
-    "icon_id": "24881290",
-    "name": "upload-filled",
-    "font_class": "upload-filled",
-    "unicode": "e68e",
-    "unicode_decimal": 59022
-  }, {
-    "icon_id": "24881292",
-    "name": "upload",
-    "font_class": "upload",
-    "unicode": "e690",
-    "unicode_decimal": 59024
-  }, {
-    "icon_id": "24881293",
-    "name": "weixin",
-    "font_class": "weixin",
-    "unicode": "e691",
-    "unicode_decimal": 59025
-  }, {
-    "icon_id": "24881274",
-    "name": "compose",
-    "font_class": "compose",
-    "unicode": "e67f",
-    "unicode_decimal": 59007
-  }, {
-    "icon_id": "24881275",
-    "name": "qq",
-    "font_class": "qq",
-    "unicode": "e680",
-    "unicode_decimal": 59008
-  }, {
-    "icon_id": "24881276",
-    "name": "download-filled",
-    "font_class": "download-filled",
-    "unicode": "e681",
-    "unicode_decimal": 59009
-  }, {
-    "icon_id": "24881277",
-    "name": "pengyouquan",
-    "font_class": "pyq",
-    "unicode": "e682",
-    "unicode_decimal": 59010
-  }, {
-    "icon_id": "24881279",
-    "name": "sound",
-    "font_class": "sound",
-    "unicode": "e684",
-    "unicode_decimal": 59012
-  }, {
-    "icon_id": "24881280",
-    "name": "trash-filled",
-    "font_class": "trash-filled",
-    "unicode": "e685",
-    "unicode_decimal": 59013
-  }, {
-    "icon_id": "24881281",
-    "name": "sound-filled",
-    "font_class": "sound-filled",
-    "unicode": "e686",
-    "unicode_decimal": 59014
-  }, {
-    "icon_id": "24881282",
-    "name": "trash",
-    "font_class": "trash",
-    "unicode": "e687",
-    "unicode_decimal": 59015
-  }, {
-    "icon_id": "24881284",
-    "name": "videocam-filled",
-    "font_class": "videocam-filled",
-    "unicode": "e689",
-    "unicode_decimal": 59017
-  }, {
-    "icon_id": "24881285",
-    "name": "spinner-cycle",
-    "font_class": "spinner-cycle",
-    "unicode": "e68a",
-    "unicode_decimal": 59018
-  }, {
-    "icon_id": "24881286",
-    "name": "weibo",
-    "font_class": "weibo",
-    "unicode": "e68b",
-    "unicode_decimal": 59019
-  }, {
-    "icon_id": "24881288",
-    "name": "videocam",
-    "font_class": "videocam",
-    "unicode": "e68c",
-    "unicode_decimal": 59020
-  }, {
-    "icon_id": "24881289",
-    "name": "download",
-    "font_class": "download",
-    "unicode": "e68d",
-    "unicode_decimal": 59021
-  }, {
-    "icon_id": "24879601",
-    "name": "help",
-    "font_class": "help",
-    "unicode": "e679",
-    "unicode_decimal": 59001
-  }, {
-    "icon_id": "24879602",
-    "name": "navigate-filled",
-    "font_class": "navigate-filled",
-    "unicode": "e67a",
-    "unicode_decimal": 59002
-  }, {
-    "icon_id": "24879603",
-    "name": "plusempty",
-    "font_class": "plusempty",
-    "unicode": "e67b",
-    "unicode_decimal": 59003
-  }, {
-    "icon_id": "24879604",
-    "name": "smallcircle",
-    "font_class": "smallcircle",
-    "unicode": "e67c",
-    "unicode_decimal": 59004
-  }, {
-    "icon_id": "24879605",
-    "name": "minus-filled",
-    "font_class": "minus-filled",
-    "unicode": "e67d",
-    "unicode_decimal": 59005
-  }, {
-    "icon_id": "24879606",
-    "name": "micoff",
-    "font_class": "micoff",
-    "unicode": "e67e",
-    "unicode_decimal": 59006
-  }, {
-    "icon_id": "24879588",
-    "name": "closeempty",
-    "font_class": "closeempty",
-    "unicode": "e66c",
-    "unicode_decimal": 58988
-  }, {
-    "icon_id": "24879589",
-    "name": "clear",
-    "font_class": "clear",
-    "unicode": "e66d",
-    "unicode_decimal": 58989
-  }, {
-    "icon_id": "24879590",
-    "name": "navigate",
-    "font_class": "navigate",
-    "unicode": "e66e",
-    "unicode_decimal": 58990
-  }, {
-    "icon_id": "24879591",
-    "name": "minus",
-    "font_class": "minus",
-    "unicode": "e66f",
-    "unicode_decimal": 58991
-  }, {
-    "icon_id": "24879592",
-    "name": "image",
-    "font_class": "image",
-    "unicode": "e670",
-    "unicode_decimal": 58992
-  }, {
-    "icon_id": "24879593",
-    "name": "mic",
-    "font_class": "mic",
-    "unicode": "e671",
-    "unicode_decimal": 58993
-  }, {
-    "icon_id": "24879594",
-    "name": "paperplane",
-    "font_class": "paperplane",
-    "unicode": "e672",
-    "unicode_decimal": 58994
-  }, {
-    "icon_id": "24879595",
-    "name": "close",
-    "font_class": "close",
-    "unicode": "e673",
-    "unicode_decimal": 58995
-  }, {
-    "icon_id": "24879596",
-    "name": "help-filled",
-    "font_class": "help-filled",
-    "unicode": "e674",
-    "unicode_decimal": 58996
-  }, {
-    "icon_id": "24879597",
-    "name": "plus-filled",
-    "font_class": "paperplane-filled",
-    "unicode": "e675",
-    "unicode_decimal": 58997
-  }, {
-    "icon_id": "24879598",
-    "name": "plus",
-    "font_class": "plus",
-    "unicode": "e676",
-    "unicode_decimal": 58998
-  }, {
-    "icon_id": "24879599",
-    "name": "mic-filled",
-    "font_class": "mic-filled",
-    "unicode": "e677",
-    "unicode_decimal": 58999
-  }, {
-    "icon_id": "24879600",
-    "name": "image-filled",
-    "font_class": "image-filled",
-    "unicode": "e678",
-    "unicode_decimal": 59000
-  }, {
-    "icon_id": "24855900",
-    "name": "locked-filled",
-    "font_class": "locked-filled",
-    "unicode": "e668",
-    "unicode_decimal": 58984
-  }, {
-    "icon_id": "24855901",
-    "name": "info",
-    "font_class": "info",
-    "unicode": "e669",
-    "unicode_decimal": 58985
-  }, {
-    "icon_id": "24855903",
-    "name": "locked",
-    "font_class": "locked",
-    "unicode": "e66b",
-    "unicode_decimal": 58987
-  }, {
-    "icon_id": "24855884",
-    "name": "camera-filled",
-    "font_class": "camera-filled",
-    "unicode": "e658",
-    "unicode_decimal": 58968
-  }, {
-    "icon_id": "24855885",
-    "name": "chat-filled",
-    "font_class": "chat-filled",
-    "unicode": "e659",
-    "unicode_decimal": 58969
-  }, {
-    "icon_id": "24855886",
-    "name": "camera",
-    "font_class": "camera",
-    "unicode": "e65a",
-    "unicode_decimal": 58970
-  }, {
-    "icon_id": "24855887",
-    "name": "circle",
-    "font_class": "circle",
-    "unicode": "e65b",
-    "unicode_decimal": 58971
-  }, {
-    "icon_id": "24855888",
-    "name": "checkmarkempty",
-    "font_class": "checkmarkempty",
-    "unicode": "e65c",
-    "unicode_decimal": 58972
-  }, {
-    "icon_id": "24855889",
-    "name": "chat",
-    "font_class": "chat",
-    "unicode": "e65d",
-    "unicode_decimal": 58973
-  }, {
-    "icon_id": "24855890",
-    "name": "circle-filled",
-    "font_class": "circle-filled",
-    "unicode": "e65e",
-    "unicode_decimal": 58974
-  }, {
-    "icon_id": "24855891",
-    "name": "flag",
-    "font_class": "flag",
-    "unicode": "e65f",
-    "unicode_decimal": 58975
-  }, {
-    "icon_id": "24855892",
-    "name": "flag-filled",
-    "font_class": "flag-filled",
-    "unicode": "e660",
-    "unicode_decimal": 58976
-  }, {
-    "icon_id": "24855893",
-    "name": "gear-filled",
-    "font_class": "gear-filled",
-    "unicode": "e661",
-    "unicode_decimal": 58977
-  }, {
-    "icon_id": "24855894",
-    "name": "home",
-    "font_class": "home",
-    "unicode": "e662",
-    "unicode_decimal": 58978
-  }, {
-    "icon_id": "24855895",
-    "name": "home-filled",
-    "font_class": "home-filled",
-    "unicode": "e663",
-    "unicode_decimal": 58979
-  }, {
-    "icon_id": "24855896",
-    "name": "gear",
-    "font_class": "gear",
-    "unicode": "e664",
-    "unicode_decimal": 58980
-  }, {
-    "icon_id": "24855897",
-    "name": "smallcircle-filled",
-    "font_class": "smallcircle-filled",
-    "unicode": "e665",
-    "unicode_decimal": 58981
-  }, {
-    "icon_id": "24855898",
-    "name": "map-filled",
-    "font_class": "map-filled",
-    "unicode": "e666",
-    "unicode_decimal": 58982
-  }, {
-    "icon_id": "24855899",
-    "name": "map",
-    "font_class": "map",
-    "unicode": "e667",
-    "unicode_decimal": 58983
-  }, {
-    "icon_id": "24855825",
-    "name": "refresh-filled",
-    "font_class": "refresh-filled",
-    "unicode": "e656",
-    "unicode_decimal": 58966
-  }, {
-    "icon_id": "24855826",
-    "name": "refresh",
-    "font_class": "refresh",
-    "unicode": "e657",
-    "unicode_decimal": 58967
-  }, {
-    "icon_id": "24855808",
-    "name": "cloud-upload",
-    "font_class": "cloud-upload",
-    "unicode": "e645",
-    "unicode_decimal": 58949
-  }, {
-    "icon_id": "24855809",
-    "name": "cloud-download-filled",
-    "font_class": "cloud-download-filled",
-    "unicode": "e646",
-    "unicode_decimal": 58950
-  }, {
-    "icon_id": "24855810",
-    "name": "cloud-download",
-    "font_class": "cloud-download",
-    "unicode": "e647",
-    "unicode_decimal": 58951
-  }, {
-    "icon_id": "24855811",
-    "name": "cloud-upload-filled",
-    "font_class": "cloud-upload-filled",
-    "unicode": "e648",
-    "unicode_decimal": 58952
-  }, {
-    "icon_id": "24855813",
-    "name": "redo",
-    "font_class": "redo",
-    "unicode": "e64a",
-    "unicode_decimal": 58954
-  }, {
-    "icon_id": "24855814",
-    "name": "images-filled",
-    "font_class": "images-filled",
-    "unicode": "e64b",
-    "unicode_decimal": 58955
-  }, {
-    "icon_id": "24855815",
-    "name": "undo-filled",
-    "font_class": "undo-filled",
-    "unicode": "e64c",
-    "unicode_decimal": 58956
-  }, {
-    "icon_id": "24855816",
-    "name": "more",
-    "font_class": "more",
-    "unicode": "e64d",
-    "unicode_decimal": 58957
-  }, {
-    "icon_id": "24855817",
-    "name": "more-filled",
-    "font_class": "more-filled",
-    "unicode": "e64e",
-    "unicode_decimal": 58958
-  }, {
-    "icon_id": "24855818",
-    "name": "undo",
-    "font_class": "undo",
-    "unicode": "e64f",
-    "unicode_decimal": 58959
-  }, {
-    "icon_id": "24855819",
-    "name": "images",
-    "font_class": "images",
-    "unicode": "e650",
-    "unicode_decimal": 58960
-  }, {
-    "icon_id": "24855821",
-    "name": "paperclip",
-    "font_class": "paperclip",
-    "unicode": "e652",
-    "unicode_decimal": 58962
-  }, {
-    "icon_id": "24855822",
-    "name": "settings",
-    "font_class": "settings",
-    "unicode": "e653",
-    "unicode_decimal": 58963
-  }, {
-    "icon_id": "24855823",
-    "name": "search",
-    "font_class": "search",
-    "unicode": "e654",
-    "unicode_decimal": 58964
-  }, {
-    "icon_id": "24855824",
-    "name": "redo-filled",
-    "font_class": "redo-filled",
-    "unicode": "e655",
-    "unicode_decimal": 58965
-  }, {
-    "icon_id": "24841702",
-    "name": "list",
-    "font_class": "list",
-    "unicode": "e644",
-    "unicode_decimal": 58948
-  }, {
-    "icon_id": "24841489",
-    "name": "mail-open-filled",
-    "font_class": "mail-open-filled",
-    "unicode": "e63a",
-    "unicode_decimal": 58938
-  }, {
-    "icon_id": "24841491",
-    "name": "hand-thumbsdown-filled",
-    "font_class": "hand-down-filled",
-    "unicode": "e63c",
-    "unicode_decimal": 58940
-  }, {
-    "icon_id": "24841492",
-    "name": "hand-thumbsdown",
-    "font_class": "hand-down",
-    "unicode": "e63d",
-    "unicode_decimal": 58941
-  }, {
-    "icon_id": "24841493",
-    "name": "hand-thumbsup-filled",
-    "font_class": "hand-up-filled",
-    "unicode": "e63e",
-    "unicode_decimal": 58942
-  }, {
-    "icon_id": "24841494",
-    "name": "hand-thumbsup",
-    "font_class": "hand-up",
-    "unicode": "e63f",
-    "unicode_decimal": 58943
-  }, {
-    "icon_id": "24841496",
-    "name": "heart-filled",
-    "font_class": "heart-filled",
-    "unicode": "e641",
-    "unicode_decimal": 58945
-  }, {
-    "icon_id": "24841498",
-    "name": "mail-open",
-    "font_class": "mail-open",
-    "unicode": "e643",
-    "unicode_decimal": 58947
-  }, {
-    "icon_id": "24841488",
-    "name": "heart",
-    "font_class": "heart",
-    "unicode": "e639",
-    "unicode_decimal": 58937
-  }, {
-    "icon_id": "24839963",
-    "name": "loop",
-    "font_class": "loop",
-    "unicode": "e633",
-    "unicode_decimal": 58931
-  }, {
-    "icon_id": "24839866",
-    "name": "pulldown",
-    "font_class": "pulldown",
-    "unicode": "e632",
-    "unicode_decimal": 58930
-  }, {
-    "icon_id": "24813798",
-    "name": "scan",
-    "font_class": "scan",
-    "unicode": "e62a",
-    "unicode_decimal": 58922
-  }, {
-    "icon_id": "24813786",
-    "name": "bars",
-    "font_class": "bars",
-    "unicode": "e627",
-    "unicode_decimal": 58919
-  }, {
-    "icon_id": "24813788",
-    "name": "cart-filled",
-    "font_class": "cart-filled",
-    "unicode": "e629",
-    "unicode_decimal": 58921
-  }, {
-    "icon_id": "24813790",
-    "name": "checkbox",
-    "font_class": "checkbox",
-    "unicode": "e62b",
-    "unicode_decimal": 58923
-  }, {
-    "icon_id": "24813791",
-    "name": "checkbox-filled",
-    "font_class": "checkbox-filled",
-    "unicode": "e62c",
-    "unicode_decimal": 58924
-  }, {
-    "icon_id": "24813794",
-    "name": "shop",
-    "font_class": "shop",
-    "unicode": "e62f",
-    "unicode_decimal": 58927
-  }, {
-    "icon_id": "24813795",
-    "name": "headphones",
-    "font_class": "headphones",
-    "unicode": "e630",
-    "unicode_decimal": 58928
-  }, {
-    "icon_id": "24813796",
-    "name": "cart",
-    "font_class": "cart",
-    "unicode": "e631",
-    "unicode_decimal": 58929
-  }]
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 31:
+/* 31 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/asyncToGenerator.js ***!
   \*****************************************************************/
@@ -19247,8 +17707,7 @@ function _asyncToGenerator(fn) {
 module.exports = _asyncToGenerator, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 32:
+/* 32 */
 /*!*********************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/inherits.js ***!
   \*********************************************************/
@@ -19275,226 +17734,7 @@ function _inherits(subClass, superClass) {
 module.exports = _inherits, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 325:
-/*!********************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-dateformat/components/uni-dateformat/date-format.js ***!
-  \********************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.formatDate = formatDate;
-exports.friendlyDate = friendlyDate;
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-// yyyy-MM-dd hh:mm:ss.SSS 所有支持的类型
-function pad(str) {
-  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-  str += '';
-  while (str.length < length) {
-    str = '0' + str;
-  }
-  return str.slice(-length);
-}
-var parser = {
-  yyyy: function yyyy(dateObj) {
-    return pad(dateObj.year, 4);
-  },
-  yy: function yy(dateObj) {
-    return pad(dateObj.year);
-  },
-  MM: function MM(dateObj) {
-    return pad(dateObj.month);
-  },
-  M: function M(dateObj) {
-    return dateObj.month;
-  },
-  dd: function dd(dateObj) {
-    return pad(dateObj.day);
-  },
-  d: function d(dateObj) {
-    return dateObj.day;
-  },
-  hh: function hh(dateObj) {
-    return pad(dateObj.hour);
-  },
-  h: function h(dateObj) {
-    return dateObj.hour;
-  },
-  mm: function mm(dateObj) {
-    return pad(dateObj.minute);
-  },
-  m: function m(dateObj) {
-    return dateObj.minute;
-  },
-  ss: function ss(dateObj) {
-    return pad(dateObj.second);
-  },
-  s: function s(dateObj) {
-    return dateObj.second;
-  },
-  SSS: function SSS(dateObj) {
-    return pad(dateObj.millisecond, 3);
-  },
-  S: function S(dateObj) {
-    return dateObj.millisecond;
-  }
-};
-
-// 这都n年了iOS依然不认识2020-12-12，需要转换为2020/12/12
-function getDate(time) {
-  if (time instanceof Date) {
-    return time;
-  }
-  switch ((0, _typeof2.default)(time)) {
-    case 'string':
-      {
-        // 2020-12-12T12:12:12.000Z、2020-12-12T12:12:12.000
-        if (time.indexOf('T') > -1) {
-          return new Date(time);
-        }
-        return new Date(time.replace(/-/g, '/'));
-      }
-    default:
-      return new Date(time);
-  }
-}
-function formatDate(date) {
-  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy/MM/dd hh:mm:ss';
-  if (!date && date !== 0) {
-    return '';
-  }
-  date = getDate(date);
-  var dateObj = {
-    year: date.getFullYear(),
-    month: date.getMonth() + 1,
-    day: date.getDate(),
-    hour: date.getHours(),
-    minute: date.getMinutes(),
-    second: date.getSeconds(),
-    millisecond: date.getMilliseconds()
-  };
-  var tokenRegExp = /yyyy|yy|MM|M|dd|d|hh|h|mm|m|ss|s|SSS|SS|S/;
-  var flag = true;
-  var result = format;
-  while (flag) {
-    flag = false;
-    result = result.replace(tokenRegExp, function (matched) {
-      flag = true;
-      return parser[matched](dateObj);
-    });
-  }
-  return result;
-}
-function friendlyDate(time, _ref) {
-  var _ref$locale = _ref.locale,
-    locale = _ref$locale === void 0 ? 'zh' : _ref$locale,
-    _ref$threshold = _ref.threshold,
-    threshold = _ref$threshold === void 0 ? [60000, 3600000] : _ref$threshold,
-    _ref$format = _ref.format,
-    format = _ref$format === void 0 ? 'yyyy/MM/dd hh:mm:ss' : _ref$format;
-  if (time === '-') {
-    return time;
-  }
-  if (!time && time !== 0) {
-    return '';
-  }
-  var localeText = {
-    zh: {
-      year: '年',
-      month: '月',
-      day: '天',
-      hour: '小时',
-      minute: '分钟',
-      second: '秒',
-      ago: '前',
-      later: '后',
-      justNow: '刚刚',
-      soon: '马上',
-      template: '{num}{unit}{suffix}'
-    },
-    en: {
-      year: 'year',
-      month: 'month',
-      day: 'day',
-      hour: 'hour',
-      minute: 'minute',
-      second: 'second',
-      ago: 'ago',
-      later: 'later',
-      justNow: 'just now',
-      soon: 'soon',
-      template: '{num} {unit} {suffix}'
-    }
-  };
-  var text = localeText[locale] || localeText.zh;
-  var date = getDate(time);
-  var ms = date.getTime() - Date.now();
-  var absMs = Math.abs(ms);
-  if (absMs < threshold[0]) {
-    return ms < 0 ? text.justNow : text.soon;
-  }
-  if (absMs >= threshold[1]) {
-    return formatDate(date, format);
-  }
-  var num;
-  var unit;
-  var suffix = text.later;
-  if (ms < 0) {
-    suffix = text.ago;
-    ms = -ms;
-  }
-  var seconds = Math.floor(ms / 1000);
-  var minutes = Math.floor(seconds / 60);
-  var hours = Math.floor(minutes / 60);
-  var days = Math.floor(hours / 24);
-  var months = Math.floor(days / 30);
-  var years = Math.floor(months / 12);
-  switch (true) {
-    case years > 0:
-      num = years;
-      unit = text.year;
-      break;
-    case months > 0:
-      num = months;
-      unit = text.month;
-      break;
-    case days > 0:
-      num = days;
-      unit = text.day;
-      break;
-    case hours > 0:
-      num = hours;
-      unit = text.hour;
-      break;
-    case minutes > 0:
-      num = minutes;
-      unit = text.minute;
-      break;
-    default:
-      num = seconds;
-      unit = text.second;
-      break;
-  }
-  if (locale === 'en') {
-    if (num === 1) {
-      num = 'a';
-    } else {
-      unit += 's';
-    }
-  }
-  return text.template.replace(/{\s*num\s*}/g, num + '').replace(/{\s*unit\s*}/g, unit).replace(/{\s*suffix\s*}/g, suffix);
-}
-
-/***/ }),
-
-/***/ 33:
+/* 33 */
 /*!**************************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/possibleConstructorReturn.js ***!
   \**************************************************************************/
@@ -19514,55 +17754,7 @@ function _possibleConstructorReturn(self, call) {
 module.exports = _possibleConstructorReturn, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 331:
-/*!****************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/index.js ***!
-  \****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 332));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 333));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 332:
-/*!***************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/en.json ***!
-  \***************************************************************************************************************************/
-/*! exports provided: noData, noNetwork, toSet, error, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"noData\":\"No Data\",\"noNetwork\":\"Network error\",\"toSet\":\"Go to settings\",\"error\":\"error\"}");
-
-/***/ }),
-
-/***/ 333:
-/*!********************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/zh-Hans.json ***!
-  \********************************************************************************************************************************/
-/*! exports provided: noData, noNetwork, toSet, error, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"noData\":\"暂无数据\",\"noNetwork\":\"网络异常\",\"toSet\":\"前往设置\",\"error\":\"错误\"}");
-
-/***/ }),
-
-/***/ 34:
+/* 34 */
 /*!***************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/getPrototypeOf.js ***!
   \***************************************************************/
@@ -19578,8 +17770,7 @@ function _getPrototypeOf(o) {
 module.exports = _getPrototypeOf, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 35:
+/* 35 */
 /*!****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/wrapNativeSuper.js ***!
   \****************************************************************/
@@ -19619,19 +17810,7 @@ function _wrapNativeSuper(Class) {
 module.exports = _wrapNativeSuper, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 355:
-/*!******************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/bazaar-city_list/citylist.json ***!
-  \******************************************************************************************************************************/
-/*! exports provided: hotcity, city, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"hotcity\":{\"title\":\"热门城市\",\"lists\":[\"上海\",\"北京\",\"广州\",\"深圳\",\"武汉\",\"天津\",\"西安\",\"南京\",\"杭州\",\"成都\",\"重庆\"]},\"city\":[{\"title\":\"A\",\"lists\":[\"阿坝\",\"阿拉善\",\"阿里\",\"安康\",\"安庆\",\"鞍山\",\"安顺\",\"安阳\",\"澳门\"]},{\"title\":\"B\",\"lists\":[\"北京\",\"白银\",\"保定\",\"宝鸡\",\"保山\",\"包头\",\"巴中\",\"北海\",\"蚌埠\",\"本溪\",\"毕节\",\"滨州\",\"百色\",\"亳州\"]},{\"title\":\"C\",\"lists\":[\"重庆\",\"成都\",\"长沙\",\"长春\",\"沧州\",\"常德\",\"昌都\",\"长治\",\"常州\",\"巢湖\",\"潮州\",\"承德\",\"郴州\",\"赤峰\",\"池州\",\"崇左\",\"楚雄\",\"滁州\",\"朝阳\"]},{\"title\":\"D\",\"lists\":[\"大连\",\"东莞\",\"大理\",\"丹东\",\"大庆\",\"大同\",\"大兴安岭\",\"德宏\",\"德阳\",\"德州\",\"定西\",\"迪庆\",\"东营\"]},{\"title\":\"E\",\"lists\":[\"鄂尔多斯\",\"恩施\",\"鄂州\"]},{\"title\":\"F\",\"lists\":[\"福州\",\"防城港\",\"佛山\",\"抚顺\",\"抚州\",\"阜新\",\"阜阳\"]},{\"title\":\"G\",\"lists\":[\"广州\",\"桂林\",\"贵阳\",\"甘南\",\"赣州\",\"甘孜\",\"广安\",\"广元\",\"贵港\",\"果洛\"]},{\"title\":\"H\",\"lists\":[\"杭州\",\"哈尔滨\",\"合肥\",\"海口\",\"呼和浩特\",\"海北\",\"海东\",\"海南\",\"海西\",\"邯郸\",\"汉中\",\"鹤壁\",\"河池\",\"鹤岗\",\"黑河\",\"衡水\",\"衡阳\",\"河源\",\"贺州\",\"红河\",\"淮安\",\"淮北\",\"怀化\",\"淮南\",\"黄冈\",\"黄南\",\"黄山\",\"黄石\",\"惠州\",\"葫芦岛\",\"呼伦贝尔\",\"湖州\",\"菏泽\"]},{\"title\":\"J\",\"lists\":[\"济南\",\"佳木斯\",\"吉安\",\"江门\",\"焦作\",\"嘉兴\",\"嘉峪关\",\"揭阳\",\"吉林\",\"金昌\",\"晋城\",\"景德镇\",\"荆门\",\"荆州\",\"金华\",\"济宁\",\"晋中\",\"锦州\",\"九江\",\"酒泉\"]},{\"title\":\"K\",\"lists\":[\"昆明\",\"开封\"]},{\"title\":\"L\",\"lists\":[\"兰州\",\"拉萨\",\"来宾\",\"莱芜\",\"廊坊\",\"乐山\",\"凉山\",\"连云港\",\"聊城\",\"辽阳\",\"辽源\",\"丽江\",\"临沧\",\"临汾\",\"临夏\",\"临沂\",\"林芝\",\"丽水\",\"六安\",\"六盘水\",\"柳州\",\"陇南\",\"龙岩\",\"娄底\",\"漯河\",\"洛阳\",\"泸州\",\"吕梁\"]},{\"title\":\"M\",\"lists\":[\"马鞍山\",\"茂名\",\"眉山\",\"梅州\",\"绵阳\",\"牡丹江\"]},{\"title\":\"N\",\"lists\":[\"南京\",\"南昌\",\"南宁\",\"宁波\",\"南充\",\"南平\",\"南通\",\"南阳\",\"那曲\",\"内江\",\"宁德\",\"怒江\"]},{\"title\":\"P\",\"lists\":[\"盘锦\",\"攀枝花\",\"平顶山\",\"平凉\",\"萍乡\",\"莆田\",\"濮阳\"]},{\"title\":\"Q\",\"lists\":[\"青岛\",\"黔东南\",\"黔南\",\"黔西南\",\"庆阳\",\"清远\",\"秦皇岛\",\"钦州\",\"齐齐哈尔\",\"泉州\",\"曲靖\",\"衢州\"]},{\"title\":\"R\",\"lists\":[\"日喀则\",\"日照\"]},{\"title\":\"S\",\"lists\":[\"上海\",\"深圳\",\"苏州\",\"沈阳\",\"石家庄\",\"三门峡\",\"三明\",\"三亚\",\"商洛\",\"商丘\",\"上饶\",\"山南\",\"汕头\",\"汕尾\",\"韶关\",\"绍兴\",\"邵阳\",\"十堰\",\"朔州\",\"四平\",\"绥化\",\"遂宁\",\"随州\",\"宿迁\",\"宿州\"]},{\"title\":\"T\",\"lists\":[\"天津\",\"太原\",\"泰安\",\"泰州\",\"台州\",\"唐山\",\"天水\",\"铁岭\",\"铜川\",\"通化\",\"通辽\",\"铜陵\",\"铜仁\",\"台湾\"]},{\"title\":\"W\",\"lists\":[\"武汉\",\"乌鲁木齐\",\"无锡\",\"威海\",\"潍坊\",\"文山\",\"温州\",\"乌海\",\"芜湖\",\"乌兰察布\",\"武威\",\"梧州\"]},{\"title\":\"X\",\"lists\":[\"厦门\",\"西安\",\"西宁\",\"襄樊\",\"湘潭\",\"湘西\",\"咸宁\",\"咸阳\",\"孝感\",\"邢台\",\"新乡\",\"信阳\",\"新余\",\"忻州\",\"西双版纳\",\"宣城\",\"许昌\",\"徐州\",\"香港\",\"锡林郭勒\",\"兴安\"]},{\"title\":\"Y\",\"lists\":[\"银川\",\"雅安\",\"延安\",\"延边\",\"盐城\",\"阳江\",\"阳泉\",\"扬州\",\"烟台\",\"宜宾\",\"宜昌\",\"宜春\",\"营口\",\"益阳\",\"永州\",\"岳阳\",\"榆林\",\"运城\",\"云浮\",\"玉树\",\"玉溪\",\"玉林\"]},{\"title\":\"Z\",\"lists\":[\"杂多县\",\"赞皇县\",\"枣强县\",\"枣阳市\",\"枣庄\",\"泽库县\",\"增城市\",\"曾都区\",\"泽普县\",\"泽州县\",\"札达县\",\"扎赉特旗\",\"扎兰屯市\",\"扎鲁特旗\",\"扎囊县\",\"张北县\",\"张店区\",\"章贡区\",\"张家港\",\"张家界\",\"张家口\",\"漳平市\",\"漳浦县\",\"章丘市\",\"樟树市\",\"张湾区\",\"彰武县\",\"漳县\",\"张掖\",\"漳州\",\"长子县\",\"湛河区\",\"湛江\",\"站前区\",\"沾益县\",\"诏安县\",\"召陵区\",\"昭平县\",\"肇庆\",\"昭通\",\"赵县\",\"昭阳区\",\"招远市\",\"肇源县\",\"肇州县\",\"柞水县\",\"柘城县\",\"浙江\",\"镇安县\",\"振安区\",\"镇巴县\",\"正安县\",\"正定县\",\"正定新区\",\"正蓝旗\",\"正宁县\",\"蒸湘区\",\"正镶白旗\",\"正阳县\",\"郑州\",\"镇海区\",\"镇江\",\"浈江区\",\"镇康县\",\"镇赉县\",\"镇平县\",\"振兴区\",\"镇雄县\",\"镇原县\",\"志丹县\",\"治多县\",\"芝罘区\",\"枝江市\",\"芷江侗族自治县\",\"织金县\",\"中方县\",\"中江县\",\"钟楼区\",\"中牟县\",\"中宁县\",\"中山\",\"中山区\",\"钟山区\",\"钟山县\",\"中卫\",\"钟祥市\",\"中阳县\",\"中原区\",\"周村区\",\"周口\",\"周宁县\",\"舟曲县\",\"舟山\",\"周至县\",\"庄河市\",\"诸城市\",\"珠海\",\"珠晖区\",\"诸暨市\",\"驻马店\",\"准格尔旗\",\"涿鹿县\",\"卓尼\",\"涿州市\",\"卓资县\",\"珠山区\",\"竹山县\",\"竹溪县\",\"株洲\",\"株洲县\",\"淄博\",\"子长县\",\"淄川区\",\"自贡\",\"秭归县\",\"紫金县\",\"自流井区\",\"资溪县\",\"资兴市\",\"资阳\"]}]}");
-
-/***/ }),
-
-/***/ 36:
+/* 36 */
 /*!*****************************************************************!*\
   !*** ./node_modules/@babel/runtime/helpers/isNativeFunction.js ***!
   \*****************************************************************/
@@ -19648,8 +17827,7 @@ function _isNativeFunction(fn) {
 module.exports = _isNativeFunction, module.exports.__esModule = true, module.exports["default"] = module.exports;
 
 /***/ }),
-
-/***/ 37:
+/* 37 */
 /*!****************************************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages.json?{"type":"origin-pages-json"} ***!
   \****************************************************************************************************************************/
@@ -19664,13 +17842,95 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 var _default = {
+  "easycom": {
+    "^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
+  },
   "pages": [{
+    "path": "pages/index/index",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "首页",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "custom",
+      "app-plus": {
+        "titleNView": {
+          "buttons": [{
+            "color": "#fff",
+            "float": "left",
+            "fontSize": "15",
+            "text": "北京",
+            "select": true
+          }]
+        }
+      }
+    }
+  }, {
     "path": "pages/home/home",
     "style": {
       "navigationBarTitleText": "首页",
       "navigationBarBackgroundColor": "#1cbbb4",
       "navigationBarTextStyle": "white",
-      "enablePullDownRefresh": false
+      "enablePullDownRefresh": false,
+      "app-plus": {
+        "titleNView": {
+          "titleText": "",
+          "tags": [{
+            "tag": "img",
+            "src": "/static/search.png",
+            "position": {
+              "left": "auto",
+              "top": "auto",
+              "width": "110px",
+              "height": "26px"
+            }
+          }]
+        }
+      }
+    }
+  }, {
+    "path": "pages/index/search",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "default",
+      "navigationBarTitleText": "服务搜索"
+    }
+  }, {
+    "path": "pages/order/OrderList",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "default",
+      "navigationBarTitleText": "订单列表"
+    }
+  }, {
+    "path": "pages/order/OrderEvaluate",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "default",
+      "navigationBarTitleText": "评价"
+    }
+  }, {
+    "path": "pages/order/MoreEvaluate",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "default",
+      "navigationBarTitleText": "更多评价"
+    }
+  }, {
+    "path": "pages/index/indexservice/indexservice",
+    "style": {
+      "navigationBarTitleText": "服务分类",
+      "navigationBarTextStyle": "white",
+      "enablePullDownRefresh": false,
+      "navigationStyle": "custom"
     }
   }, {
     "path": "pages/list/list",
@@ -19832,11 +18092,71 @@ var _default = {
   }, {
     "path": "pages/creatService/creatService",
     "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
       "navigationBarTitleText": "创建医院服务"
+    }
+  }, {
+    "path": "pages/hushizhan/hushizhan",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "服务"
+    }
+  }, {
+    "path": "pages/hospital/hospital",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "护士站",
+      "app-plus": {
+        "titleNView": {
+          "buttons": [{
+            "color": "#fff",
+            "float": "left",
+            "fontSize": "15",
+            "text": "北京",
+            "select": true
+          }]
+        }
+      }
+    }
+  }, {
+    "path": "pages/coupon-card/coupon-card",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "优惠券"
+    }
+  }, {
+    "path": "pages/function/voucher_center_",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "充值中心"
+    }
+  }, {
+    "path": "pages/hospitalservice/hospitalservice",
+    "style": {
+      "navigationBarTitleText": "服务类别"
+    }
+  }, {
+    "path": "pages/city/city",
+    "style": {
+      "navigationBarTitleText": "选择城市"
+    }
+  }, {
+    "path": "pages/servicedetails/servicedetails",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "服务详情",
+      "navigationStyle": "default"
+    }
+  }, {
+    "path": "pages/appointment/appointment",
+    "style": {
+      "navigationBarBackgroundColor": "#1cbbb4",
+      "navigationBarTitleText": "预约",
+      "navigationStyle": "default"
     }
   }],
   "globalStyle": {
-    "navigationBarTextStyle": "black",
+    "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-starter",
     "navigationBarBackgroundColor": "#FFFFFF",
     "backgroundColor": "#F8F8F8",
@@ -19850,22 +18170,12 @@ var _default = {
     "borderStyle": "black",
     "backgroundColor": "#FFFFFF",
     "list": [{
-      "pagePath": "pages/home/home",
+      "pagePath": "pages/index/index",
       "iconPath": "static/tabbar/home.png",
       "selectedIconPath": "static/tabbar/homefill.png",
       "text": "首页"
     }, {
-      "pagePath": "pages/list/list",
-      "iconPath": "static/tabbar/we.png",
-      "selectedIconPath": "static/tabbar/wefill.png",
-      "text": "护士站"
-    }, {
-      "pagePath": "pages/join/join",
-      "iconPath": "static/tabbar/add.png",
-      "selectedIconPath": "static/tabbar/add.png",
-      "text": "加入"
-    }, {
-      "pagePath": "pages/messge/messge",
+      "pagePath": "pages/order/OrderList",
       "iconPath": "static/tabbar/message.png",
       "selectedIconPath": "static/tabbar/messagefill.png",
       "text": "订单"
@@ -19875,60 +18185,28 @@ var _default = {
       "selectedIconPath": "static/tabbar/myfill.png",
       "text": "我的"
     }]
+  },
+  "condition": {
+    "current": 0,
+    "list": [{
+      "name": "首页",
+      "path": "pages/index/index",
+      "query": ""
+    }, {
+      "name": "订单",
+      "path": "pages/order/OrderList",
+      "query": ""
+    }, {
+      "name": "我的",
+      "path": "pages/ucenter/ucenter",
+      "query": ""
+    }]
   }
 };
 exports.default = _default;
 
 /***/ }),
-
-/***/ 370:
-/*!*****************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/index.js ***!
-  \*****************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 371));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 372));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 371:
-/*!****************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/en.json ***!
-  \****************************************************************************************************************************/
-/*! exports provided: accountLogin, SMSLogin, wechatLogin, appleLogin, oneClickLogin, QQLogin, xiaomiLogin, getProviderFail, loginErr, chooseOtherLogin, weibo, noAgree, gotIt, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"accountLogin\":\"Account\",\"SMSLogin\":\"SMS\",\"wechatLogin\":\"wechat\",\"appleLogin\":\"Apple\",\"oneClickLogin\":\"One click login\",\"QQLogin\":\"QQ\",\"xiaomiLogin\":\"Xiaomi\",\"getProviderFail\":\"Failed to get service provider\",\"loginErr\":\"Login service initialization error\",\"chooseOtherLogin\":\"Click the third-party login\",\"weibo\":\"weibo\",\"noAgree\":\"You have not agreed to the privacy policy agreement\",\"gotIt\":\"got it\"}");
-
-/***/ }),
-
-/***/ 372:
-/*!*********************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/zh-Hans.json ***!
-  \*********************************************************************************************************************************/
-/*! exports provided: accountLogin, SMSLogin, wechatLogin, appleLogin, oneClickLogin, QQLogin, xiaomiLogin, getProviderFail, loginErr, chooseOtherLogin, weibo, noAgree, gotIt, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"accountLogin\":\"账号登录\",\"SMSLogin\":\"短信验证码\",\"wechatLogin\":\"微信登录\",\"appleLogin\":\"苹果登录\",\"oneClickLogin\":\"一键登录\",\"QQLogin\":\"QQ登录\",\"xiaomiLogin\":\"小米登录\",\"getProviderFail\":\"获取服务供应商失败\",\"loginErr\":\"登录服务初始化错误\",\"chooseOtherLogin\":\"点击了第三方登录\",\"weibo\":\"微博\",\"noAgree\":\"你未同意隐私政策协议\",\"gotIt\":\"知道了\"}");
-
-/***/ }),
-
-/***/ 38:
+/* 38 */
 /*!***************************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages.json?{"type":"stat"} ***!
   \***************************************************************************************************************/
@@ -19948,361 +18226,10 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-
-/***/ 380:
-/*!*******************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
-  \*******************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 381));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 382));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 383));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 381:
-/*!******************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
-  \******************************************************************************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"Search enter content\"}");
-
-/***/ }),
-
-/***/ 382:
-/*!***********************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
-  \***********************************************************************************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"请输入搜索内容\"}");
-
-/***/ }),
-
-/***/ 383:
-/*!***********************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
-  \***********************************************************************************************************************************************************/
-/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"請輸入搜索內容\"}");
-
-/***/ }),
-
-/***/ 4:
-/*!**********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/interopRequireDefault.js ***!
-  \**********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-function _interopRequireDefault(obj) {
-  return obj && obj.__esModule ? obj : {
-    "default": obj
-  };
-}
-module.exports = _interopRequireDefault, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 412:
-/*!************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-sign-in/utils/ad.js ***!
-  \************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 32));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 33));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 34));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-// ad.js
-var ADType = {
-  RewardedVideo: "RewardedVideo",
-  FullScreenVideo: "FullScreenVideo"
-};
-var AdHelper = /*#__PURE__*/function () {
-  function AdHelper() {
-    (0, _classCallCheck2.default)(this, AdHelper);
-    this._ads = {};
-  }
-  (0, _createClass2.default)(AdHelper, [{
-    key: "load",
-    value: function load(options, onload, onerror) {
-      var ops = this._fixOldOptions(options);
-      var adpid = ops.adpid;
-      if (!adpid || this.isBusy(adpid)) {
-        return;
-      }
-      this.get(ops).load(onload, onerror);
-    }
-  }, {
-    key: "show",
-    value: function show(options, onsuccess, onfail) {
-      var ops = this._fixOldOptions(options);
-      var adpid = ops.adpid;
-      if (!adpid) {
-        return;
-      }
-      uni.showLoading({
-        mask: true
-      });
-      var ad = this.get(ops);
-      ad.load(function () {
-        uni.hideLoading();
-        ad.show(function (e) {
-          onsuccess && onsuccess(e);
-        });
-      }, function (err) {
-        uni.hideLoading();
-        onfail && onfail(err);
-      });
-    }
-  }, {
-    key: "isBusy",
-    value: function isBusy(adpid) {
-      return this._ads[adpid] && this._ads[adpid].isLoading;
-    }
-  }, {
-    key: "get",
-    value: function get(options) {
-      var adpid = options.adpid,
-        _options$singleton = options.singleton,
-        singleton = _options$singleton === void 0 ? true : _options$singleton;
-      if (singleton === false) {
-        if (this._ads[adpid]) {
-          this._ads[adpid].destroy();
-          delete this._ads[adpid];
-        }
-      }
-      delete options.singleton;
-      if (!this._ads[adpid]) {
-        this._ads[adpid] = this._createAdInstance(options);
-      }
-      return this._ads[adpid];
-    }
-  }, {
-    key: "_createAdInstance",
-    value: function _createAdInstance(options) {
-      var adType = options.adType || ADType.RewardedVideo;
-      delete options.adType;
-      var ad = null;
-      if (adType === ADType.RewardedVideo) {
-        ad = new RewardedVideo(options);
-      } else if (adType === ADType.FullScreenVideo) {
-        ad = new FullScreenVideo(options);
-      }
-      return ad;
-    }
-  }, {
-    key: "_fixOldOptions",
-    value: function _fixOldOptions(options) {
-      return typeof options === "string" ? {
-        adpid: options
-      } : options;
-    }
-  }]);
-  return AdHelper;
-}();
-var EXPIRED_TIME = 1000 * 60 * 30;
-var ProviderType = {
-  CSJ: 'csj',
-  GDT: 'gdt'
-};
-var RETRY_COUNT = 1;
-var AdBase = /*#__PURE__*/function () {
-  function AdBase(adInstance) {
-    var _this = this;
-    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-    (0, _classCallCheck2.default)(this, AdBase);
-    this._isLoad = false;
-    this._isLoading = false;
-    this._lastLoadTime = 0;
-    this._lastError = null;
-    this._retryCount = 0;
-    this._loadCallback = null;
-    this._closeCallback = null;
-    this._errorCallback = null;
-    var ad = this._ad = adInstance;
-    ad.onLoad(function (e) {
-      _this._isLoading = false;
-      _this._isLoad = true;
-      _this._lastLoadTime = Date.now();
-      _this.onLoad();
-    });
-    ad.onClose(function (e) {
-      _this._isLoad = false;
-      _this.onClose(e);
-    });
-    ad.onVerify && ad.onVerify(function (e) {
-      // e.isValid
-    });
-    ad.onError(function (_ref) {
-      var code = _ref.code,
-        message = _ref.message;
-      _this._isLoading = false;
-      var data = {
-        code: code,
-        errMsg: message
-      };
-      if (code === -5008) {
-        _this._loadAd();
-        return;
-      }
-      if (_this._retryCount < RETRY_COUNT) {
-        _this._retryCount += 1;
-        _this._loadAd();
-        return;
-      }
-      _this._lastError = data;
-      _this.onError(data);
-    });
-  }
-  (0, _createClass2.default)(AdBase, [{
-    key: "isExpired",
-    get: function get() {
-      return this._lastLoadTime !== 0 && Math.abs(Date.now() - this._lastLoadTime) > EXPIRED_TIME;
-    }
-  }, {
-    key: "isLoading",
-    get: function get() {
-      return this._isLoading;
-    }
-  }, {
-    key: "getProvider",
-    value: function getProvider() {
-      return this._ad.getProvider();
-    }
-  }, {
-    key: "load",
-    value: function load(onload, onerror) {
-      this._loadCallback = onload;
-      this._errorCallback = onerror;
-      if (this._isLoading) {
-        return;
-      }
-      if (this._isLoad) {
-        this.onLoad();
-        return;
-      }
-      this._retryCount = 0;
-      this._loadAd();
-    }
-  }, {
-    key: "show",
-    value: function show(onclose) {
-      this._closeCallback = onclose;
-      if (this._isLoading || !this._isLoad) {
-        return;
-      }
-      if (this._lastError !== null) {
-        this.onError(this._lastError);
-        return;
-      }
-      var provider = this.getProvider();
-      if (provider === ProviderType.CSJ && this.isExpired) {
-        this._loadAd();
-        return;
-      }
-      this._ad.show();
-    }
-  }, {
-    key: "onLoad",
-    value: function onLoad(e) {
-      if (this._loadCallback != null) {
-        this._loadCallback();
-      }
-    }
-  }, {
-    key: "onClose",
-    value: function onClose(e) {
-      if (this._closeCallback != null) {
-        this._closeCallback({
-          isEnded: e.isEnded
-        });
-      }
-    }
-  }, {
-    key: "onError",
-    value: function onError(e) {
-      if (this._errorCallback != null) {
-        this._errorCallback(e);
-      }
-    }
-  }, {
-    key: "destroy",
-    value: function destroy() {
-      this._ad.destroy();
-    }
-  }, {
-    key: "_loadAd",
-    value: function _loadAd() {
-      this._isLoad = false;
-      this._isLoading = true;
-      this._lastError = null;
-      this._ad.load();
-    }
-  }]);
-  return AdBase;
-}();
-var RewardedVideo = /*#__PURE__*/function (_AdBase) {
-  (0, _inherits2.default)(RewardedVideo, _AdBase);
-  var _super = _createSuper(RewardedVideo);
-  function RewardedVideo() {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    (0, _classCallCheck2.default)(this, RewardedVideo);
-    return _super.call(this, plus.ad.createRewardedVideoAd(options), options);
-  }
-  return (0, _createClass2.default)(RewardedVideo);
-}(AdBase);
-var FullScreenVideo = /*#__PURE__*/function (_AdBase2) {
-  (0, _inherits2.default)(FullScreenVideo, _AdBase2);
-  var _super2 = _createSuper(FullScreenVideo);
-  function FullScreenVideo() {
-    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-    (0, _classCallCheck2.default)(this, FullScreenVideo);
-    return _super2.call(this, plus.ad.createFullScreenVideoAd(options), options);
-  }
-  return (0, _createClass2.default)(FullScreenVideo);
-}(AdBase);
-var _default = new AdHelper();
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 42:
+/* 39 */,
+/* 40 */,
+/* 41 */,
+/* 42 */
 /*!******************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/common/appInit.js ***!
   \******************************************************************************************************/
@@ -20466,7 +18393,7 @@ function _ref() {
               },
               fail: function fail(e) {
                 // 失败回调拦截
-                console.error('网络请求错误码：', JSON.stringify(e));
+                // console.error('网络请求错误码：',JSON.stringify(e));
                 if (debug) {
                   uni.showModal({
                     content: JSON.stringify(e),
@@ -20512,6 +18439,7 @@ function _ref() {
                 });
               },
               success: function success(e) {
+                // console.log("success:" + JSON.stringify(e))
                 var _e$result = e.result,
                   token = _e$result.token,
                   tokenExpired = _e$result.tokenExpired;
@@ -20521,6 +18449,7 @@ function _ref() {
                     tokenExpired: tokenExpired
                   });
                 }
+                console.log('e.result.code:' + e.result.code);
                 switch (e.result.code) {
                   case 403:
                     uni.navigateTo({
@@ -20693,988 +18622,7 @@ function _getDeviceInfo() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-
-/***/ 420:
-/*!*************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/Sansnn-uQRCode/uqrcode.js ***!
-  \*************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-//---------------------------------------------------------------------
-// github https://github.com/Sansnn/uQRCode
-//---------------------------------------------------------------------
-
-var uQRCode = {};
-(function () {
-  //---------------------------------------------------------------------
-  // QRCode for JavaScript
-  //
-  // Copyright (c) 2009 Kazuhiko Arase
-  //
-  // URL: http://www.d-project.com/
-  //
-  // Licensed under the MIT license:
-  //   http://www.opensource.org/licenses/mit-license.php
-  //
-  // The word "QR Code" is registered trademark of 
-  // DENSO WAVE INCORPORATED
-  //   http://www.denso-wave.com/qrcode/faqpatent-e.html
-  //
-  //---------------------------------------------------------------------
-
-  //---------------------------------------------------------------------
-  // QR8bitByte
-  //---------------------------------------------------------------------
-
-  function QR8bitByte(data) {
-    this.mode = QRMode.MODE_8BIT_BYTE;
-    this.data = data;
-  }
-  QR8bitByte.prototype = {
-    getLength: function getLength(buffer) {
-      return this.data.length;
-    },
-    write: function write(buffer) {
-      for (var i = 0; i < this.data.length; i++) {
-        // not JIS ...
-        buffer.put(this.data.charCodeAt(i), 8);
-      }
-    }
-  };
-
-  //---------------------------------------------------------------------
-  // QRCode
-  //---------------------------------------------------------------------
-
-  function QRCode(typeNumber, errorCorrectLevel) {
-    this.typeNumber = typeNumber;
-    this.errorCorrectLevel = errorCorrectLevel;
-    this.modules = null;
-    this.moduleCount = 0;
-    this.dataCache = null;
-    this.dataList = new Array();
-  }
-  QRCode.prototype = {
-    addData: function addData(data) {
-      var newData = new QR8bitByte(data);
-      this.dataList.push(newData);
-      this.dataCache = null;
-    },
-    isDark: function isDark(row, col) {
-      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
-        throw new Error(row + "," + col);
-      }
-      return this.modules[row][col];
-    },
-    getModuleCount: function getModuleCount() {
-      return this.moduleCount;
-    },
-    make: function make() {
-      // Calculate automatically typeNumber if provided is < 1
-      if (this.typeNumber < 1) {
-        var typeNumber = 1;
-        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
-          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
-          var buffer = new QRBitBuffer();
-          var totalDataCount = 0;
-          for (var i = 0; i < rsBlocks.length; i++) {
-            totalDataCount += rsBlocks[i].dataCount;
-          }
-          for (var i = 0; i < this.dataList.length; i++) {
-            var data = this.dataList[i];
-            buffer.put(data.mode, 4);
-            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
-            data.write(buffer);
-          }
-          if (buffer.getLengthInBits() <= totalDataCount * 8) break;
-        }
-        this.typeNumber = typeNumber;
-      }
-      this.makeImpl(false, this.getBestMaskPattern());
-    },
-    makeImpl: function makeImpl(test, maskPattern) {
-      this.moduleCount = this.typeNumber * 4 + 17;
-      this.modules = new Array(this.moduleCount);
-      for (var row = 0; row < this.moduleCount; row++) {
-        this.modules[row] = new Array(this.moduleCount);
-        for (var col = 0; col < this.moduleCount; col++) {
-          this.modules[row][col] = null; //(col + row) % 3;
-        }
-      }
-
-      this.setupPositionProbePattern(0, 0);
-      this.setupPositionProbePattern(this.moduleCount - 7, 0);
-      this.setupPositionProbePattern(0, this.moduleCount - 7);
-      this.setupPositionAdjustPattern();
-      this.setupTimingPattern();
-      this.setupTypeInfo(test, maskPattern);
-      if (this.typeNumber >= 7) {
-        this.setupTypeNumber(test);
-      }
-      if (this.dataCache == null) {
-        this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
-      }
-      this.mapData(this.dataCache, maskPattern);
-    },
-    setupPositionProbePattern: function setupPositionProbePattern(row, col) {
-      for (var r = -1; r <= 7; r++) {
-        if (row + r <= -1 || this.moduleCount <= row + r) continue;
-        for (var c = -1; c <= 7; c++) {
-          if (col + c <= -1 || this.moduleCount <= col + c) continue;
-          if (0 <= r && r <= 6 && (c == 0 || c == 6) || 0 <= c && c <= 6 && (r == 0 || r == 6) || 2 <= r && r <= 4 && 2 <= c && c <= 4) {
-            this.modules[row + r][col + c] = true;
-          } else {
-            this.modules[row + r][col + c] = false;
-          }
-        }
-      }
-    },
-    getBestMaskPattern: function getBestMaskPattern() {
-      var minLostPoint = 0;
-      var pattern = 0;
-      for (var i = 0; i < 8; i++) {
-        this.makeImpl(true, i);
-        var lostPoint = QRUtil.getLostPoint(this);
-        if (i == 0 || minLostPoint > lostPoint) {
-          minLostPoint = lostPoint;
-          pattern = i;
-        }
-      }
-      return pattern;
-    },
-    createMovieClip: function createMovieClip(target_mc, instance_name, depth) {
-      var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
-      var cs = 1;
-      this.make();
-      for (var row = 0; row < this.modules.length; row++) {
-        var y = row * cs;
-        for (var col = 0; col < this.modules[row].length; col++) {
-          var x = col * cs;
-          var dark = this.modules[row][col];
-          if (dark) {
-            qr_mc.beginFill(0, 100);
-            qr_mc.moveTo(x, y);
-            qr_mc.lineTo(x + cs, y);
-            qr_mc.lineTo(x + cs, y + cs);
-            qr_mc.lineTo(x, y + cs);
-            qr_mc.endFill();
-          }
-        }
-      }
-      return qr_mc;
-    },
-    setupTimingPattern: function setupTimingPattern() {
-      for (var r = 8; r < this.moduleCount - 8; r++) {
-        if (this.modules[r][6] != null) {
-          continue;
-        }
-        this.modules[r][6] = r % 2 == 0;
-      }
-      for (var c = 8; c < this.moduleCount - 8; c++) {
-        if (this.modules[6][c] != null) {
-          continue;
-        }
-        this.modules[6][c] = c % 2 == 0;
-      }
-    },
-    setupPositionAdjustPattern: function setupPositionAdjustPattern() {
-      var pos = QRUtil.getPatternPosition(this.typeNumber);
-      for (var i = 0; i < pos.length; i++) {
-        for (var j = 0; j < pos.length; j++) {
-          var row = pos[i];
-          var col = pos[j];
-          if (this.modules[row][col] != null) {
-            continue;
-          }
-          for (var r = -2; r <= 2; r++) {
-            for (var c = -2; c <= 2; c++) {
-              if (r == -2 || r == 2 || c == -2 || c == 2 || r == 0 && c == 0) {
-                this.modules[row + r][col + c] = true;
-              } else {
-                this.modules[row + r][col + c] = false;
-              }
-            }
-          }
-        }
-      }
-    },
-    setupTypeNumber: function setupTypeNumber(test) {
-      var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
-      for (var i = 0; i < 18; i++) {
-        var mod = !test && (bits >> i & 1) == 1;
-        this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
-      }
-      for (var i = 0; i < 18; i++) {
-        var mod = !test && (bits >> i & 1) == 1;
-        this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
-      }
-    },
-    setupTypeInfo: function setupTypeInfo(test, maskPattern) {
-      var data = this.errorCorrectLevel << 3 | maskPattern;
-      var bits = QRUtil.getBCHTypeInfo(data);
-
-      // vertical		
-      for (var i = 0; i < 15; i++) {
-        var mod = !test && (bits >> i & 1) == 1;
-        if (i < 6) {
-          this.modules[i][8] = mod;
-        } else if (i < 8) {
-          this.modules[i + 1][8] = mod;
-        } else {
-          this.modules[this.moduleCount - 15 + i][8] = mod;
-        }
-      }
-
-      // horizontal
-      for (var i = 0; i < 15; i++) {
-        var mod = !test && (bits >> i & 1) == 1;
-        if (i < 8) {
-          this.modules[8][this.moduleCount - i - 1] = mod;
-        } else if (i < 9) {
-          this.modules[8][15 - i - 1 + 1] = mod;
-        } else {
-          this.modules[8][15 - i - 1] = mod;
-        }
-      }
-
-      // fixed module
-      this.modules[this.moduleCount - 8][8] = !test;
-    },
-    mapData: function mapData(data, maskPattern) {
-      var inc = -1;
-      var row = this.moduleCount - 1;
-      var bitIndex = 7;
-      var byteIndex = 0;
-      for (var col = this.moduleCount - 1; col > 0; col -= 2) {
-        if (col == 6) col--;
-        while (true) {
-          for (var c = 0; c < 2; c++) {
-            if (this.modules[row][col - c] == null) {
-              var dark = false;
-              if (byteIndex < data.length) {
-                dark = (data[byteIndex] >>> bitIndex & 1) == 1;
-              }
-              var mask = QRUtil.getMask(maskPattern, row, col - c);
-              if (mask) {
-                dark = !dark;
-              }
-              this.modules[row][col - c] = dark;
-              bitIndex--;
-              if (bitIndex == -1) {
-                byteIndex++;
-                bitIndex = 7;
-              }
-            }
-          }
-          row += inc;
-          if (row < 0 || this.moduleCount <= row) {
-            row -= inc;
-            inc = -inc;
-            break;
-          }
-        }
-      }
-    }
-  };
-  QRCode.PAD0 = 0xEC;
-  QRCode.PAD1 = 0x11;
-  QRCode.createData = function (typeNumber, errorCorrectLevel, dataList) {
-    var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
-    var buffer = new QRBitBuffer();
-    for (var i = 0; i < dataList.length; i++) {
-      var data = dataList[i];
-      buffer.put(data.mode, 4);
-      buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
-      data.write(buffer);
-    }
-
-    // calc num max data.
-    var totalDataCount = 0;
-    for (var i = 0; i < rsBlocks.length; i++) {
-      totalDataCount += rsBlocks[i].dataCount;
-    }
-    if (buffer.getLengthInBits() > totalDataCount * 8) {
-      throw new Error("code length overflow. (" + buffer.getLengthInBits() + ">" + totalDataCount * 8 + ")");
-    }
-
-    // end code
-    if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
-      buffer.put(0, 4);
-    }
-
-    // padding
-    while (buffer.getLengthInBits() % 8 != 0) {
-      buffer.putBit(false);
-    }
-
-    // padding
-    while (true) {
-      if (buffer.getLengthInBits() >= totalDataCount * 8) {
-        break;
-      }
-      buffer.put(QRCode.PAD0, 8);
-      if (buffer.getLengthInBits() >= totalDataCount * 8) {
-        break;
-      }
-      buffer.put(QRCode.PAD1, 8);
-    }
-    return QRCode.createBytes(buffer, rsBlocks);
-  };
-  QRCode.createBytes = function (buffer, rsBlocks) {
-    var offset = 0;
-    var maxDcCount = 0;
-    var maxEcCount = 0;
-    var dcdata = new Array(rsBlocks.length);
-    var ecdata = new Array(rsBlocks.length);
-    for (var r = 0; r < rsBlocks.length; r++) {
-      var dcCount = rsBlocks[r].dataCount;
-      var ecCount = rsBlocks[r].totalCount - dcCount;
-      maxDcCount = Math.max(maxDcCount, dcCount);
-      maxEcCount = Math.max(maxEcCount, ecCount);
-      dcdata[r] = new Array(dcCount);
-      for (var i = 0; i < dcdata[r].length; i++) {
-        dcdata[r][i] = 0xff & buffer.buffer[i + offset];
-      }
-      offset += dcCount;
-      var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
-      var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
-      var modPoly = rawPoly.mod(rsPoly);
-      ecdata[r] = new Array(rsPoly.getLength() - 1);
-      for (var i = 0; i < ecdata[r].length; i++) {
-        var modIndex = i + modPoly.getLength() - ecdata[r].length;
-        ecdata[r][i] = modIndex >= 0 ? modPoly.get(modIndex) : 0;
-      }
-    }
-    var totalCodeCount = 0;
-    for (var i = 0; i < rsBlocks.length; i++) {
-      totalCodeCount += rsBlocks[i].totalCount;
-    }
-    var data = new Array(totalCodeCount);
-    var index = 0;
-    for (var i = 0; i < maxDcCount; i++) {
-      for (var r = 0; r < rsBlocks.length; r++) {
-        if (i < dcdata[r].length) {
-          data[index++] = dcdata[r][i];
-        }
-      }
-    }
-    for (var i = 0; i < maxEcCount; i++) {
-      for (var r = 0; r < rsBlocks.length; r++) {
-        if (i < ecdata[r].length) {
-          data[index++] = ecdata[r][i];
-        }
-      }
-    }
-    return data;
-  };
-
-  //---------------------------------------------------------------------
-  // QRMode
-  //---------------------------------------------------------------------
-
-  var QRMode = {
-    MODE_NUMBER: 1 << 0,
-    MODE_ALPHA_NUM: 1 << 1,
-    MODE_8BIT_BYTE: 1 << 2,
-    MODE_KANJI: 1 << 3
-  };
-
-  //---------------------------------------------------------------------
-  // QRErrorCorrectLevel
-  //---------------------------------------------------------------------
-
-  var QRErrorCorrectLevel = {
-    L: 1,
-    M: 0,
-    Q: 3,
-    H: 2
-  };
-
-  //---------------------------------------------------------------------
-  // QRMaskPattern
-  //---------------------------------------------------------------------
-
-  var QRMaskPattern = {
-    PATTERN000: 0,
-    PATTERN001: 1,
-    PATTERN010: 2,
-    PATTERN011: 3,
-    PATTERN100: 4,
-    PATTERN101: 5,
-    PATTERN110: 6,
-    PATTERN111: 7
-  };
-
-  //---------------------------------------------------------------------
-  // QRUtil
-  //---------------------------------------------------------------------
-
-  var QRUtil = {
-    PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]],
-    G15: 1 << 10 | 1 << 8 | 1 << 5 | 1 << 4 | 1 << 2 | 1 << 1 | 1 << 0,
-    G18: 1 << 12 | 1 << 11 | 1 << 10 | 1 << 9 | 1 << 8 | 1 << 5 | 1 << 2 | 1 << 0,
-    G15_MASK: 1 << 14 | 1 << 12 | 1 << 10 | 1 << 4 | 1 << 1,
-    getBCHTypeInfo: function getBCHTypeInfo(data) {
-      var d = data << 10;
-      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
-        d ^= QRUtil.G15 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15);
-      }
-      return (data << 10 | d) ^ QRUtil.G15_MASK;
-    },
-    getBCHTypeNumber: function getBCHTypeNumber(data) {
-      var d = data << 12;
-      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
-        d ^= QRUtil.G18 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18);
-      }
-      return data << 12 | d;
-    },
-    getBCHDigit: function getBCHDigit(data) {
-      var digit = 0;
-      while (data != 0) {
-        digit++;
-        data >>>= 1;
-      }
-      return digit;
-    },
-    getPatternPosition: function getPatternPosition(typeNumber) {
-      return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
-    },
-    getMask: function getMask(maskPattern, i, j) {
-      switch (maskPattern) {
-        case QRMaskPattern.PATTERN000:
-          return (i + j) % 2 == 0;
-        case QRMaskPattern.PATTERN001:
-          return i % 2 == 0;
-        case QRMaskPattern.PATTERN010:
-          return j % 3 == 0;
-        case QRMaskPattern.PATTERN011:
-          return (i + j) % 3 == 0;
-        case QRMaskPattern.PATTERN100:
-          return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
-        case QRMaskPattern.PATTERN101:
-          return i * j % 2 + i * j % 3 == 0;
-        case QRMaskPattern.PATTERN110:
-          return (i * j % 2 + i * j % 3) % 2 == 0;
-        case QRMaskPattern.PATTERN111:
-          return (i * j % 3 + (i + j) % 2) % 2 == 0;
-        default:
-          throw new Error("bad maskPattern:" + maskPattern);
-      }
-    },
-    getErrorCorrectPolynomial: function getErrorCorrectPolynomial(errorCorrectLength) {
-      var a = new QRPolynomial([1], 0);
-      for (var i = 0; i < errorCorrectLength; i++) {
-        a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
-      }
-      return a;
-    },
-    getLengthInBits: function getLengthInBits(mode, type) {
-      if (1 <= type && type < 10) {
-        // 1 - 9
-
-        switch (mode) {
-          case QRMode.MODE_NUMBER:
-            return 10;
-          case QRMode.MODE_ALPHA_NUM:
-            return 9;
-          case QRMode.MODE_8BIT_BYTE:
-            return 8;
-          case QRMode.MODE_KANJI:
-            return 8;
-          default:
-            throw new Error("mode:" + mode);
-        }
-      } else if (type < 27) {
-        // 10 - 26
-
-        switch (mode) {
-          case QRMode.MODE_NUMBER:
-            return 12;
-          case QRMode.MODE_ALPHA_NUM:
-            return 11;
-          case QRMode.MODE_8BIT_BYTE:
-            return 16;
-          case QRMode.MODE_KANJI:
-            return 10;
-          default:
-            throw new Error("mode:" + mode);
-        }
-      } else if (type < 41) {
-        // 27 - 40
-
-        switch (mode) {
-          case QRMode.MODE_NUMBER:
-            return 14;
-          case QRMode.MODE_ALPHA_NUM:
-            return 13;
-          case QRMode.MODE_8BIT_BYTE:
-            return 16;
-          case QRMode.MODE_KANJI:
-            return 12;
-          default:
-            throw new Error("mode:" + mode);
-        }
-      } else {
-        throw new Error("type:" + type);
-      }
-    },
-    getLostPoint: function getLostPoint(qrCode) {
-      var moduleCount = qrCode.getModuleCount();
-      var lostPoint = 0;
-
-      // LEVEL1
-
-      for (var row = 0; row < moduleCount; row++) {
-        for (var col = 0; col < moduleCount; col++) {
-          var sameCount = 0;
-          var dark = qrCode.isDark(row, col);
-          for (var r = -1; r <= 1; r++) {
-            if (row + r < 0 || moduleCount <= row + r) {
-              continue;
-            }
-            for (var c = -1; c <= 1; c++) {
-              if (col + c < 0 || moduleCount <= col + c) {
-                continue;
-              }
-              if (r == 0 && c == 0) {
-                continue;
-              }
-              if (dark == qrCode.isDark(row + r, col + c)) {
-                sameCount++;
-              }
-            }
-          }
-          if (sameCount > 5) {
-            lostPoint += 3 + sameCount - 5;
-          }
-        }
-      }
-
-      // LEVEL2
-
-      for (var row = 0; row < moduleCount - 1; row++) {
-        for (var col = 0; col < moduleCount - 1; col++) {
-          var count = 0;
-          if (qrCode.isDark(row, col)) count++;
-          if (qrCode.isDark(row + 1, col)) count++;
-          if (qrCode.isDark(row, col + 1)) count++;
-          if (qrCode.isDark(row + 1, col + 1)) count++;
-          if (count == 0 || count == 4) {
-            lostPoint += 3;
-          }
-        }
-      }
-
-      // LEVEL3
-
-      for (var row = 0; row < moduleCount; row++) {
-        for (var col = 0; col < moduleCount - 6; col++) {
-          if (qrCode.isDark(row, col) && !qrCode.isDark(row, col + 1) && qrCode.isDark(row, col + 2) && qrCode.isDark(row, col + 3) && qrCode.isDark(row, col + 4) && !qrCode.isDark(row, col + 5) && qrCode.isDark(row, col + 6)) {
-            lostPoint += 40;
-          }
-        }
-      }
-      for (var col = 0; col < moduleCount; col++) {
-        for (var row = 0; row < moduleCount - 6; row++) {
-          if (qrCode.isDark(row, col) && !qrCode.isDark(row + 1, col) && qrCode.isDark(row + 2, col) && qrCode.isDark(row + 3, col) && qrCode.isDark(row + 4, col) && !qrCode.isDark(row + 5, col) && qrCode.isDark(row + 6, col)) {
-            lostPoint += 40;
-          }
-        }
-      }
-
-      // LEVEL4
-
-      var darkCount = 0;
-      for (var col = 0; col < moduleCount; col++) {
-        for (var row = 0; row < moduleCount; row++) {
-          if (qrCode.isDark(row, col)) {
-            darkCount++;
-          }
-        }
-      }
-      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
-      lostPoint += ratio * 10;
-      return lostPoint;
-    }
-  };
-
-  //---------------------------------------------------------------------
-  // QRMath
-  //---------------------------------------------------------------------
-
-  var QRMath = {
-    glog: function glog(n) {
-      if (n < 1) {
-        throw new Error("glog(" + n + ")");
-      }
-      return QRMath.LOG_TABLE[n];
-    },
-    gexp: function gexp(n) {
-      while (n < 0) {
-        n += 255;
-      }
-      while (n >= 256) {
-        n -= 255;
-      }
-      return QRMath.EXP_TABLE[n];
-    },
-    EXP_TABLE: new Array(256),
-    LOG_TABLE: new Array(256)
-  };
-  for (var i = 0; i < 8; i++) {
-    QRMath.EXP_TABLE[i] = 1 << i;
-  }
-  for (var i = 8; i < 256; i++) {
-    QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
-  }
-  for (var i = 0; i < 255; i++) {
-    QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
-  }
-
-  //---------------------------------------------------------------------
-  // QRPolynomial
-  //---------------------------------------------------------------------
-
-  function QRPolynomial(num, shift) {
-    if (num.length == undefined) {
-      throw new Error(num.length + "/" + shift);
-    }
-    var offset = 0;
-    while (offset < num.length && num[offset] == 0) {
-      offset++;
-    }
-    this.num = new Array(num.length - offset + shift);
-    for (var i = 0; i < num.length - offset; i++) {
-      this.num[i] = num[i + offset];
-    }
-  }
-  QRPolynomial.prototype = {
-    get: function get(index) {
-      return this.num[index];
-    },
-    getLength: function getLength() {
-      return this.num.length;
-    },
-    multiply: function multiply(e) {
-      var num = new Array(this.getLength() + e.getLength() - 1);
-      for (var i = 0; i < this.getLength(); i++) {
-        for (var j = 0; j < e.getLength(); j++) {
-          num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
-        }
-      }
-      return new QRPolynomial(num, 0);
-    },
-    mod: function mod(e) {
-      if (this.getLength() - e.getLength() < 0) {
-        return this;
-      }
-      var ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
-      var num = new Array(this.getLength());
-      for (var i = 0; i < this.getLength(); i++) {
-        num[i] = this.get(i);
-      }
-      for (var i = 0; i < e.getLength(); i++) {
-        num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
-      }
-
-      // recursive call
-      return new QRPolynomial(num, 0).mod(e);
-    }
-  };
-
-  //---------------------------------------------------------------------
-  // QRRSBlock
-  //---------------------------------------------------------------------
-
-  function QRRSBlock(totalCount, dataCount) {
-    this.totalCount = totalCount;
-    this.dataCount = dataCount;
-  }
-  QRRSBlock.RS_BLOCK_TABLE = [
-  // L
-  // M
-  // Q
-  // H
-
-  // 1
-  [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
-  // 2
-  [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
-  // 3
-  [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
-  // 4		
-  [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
-  // 5
-  [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
-  // 6
-  [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
-  // 7		
-  [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
-  // 8
-  [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
-  // 9
-  [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
-  // 10		
-  [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16],
-  // 11
-  [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13],
-  // 12
-  [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15],
-  // 13
-  [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12],
-  // 14
-  [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13],
-  // 15
-  [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12],
-  // 16
-  [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16],
-  // 17
-  [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15],
-  // 18
-  [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15],
-  // 19
-  [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14],
-  // 20
-  [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16],
-  // 21
-  [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17],
-  // 22
-  [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13],
-  // 23
-  [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16],
-  // 24
-  [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17],
-  // 25
-  [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16],
-  // 26
-  [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17],
-  // 27
-  [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16],
-  // 28
-  [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16],
-  // 29
-  [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16],
-  // 30
-  [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16],
-  // 31
-  [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16],
-  // 32
-  [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16],
-  // 33
-  [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16],
-  // 34
-  [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17],
-  // 35
-  [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16],
-  // 36
-  [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16],
-  // 37
-  [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16],
-  // 38
-  [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16],
-  // 39
-  [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16],
-  // 40
-  [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]];
-  QRRSBlock.getRSBlocks = function (typeNumber, errorCorrectLevel) {
-    var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
-    if (rsBlock == undefined) {
-      throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
-    }
-    var length = rsBlock.length / 3;
-    var list = new Array();
-    for (var i = 0; i < length; i++) {
-      var count = rsBlock[i * 3 + 0];
-      var totalCount = rsBlock[i * 3 + 1];
-      var dataCount = rsBlock[i * 3 + 2];
-      for (var j = 0; j < count; j++) {
-        list.push(new QRRSBlock(totalCount, dataCount));
-      }
-    }
-    return list;
-  };
-  QRRSBlock.getRsBlockTable = function (typeNumber, errorCorrectLevel) {
-    switch (errorCorrectLevel) {
-      case QRErrorCorrectLevel.L:
-        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
-      case QRErrorCorrectLevel.M:
-        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
-      case QRErrorCorrectLevel.Q:
-        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
-      case QRErrorCorrectLevel.H:
-        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
-      default:
-        return undefined;
-    }
-  };
-
-  //---------------------------------------------------------------------
-  // QRBitBuffer
-  //---------------------------------------------------------------------
-
-  function QRBitBuffer() {
-    this.buffer = new Array();
-    this.length = 0;
-  }
-  QRBitBuffer.prototype = {
-    get: function get(index) {
-      var bufIndex = Math.floor(index / 8);
-      return (this.buffer[bufIndex] >>> 7 - index % 8 & 1) == 1;
-    },
-    put: function put(num, length) {
-      for (var i = 0; i < length; i++) {
-        this.putBit((num >>> length - i - 1 & 1) == 1);
-      }
-    },
-    getLengthInBits: function getLengthInBits() {
-      return this.length;
-    },
-    putBit: function putBit(bit) {
-      var bufIndex = Math.floor(this.length / 8);
-      if (this.buffer.length <= bufIndex) {
-        this.buffer.push(0);
-      }
-      if (bit) {
-        this.buffer[bufIndex] |= 0x80 >>> this.length % 8;
-      }
-      this.length++;
-    }
-  };
-
-  //---------------------------------------------------------------------
-  // Support Chinese
-  //---------------------------------------------------------------------
-  function utf16To8(text) {
-    var result = '';
-    var c;
-    for (var i = 0; i < text.length; i++) {
-      c = text.charCodeAt(i);
-      if (c >= 0x0001 && c <= 0x007F) {
-        result += text.charAt(i);
-      } else if (c > 0x07FF) {
-        result += String.fromCharCode(0xE0 | c >> 12 & 0x0F);
-        result += String.fromCharCode(0x80 | c >> 6 & 0x3F);
-        result += String.fromCharCode(0x80 | c >> 0 & 0x3F);
-      } else {
-        result += String.fromCharCode(0xC0 | c >> 6 & 0x1F);
-        result += String.fromCharCode(0x80 | c >> 0 & 0x3F);
-      }
-    }
-    return result;
-  }
-  uQRCode = {
-    errorCorrectLevel: QRErrorCorrectLevel,
-    defaults: {
-      size: 354,
-      margin: 0,
-      backgroundColor: '#ffffff',
-      foregroundColor: '#000000',
-      fileType: 'png',
-      // 'jpg', 'png'
-      errorCorrectLevel: QRErrorCorrectLevel.H,
-      typeNumber: -1
-    },
-    make: function make(options) {
-      var _this = this;
-      return new Promise(function (reslove, reject) {
-        var defaultOptions = {
-          canvasId: options.canvasId,
-          componentInstance: options.componentInstance,
-          text: options.text,
-          size: _this.defaults.size,
-          margin: _this.defaults.margin,
-          backgroundColor: _this.defaults.backgroundColor,
-          foregroundColor: _this.defaults.foregroundColor,
-          fileType: _this.defaults.fileType,
-          errorCorrectLevel: _this.defaults.errorCorrectLevel,
-          typeNumber: _this.defaults.typeNumber
-        };
-        if (options) {
-          for (var i in options) {
-            defaultOptions[i] = options[i];
-          }
-        }
-        options = defaultOptions;
-        if (!options.canvasId) {
-          console.error('uQRCode: Please set canvasId!');
-          return;
-        }
-        function createCanvas() {
-          var qrcode = new QRCode(options.typeNumber, options.errorCorrectLevel);
-          qrcode.addData(utf16To8(options.text));
-          qrcode.make();
-          var ctx = uni.createCanvasContext(options.canvasId, options.componentInstance);
-          ctx.setFillStyle(options.backgroundColor);
-          ctx.fillRect(0, 0, options.size, options.size);
-          var tileW = (options.size - options.margin * 2) / qrcode.getModuleCount();
-          var tileH = tileW;
-          for (var row = 0; row < qrcode.getModuleCount(); row++) {
-            for (var col = 0; col < qrcode.getModuleCount(); col++) {
-              var style = qrcode.isDark(row, col) ? options.foregroundColor : options.backgroundColor;
-              ctx.setFillStyle(style);
-              var x = Math.round(col * tileW) + options.margin;
-              var y = Math.round(row * tileH) + options.margin;
-              var w = Math.ceil((col + 1) * tileW) - Math.floor(col * tileW);
-              var h = Math.ceil((row + 1) * tileW) - Math.floor(row * tileW);
-              ctx.fillRect(x, y, w, h);
-            }
-          }
-          setTimeout(function () {
-            ctx.draw(false, function () {
-              setTimeout(function () {
-                uni.canvasToTempFilePath({
-                  canvasId: options.canvasId,
-                  fileType: options.fileType,
-                  width: options.size,
-                  height: options.size,
-                  destWidth: options.size,
-                  destHeight: options.size,
-                  success: function success(res) {
-                    var resData; // 将统一为base64格式
-                    var tempFilePath = res.tempFilePath; // H5为base64，其他为相对路径
-
-                    uni.getFileSystemManager().readFile({
-                      filePath: tempFilePath,
-                      encoding: 'base64',
-                      success: function success(res) {
-                        resData = 'data:image/png;base64,' + res.data;
-                        options.success && options.success(resData);
-                        reslove(resData);
-                      }
-                    });
-                  },
-                  fail: function fail(error) {
-                    options.fail && options.fail(error);
-                    reject(error);
-                  },
-                  complete: function complete(res) {
-                    options.complete && options.complete(res);
-                  }
-                }, options.componentInstance);
-              }, options.text.length + 100);
-            }());
-          }, 150);
-        }
-        createCanvas();
-      });
-    }
-  };
-})();
-var _default = uQRCode;
-exports.default = _default;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 43:
+/* 43 */
 /*!**********************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni-starter.config.js ***!
   \**********************************************************************************************************/
@@ -21787,77 +18735,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-
-/***/ 438:
-/*!****************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/popup.js ***!
-  \****************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _default = {
-  data: function data() {
-    return {};
-  },
-  created: function created() {
-    this.popup = this.getParent();
-  },
-  methods: {
-    /**
-     * 获取父元素实例
-     */
-    getParent: function getParent() {
-      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'uniPopup';
-      var parent = this.$parent;
-      var parentName = parent.$options.name;
-      while (parentName !== name) {
-        parent = parent.$parent;
-        if (!parent) return false;
-        parentName = parent.$options.name;
-      }
-      return parent;
-    }
-  }
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 439:
-/*!*********************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
-  \*********************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 440));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 441));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 442));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 44:
+/* 44 */
 /*!***************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/store/index.js ***!
   \***************************************************************************************************/
@@ -21886,41 +18764,7 @@ var _default = store;
 exports.default = _default;
 
 /***/ }),
-
-/***/ 440:
-/*!********************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
-  \********************************************************************************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\"ok\",\"uni-popup.placeholder\":\"pleace enter\",\"uni-popup.title\":\"Hint\",\"uni-popup.shareTitle\":\"Share to\"}");
-
-/***/ }),
-
-/***/ 441:
-/*!*************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
-  \*************************************************************************************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"确定\",\"uni-popup.placeholder\":\"请输入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
-
-/***/ }),
-
-/***/ 442:
-/*!*************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
-  \*************************************************************************************************************************************************/
-/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"確定\",\"uni-popup.placeholder\":\"請輸入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
-
-/***/ }),
-
-/***/ 45:
+/* 45 */
 /*!**********************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/store/modules/user.js ***!
   \**********************************************************************************************************/
@@ -22009,264 +18853,7 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
 
 /***/ }),
-
-/***/ 457:
-/*!********************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/userinfo/limeClipper/utils.js ***!
-  \********************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.calcImageOffset = calcImageOffset;
-exports.calcImageScale = calcImageScale;
-exports.calcImageSize = calcImageSize;
-exports.calcPythagoreanTheorem = calcPythagoreanTheorem;
-exports.clipTouchMoveOfCalculate = clipTouchMoveOfCalculate;
-exports.determineDirection = determineDirection;
-exports.imageTouchMoveOfCalcOffset = imageTouchMoveOfCalcOffset;
-/**
- * 判断手指触摸位置
- */
-function determineDirection(clipX, clipY, clipWidth, clipHeight, currentX, currentY) {
-  /*
-   * (右下>>1 右上>>2 左上>>3 左下>>4)
-   */
-  var corner;
-  /**
-   * 思路：（利用直角坐标系）
-   *  1.找出裁剪框中心点
-   *  2.如点击坐标在上方点与左方点区域内，则点击为左上角
-   *  3.如点击坐标在下方点与右方点区域内，则点击为右下角
-   *  4.其他角同理
-   */
-  var mainPoint = [clipX + clipWidth / 2, clipY + clipHeight / 2]; // 中心点
-  var currentPoint = [currentX, currentY]; // 触摸点
-
-  if (currentPoint[0] <= mainPoint[0] && currentPoint[1] <= mainPoint[1]) {
-    corner = 3; // 左上
-  } else if (currentPoint[0] >= mainPoint[0] && currentPoint[1] <= mainPoint[1]) {
-    corner = 2; // 右上
-  } else if (currentPoint[0] <= mainPoint[0] && currentPoint[1] >= mainPoint[1]) {
-    corner = 4; // 左下
-  } else if (currentPoint[0] >= mainPoint[0] && currentPoint[1] >= mainPoint[1]) {
-    corner = 1; // 右下
-  }
-
-  return corner;
-}
-
-/**
- * 图片边缘检测检测时，计算图片偏移量
- */
-function calcImageOffset(data, scale) {
-  var left = data.imageLeft;
-  var top = data.imageTop;
-  scale = scale || data.scale;
-  var imageWidth = data.imageWidth;
-  var imageHeight = data.imageHeight;
-  if (data.angle / 90 % 2) {
-    imageWidth = data.imageHeight;
-    imageHeight = data.imageWidth;
-  }
-  var clipX = data.clipX,
-    clipWidth = data.clipWidth,
-    clipY = data.clipY,
-    clipHeight = data.clipHeight;
-
-  // 当前图片宽度/高度
-  var currentImageSize = function currentImageSize(size) {
-    return size * scale / 2;
-  };
-  var currentImageWidth = currentImageSize(imageWidth);
-  var currentImageHeight = currentImageSize(imageHeight);
-  left = clipX + currentImageWidth >= left ? left : clipX + currentImageWidth;
-  left = clipX + clipWidth - currentImageWidth <= left ? left : clipX + clipWidth - currentImageWidth;
-  top = clipY + currentImageHeight >= top ? top : clipY + currentImageHeight;
-  top = clipY + clipHeight - currentImageHeight <= top ? top : clipY + clipHeight - currentImageHeight;
-  return {
-    left: left,
-    top: top,
-    scale: scale
-  };
-}
-
-/**
- * 图片边缘检测时，计算图片缩放比例
- */
-function calcImageScale(data, scale) {
-  scale = scale || data.scale;
-  var imageWidth = data.imageWidth,
-    imageHeight = data.imageHeight,
-    clipWidth = data.clipWidth,
-    clipHeight = data.clipHeight,
-    angle = data.angle;
-  if (angle / 90 % 2) {
-    imageWidth = imageHeight;
-    imageHeight = imageWidth;
-  }
-  if (imageWidth * scale < clipWidth) {
-    scale = clipWidth / imageWidth;
-  }
-  if (imageHeight * scale < clipHeight) {
-    scale = Math.max(scale, clipHeight / imageHeight);
-  }
-  return scale;
-}
-
-/**
- * 计算图片尺寸
- */
-function calcImageSize(width, height, data) {
-  var imageWidth = width,
-    imageHeight = height;
-  var clipWidth = data.clipWidth,
-    clipHeight = data.clipHeight,
-    sysinfo = data.sysinfo,
-    originWidth = data.width,
-    originHeight = data.height;
-  if (imageWidth && imageHeight) {
-    if (imageWidth / imageHeight > (clipWidth || originWidth) / (clipWidth || originHeight)) {
-      imageHeight = clipHeight || originHeight;
-      imageWidth = width / height * imageHeight;
-    } else {
-      imageWidth = clipWidth || originWidth;
-      imageHeight = height / width * imageWidth;
-    }
-  } else {
-    var sys = sysinfo || uni.getSystemInfoSync();
-    imageWidth = sys.windowWidth;
-    imageHeight = 0;
-  }
-  return {
-    imageWidth: imageWidth,
-    imageHeight: imageHeight
-  };
-}
-
-/**
- * 勾股定理求斜边
- */
-function calcPythagoreanTheorem(width, height) {
-  return Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
-}
-
-/**
- * 拖动裁剪框时计算
- */
-function clipTouchMoveOfCalculate(data, event) {
-  var clientX = event.touches[0].clientX;
-  var clientY = event.touches[0].clientY;
-  var clipWidth = data.clipWidth,
-    clipHeight = data.clipHeight,
-    oldClipY = data.clipY,
-    oldClipX = data.clipX,
-    clipStart = data.clipStart,
-    isLockRatio = data.isLockRatio,
-    maxWidth = data.maxWidth,
-    minWidth = data.minWidth,
-    maxHeight = data.maxHeight,
-    minHeight = data.minHeight;
-  maxWidth = maxWidth / 2;
-  minWidth = minWidth / 2;
-  minHeight = minHeight / 2;
-  maxHeight = maxHeight / 2;
-  var width = clipWidth,
-    height = clipHeight,
-    clipY = oldClipY,
-    clipX = oldClipX,
-    // 获取裁剪框实际宽度/高度
-    // 如果大于最大值则使用最大值
-    // 如果小于最小值则使用最小值
-    sizecorrect = function sizecorrect() {
-      width = width <= maxWidth ? width >= minWidth ? width : minWidth : maxWidth;
-      height = height <= maxHeight ? height >= minHeight ? height : minHeight : maxHeight;
-    },
-    sizeinspect = function sizeinspect() {
-      sizecorrect();
-      if ((width > maxWidth || width < minWidth || height > maxHeight || height < minHeight) && isLockRatio) {
-        return false;
-      } else {
-        return true;
-      }
-    };
-  //if (clipStart.corner) {
-  height = clipStart.height + (clipStart.corner > 1 && clipStart.corner < 4 ? 1 : -1) * (clipStart.y - clientY);
-  //}
-  switch (clipStart.corner) {
-    case 1:
-      width = clipStart.width - clipStart.x + clientX;
-      if (isLockRatio) {
-        height = width / (clipWidth / clipHeight);
-      }
-      if (!sizeinspect()) return;
-      break;
-    case 2:
-      width = clipStart.width - clipStart.x + clientX;
-      if (isLockRatio) {
-        height = width / (clipWidth / clipHeight);
-      }
-      if (!sizeinspect()) {
-        return;
-      } else {
-        clipY = clipStart.clipY - (height - clipStart.height);
-      }
-      break;
-    case 3:
-      width = clipStart.width + clipStart.x - clientX;
-      if (isLockRatio) {
-        height = width / (clipWidth / clipHeight);
-      }
-      if (!sizeinspect()) {
-        return;
-      } else {
-        clipY = clipStart.clipY - (height - clipStart.height);
-        clipX = clipStart.clipX - (width - clipStart.width);
-      }
-      break;
-    case 4:
-      width = clipStart.width + clipStart.x - clientX;
-      if (isLockRatio) {
-        height = width / (clipWidth / clipHeight);
-      }
-      if (!sizeinspect()) {
-        return;
-      } else {
-        clipX = clipStart.clipX - (width - clipStart.width);
-      }
-      break;
-    default:
-      break;
-  }
-  return {
-    width: width,
-    height: height,
-    clipX: clipX,
-    clipY: clipY
-  };
-}
-
-/**
- * 单指拖动图片计算偏移
- */
-function imageTouchMoveOfCalcOffset(data, clientXForLeft, clientYForLeft) {
-  var left = clientXForLeft - data.touchRelative[0].x,
-    top = clientYForLeft - data.touchRelative[0].y;
-  return {
-    left: left,
-    top: top
-  };
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 46:
+/* 46 */
 /*!**************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vuex3/dist/vuex.common.js ***!
   \**************************************************************************************/
@@ -23522,8 +20109,7 @@ module.exports = index_cjs;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../webpack/buildin/global.js */ 3)))
 
 /***/ }),
-
-/***/ 47:
+/* 47 */
 /*!******************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/common/openApp.js ***!
   \******************************************************************************************************/
@@ -23549,700 +20135,7 @@ var CONFIG_OPEN = _uniStarterConfig.default.h5.openApp || {};
 function _default() {}
 
 /***/ }),
-
-/***/ 472:
-/*!*******************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-forms/components/uni-forms/validate.js ***!
-  \*******************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
-var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 32));
-var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 33));
-var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 34));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
-function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
-function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
-var pattern = {
-  email: /^\S+?@\S+?\.\S+?$/,
-  idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
-  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", 'i')
-};
-var FORMAT_MAPPING = {
-  "int": 'integer',
-  "bool": 'boolean',
-  "double": 'number',
-  "long": 'number',
-  "password": 'string'
-  // "fileurls": 'array'
-};
-
-function formatMessage(args) {
-  var resources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  var defaultMessage = ['label'];
-  defaultMessage.forEach(function (item) {
-    if (args[item] === undefined) {
-      args[item] = '';
-    }
-  });
-  var str = resources;
-  for (var key in args) {
-    var reg = new RegExp('{' + key + '}');
-    str = str.replace(reg, args[key]);
-  }
-  return str;
-}
-function isEmptyValue(value, type) {
-  if (value === undefined || value === null) {
-    return true;
-  }
-  if (typeof value === 'string' && !value) {
-    return true;
-  }
-  if (Array.isArray(value) && !value.length) {
-    return true;
-  }
-  if (type === 'object' && !Object.keys(value).length) {
-    return true;
-  }
-  return false;
-}
-var types = {
-  integer: function integer(value) {
-    return types.number(value) && parseInt(value, 10) === value;
-  },
-  string: function string(value) {
-    return typeof value === 'string';
-  },
-  number: function number(value) {
-    if (isNaN(value)) {
-      return false;
-    }
-    return typeof value === 'number';
-  },
-  "boolean": function boolean(value) {
-    return typeof value === 'boolean';
-  },
-  "float": function float(value) {
-    return types.number(value) && !types.integer(value);
-  },
-  array: function array(value) {
-    return Array.isArray(value);
-  },
-  object: function object(value) {
-    return (0, _typeof2.default)(value) === 'object' && !types.array(value);
-  },
-  date: function date(value) {
-    return value instanceof Date;
-  },
-  timestamp: function timestamp(value) {
-    if (!this.integer(value) || Math.abs(value).toString().length > 16) {
-      return false;
-    }
-    return true;
-  },
-  file: function file(value) {
-    return typeof value.url === 'string';
-  },
-  email: function email(value) {
-    return typeof value === 'string' && !!value.match(pattern.email) && value.length < 255;
-  },
-  url: function url(value) {
-    return typeof value === 'string' && !!value.match(pattern.url);
-  },
-  pattern: function pattern(reg, value) {
-    try {
-      return new RegExp(reg).test(value);
-    } catch (e) {
-      return false;
-    }
-  },
-  method: function method(value) {
-    return typeof value === 'function';
-  },
-  idcard: function idcard(value) {
-    return typeof value === 'string' && !!value.match(pattern.idcard);
-  },
-  'url-https': function urlHttps(value) {
-    return this.url(value) && value.startsWith('https://');
-  },
-  'url-scheme': function urlScheme(value) {
-    return value.startsWith('://');
-  },
-  'url-web': function urlWeb(value) {
-    return false;
-  }
-};
-var RuleValidator = /*#__PURE__*/function () {
-  function RuleValidator(message) {
-    (0, _classCallCheck2.default)(this, RuleValidator);
-    this._message = message;
-  }
-  (0, _createClass2.default)(RuleValidator, [{
-    key: "validateRule",
-    value: function () {
-      var _validateRule = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(fieldKey, fieldValue, value, data, allData) {
-        var result, rules, hasRequired, message, i, rule, vt, now, resultExpr;
-        return _regenerator.default.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                result = null;
-                rules = fieldValue.rules;
-                hasRequired = rules.findIndex(function (item) {
-                  return item.required;
-                });
-                if (!(hasRequired < 0)) {
-                  _context.next = 8;
-                  break;
-                }
-                if (!(value === null || value === undefined)) {
-                  _context.next = 6;
-                  break;
-                }
-                return _context.abrupt("return", result);
-              case 6:
-                if (!(typeof value === 'string' && !value.length)) {
-                  _context.next = 8;
-                  break;
-                }
-                return _context.abrupt("return", result);
-              case 8:
-                message = this._message;
-                if (!(rules === undefined)) {
-                  _context.next = 11;
-                  break;
-                }
-                return _context.abrupt("return", message['default']);
-              case 11:
-                i = 0;
-              case 12:
-                if (!(i < rules.length)) {
-                  _context.next = 35;
-                  break;
-                }
-                rule = rules[i];
-                vt = this._getValidateType(rule);
-                Object.assign(rule, {
-                  label: fieldValue.label || "[\"".concat(fieldKey, "\"]")
-                });
-                if (!RuleValidatorHelper[vt]) {
-                  _context.next = 20;
-                  break;
-                }
-                result = RuleValidatorHelper[vt](rule, value, message);
-                if (!(result != null)) {
-                  _context.next = 20;
-                  break;
-                }
-                return _context.abrupt("break", 35);
-              case 20:
-                if (!rule.validateExpr) {
-                  _context.next = 26;
-                  break;
-                }
-                now = Date.now();
-                resultExpr = rule.validateExpr(value, allData, now);
-                if (!(resultExpr === false)) {
-                  _context.next = 26;
-                  break;
-                }
-                result = this._getMessage(rule, rule.errorMessage || this._message['default']);
-                return _context.abrupt("break", 35);
-              case 26:
-                if (!rule.validateFunction) {
-                  _context.next = 32;
-                  break;
-                }
-                _context.next = 29;
-                return this.validateFunction(rule, value, data, allData, vt);
-              case 29:
-                result = _context.sent;
-                if (!(result !== null)) {
-                  _context.next = 32;
-                  break;
-                }
-                return _context.abrupt("break", 35);
-              case 32:
-                i++;
-                _context.next = 12;
-                break;
-              case 35:
-                if (result !== null) {
-                  result = message.TAG + result;
-                }
-                return _context.abrupt("return", result);
-              case 37:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee, this);
-      }));
-      function validateRule(_x, _x2, _x3, _x4, _x5) {
-        return _validateRule.apply(this, arguments);
-      }
-      return validateRule;
-    }()
-  }, {
-    key: "validateFunction",
-    value: function () {
-      var _validateFunction = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(rule, value, data, allData, vt) {
-        var result, callbackMessage, res;
-        return _regenerator.default.wrap(function _callee2$(_context2) {
-          while (1) {
-            switch (_context2.prev = _context2.next) {
-              case 0:
-                result = null;
-                _context2.prev = 1;
-                callbackMessage = null;
-                _context2.next = 5;
-                return rule.validateFunction(rule, value, allData || data, function (message) {
-                  callbackMessage = message;
-                });
-              case 5:
-                res = _context2.sent;
-                if (callbackMessage || typeof res === 'string' && res || res === false) {
-                  result = this._getMessage(rule, callbackMessage || res, vt);
-                }
-                _context2.next = 12;
-                break;
-              case 9:
-                _context2.prev = 9;
-                _context2.t0 = _context2["catch"](1);
-                result = this._getMessage(rule, _context2.t0.message, vt);
-              case 12:
-                return _context2.abrupt("return", result);
-              case 13:
-              case "end":
-                return _context2.stop();
-            }
-          }
-        }, _callee2, this, [[1, 9]]);
-      }));
-      function validateFunction(_x6, _x7, _x8, _x9, _x10) {
-        return _validateFunction.apply(this, arguments);
-      }
-      return validateFunction;
-    }()
-  }, {
-    key: "_getMessage",
-    value: function _getMessage(rule, message, vt) {
-      return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default']);
-    }
-  }, {
-    key: "_getValidateType",
-    value: function _getValidateType(rule) {
-      var result = '';
-      if (rule.required) {
-        result = 'required';
-      } else if (rule.format) {
-        result = 'format';
-      } else if (rule.arrayType) {
-        result = 'arrayTypeFormat';
-      } else if (rule.range) {
-        result = 'range';
-      } else if (rule.maximum !== undefined || rule.minimum !== undefined) {
-        result = 'rangeNumber';
-      } else if (rule.maxLength !== undefined || rule.minLength !== undefined) {
-        result = 'rangeLength';
-      } else if (rule.pattern) {
-        result = 'pattern';
-      } else if (rule.validateFunction) {
-        result = 'validateFunction';
-      }
-      return result;
-    }
-  }]);
-  return RuleValidator;
-}();
-var RuleValidatorHelper = {
-  required: function required(rule, value, message) {
-    if (rule.required && isEmptyValue(value, rule.format || (0, _typeof2.default)(value))) {
-      return formatMessage(rule, rule.errorMessage || message.required);
-    }
-    return null;
-  },
-  range: function range(rule, value, message) {
-    var range = rule.range,
-      errorMessage = rule.errorMessage;
-    var list = new Array(range.length);
-    for (var i = 0; i < range.length; i++) {
-      var item = range[i];
-      if (types.object(item) && item.value !== undefined) {
-        list[i] = item.value;
-      } else {
-        list[i] = item;
-      }
-    }
-    var result = false;
-    if (Array.isArray(value)) {
-      result = new Set(value.concat(list)).size === list.length;
-    } else {
-      if (list.indexOf(value) > -1) {
-        result = true;
-      }
-    }
-    if (!result) {
-      return formatMessage(rule, errorMessage || message['enum']);
-    }
-    return null;
-  },
-  rangeNumber: function rangeNumber(rule, value, message) {
-    if (!types.number(value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    var minimum = rule.minimum,
-      maximum = rule.maximum,
-      exclusiveMinimum = rule.exclusiveMinimum,
-      exclusiveMaximum = rule.exclusiveMaximum;
-    var min = exclusiveMinimum ? value <= minimum : value < minimum;
-    var max = exclusiveMaximum ? value >= maximum : value > maximum;
-    if (minimum !== undefined && min) {
-      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMinimum ? 'exclusiveMinimum' : 'minimum']);
-    } else if (maximum !== undefined && max) {
-      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMaximum ? 'exclusiveMaximum' : 'maximum']);
-    } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
-      return formatMessage(rule, rule.errorMessage || message['number'].range);
-    }
-    return null;
-  },
-  rangeLength: function rangeLength(rule, value, message) {
-    if (!types.string(value) && !types.array(value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    var min = rule.minLength;
-    var max = rule.maxLength;
-    var val = value.length;
-    if (min !== undefined && val < min) {
-      return formatMessage(rule, rule.errorMessage || message['length'].minLength);
-    } else if (max !== undefined && val > max) {
-      return formatMessage(rule, rule.errorMessage || message['length'].maxLength);
-    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
-      return formatMessage(rule, rule.errorMessage || message['length'].range);
-    }
-    return null;
-  },
-  pattern: function pattern(rule, value, message) {
-    if (!types['pattern'](rule.pattern, value)) {
-      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
-    }
-    return null;
-  },
-  format: function format(rule, value, message) {
-    var customTypes = Object.keys(types);
-    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format || rule.arrayType;
-    if (customTypes.indexOf(format) > -1) {
-      if (!types[format](value)) {
-        return formatMessage(rule, rule.errorMessage || message.typeError);
-      }
-    }
-    return null;
-  },
-  arrayTypeFormat: function arrayTypeFormat(rule, value, message) {
-    if (!Array.isArray(value)) {
-      return formatMessage(rule, rule.errorMessage || message.typeError);
-    }
-    for (var i = 0; i < value.length; i++) {
-      var element = value[i];
-      var formatResult = this.format(rule, element, message);
-      if (formatResult !== null) {
-        return formatResult;
-      }
-    }
-    return null;
-  }
-};
-var SchemaValidator = /*#__PURE__*/function (_RuleValidator) {
-  (0, _inherits2.default)(SchemaValidator, _RuleValidator);
-  var _super = _createSuper(SchemaValidator);
-  function SchemaValidator(schema, options) {
-    var _this;
-    (0, _classCallCheck2.default)(this, SchemaValidator);
-    _this = _super.call(this, SchemaValidator.message);
-    _this._schema = schema;
-    _this._options = options || null;
-    return _this;
-  }
-  (0, _createClass2.default)(SchemaValidator, [{
-    key: "updateSchema",
-    value: function updateSchema(schema) {
-      this._schema = schema;
-    }
-  }, {
-    key: "validate",
-    value: function () {
-      var _validate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee3$(_context3) {
-          while (1) {
-            switch (_context3.prev = _context3.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context3.next = 5;
-                  break;
-                }
-                _context3.next = 4;
-                return this.invokeValidate(data, false, allData);
-              case 4:
-                result = _context3.sent;
-              case 5:
-                return _context3.abrupt("return", result.length ? result[0] : null);
-              case 6:
-              case "end":
-                return _context3.stop();
-            }
-          }
-        }, _callee3, this);
-      }));
-      function validate(_x11, _x12) {
-        return _validate.apply(this, arguments);
-      }
-      return validate;
-    }()
-  }, {
-    key: "validateAll",
-    value: function () {
-      var _validateAll = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee4$(_context4) {
-          while (1) {
-            switch (_context4.prev = _context4.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context4.next = 5;
-                  break;
-                }
-                _context4.next = 4;
-                return this.invokeValidate(data, true, allData);
-              case 4:
-                result = _context4.sent;
-              case 5:
-                return _context4.abrupt("return", result);
-              case 6:
-              case "end":
-                return _context4.stop();
-            }
-          }
-        }, _callee4, this);
-      }));
-      function validateAll(_x13, _x14) {
-        return _validateAll.apply(this, arguments);
-      }
-      return validateAll;
-    }()
-  }, {
-    key: "validateUpdate",
-    value: function () {
-      var _validateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(data, allData) {
-        var result;
-        return _regenerator.default.wrap(function _callee5$(_context5) {
-          while (1) {
-            switch (_context5.prev = _context5.next) {
-              case 0:
-                result = this._checkFieldInSchema(data);
-                if (result) {
-                  _context5.next = 5;
-                  break;
-                }
-                _context5.next = 4;
-                return this.invokeValidateUpdate(data, false, allData);
-              case 4:
-                result = _context5.sent;
-              case 5:
-                return _context5.abrupt("return", result.length ? result[0] : null);
-              case 6:
-              case "end":
-                return _context5.stop();
-            }
-          }
-        }, _callee5, this);
-      }));
-      function validateUpdate(_x15, _x16) {
-        return _validateUpdate.apply(this, arguments);
-      }
-      return validateUpdate;
-    }()
-  }, {
-    key: "invokeValidate",
-    value: function () {
-      var _invokeValidate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(data, all, allData) {
-        var result, schema, key, value, errorMessage;
-        return _regenerator.default.wrap(function _callee6$(_context6) {
-          while (1) {
-            switch (_context6.prev = _context6.next) {
-              case 0:
-                result = [];
-                schema = this._schema;
-                _context6.t0 = _regenerator.default.keys(schema);
-              case 3:
-                if ((_context6.t1 = _context6.t0()).done) {
-                  _context6.next = 15;
-                  break;
-                }
-                key = _context6.t1.value;
-                value = schema[key];
-                _context6.next = 8;
-                return this.validateRule(key, value, data[key], data, allData);
-              case 8:
-                errorMessage = _context6.sent;
-                if (!(errorMessage != null)) {
-                  _context6.next = 13;
-                  break;
-                }
-                result.push({
-                  key: key,
-                  errorMessage: errorMessage
-                });
-                if (all) {
-                  _context6.next = 13;
-                  break;
-                }
-                return _context6.abrupt("break", 15);
-              case 13:
-                _context6.next = 3;
-                break;
-              case 15:
-                return _context6.abrupt("return", result);
-              case 16:
-              case "end":
-                return _context6.stop();
-            }
-          }
-        }, _callee6, this);
-      }));
-      function invokeValidate(_x17, _x18, _x19) {
-        return _invokeValidate.apply(this, arguments);
-      }
-      return invokeValidate;
-    }()
-  }, {
-    key: "invokeValidateUpdate",
-    value: function () {
-      var _invokeValidateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7(data, all, allData) {
-        var result, key, errorMessage;
-        return _regenerator.default.wrap(function _callee7$(_context7) {
-          while (1) {
-            switch (_context7.prev = _context7.next) {
-              case 0:
-                result = [];
-                _context7.t0 = _regenerator.default.keys(data);
-              case 2:
-                if ((_context7.t1 = _context7.t0()).done) {
-                  _context7.next = 13;
-                  break;
-                }
-                key = _context7.t1.value;
-                _context7.next = 6;
-                return this.validateRule(key, this._schema[key], data[key], data, allData);
-              case 6:
-                errorMessage = _context7.sent;
-                if (!(errorMessage != null)) {
-                  _context7.next = 11;
-                  break;
-                }
-                result.push({
-                  key: key,
-                  errorMessage: errorMessage
-                });
-                if (all) {
-                  _context7.next = 11;
-                  break;
-                }
-                return _context7.abrupt("break", 13);
-              case 11:
-                _context7.next = 2;
-                break;
-              case 13:
-                return _context7.abrupt("return", result);
-              case 14:
-              case "end":
-                return _context7.stop();
-            }
-          }
-        }, _callee7, this);
-      }));
-      function invokeValidateUpdate(_x20, _x21, _x22) {
-        return _invokeValidateUpdate.apply(this, arguments);
-      }
-      return invokeValidateUpdate;
-    }()
-  }, {
-    key: "_checkFieldInSchema",
-    value: function _checkFieldInSchema(data) {
-      var keys = Object.keys(data);
-      var keys2 = Object.keys(this._schema);
-      if (new Set(keys.concat(keys2)).size === keys2.length) {
-        return '';
-      }
-      var noExistFields = keys.filter(function (key) {
-        return keys2.indexOf(key) < 0;
-      });
-      var errorMessage = formatMessage({
-        field: JSON.stringify(noExistFields)
-      }, SchemaValidator.message.TAG + SchemaValidator.message['defaultInvalid']);
-      return [{
-        key: 'invalid',
-        errorMessage: errorMessage
-      }];
-    }
-  }]);
-  return SchemaValidator;
-}(RuleValidator);
-function Message() {
-  return {
-    TAG: "",
-    default: '验证错误',
-    defaultInvalid: '提交的字段{field}在数据库中并不存在',
-    validateFunction: '验证无效',
-    required: '{label}必填',
-    'enum': '{label}超出范围',
-    timestamp: '{label}格式无效',
-    whitespace: '{label}不能为空',
-    typeError: '{label}类型无效',
-    date: {
-      format: '{label}日期{value}格式无效',
-      parse: '{label}日期无法解析,{value}无效',
-      invalid: '{label}日期{value}无效'
-    },
-    length: {
-      minLength: '{label}长度不能少于{minLength}',
-      maxLength: '{label}长度不能超过{maxLength}',
-      range: '{label}必须介于{minLength}和{maxLength}之间'
-    },
-    number: {
-      minimum: '{label}不能小于{minimum}',
-      maximum: '{label}不能大于{maximum}',
-      exclusiveMinimum: '{label}不能小于等于{minimum}',
-      exclusiveMaximum: '{label}不能大于等于{maximum}',
-      range: '{label}必须介于{minimum}and{maximum}之间'
-    },
-    pattern: {
-      mismatch: '{label}格式不匹配'
-    }
-  };
-}
-SchemaValidator.message = new Message();
-var _default = SchemaValidator;
-exports.default = _default;
-
-/***/ }),
-
-/***/ 48:
+/* 48 */
 /*!***********************************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/uni-agree/utils/uni-agree.js ***!
   \***********************************************************************************************************************/
@@ -24270,408 +20163,9 @@ function _default() {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-
-/***/ 487:
-/*!*********************************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-file-picker/components/uni-file-picker/choose-and-upload-file.js ***!
-  \*********************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni, wx, uniCloud) {
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.chooseAndUploadFile = chooseAndUploadFile;
-exports.uploadCloudFiles = uploadCloudFiles;
-var ERR_MSG_OK = 'chooseAndUploadFile:ok';
-var ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
-function chooseImage(opts) {
-  var count = opts.count,
-    _opts$sizeType = opts.sizeType,
-    sizeType = _opts$sizeType === void 0 ? ['original', 'compressed'] : _opts$sizeType,
-    _opts$sourceType = opts.sourceType,
-    sourceType = _opts$sourceType === void 0 ? ['album', 'camera'] : _opts$sourceType,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    uni.chooseImage({
-      count: count,
-      sizeType: sizeType,
-      sourceType: sourceType,
-      extension: extension,
-      success: function success(res) {
-        resolve(normalizeChooseAndUploadFileRes(res, 'image'));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseImage:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function chooseVideo(opts) {
-  var camera = opts.camera,
-    compressed = opts.compressed,
-    maxDuration = opts.maxDuration,
-    _opts$sourceType2 = opts.sourceType,
-    sourceType = _opts$sourceType2 === void 0 ? ['album', 'camera'] : _opts$sourceType2,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    uni.chooseVideo({
-      camera: camera,
-      compressed: compressed,
-      maxDuration: maxDuration,
-      sourceType: sourceType,
-      extension: extension,
-      success: function success(res) {
-        var tempFilePath = res.tempFilePath,
-          duration = res.duration,
-          size = res.size,
-          height = res.height,
-          width = res.width;
-        resolve(normalizeChooseAndUploadFileRes({
-          errMsg: 'chooseVideo:ok',
-          tempFilePaths: [tempFilePath],
-          tempFiles: [{
-            name: res.tempFile && res.tempFile.name || '',
-            path: tempFilePath,
-            size: size,
-            type: res.tempFile && res.tempFile.type || '',
-            width: width,
-            height: height,
-            duration: duration,
-            fileType: 'video',
-            cloudPath: ''
-          }]
-        }, 'video'));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseVideo:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function chooseAll(opts) {
-  var count = opts.count,
-    extension = opts.extension;
-  return new Promise(function (resolve, reject) {
-    var chooseFile = uni.chooseFile;
-    if (typeof wx !== 'undefined' && typeof wx.chooseMessageFile === 'function') {
-      chooseFile = wx.chooseMessageFile;
-    }
-    if (typeof chooseFile !== 'function') {
-      return reject({
-        errMsg: ERR_MSG_FAIL + ' 请指定 type 类型，该平台仅支持选择 image 或 video。'
-      });
-    }
-    chooseFile({
-      type: 'all',
-      count: count,
-      extension: extension,
-      success: function success(res) {
-        resolve(normalizeChooseAndUploadFileRes(res));
-      },
-      fail: function fail(res) {
-        reject({
-          errMsg: res.errMsg.replace('chooseFile:fail', ERR_MSG_FAIL)
-        });
-      }
-    });
-  });
-}
-function normalizeChooseAndUploadFileRes(res, fileType) {
-  res.tempFiles.forEach(function (item, index) {
-    if (!item.name) {
-      item.name = item.path.substring(item.path.lastIndexOf('/') + 1);
-    }
-    if (fileType) {
-      item.fileType = fileType;
-    }
-    item.cloudPath = Date.now() + '_' + index + item.name.substring(item.name.lastIndexOf('.'));
-  });
-  if (!res.tempFilePaths) {
-    res.tempFilePaths = res.tempFiles.map(function (file) {
-      return file.path;
-    });
-  }
-  return res;
-}
-function uploadCloudFiles(files) {
-  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
-  var _onUploadProgress = arguments.length > 2 ? arguments[2] : undefined;
-  files = JSON.parse(JSON.stringify(files));
-  var len = files.length;
-  var count = 0;
-  var self = this;
-  return new Promise(function (resolve) {
-    while (count < max) {
-      next();
-    }
-    function next() {
-      var cur = count++;
-      if (cur >= len) {
-        !files.find(function (item) {
-          return !item.url && !item.errMsg;
-        }) && resolve(files);
-        return;
-      }
-      var fileItem = files[cur];
-      var index = self.files.findIndex(function (v) {
-        return v.uuid === fileItem.uuid;
-      });
-      fileItem.url = '';
-      delete fileItem.errMsg;
-      uniCloud.uploadFile({
-        filePath: fileItem.path,
-        cloudPath: fileItem.cloudPath,
-        fileType: fileItem.fileType,
-        onUploadProgress: function onUploadProgress(res) {
-          res.index = index;
-          _onUploadProgress && _onUploadProgress(res);
-        }
-      }).then(function (res) {
-        fileItem.url = res.fileID;
-        fileItem.index = index;
-        if (cur < len) {
-          next();
-        }
-      }).catch(function (res) {
-        fileItem.errMsg = res.errMsg || res.message;
-        fileItem.index = index;
-        if (cur < len) {
-          next();
-        }
-      });
-    }
-  });
-}
-function uploadFiles(choosePromise, _ref) {
-  var onChooseFile = _ref.onChooseFile,
-    onUploadProgress = _ref.onUploadProgress;
-  return choosePromise.then(function (res) {
-    if (onChooseFile) {
-      var customChooseRes = onChooseFile(res);
-      if (typeof customChooseRes !== 'undefined') {
-        return Promise.resolve(customChooseRes).then(function (chooseRes) {
-          return typeof chooseRes === 'undefined' ? res : chooseRes;
-        });
-      }
-    }
-    return res;
-  }).then(function (res) {
-    if (res === false) {
-      return {
-        errMsg: ERR_MSG_OK,
-        tempFilePaths: [],
-        tempFiles: []
-      };
-    }
-    return res;
-  });
-}
-function chooseAndUploadFile() {
-  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-    type: 'all'
-  };
-  if (opts.type === 'image') {
-    return uploadFiles(chooseImage(opts), opts);
-  } else if (opts.type === 'video') {
-    return uploadFiles(chooseVideo(opts), opts);
-  }
-  return uploadFiles(chooseAll(opts), opts);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
-
-/***/ }),
-
-/***/ 488:
-/*!****************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-file-picker/components/uni-file-picker/utils.js ***!
-  \****************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.get_files_and_is_max = exports.get_file_info = exports.get_file_ext = exports.get_file_data = exports.get_extname = void 0;
-var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
-var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
-/**
- * 获取文件名和后缀
- * @param {String} name
- */
-var get_file_ext = function get_file_ext(name) {
-  var last_len = name.lastIndexOf('.');
-  var len = name.length;
-  return {
-    name: name.substring(0, last_len),
-    ext: name.substring(last_len + 1, len)
-  };
-};
-
-/**
- * 获取扩展名
- * @param {Array} fileExtname
- */
-exports.get_file_ext = get_file_ext;
-var get_extname = function get_extname(fileExtname) {
-  if (!Array.isArray(fileExtname)) {
-    var extname = fileExtname.replace(/(\[|\])/g, '');
-    return extname.split(',');
-  } else {
-    return fileExtname;
-  }
-  return [];
-};
-
-/**
- * 获取文件和检测是否可选
- */
-exports.get_extname = get_extname;
-var get_files_and_is_max = function get_files_and_is_max(res, _extname) {
-  var filePaths = [];
-  var files = [];
-  if (!_extname || _extname.length === 0) {
-    return {
-      filePaths: filePaths,
-      files: files
-    };
-  }
-  res.tempFiles.forEach(function (v) {
-    var fileFullName = get_file_ext(v.name);
-    var extname = fileFullName.ext.toLowerCase();
-    if (_extname.indexOf(extname) !== -1) {
-      files.push(v);
-      filePaths.push(v.path);
-    }
-  });
-  if (files.length !== res.tempFiles.length) {
-    uni.showToast({
-      title: "\u5F53\u524D\u9009\u62E9\u4E86".concat(res.tempFiles.length, "\u4E2A\u6587\u4EF6 \uFF0C").concat(res.tempFiles.length - files.length, " \u4E2A\u6587\u4EF6\u683C\u5F0F\u4E0D\u6B63\u786E"),
-      icon: 'none',
-      duration: 5000
-    });
-  }
-  return {
-    filePaths: filePaths,
-    files: files
-  };
-};
-
-/**
- * 获取图片信息
- * @param {Object} filepath
- */
-exports.get_files_and_is_max = get_files_and_is_max;
-var get_file_info = function get_file_info(filepath) {
-  return new Promise(function (resolve, reject) {
-    uni.getImageInfo({
-      src: filepath,
-      success: function success(res) {
-        resolve(res);
-      },
-      fail: function fail(err) {
-        reject(err);
-      }
-    });
-  });
-};
-/**
- * 获取封装数据
- */
-exports.get_file_info = get_file_info;
-var get_file_data = /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(files) {
-    var type,
-      fileFullName,
-      extname,
-      filedata,
-      imageinfo,
-      _args = arguments;
-    return _regenerator.default.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            type = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'image';
-            // 最终需要上传数据库的数据
-            fileFullName = get_file_ext(files.name);
-            extname = fileFullName.ext.toLowerCase();
-            filedata = {
-              name: files.name,
-              uuid: files.uuid,
-              extname: extname || '',
-              cloudPath: files.cloudPath,
-              fileType: files.fileType,
-              url: files.path || files.path,
-              size: files.size,
-              //单位是字节
-              image: {},
-              path: files.path,
-              video: {}
-            };
-            if (!(type === 'image')) {
-              _context.next = 14;
-              break;
-            }
-            _context.next = 7;
-            return get_file_info(files.path);
-          case 7:
-            imageinfo = _context.sent;
-            delete filedata.video;
-            filedata.image.width = imageinfo.width;
-            filedata.image.height = imageinfo.height;
-            filedata.image.location = imageinfo.path;
-            _context.next = 15;
-            break;
-          case 14:
-            delete filedata.image;
-          case 15:
-            return _context.abrupt("return", filedata);
-          case 16:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-  return function get_file_data(_x) {
-    return _ref.apply(this, arguments);
-  };
-}();
-exports.get_file_data = get_file_data;
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 5:
-/*!**************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/slicedToArray.js ***!
-  \**************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 6);
-var iterableToArrayLimit = __webpack_require__(/*! ./iterableToArrayLimit.js */ 7);
-var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
-var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 10);
-function _slicedToArray(arr, i) {
-  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || unsupportedIterableToArray(arr, i) || nonIterableRest();
-}
-module.exports = _slicedToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
-
-/***/ }),
-
-/***/ 51:
+/* 49 */,
+/* 50 */,
+/* 51 */
 /*!**********************************************************************************************************!*\
   !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/runtime/componentNormalizer.js ***!
   \**********************************************************************************************************/
@@ -24802,57 +20296,7 @@ function normalizeComponent (
 
 
 /***/ }),
-
-/***/ 517:
-/*!*****************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
-  \*****************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 518));
-var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 519));
-var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 520));
-var _default = {
-  en: _en.default,
-  'zh-Hans': _zhHans.default,
-  'zh-Hant': _zhHant.default
-};
-exports.default = _default;
-
-/***/ }),
-
-/***/ 518:
-/*!****************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
-  \****************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
-
-/***/ }),
-
-/***/ 519:
-/*!*********************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
-  \*********************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
-
-/***/ }),
-
-/***/ 52:
+/* 52 */
 /*!*************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/lang/i18n.js ***!
   \*************************************************************************************************/
@@ -24955,19 +20399,7 @@ if (i18nEnable) {
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-
-/***/ 520:
-/*!*********************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
-  \*********************************************************************************************************************************************************/
-/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
-/***/ (function(module) {
-
-module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
-
-/***/ }),
-
-/***/ 53:
+/* 53 */
 /*!***********************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/lang/en.js ***!
   \***********************************************************************************************/
@@ -25175,142 +20607,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-
-/***/ 535:
-/*!************************************************************************************************************************************************************!*\
-  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
-  \************************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {
-
-var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.createAnimation = createAnimation;
-var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
-var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
-var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
-// const defaultOption = {
-// 	duration: 300,
-// 	timingFunction: 'linear',
-// 	delay: 0,
-// 	transformOrigin: '50% 50% 0'
-// }
-var MPAnimation = /*#__PURE__*/function () {
-  function MPAnimation(options, _this) {
-    (0, _classCallCheck2.default)(this, MPAnimation);
-    this.options = options;
-    this.animation = uni.createAnimation(options);
-    this.currentStepAnimates = {};
-    this.next = 0;
-    this.$ = _this;
-  }
-  (0, _createClass2.default)(MPAnimation, [{
-    key: "_nvuePushAnimates",
-    value: function _nvuePushAnimates(type, args) {
-      var aniObj = this.currentStepAnimates[this.next];
-      var styles = {};
-      if (!aniObj) {
-        styles = {
-          styles: {},
-          config: {}
-        };
-      } else {
-        styles = aniObj;
-      }
-      if (animateTypes1.includes(type)) {
-        if (!styles.styles.transform) {
-          styles.styles.transform = '';
-        }
-        var unit = '';
-        if (type === 'rotate') {
-          unit = 'deg';
-        }
-        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
-      } else {
-        styles.styles[type] = "".concat(args);
-      }
-      this.currentStepAnimates[this.next] = styles;
-    }
-  }, {
-    key: "_animateRun",
-    value: function _animateRun() {
-      var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-      var ref = this.$.$refs['ani'].ref;
-      if (!ref) return;
-      return new Promise(function (resolve, reject) {
-        nvueAnimation.transition(ref, _objectSpread({
-          styles: styles
-        }, config), function (res) {
-          resolve();
-        });
-      });
-    }
-  }, {
-    key: "_nvueNextAnimate",
-    value: function _nvueNextAnimate(animates) {
-      var _this2 = this;
-      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var fn = arguments.length > 2 ? arguments[2] : undefined;
-      var obj = animates[step];
-      if (obj) {
-        var styles = obj.styles,
-          config = obj.config;
-        this._animateRun(styles, config).then(function () {
-          step += 1;
-          _this2._nvueNextAnimate(animates, step, fn);
-        });
-      } else {
-        this.currentStepAnimates = {};
-        typeof fn === 'function' && fn();
-        this.isEnd = true;
-      }
-    }
-  }, {
-    key: "step",
-    value: function step() {
-      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      this.animation.step(config);
-      return this;
-    }
-  }, {
-    key: "run",
-    value: function run(fn) {
-      this.$.animationData = this.animation.export();
-      this.$.timer = setTimeout(function () {
-        typeof fn === 'function' && fn();
-      }, this.$.durationTime);
-    }
-  }]);
-  return MPAnimation;
-}();
-var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d', 'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY', 'translateZ'];
-var animateTypes2 = ['opacity', 'backgroundColor'];
-var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
-animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
-  MPAnimation.prototype[type] = function () {
-    var _this$animation;
-    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
-    return this;
-  };
-});
-function createAnimation(option, _this) {
-  if (!_this) return;
-  clearTimeout(_this.timer);
-  return new MPAnimation(option, _this);
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
-
-/***/ }),
-
-/***/ 54:
+/* 54 */
 /*!****************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/lang/zh-Hans.js ***!
   \****************************************************************************************************/
@@ -25518,8 +20815,7 @@ var _default = {
 exports.default = _default;
 
 /***/ }),
-
-/***/ 55:
+/* 55 */
 /*!****************************************************!*\
   !*** ./node_modules/vue-i18n/dist/vue-i18n.esm.js ***!
   \****************************************************/
@@ -27835,22 +23131,9261 @@ VueI18n.version = '8.28.2';
 
 
 /***/ }),
+/* 56 */
+/*!*******************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/index.js ***!
+  \*******************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 6:
-/*!***************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayWithHoles.js ***!
-  \***************************************************************/
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _mixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mixin.js */ 57));
+var _mpMixin = _interopRequireDefault(__webpack_require__(/*! ./libs/mixin/mpMixin.js */ 58));
+var _luchRequest = _interopRequireDefault(__webpack_require__(/*! ./libs/luch-request */ 59));
+var _route = _interopRequireDefault(__webpack_require__(/*! ./libs/util/route.js */ 77));
+var _colorGradient = _interopRequireDefault(__webpack_require__(/*! ./libs/function/colorGradient.js */ 78));
+var _test = _interopRequireDefault(__webpack_require__(/*! ./libs/function/test.js */ 79));
+var _debounce = _interopRequireDefault(__webpack_require__(/*! ./libs/function/debounce.js */ 80));
+var _throttle = _interopRequireDefault(__webpack_require__(/*! ./libs/function/throttle.js */ 81));
+var _index = _interopRequireDefault(__webpack_require__(/*! ./libs/function/index.js */ 82));
+var _config = _interopRequireDefault(__webpack_require__(/*! ./libs/config/config.js */ 85));
+var _props = _interopRequireDefault(__webpack_require__(/*! ./libs/config/props.js */ 86));
+var _zIndex = _interopRequireDefault(__webpack_require__(/*! ./libs/config/zIndex.js */ 176));
+var _color = _interopRequireDefault(__webpack_require__(/*! ./libs/config/color.js */ 134));
+var _platform = _interopRequireDefault(__webpack_require__(/*! ./libs/function/platform */ 177));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// 看到此报错，是因为没有配置vue.config.js的【transpileDependencies】，详见：https://www.uviewui.com/components/npmSetting.html#_5-cli模式额外配置
+var pleaseSetTranspileDependencies = {},
+  babelTest = pleaseSetTranspileDependencies === null || pleaseSetTranspileDependencies === void 0 ? void 0 : pleaseSetTranspileDependencies.test;
+
+// 引入全局mixin
+
+var $u = _objectSpread(_objectSpread({
+  route: _route.default,
+  date: _index.default.timeFormat,
+  // 另名date
+  colorGradient: _colorGradient.default.colorGradient,
+  hexToRgb: _colorGradient.default.hexToRgb,
+  rgbToHex: _colorGradient.default.rgbToHex,
+  colorToRgba: _colorGradient.default.colorToRgba,
+  test: _test.default,
+  type: ['primary', 'success', 'error', 'warning', 'info'],
+  http: new _luchRequest.default(),
+  config: _config.default,
+  // uView配置信息相关，比如版本号
+  zIndex: _zIndex.default,
+  debounce: _debounce.default,
+  throttle: _throttle.default,
+  mixin: _mixin.default,
+  mpMixin: _mpMixin.default,
+  props: _props.default
+}, _index.default), {}, {
+  color: _color.default,
+  platform: _platform.default
+});
+
+// $u挂载到uni对象上
+uni.$u = $u;
+var install = function install(Vue) {
+  // 时间格式化，同时两个名称，date和timeFormat
+  Vue.filter('timeFormat', function (timestamp, format) {
+    return uni.$u.timeFormat(timestamp, format);
+  });
+  Vue.filter('date', function (timestamp, format) {
+    return uni.$u.timeFormat(timestamp, format);
+  });
+  // 将多久以前的方法，注入到全局过滤器
+  Vue.filter('timeFrom', function (timestamp, format) {
+    return uni.$u.timeFrom(timestamp, format);
+  });
+  // 同时挂载到uni和Vue.prototype中
+
+  // 只有vue，挂载到Vue.prototype才有意义，因为nvue中全局Vue.prototype和Vue.mixin是无效的
+  Vue.prototype.$u = $u;
+  Vue.mixin(_mixin.default);
+};
+var _default = {
+  install: install
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 57 */
+/*!******************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/mixin/mixin.js ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {module.exports = {
+  // 定义每个组件都可能需要用到的外部样式以及类名
+  props: {
+    // 每个组件都有的父组件传递的样式，可以为字符串或者对象形式
+    customStyle: {
+      type: [Object, String],
+      default: function _default() {
+        return {};
+      }
+    },
+    customClass: {
+      type: String,
+      default: ''
+    },
+    // 跳转的页面路径
+    url: {
+      type: String,
+      default: ''
+    },
+    // 页面跳转的类型
+    linkType: {
+      type: String,
+      default: 'navigateTo'
+    }
+  },
+  data: function data() {
+    return {};
+  },
+  onLoad: function onLoad() {
+    // getRect挂载到$u上，因为这方法需要使用in(this)，所以无法把它独立成一个单独的文件导出
+    this.$u.getRect = this.$uGetRect;
+  },
+  created: function created() {
+    // 组件当中，只有created声明周期，为了能在组件使用，故也在created中将方法挂载到$u
+    this.$u.getRect = this.$uGetRect;
+  },
+  computed: {
+    // 在2.x版本中，将会把$u挂载到uni对象下，导致在模板中无法使用uni.$u.xxx形式
+    // 所以这里通过computed计算属性将其附加到this.$u上，就可以在模板或者js中使用uni.$u.xxx
+    // 只在nvue环境通过此方式引入完整的$u，其他平台会出现性能问题，非nvue则按需引入（主要原因是props过大）
+    $u: function $u() {
+      // 在非nvue端，移除props，http，mixin等对象，避免在小程序setData时数据过大影响性能
+      return uni.$u.deepMerge(uni.$u, {
+        props: undefined,
+        http: undefined,
+        mixin: undefined
+      });
+    },
+    /**
+     * 生成bem规则类名
+     * 由于微信小程序，H5，nvue之间绑定class的差异，无法通过:class="[bem()]"的形式进行同用
+     * 故采用如下折中做法，最后返回的是数组（一般平台）或字符串（支付宝和字节跳动平台），类似['a', 'b', 'c']或'a b c'的形式
+     * @param {String} name 组件名称
+     * @param {Array} fixed 一直会存在的类名
+     * @param {Array} change 会根据变量值为true或者false而出现或者隐藏的类名
+     * @returns {Array|string}
+     */
+    bem: function bem() {
+      return function (name, fixed, change) {
+        var _this = this;
+        // 类名前缀
+        var prefix = "u-".concat(name, "--");
+        var classes = {};
+        if (fixed) {
+          fixed.map(function (item) {
+            // 这里的类名，会一直存在
+            classes[prefix + _this[item]] = true;
+          });
+        }
+        if (change) {
+          change.map(function (item) {
+            // 这里的类名，会根据this[item]的值为true或者false，而进行添加或者移除某一个类
+            _this[item] ? classes[prefix + item] = _this[item] : delete classes[prefix + item];
+          });
+        }
+        return Object.keys(classes);
+        // 支付宝，头条小程序无法动态绑定一个数组类名，否则解析出来的结果会带有","，而导致失效
+      };
+    }
+  },
+
+  methods: {
+    // 跳转某一个页面
+    openPage: function openPage() {
+      var urlKey = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'url';
+      var url = this[urlKey];
+      if (url) {
+        // 执行类似uni.navigateTo的方法
+        uni[this.linkType]({
+          url: url
+        });
+      }
+    },
+    // 查询节点信息
+    // 目前此方法在支付宝小程序中无法获取组件跟接点的尺寸，为支付宝的bug(2020-07-21)
+    // 解决办法为在组件根部再套一个没有任何作用的view元素
+    $uGetRect: function $uGetRect(selector, all) {
+      var _this2 = this;
+      return new Promise(function (resolve) {
+        uni.createSelectorQuery().in(_this2)[all ? 'selectAll' : 'select'](selector).boundingClientRect(function (rect) {
+          if (all && Array.isArray(rect) && rect.length) {
+            resolve(rect);
+          }
+          if (!all && rect) {
+            resolve(rect);
+          }
+        }).exec();
+      });
+    },
+    getParentData: function getParentData() {
+      var _this3 = this;
+      var parentName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      // 避免在created中去定义parent变量
+      if (!this.parent) this.parent = {};
+      // 这里的本质原理是，通过获取父组件实例(也即类似u-radio的父组件u-radio-group的this)
+      // 将父组件this中对应的参数，赋值给本组件(u-radio的this)的parentData对象中对应的属性
+      // 之所以需要这么做，是因为所有端中，头条小程序不支持通过this.parent.xxx去监听父组件参数的变化
+      // 此处并不会自动更新子组件的数据，而是依赖父组件u-radio-group去监听data的变化，手动调用更新子组件的方法去重新获取
+      this.parent = uni.$u.$parent.call(this, parentName);
+      if (this.parent.children) {
+        // 如果父组件的children不存在本组件的实例，才将本实例添加到父组件的children中
+        this.parent.children.indexOf(this) === -1 && this.parent.children.push(this);
+      }
+      if (this.parent && this.parentData) {
+        // 历遍parentData中的属性，将parent中的同名属性赋值给parentData
+        Object.keys(this.parentData).map(function (key) {
+          _this3.parentData[key] = _this3.parent[key];
+        });
+      }
+    },
+    // 阻止事件冒泡
+    preventEvent: function preventEvent(e) {
+      e && typeof e.stopPropagation === 'function' && e.stopPropagation();
+    },
+    // 空操作
+    noop: function noop(e) {
+      this.preventEvent(e);
+    }
+  },
+  onReachBottom: function onReachBottom() {
+    uni.$emit('uOnReachBottom');
+  },
+  beforeDestroy: function beforeDestroy() {
+    var _this4 = this;
+    // 判断当前页面是否存在parent和chldren，一般在checkbox和checkbox-group父子联动的场景会有此情况
+    // 组件销毁时，移除子组件在父组件children数组中的实例，释放资源，避免数据混乱
+    if (this.parent && uni.$u.test.array(this.parent.children)) {
+      // 组件销毁时，移除父组件中的children数组中对应的实例
+      var childrenList = this.parent.children;
+      childrenList.map(function (child, index) {
+        // 如果相等，则移除
+        if (child === _this4) {
+          childrenList.splice(index, 1);
+        }
+      });
+    }
+  }
+};
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 58 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/mixin/mpMixin.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  // 将自定义节点设置成虚拟的，更加接近Vue组件的表现，能更好的使用flex属性
+  options: {
+    virtualHost: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 59 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/index.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _Request = _interopRequireDefault(__webpack_require__(/*! ./core/Request */ 60));
+var _default = _Request.default;
+exports.default = _default;
+
+/***/ }),
+/* 60 */
+/*!********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/Request.js ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var _dispatchRequest = _interopRequireDefault(__webpack_require__(/*! ./dispatchRequest */ 61));
+var _InterceptorManager = _interopRequireDefault(__webpack_require__(/*! ./InterceptorManager */ 69));
+var _mergeConfig = _interopRequireDefault(__webpack_require__(/*! ./mergeConfig */ 70));
+var _defaults = _interopRequireDefault(__webpack_require__(/*! ./defaults */ 71));
+var _utils = __webpack_require__(/*! ../utils */ 64);
+var _clone = _interopRequireDefault(__webpack_require__(/*! ../utils/clone */ 72));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var Request = /*#__PURE__*/function () {
+  /**
+  * @param {Object} arg - 全局配置
+  * @param {String} arg.baseURL - 全局根路径
+  * @param {Object} arg.header - 全局header
+  * @param {String} arg.method = [GET|POST|PUT|DELETE|CONNECT|HEAD|OPTIONS|TRACE] - 全局默认请求方式
+  * @param {String} arg.dataType = [json] - 全局默认的dataType
+  * @param {String} arg.responseType = [text|arraybuffer] - 全局默认的responseType。支付宝小程序不支持
+  * @param {Object} arg.custom - 全局默认的自定义参数
+  * @param {Number} arg.timeout - 全局默认的超时时间，单位 ms。默认60000。H5(HBuilderX 2.9.9+)、APP(HBuilderX 2.9.9+)、微信小程序（2.10.0）、支付宝小程序
+  * @param {Boolean} arg.sslVerify - 全局默认的是否验证 ssl 证书。默认true.仅App安卓端支持（HBuilderX 2.3.3+）
+  * @param {Boolean} arg.withCredentials - 全局默认的跨域请求时是否携带凭证（cookies）。默认false。仅H5支持（HBuilderX 2.6.15+）
+  * @param {Boolean} arg.firstIpv4 - 全DNS解析时优先使用ipv4。默认false。仅 App-Android 支持 (HBuilderX 2.8.0+)
+  * @param {Function(statusCode):Boolean} arg.validateStatus - 全局默认的自定义验证器。默认statusCode >= 200 && statusCode < 300
+  */
+  function Request() {
+    var arg = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    (0, _classCallCheck2.default)(this, Request);
+    if (!(0, _utils.isPlainObject)(arg)) {
+      arg = {};
+      console.warn('设置全局参数必须接收一个Object');
+    }
+    this.config = (0, _clone.default)(_objectSpread(_objectSpread({}, _defaults.default), arg));
+    this.interceptors = {
+      request: new _InterceptorManager.default(),
+      response: new _InterceptorManager.default()
+    };
+  }
+
+  /**
+  * @Function
+  * @param {Request~setConfigCallback} f - 设置全局默认配置
+  */
+  (0, _createClass2.default)(Request, [{
+    key: "setConfig",
+    value: function setConfig(f) {
+      this.config = f(this.config);
+    }
+  }, {
+    key: "middleware",
+    value: function middleware(config) {
+      config = (0, _mergeConfig.default)(this.config, config);
+      var chain = [_dispatchRequest.default, undefined];
+      var promise = Promise.resolve(config);
+      this.interceptors.request.forEach(function (interceptor) {
+        chain.unshift(interceptor.fulfilled, interceptor.rejected);
+      });
+      this.interceptors.response.forEach(function (interceptor) {
+        chain.push(interceptor.fulfilled, interceptor.rejected);
+      });
+      while (chain.length) {
+        promise = promise.then(chain.shift(), chain.shift());
+      }
+      return promise;
+    }
+
+    /**
+    * @Function
+    * @param {Object} config - 请求配置项
+    * @prop {String} options.url - 请求路径
+    * @prop {Object} options.data - 请求参数
+    * @prop {Object} [options.responseType = config.responseType] [text|arraybuffer] - 响应的数据类型
+    * @prop {Object} [options.dataType = config.dataType] - 如果设为 json，会尝试对返回的数据做一次 JSON.parse
+    * @prop {Object} [options.header = config.header] - 请求header
+    * @prop {Object} [options.method = config.method] - 请求方法
+    * @returns {Promise<unknown>}
+    */
+  }, {
+    key: "request",
+    value: function request() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      return this.middleware(config);
+    }
+  }, {
+    key: "get",
+    value: function get(url) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        method: 'GET'
+      }, options));
+    }
+  }, {
+    key: "post",
+    value: function post(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'POST'
+      }, options));
+    }
+  }, {
+    key: "put",
+    value: function put(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'PUT'
+      }, options));
+    }
+  }, {
+    key: "delete",
+    value: function _delete(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'DELETE'
+      }, options));
+    }
+  }, {
+    key: "connect",
+    value: function connect(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'CONNECT'
+      }, options));
+    }
+  }, {
+    key: "head",
+    value: function head(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'HEAD'
+      }, options));
+    }
+  }, {
+    key: "options",
+    value: function options(url, data) {
+      var _options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'OPTIONS'
+      }, _options));
+    }
+  }, {
+    key: "trace",
+    value: function trace(url, data) {
+      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
+      return this.middleware(_objectSpread({
+        url: url,
+        data: data,
+        method: 'TRACE'
+      }, options));
+    }
+  }, {
+    key: "upload",
+    value: function upload(url) {
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      config.url = url;
+      config.method = 'UPLOAD';
+      return this.middleware(config);
+    }
+  }, {
+    key: "download",
+    value: function download(url) {
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      config.url = url;
+      config.method = 'DOWNLOAD';
+      return this.middleware(config);
+    }
+  }]);
+  return Request;
+}();
+/**
+ * setConfig回调
+ * @return {Object} - 返回操作后的config
+ * @callback Request~setConfigCallback
+ * @param {Object} config - 全局默认config
+ */
+exports.default = Request;
+
+/***/ }),
+/* 61 */
+/*!****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/dispatchRequest.js ***!
+  \****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _index = _interopRequireDefault(__webpack_require__(/*! ../adapters/index */ 62));
+var _default = function _default(config) {
+  return (0, _index.default)(config);
+};
+exports.default = _default;
+
+/***/ }),
+/* 62 */
+/*!**********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/adapters/index.js ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _buildURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/buildURL */ 63));
+var _buildFullPath = _interopRequireDefault(__webpack_require__(/*! ../core/buildFullPath */ 65));
+var _settle = _interopRequireDefault(__webpack_require__(/*! ../core/settle */ 68));
+var _utils = __webpack_require__(/*! ../utils */ 64);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+/**
+ * 返回可选值存在的配置
+ * @param {Array} keys - 可选值数组
+ * @param {Object} config2 - 配置
+ * @return {{}} - 存在的配置项
+ */
+var mergeKeys = function mergeKeys(keys, config2) {
+  var config = {};
+  keys.forEach(function (prop) {
+    if (!(0, _utils.isUndefined)(config2[prop])) {
+      config[prop] = config2[prop];
+    }
+  });
+  return config;
+};
+var _default = function _default(config) {
+  return new Promise(function (resolve, reject) {
+    var fullPath = (0, _buildURL.default)((0, _buildFullPath.default)(config.baseURL, config.url), config.params);
+    var _config = {
+      url: fullPath,
+      header: config.header,
+      complete: function complete(response) {
+        config.fullPath = fullPath;
+        response.config = config;
+        try {
+          // 对可能字符串不是json 的情况容错
+          if (typeof response.data === 'string') {
+            response.data = JSON.parse(response.data);
+          }
+          // eslint-disable-next-line no-empty
+        } catch (e) {}
+        (0, _settle.default)(resolve, reject, response);
+      }
+    };
+    var requestTask;
+    if (config.method === 'UPLOAD') {
+      delete _config.header['content-type'];
+      delete _config.header['Content-Type'];
+      var otherConfig = {
+        filePath: config.filePath,
+        name: config.name
+      };
+      var optionalKeys = ['formData'];
+      requestTask = uni.uploadFile(_objectSpread(_objectSpread(_objectSpread({}, _config), otherConfig), mergeKeys(optionalKeys, config)));
+    } else if (config.method === 'DOWNLOAD') {
+      requestTask = uni.downloadFile(_config);
+    } else {
+      var _optionalKeys = ['data', 'method', 'timeout', 'dataType', 'responseType'];
+      requestTask = uni.request(_objectSpread(_objectSpread({}, _config), mergeKeys(_optionalKeys, config)));
+    }
+    if (config.getTask) {
+      config.getTask(requestTask, config);
+    }
+  });
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 63 */
+/*!************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/helpers/buildURL.js ***!
+  \************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildURL;
+var utils = _interopRequireWildcard(__webpack_require__(/*! ../utils */ 64));
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function _getRequireWildcardCache(nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+function encode(val) {
+  return encodeURIComponent(val).replace(/%40/gi, '@').replace(/%3A/gi, ':').replace(/%24/g, '$').replace(/%2C/gi, ',').replace(/%20/g, '+').replace(/%5B/gi, '[').replace(/%5D/gi, ']');
+}
+
+/**
+ * Build a URL by appending params to the end
+ *
+ * @param {string} url The base of the url (e.g., http://www.google.com)
+ * @param {object} [params] The params to be appended
+ * @returns {string} The formatted url
+ */
+function buildURL(url, params) {
+  /* eslint no-param-reassign:0 */
+  if (!params) {
+    return url;
+  }
+  var serializedParams;
+  if (utils.isURLSearchParams(params)) {
+    serializedParams = params.toString();
+  } else {
+    var parts = [];
+    utils.forEach(params, function (val, key) {
+      if (val === null || typeof val === 'undefined') {
+        return;
+      }
+      if (utils.isArray(val)) {
+        key = "".concat(key, "[]");
+      } else {
+        val = [val];
+      }
+      utils.forEach(val, function (v) {
+        if (utils.isDate(v)) {
+          v = v.toISOString();
+        } else if (utils.isObject(v)) {
+          v = JSON.stringify(v);
+        }
+        parts.push("".concat(encode(key), "=").concat(encode(v)));
+      });
+    });
+    serializedParams = parts.join('&');
+  }
+  if (serializedParams) {
+    var hashmarkIndex = url.indexOf('#');
+    if (hashmarkIndex !== -1) {
+      url = url.slice(0, hashmarkIndex);
+    }
+    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+  }
+  return url;
+}
+
+/***/ }),
+/* 64 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/utils.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// utils is a library of generic helper functions non-specific to axios
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.deepMerge = deepMerge;
+exports.forEach = forEach;
+exports.isArray = isArray;
+exports.isBoolean = isBoolean;
+exports.isDate = isDate;
+exports.isObject = isObject;
+exports.isPlainObject = isPlainObject;
+exports.isURLSearchParams = isURLSearchParams;
+exports.isUndefined = isUndefined;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var toString = Object.prototype.toString;
+
+/**
+ * Determine if a value is an Array
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Array, otherwise false
+ */
+function isArray(val) {
+  return toString.call(val) === '[object Array]';
+}
+
+/**
+ * Determine if a value is an Object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is an Object, otherwise false
+ */
+function isObject(val) {
+  return val !== null && (0, _typeof2.default)(val) === 'object';
+}
+
+/**
+ * Determine if a value is a Date
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a Date, otherwise false
+ */
+function isDate(val) {
+  return toString.call(val) === '[object Date]';
+}
+
+/**
+ * Determine if a value is a URLSearchParams object
+ *
+ * @param {Object} val The value to test
+ * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+ */
+function isURLSearchParams(val) {
+  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+}
+
+/**
+ * Iterate over an Array or an Object invoking a function for each item.
+ *
+ * If `obj` is an Array callback will be called passing
+ * the value, index, and complete array for each item.
+ *
+ * If 'obj' is an Object callback will be called passing
+ * the value, key, and complete object for each property.
+ *
+ * @param {Object|Array} obj The object to iterate
+ * @param {Function} fn The callback to invoke for each item
+ */
+function forEach(obj, fn) {
+  // Don't bother if no value provided
+  if (obj === null || typeof obj === 'undefined') {
+    return;
+  }
+
+  // Force an array if not already something iterable
+  if ((0, _typeof2.default)(obj) !== 'object') {
+    /* eslint no-param-reassign:0 */
+    obj = [obj];
+  }
+  if (isArray(obj)) {
+    // Iterate over array values
+    for (var i = 0, l = obj.length; i < l; i++) {
+      fn.call(null, obj[i], i, obj);
+    }
+  } else {
+    // Iterate over object keys
+    for (var key in obj) {
+      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+        fn.call(null, obj[key], key, obj);
+      }
+    }
+  }
+}
+
+/**
+ * 是否为boolean 值
+ * @param val
+ * @returns {boolean}
+ */
+function isBoolean(val) {
+  return typeof val === 'boolean';
+}
+
+/**
+ * 是否为真正的对象{} new Object
+ * @param {any} obj - 检测的对象
+ * @returns {boolean}
+ */
+function isPlainObject(obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+}
+
+/**
+ * Function equal to merge with the difference being that no reference
+ * to original objects is kept.
+ *
+ * @see merge
+ * @param {Object} obj1 Object to merge
+ * @returns {Object} Result of all merge properties
+ */
+function deepMerge( /* obj1, obj2, obj3, ... */
+) {
+  var result = {};
+  function assignValue(val, key) {
+    if ((0, _typeof2.default)(result[key]) === 'object' && (0, _typeof2.default)(val) === 'object') {
+      result[key] = deepMerge(result[key], val);
+    } else if ((0, _typeof2.default)(val) === 'object') {
+      result[key] = deepMerge({}, val);
+    } else {
+      result[key] = val;
+    }
+  }
+  for (var i = 0, l = arguments.length; i < l; i++) {
+    forEach(arguments[i], assignValue);
+  }
+  return result;
+}
+function isUndefined(val) {
+  return typeof val === 'undefined';
+}
+
+/***/ }),
+/* 65 */
+/*!**************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/buildFullPath.js ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = buildFullPath;
+var _isAbsoluteURL = _interopRequireDefault(__webpack_require__(/*! ../helpers/isAbsoluteURL */ 66));
+var _combineURLs = _interopRequireDefault(__webpack_require__(/*! ../helpers/combineURLs */ 67));
+/**
+ * Creates a new URL by combining the baseURL with the requestedURL,
+ * only when the requestedURL is not already an absolute URL.
+ * If the requestURL is absolute, this function returns the requestedURL untouched.
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} requestedURL Absolute or relative URL to combine
+ * @returns {string} The combined full path
+ */
+function buildFullPath(baseURL, requestedURL) {
+  if (baseURL && !(0, _isAbsoluteURL.default)(requestedURL)) {
+    return (0, _combineURLs.default)(baseURL, requestedURL);
+  }
+  return requestedURL;
+}
+
+/***/ }),
+/* 66 */
+/*!*****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/helpers/isAbsoluteURL.js ***!
+  \*****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Determines whether the specified URL is absolute
+ *
+ * @param {string} url The URL to test
+ * @returns {boolean} True if the specified URL is absolute, otherwise false
+ */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = isAbsoluteURL;
+function isAbsoluteURL(url) {
+  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+  // by any combination of letters, digits, plus, period, or hyphen.
+  return /^([a-z][a-z\d+\-.]*:)?\/\//i.test(url);
+}
+
+/***/ }),
+/* 67 */
+/*!***************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/helpers/combineURLs.js ***!
+  \***************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+/**
+ * Creates a new URL by combining the specified URLs
+ *
+ * @param {string} baseURL The base URL
+ * @param {string} relativeURL The relative URL
+ * @returns {string} The combined URL
+ */
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = combineURLs;
+function combineURLs(baseURL, relativeURL) {
+  return relativeURL ? "".concat(baseURL.replace(/\/+$/, ''), "/").concat(relativeURL.replace(/^\/+/, '')) : baseURL;
+}
+
+/***/ }),
+/* 68 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/settle.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = settle;
+/**
+ * Resolve or reject a Promise based on response status.
+ *
+ * @param {Function} resolve A function that resolves the promise.
+ * @param {Function} reject A function that rejects the promise.
+ * @param {object} response The response.
+ */
+function settle(resolve, reject, response) {
+  var validateStatus = response.config.validateStatus;
+  var status = response.statusCode;
+  if (status && (!validateStatus || validateStatus(status))) {
+    resolve(response);
+  } else {
+    reject(response);
+  }
+}
+
+/***/ }),
+/* 69 */
+/*!*******************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/InterceptorManager.js ***!
+  \*******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+function InterceptorManager() {
+  this.handlers = [];
+}
+
+/**
+ * Add a new interceptor to the stack
+ *
+ * @param {Function} fulfilled The function to handle `then` for a `Promise`
+ * @param {Function} rejected The function to handle `reject` for a `Promise`
+ *
+ * @return {Number} An ID used to remove interceptor later
+ */
+InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+  this.handlers.push({
+    fulfilled: fulfilled,
+    rejected: rejected
+  });
+  return this.handlers.length - 1;
+};
+
+/**
+ * Remove an interceptor from the stack
+ *
+ * @param {Number} id The ID that was returned by `use`
+ */
+InterceptorManager.prototype.eject = function eject(id) {
+  if (this.handlers[id]) {
+    this.handlers[id] = null;
+  }
+};
+
+/**
+ * Iterate over all the registered interceptors
+ *
+ * This method is particularly useful for skipping over any
+ * interceptors that may have become `null` calling `eject`.
+ *
+ * @param {Function} fn The function to call for each interceptor
+ */
+InterceptorManager.prototype.forEach = function forEach(fn) {
+  this.handlers.forEach(function (h) {
+    if (h !== null) {
+      fn(h);
+    }
+  });
+};
+var _default = InterceptorManager;
+exports.default = _default;
+
+/***/ }),
+/* 70 */
+/*!************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/mergeConfig.js ***!
+  \************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _utils = __webpack_require__(/*! ../utils */ 64);
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+/**
+ * 合并局部配置优先的配置，如果局部有该配置项则用局部，如果全局有该配置项则用全局
+ * @param {Array} keys - 配置项
+ * @param {Object} globalsConfig - 当前的全局配置
+ * @param {Object} config2 - 局部配置
+ * @return {{}}
+ */
+var mergeKeys = function mergeKeys(keys, globalsConfig, config2) {
+  var config = {};
+  keys.forEach(function (prop) {
+    if (!(0, _utils.isUndefined)(config2[prop])) {
+      config[prop] = config2[prop];
+    } else if (!(0, _utils.isUndefined)(globalsConfig[prop])) {
+      config[prop] = globalsConfig[prop];
+    }
+  });
+  return config;
+};
+/**
+ *
+ * @param globalsConfig - 当前实例的全局配置
+ * @param config2 - 当前的局部配置
+ * @return - 合并后的配置
+ */
+var _default = function _default(globalsConfig) {
+  var config2 = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  var method = config2.method || globalsConfig.method || 'GET';
+  var config = {
+    baseURL: globalsConfig.baseURL || '',
+    method: method,
+    url: config2.url || '',
+    params: config2.params || {},
+    custom: _objectSpread(_objectSpread({}, globalsConfig.custom || {}), config2.custom || {}),
+    header: (0, _utils.deepMerge)(globalsConfig.header || {}, config2.header || {})
+  };
+  var defaultToConfig2Keys = ['getTask', 'validateStatus'];
+  config = _objectSpread(_objectSpread({}, config), mergeKeys(defaultToConfig2Keys, globalsConfig, config2));
+
+  // eslint-disable-next-line no-empty
+  if (method === 'DOWNLOAD') {} else if (method === 'UPLOAD') {
+    delete config.header['content-type'];
+    delete config.header['Content-Type'];
+    var uploadKeys = ['filePath', 'name', 'formData'];
+    uploadKeys.forEach(function (prop) {
+      if (!(0, _utils.isUndefined)(config2[prop])) {
+        config[prop] = config2[prop];
+      }
+    });
+  } else {
+    var defaultsKeys = ['data', 'timeout', 'dataType', 'responseType'];
+    config = _objectSpread(_objectSpread({}, config), mergeKeys(defaultsKeys, globalsConfig, config2));
+  }
+  return config;
+};
+exports.default = _default;
+
+/***/ }),
+/* 71 */
+/*!*********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/core/defaults.js ***!
+  \*********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 默认的全局配置
+ */
+var _default = {
+  baseURL: '',
+  header: {},
+  method: 'GET',
+  dataType: 'json',
+  responseType: 'text',
+  custom: {},
+  timeout: 60000,
+  validateStatus: function validateStatus(status) {
+    return status >= 200 && status < 300;
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 72 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/luch-request/utils/clone.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(Buffer) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+/* eslint-disable */
+var clone = function () {
+  'use strict';
+
+  function _instanceof(obj, type) {
+    return type != null && obj instanceof type;
+  }
+  var nativeMap;
+  try {
+    nativeMap = Map;
+  } catch (_) {
+    // maybe a reference error because no `Map`. Give it a dummy value that no
+    // value will ever be an instanceof.
+    nativeMap = function nativeMap() {};
+  }
+  var nativeSet;
+  try {
+    nativeSet = Set;
+  } catch (_) {
+    nativeSet = function nativeSet() {};
+  }
+  var nativePromise;
+  try {
+    nativePromise = Promise;
+  } catch (_) {
+    nativePromise = function nativePromise() {};
+  }
+
+  /**
+   * Clones (copies) an Object using deep copying.
+   *
+   * This function supports circular references by default, but if you are certain
+   * there are no circular references in your object, you can save some CPU time
+   * by calling clone(obj, false).
+   *
+   * Caution: if `circular` is false and `parent` contains circular references,
+   * your program may enter an infinite loop and crash.
+   *
+   * @param `parent` - the object to be cloned
+   * @param `circular` - set to true if the object to be cloned may contain
+   *    circular references. (optional - true by default)
+   * @param `depth` - set to a number if the object is only to be cloned to
+   *    a particular depth. (optional - defaults to Infinity)
+   * @param `prototype` - sets the prototype to be used when cloning an object.
+   *    (optional - defaults to parent prototype).
+   * @param `includeNonEnumerable` - set to true if the non-enumerable properties
+   *    should be cloned as well. Non-enumerable properties on the prototype
+   *    chain will be ignored. (optional - false by default)
+   */
+  function clone(parent, circular, depth, prototype, includeNonEnumerable) {
+    if ((0, _typeof2.default)(circular) === 'object') {
+      depth = circular.depth;
+      prototype = circular.prototype;
+      includeNonEnumerable = circular.includeNonEnumerable;
+      circular = circular.circular;
+    }
+    // maintain two arrays for circular references, where corresponding parents
+    // and children have the same index
+    var allParents = [];
+    var allChildren = [];
+    var useBuffer = typeof Buffer != 'undefined';
+    if (typeof circular == 'undefined') circular = true;
+    if (typeof depth == 'undefined') depth = Infinity;
+
+    // recurse this function so we don't reset allParents and allChildren
+    function _clone(parent, depth) {
+      // cloning null always returns null
+      if (parent === null) return null;
+      if (depth === 0) return parent;
+      var child;
+      var proto;
+      if ((0, _typeof2.default)(parent) != 'object') {
+        return parent;
+      }
+      if (_instanceof(parent, nativeMap)) {
+        child = new nativeMap();
+      } else if (_instanceof(parent, nativeSet)) {
+        child = new nativeSet();
+      } else if (_instanceof(parent, nativePromise)) {
+        child = new nativePromise(function (resolve, reject) {
+          parent.then(function (value) {
+            resolve(_clone(value, depth - 1));
+          }, function (err) {
+            reject(_clone(err, depth - 1));
+          });
+        });
+      } else if (clone.__isArray(parent)) {
+        child = [];
+      } else if (clone.__isRegExp(parent)) {
+        child = new RegExp(parent.source, __getRegExpFlags(parent));
+        if (parent.lastIndex) child.lastIndex = parent.lastIndex;
+      } else if (clone.__isDate(parent)) {
+        child = new Date(parent.getTime());
+      } else if (useBuffer && Buffer.isBuffer(parent)) {
+        if (Buffer.from) {
+          // Node.js >= 5.10.0
+          child = Buffer.from(parent);
+        } else {
+          // Older Node.js versions
+          child = new Buffer(parent.length);
+          parent.copy(child);
+        }
+        return child;
+      } else if (_instanceof(parent, Error)) {
+        child = Object.create(parent);
+      } else {
+        if (typeof prototype == 'undefined') {
+          proto = Object.getPrototypeOf(parent);
+          child = Object.create(proto);
+        } else {
+          child = Object.create(prototype);
+          proto = prototype;
+        }
+      }
+      if (circular) {
+        var index = allParents.indexOf(parent);
+        if (index != -1) {
+          return allChildren[index];
+        }
+        allParents.push(parent);
+        allChildren.push(child);
+      }
+      if (_instanceof(parent, nativeMap)) {
+        parent.forEach(function (value, key) {
+          var keyChild = _clone(key, depth - 1);
+          var valueChild = _clone(value, depth - 1);
+          child.set(keyChild, valueChild);
+        });
+      }
+      if (_instanceof(parent, nativeSet)) {
+        parent.forEach(function (value) {
+          var entryChild = _clone(value, depth - 1);
+          child.add(entryChild);
+        });
+      }
+      for (var i in parent) {
+        var attrs = Object.getOwnPropertyDescriptor(parent, i);
+        if (attrs) {
+          child[i] = _clone(parent[i], depth - 1);
+        }
+        try {
+          var objProperty = Object.getOwnPropertyDescriptor(parent, i);
+          if (objProperty.set === 'undefined') {
+            // no setter defined. Skip cloning this property
+            continue;
+          }
+          child[i] = _clone(parent[i], depth - 1);
+        } catch (e) {
+          if (e instanceof TypeError) {
+            // when in strict mode, TypeError will be thrown if child[i] property only has a getter
+            // we can't do anything about this, other than inform the user that this property cannot be set.
+            continue;
+          } else if (e instanceof ReferenceError) {
+            //this may happen in non strict mode
+            continue;
+          }
+        }
+      }
+      if (Object.getOwnPropertySymbols) {
+        var symbols = Object.getOwnPropertySymbols(parent);
+        for (var i = 0; i < symbols.length; i++) {
+          // Don't need to worry about cloning a symbol because it is a primitive,
+          // like a number or string.
+          var symbol = symbols[i];
+          var descriptor = Object.getOwnPropertyDescriptor(parent, symbol);
+          if (descriptor && !descriptor.enumerable && !includeNonEnumerable) {
+            continue;
+          }
+          child[symbol] = _clone(parent[symbol], depth - 1);
+          Object.defineProperty(child, symbol, descriptor);
+        }
+      }
+      if (includeNonEnumerable) {
+        var allPropertyNames = Object.getOwnPropertyNames(parent);
+        for (var i = 0; i < allPropertyNames.length; i++) {
+          var propertyName = allPropertyNames[i];
+          var descriptor = Object.getOwnPropertyDescriptor(parent, propertyName);
+          if (descriptor && descriptor.enumerable) {
+            continue;
+          }
+          child[propertyName] = _clone(parent[propertyName], depth - 1);
+          Object.defineProperty(child, propertyName, descriptor);
+        }
+      }
+      return child;
+    }
+    return _clone(parent, depth);
+  }
+
+  /**
+   * Simple flat clone using prototype, accepts only objects, usefull for property
+   * override on FLAT configuration object (no nested props).
+   *
+   * USE WITH CAUTION! This may not behave as you wish if you do not know how this
+   * works.
+   */
+  clone.clonePrototype = function clonePrototype(parent) {
+    if (parent === null) return null;
+    var c = function c() {};
+    c.prototype = parent;
+    return new c();
+  };
+
+  // private utility functions
+
+  function __objToStr(o) {
+    return Object.prototype.toString.call(o);
+  }
+  clone.__objToStr = __objToStr;
+  function __isDate(o) {
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object Date]';
+  }
+  clone.__isDate = __isDate;
+  function __isArray(o) {
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object Array]';
+  }
+  clone.__isArray = __isArray;
+  function __isRegExp(o) {
+    return (0, _typeof2.default)(o) === 'object' && __objToStr(o) === '[object RegExp]';
+  }
+  clone.__isRegExp = __isRegExp;
+  function __getRegExpFlags(re) {
+    var flags = '';
+    if (re.global) flags += 'g';
+    if (re.ignoreCase) flags += 'i';
+    if (re.multiline) flags += 'm';
+    return flags;
+  }
+  clone.__getRegExpFlags = __getRegExpFlags;
+  return clone;
+}();
+var _default = clone;
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../../../../../../../../../../Program Files/HBuilderX/plugins/uniapp-cli/node_modules/buffer/index.js */ 73).Buffer))
+
+/***/ }),
+/* 73 */
+/*!**************************************!*\
+  !*** ./node_modules/buffer/index.js ***!
+  \**************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(global) {/*!
+ * The buffer module from node.js, for the browser.
+ *
+ * @author   Feross Aboukhadijeh <http://feross.org>
+ * @license  MIT
+ */
+/* eslint-disable no-proto */
+
+
+
+var base64 = __webpack_require__(/*! base64-js */ 74)
+var ieee754 = __webpack_require__(/*! ieee754 */ 75)
+var isArray = __webpack_require__(/*! isarray */ 76)
+
+exports.Buffer = Buffer
+exports.SlowBuffer = SlowBuffer
+exports.INSPECT_MAX_BYTES = 50
+
+/**
+ * If `Buffer.TYPED_ARRAY_SUPPORT`:
+ *   === true    Use Uint8Array implementation (fastest)
+ *   === false   Use Object implementation (most compatible, even IE6)
+ *
+ * Browsers that support typed arrays are IE 10+, Firefox 4+, Chrome 7+, Safari 5.1+,
+ * Opera 11.6+, iOS 4.2+.
+ *
+ * Due to various browser bugs, sometimes the Object implementation will be used even
+ * when the browser supports typed arrays.
+ *
+ * Note:
+ *
+ *   - Firefox 4-29 lacks support for adding new properties to `Uint8Array` instances,
+ *     See: https://bugzilla.mozilla.org/show_bug.cgi?id=695438.
+ *
+ *   - Chrome 9-10 is missing the `TypedArray.prototype.subarray` function.
+ *
+ *   - IE10 has a broken `TypedArray.prototype.subarray` function which returns arrays of
+ *     incorrect length in some situations.
+
+ * We detect these buggy browsers and set `Buffer.TYPED_ARRAY_SUPPORT` to `false` so they
+ * get the Object implementation, which is slower but behaves correctly.
+ */
+Buffer.TYPED_ARRAY_SUPPORT = global.TYPED_ARRAY_SUPPORT !== undefined
+  ? global.TYPED_ARRAY_SUPPORT
+  : typedArraySupport()
+
+/*
+ * Export kMaxLength after typed array support is determined.
+ */
+exports.kMaxLength = kMaxLength()
+
+function typedArraySupport () {
+  try {
+    var arr = new Uint8Array(1)
+    arr.__proto__ = {__proto__: Uint8Array.prototype, foo: function () { return 42 }}
+    return arr.foo() === 42 && // typed array instances can be augmented
+        typeof arr.subarray === 'function' && // chrome 9-10 lack `subarray`
+        arr.subarray(1, 1).byteLength === 0 // ie10 has broken `subarray`
+  } catch (e) {
+    return false
+  }
+}
+
+function kMaxLength () {
+  return Buffer.TYPED_ARRAY_SUPPORT
+    ? 0x7fffffff
+    : 0x3fffffff
+}
+
+function createBuffer (that, length) {
+  if (kMaxLength() < length) {
+    throw new RangeError('Invalid typed array length')
+  }
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = new Uint8Array(length)
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    if (that === null) {
+      that = new Buffer(length)
+    }
+    that.length = length
+  }
+
+  return that
+}
+
+/**
+ * The Buffer constructor returns instances of `Uint8Array` that have their
+ * prototype changed to `Buffer.prototype`. Furthermore, `Buffer` is a subclass of
+ * `Uint8Array`, so the returned instances will have all the node `Buffer` methods
+ * and the `Uint8Array` methods. Square bracket notation works as expected -- it
+ * returns a single octet.
+ *
+ * The `Uint8Array` prototype remains unmodified.
+ */
+
+function Buffer (arg, encodingOrOffset, length) {
+  if (!Buffer.TYPED_ARRAY_SUPPORT && !(this instanceof Buffer)) {
+    return new Buffer(arg, encodingOrOffset, length)
+  }
+
+  // Common case.
+  if (typeof arg === 'number') {
+    if (typeof encodingOrOffset === 'string') {
+      throw new Error(
+        'If encoding is specified then the first argument must be a string'
+      )
+    }
+    return allocUnsafe(this, arg)
+  }
+  return from(this, arg, encodingOrOffset, length)
+}
+
+Buffer.poolSize = 8192 // not used by this implementation
+
+// TODO: Legacy, not needed anymore. Remove in next major version.
+Buffer._augment = function (arr) {
+  arr.__proto__ = Buffer.prototype
+  return arr
+}
+
+function from (that, value, encodingOrOffset, length) {
+  if (typeof value === 'number') {
+    throw new TypeError('"value" argument must not be a number')
+  }
+
+  if (typeof ArrayBuffer !== 'undefined' && value instanceof ArrayBuffer) {
+    return fromArrayBuffer(that, value, encodingOrOffset, length)
+  }
+
+  if (typeof value === 'string') {
+    return fromString(that, value, encodingOrOffset)
+  }
+
+  return fromObject(that, value)
+}
+
+/**
+ * Functionally equivalent to Buffer(arg, encoding) but throws a TypeError
+ * if value is a number.
+ * Buffer.from(str[, encoding])
+ * Buffer.from(array)
+ * Buffer.from(buffer)
+ * Buffer.from(arrayBuffer[, byteOffset[, length]])
+ **/
+Buffer.from = function (value, encodingOrOffset, length) {
+  return from(null, value, encodingOrOffset, length)
+}
+
+if (Buffer.TYPED_ARRAY_SUPPORT) {
+  Buffer.prototype.__proto__ = Uint8Array.prototype
+  Buffer.__proto__ = Uint8Array
+  if (typeof Symbol !== 'undefined' && Symbol.species &&
+      Buffer[Symbol.species] === Buffer) {
+    // Fix subarray() in ES2016. See: https://github.com/feross/buffer/pull/97
+    Object.defineProperty(Buffer, Symbol.species, {
+      value: null,
+      configurable: true
+    })
+  }
+}
+
+function assertSize (size) {
+  if (typeof size !== 'number') {
+    throw new TypeError('"size" argument must be a number')
+  } else if (size < 0) {
+    throw new RangeError('"size" argument must not be negative')
+  }
+}
+
+function alloc (that, size, fill, encoding) {
+  assertSize(size)
+  if (size <= 0) {
+    return createBuffer(that, size)
+  }
+  if (fill !== undefined) {
+    // Only pay attention to encoding if it's a string. This
+    // prevents accidentally sending in a number that would
+    // be interpretted as a start offset.
+    return typeof encoding === 'string'
+      ? createBuffer(that, size).fill(fill, encoding)
+      : createBuffer(that, size).fill(fill)
+  }
+  return createBuffer(that, size)
+}
+
+/**
+ * Creates a new filled Buffer instance.
+ * alloc(size[, fill[, encoding]])
+ **/
+Buffer.alloc = function (size, fill, encoding) {
+  return alloc(null, size, fill, encoding)
+}
+
+function allocUnsafe (that, size) {
+  assertSize(size)
+  that = createBuffer(that, size < 0 ? 0 : checked(size) | 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) {
+    for (var i = 0; i < size; ++i) {
+      that[i] = 0
+    }
+  }
+  return that
+}
+
+/**
+ * Equivalent to Buffer(num), by default creates a non-zero-filled Buffer instance.
+ * */
+Buffer.allocUnsafe = function (size) {
+  return allocUnsafe(null, size)
+}
+/**
+ * Equivalent to SlowBuffer(num), by default creates a non-zero-filled Buffer instance.
+ */
+Buffer.allocUnsafeSlow = function (size) {
+  return allocUnsafe(null, size)
+}
+
+function fromString (that, string, encoding) {
+  if (typeof encoding !== 'string' || encoding === '') {
+    encoding = 'utf8'
+  }
+
+  if (!Buffer.isEncoding(encoding)) {
+    throw new TypeError('"encoding" must be a valid string encoding')
+  }
+
+  var length = byteLength(string, encoding) | 0
+  that = createBuffer(that, length)
+
+  var actual = that.write(string, encoding)
+
+  if (actual !== length) {
+    // Writing a hex string, for example, that contains invalid characters will
+    // cause everything after the first invalid character to be ignored. (e.g.
+    // 'abxxcd' will be treated as 'ab')
+    that = that.slice(0, actual)
+  }
+
+  return that
+}
+
+function fromArrayLike (that, array) {
+  var length = array.length < 0 ? 0 : checked(array.length) | 0
+  that = createBuffer(that, length)
+  for (var i = 0; i < length; i += 1) {
+    that[i] = array[i] & 255
+  }
+  return that
+}
+
+function fromArrayBuffer (that, array, byteOffset, length) {
+  array.byteLength // this throws if `array` is not a valid ArrayBuffer
+
+  if (byteOffset < 0 || array.byteLength < byteOffset) {
+    throw new RangeError('\'offset\' is out of bounds')
+  }
+
+  if (array.byteLength < byteOffset + (length || 0)) {
+    throw new RangeError('\'length\' is out of bounds')
+  }
+
+  if (byteOffset === undefined && length === undefined) {
+    array = new Uint8Array(array)
+  } else if (length === undefined) {
+    array = new Uint8Array(array, byteOffset)
+  } else {
+    array = new Uint8Array(array, byteOffset, length)
+  }
+
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    // Return an augmented `Uint8Array` instance, for best performance
+    that = array
+    that.__proto__ = Buffer.prototype
+  } else {
+    // Fallback: Return an object instance of the Buffer class
+    that = fromArrayLike(that, array)
+  }
+  return that
+}
+
+function fromObject (that, obj) {
+  if (Buffer.isBuffer(obj)) {
+    var len = checked(obj.length) | 0
+    that = createBuffer(that, len)
+
+    if (that.length === 0) {
+      return that
+    }
+
+    obj.copy(that, 0, 0, len)
+    return that
+  }
+
+  if (obj) {
+    if ((typeof ArrayBuffer !== 'undefined' &&
+        obj.buffer instanceof ArrayBuffer) || 'length' in obj) {
+      if (typeof obj.length !== 'number' || isnan(obj.length)) {
+        return createBuffer(that, 0)
+      }
+      return fromArrayLike(that, obj)
+    }
+
+    if (obj.type === 'Buffer' && isArray(obj.data)) {
+      return fromArrayLike(that, obj.data)
+    }
+  }
+
+  throw new TypeError('First argument must be a string, Buffer, ArrayBuffer, Array, or array-like object.')
+}
+
+function checked (length) {
+  // Note: cannot use `length < kMaxLength()` here because that fails when
+  // length is NaN (which is otherwise coerced to zero.)
+  if (length >= kMaxLength()) {
+    throw new RangeError('Attempt to allocate Buffer larger than maximum ' +
+                         'size: 0x' + kMaxLength().toString(16) + ' bytes')
+  }
+  return length | 0
+}
+
+function SlowBuffer (length) {
+  if (+length != length) { // eslint-disable-line eqeqeq
+    length = 0
+  }
+  return Buffer.alloc(+length)
+}
+
+Buffer.isBuffer = function isBuffer (b) {
+  return !!(b != null && b._isBuffer)
+}
+
+Buffer.compare = function compare (a, b) {
+  if (!Buffer.isBuffer(a) || !Buffer.isBuffer(b)) {
+    throw new TypeError('Arguments must be Buffers')
+  }
+
+  if (a === b) return 0
+
+  var x = a.length
+  var y = b.length
+
+  for (var i = 0, len = Math.min(x, y); i < len; ++i) {
+    if (a[i] !== b[i]) {
+      x = a[i]
+      y = b[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+Buffer.isEncoding = function isEncoding (encoding) {
+  switch (String(encoding).toLowerCase()) {
+    case 'hex':
+    case 'utf8':
+    case 'utf-8':
+    case 'ascii':
+    case 'latin1':
+    case 'binary':
+    case 'base64':
+    case 'ucs2':
+    case 'ucs-2':
+    case 'utf16le':
+    case 'utf-16le':
+      return true
+    default:
+      return false
+  }
+}
+
+Buffer.concat = function concat (list, length) {
+  if (!isArray(list)) {
+    throw new TypeError('"list" argument must be an Array of Buffers')
+  }
+
+  if (list.length === 0) {
+    return Buffer.alloc(0)
+  }
+
+  var i
+  if (length === undefined) {
+    length = 0
+    for (i = 0; i < list.length; ++i) {
+      length += list[i].length
+    }
+  }
+
+  var buffer = Buffer.allocUnsafe(length)
+  var pos = 0
+  for (i = 0; i < list.length; ++i) {
+    var buf = list[i]
+    if (!Buffer.isBuffer(buf)) {
+      throw new TypeError('"list" argument must be an Array of Buffers')
+    }
+    buf.copy(buffer, pos)
+    pos += buf.length
+  }
+  return buffer
+}
+
+function byteLength (string, encoding) {
+  if (Buffer.isBuffer(string)) {
+    return string.length
+  }
+  if (typeof ArrayBuffer !== 'undefined' && typeof ArrayBuffer.isView === 'function' &&
+      (ArrayBuffer.isView(string) || string instanceof ArrayBuffer)) {
+    return string.byteLength
+  }
+  if (typeof string !== 'string') {
+    string = '' + string
+  }
+
+  var len = string.length
+  if (len === 0) return 0
+
+  // Use a for loop to avoid recursion
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'ascii':
+      case 'latin1':
+      case 'binary':
+        return len
+      case 'utf8':
+      case 'utf-8':
+      case undefined:
+        return utf8ToBytes(string).length
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return len * 2
+      case 'hex':
+        return len >>> 1
+      case 'base64':
+        return base64ToBytes(string).length
+      default:
+        if (loweredCase) return utf8ToBytes(string).length // assume utf8
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+Buffer.byteLength = byteLength
+
+function slowToString (encoding, start, end) {
+  var loweredCase = false
+
+  // No need to verify that "this.length <= MAX_UINT32" since it's a read-only
+  // property of a typed array.
+
+  // This behaves neither like String nor Uint8Array in that we set start/end
+  // to their upper/lower bounds if the value passed is out of range.
+  // undefined is handled specially as per ECMA-262 6th Edition,
+  // Section 13.3.3.7 Runtime Semantics: KeyedBindingInitialization.
+  if (start === undefined || start < 0) {
+    start = 0
+  }
+  // Return early if start > this.length. Done here to prevent potential uint32
+  // coercion fail below.
+  if (start > this.length) {
+    return ''
+  }
+
+  if (end === undefined || end > this.length) {
+    end = this.length
+  }
+
+  if (end <= 0) {
+    return ''
+  }
+
+  // Force coersion to uint32. This will also coerce falsey/NaN values to 0.
+  end >>>= 0
+  start >>>= 0
+
+  if (end <= start) {
+    return ''
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  while (true) {
+    switch (encoding) {
+      case 'hex':
+        return hexSlice(this, start, end)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Slice(this, start, end)
+
+      case 'ascii':
+        return asciiSlice(this, start, end)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Slice(this, start, end)
+
+      case 'base64':
+        return base64Slice(this, start, end)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return utf16leSlice(this, start, end)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = (encoding + '').toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+// The property is used by `Buffer.isBuffer` and `is-buffer` (in Safari 5-7) to detect
+// Buffer instances.
+Buffer.prototype._isBuffer = true
+
+function swap (b, n, m) {
+  var i = b[n]
+  b[n] = b[m]
+  b[m] = i
+}
+
+Buffer.prototype.swap16 = function swap16 () {
+  var len = this.length
+  if (len % 2 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 16-bits')
+  }
+  for (var i = 0; i < len; i += 2) {
+    swap(this, i, i + 1)
+  }
+  return this
+}
+
+Buffer.prototype.swap32 = function swap32 () {
+  var len = this.length
+  if (len % 4 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 32-bits')
+  }
+  for (var i = 0; i < len; i += 4) {
+    swap(this, i, i + 3)
+    swap(this, i + 1, i + 2)
+  }
+  return this
+}
+
+Buffer.prototype.swap64 = function swap64 () {
+  var len = this.length
+  if (len % 8 !== 0) {
+    throw new RangeError('Buffer size must be a multiple of 64-bits')
+  }
+  for (var i = 0; i < len; i += 8) {
+    swap(this, i, i + 7)
+    swap(this, i + 1, i + 6)
+    swap(this, i + 2, i + 5)
+    swap(this, i + 3, i + 4)
+  }
+  return this
+}
+
+Buffer.prototype.toString = function toString () {
+  var length = this.length | 0
+  if (length === 0) return ''
+  if (arguments.length === 0) return utf8Slice(this, 0, length)
+  return slowToString.apply(this, arguments)
+}
+
+Buffer.prototype.equals = function equals (b) {
+  if (!Buffer.isBuffer(b)) throw new TypeError('Argument must be a Buffer')
+  if (this === b) return true
+  return Buffer.compare(this, b) === 0
+}
+
+Buffer.prototype.inspect = function inspect () {
+  var str = ''
+  var max = exports.INSPECT_MAX_BYTES
+  if (this.length > 0) {
+    str = this.toString('hex', 0, max).match(/.{2}/g).join(' ')
+    if (this.length > max) str += ' ... '
+  }
+  return '<Buffer ' + str + '>'
+}
+
+Buffer.prototype.compare = function compare (target, start, end, thisStart, thisEnd) {
+  if (!Buffer.isBuffer(target)) {
+    throw new TypeError('Argument must be a Buffer')
+  }
+
+  if (start === undefined) {
+    start = 0
+  }
+  if (end === undefined) {
+    end = target ? target.length : 0
+  }
+  if (thisStart === undefined) {
+    thisStart = 0
+  }
+  if (thisEnd === undefined) {
+    thisEnd = this.length
+  }
+
+  if (start < 0 || end > target.length || thisStart < 0 || thisEnd > this.length) {
+    throw new RangeError('out of range index')
+  }
+
+  if (thisStart >= thisEnd && start >= end) {
+    return 0
+  }
+  if (thisStart >= thisEnd) {
+    return -1
+  }
+  if (start >= end) {
+    return 1
+  }
+
+  start >>>= 0
+  end >>>= 0
+  thisStart >>>= 0
+  thisEnd >>>= 0
+
+  if (this === target) return 0
+
+  var x = thisEnd - thisStart
+  var y = end - start
+  var len = Math.min(x, y)
+
+  var thisCopy = this.slice(thisStart, thisEnd)
+  var targetCopy = target.slice(start, end)
+
+  for (var i = 0; i < len; ++i) {
+    if (thisCopy[i] !== targetCopy[i]) {
+      x = thisCopy[i]
+      y = targetCopy[i]
+      break
+    }
+  }
+
+  if (x < y) return -1
+  if (y < x) return 1
+  return 0
+}
+
+// Finds either the first index of `val` in `buffer` at offset >= `byteOffset`,
+// OR the last index of `val` in `buffer` at offset <= `byteOffset`.
+//
+// Arguments:
+// - buffer - a Buffer to search
+// - val - a string, Buffer, or number
+// - byteOffset - an index into `buffer`; will be clamped to an int32
+// - encoding - an optional encoding, relevant is val is a string
+// - dir - true for indexOf, false for lastIndexOf
+function bidirectionalIndexOf (buffer, val, byteOffset, encoding, dir) {
+  // Empty buffer means no match
+  if (buffer.length === 0) return -1
+
+  // Normalize byteOffset
+  if (typeof byteOffset === 'string') {
+    encoding = byteOffset
+    byteOffset = 0
+  } else if (byteOffset > 0x7fffffff) {
+    byteOffset = 0x7fffffff
+  } else if (byteOffset < -0x80000000) {
+    byteOffset = -0x80000000
+  }
+  byteOffset = +byteOffset  // Coerce to Number.
+  if (isNaN(byteOffset)) {
+    // byteOffset: it it's undefined, null, NaN, "foo", etc, search whole buffer
+    byteOffset = dir ? 0 : (buffer.length - 1)
+  }
+
+  // Normalize byteOffset: negative offsets start from the end of the buffer
+  if (byteOffset < 0) byteOffset = buffer.length + byteOffset
+  if (byteOffset >= buffer.length) {
+    if (dir) return -1
+    else byteOffset = buffer.length - 1
+  } else if (byteOffset < 0) {
+    if (dir) byteOffset = 0
+    else return -1
+  }
+
+  // Normalize val
+  if (typeof val === 'string') {
+    val = Buffer.from(val, encoding)
+  }
+
+  // Finally, search either indexOf (if dir is true) or lastIndexOf
+  if (Buffer.isBuffer(val)) {
+    // Special case: looking for empty string/buffer always fails
+    if (val.length === 0) {
+      return -1
+    }
+    return arrayIndexOf(buffer, val, byteOffset, encoding, dir)
+  } else if (typeof val === 'number') {
+    val = val & 0xFF // Search for a byte value [0-255]
+    if (Buffer.TYPED_ARRAY_SUPPORT &&
+        typeof Uint8Array.prototype.indexOf === 'function') {
+      if (dir) {
+        return Uint8Array.prototype.indexOf.call(buffer, val, byteOffset)
+      } else {
+        return Uint8Array.prototype.lastIndexOf.call(buffer, val, byteOffset)
+      }
+    }
+    return arrayIndexOf(buffer, [ val ], byteOffset, encoding, dir)
+  }
+
+  throw new TypeError('val must be string, number or Buffer')
+}
+
+function arrayIndexOf (arr, val, byteOffset, encoding, dir) {
+  var indexSize = 1
+  var arrLength = arr.length
+  var valLength = val.length
+
+  if (encoding !== undefined) {
+    encoding = String(encoding).toLowerCase()
+    if (encoding === 'ucs2' || encoding === 'ucs-2' ||
+        encoding === 'utf16le' || encoding === 'utf-16le') {
+      if (arr.length < 2 || val.length < 2) {
+        return -1
+      }
+      indexSize = 2
+      arrLength /= 2
+      valLength /= 2
+      byteOffset /= 2
+    }
+  }
+
+  function read (buf, i) {
+    if (indexSize === 1) {
+      return buf[i]
+    } else {
+      return buf.readUInt16BE(i * indexSize)
+    }
+  }
+
+  var i
+  if (dir) {
+    var foundIndex = -1
+    for (i = byteOffset; i < arrLength; i++) {
+      if (read(arr, i) === read(val, foundIndex === -1 ? 0 : i - foundIndex)) {
+        if (foundIndex === -1) foundIndex = i
+        if (i - foundIndex + 1 === valLength) return foundIndex * indexSize
+      } else {
+        if (foundIndex !== -1) i -= i - foundIndex
+        foundIndex = -1
+      }
+    }
+  } else {
+    if (byteOffset + valLength > arrLength) byteOffset = arrLength - valLength
+    for (i = byteOffset; i >= 0; i--) {
+      var found = true
+      for (var j = 0; j < valLength; j++) {
+        if (read(arr, i + j) !== read(val, j)) {
+          found = false
+          break
+        }
+      }
+      if (found) return i
+    }
+  }
+
+  return -1
+}
+
+Buffer.prototype.includes = function includes (val, byteOffset, encoding) {
+  return this.indexOf(val, byteOffset, encoding) !== -1
+}
+
+Buffer.prototype.indexOf = function indexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, true)
+}
+
+Buffer.prototype.lastIndexOf = function lastIndexOf (val, byteOffset, encoding) {
+  return bidirectionalIndexOf(this, val, byteOffset, encoding, false)
+}
+
+function hexWrite (buf, string, offset, length) {
+  offset = Number(offset) || 0
+  var remaining = buf.length - offset
+  if (!length) {
+    length = remaining
+  } else {
+    length = Number(length)
+    if (length > remaining) {
+      length = remaining
+    }
+  }
+
+  // must be an even number of digits
+  var strLen = string.length
+  if (strLen % 2 !== 0) throw new TypeError('Invalid hex string')
+
+  if (length > strLen / 2) {
+    length = strLen / 2
+  }
+  for (var i = 0; i < length; ++i) {
+    var parsed = parseInt(string.substr(i * 2, 2), 16)
+    if (isNaN(parsed)) return i
+    buf[offset + i] = parsed
+  }
+  return i
+}
+
+function utf8Write (buf, string, offset, length) {
+  return blitBuffer(utf8ToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+function asciiWrite (buf, string, offset, length) {
+  return blitBuffer(asciiToBytes(string), buf, offset, length)
+}
+
+function latin1Write (buf, string, offset, length) {
+  return asciiWrite(buf, string, offset, length)
+}
+
+function base64Write (buf, string, offset, length) {
+  return blitBuffer(base64ToBytes(string), buf, offset, length)
+}
+
+function ucs2Write (buf, string, offset, length) {
+  return blitBuffer(utf16leToBytes(string, buf.length - offset), buf, offset, length)
+}
+
+Buffer.prototype.write = function write (string, offset, length, encoding) {
+  // Buffer#write(string)
+  if (offset === undefined) {
+    encoding = 'utf8'
+    length = this.length
+    offset = 0
+  // Buffer#write(string, encoding)
+  } else if (length === undefined && typeof offset === 'string') {
+    encoding = offset
+    length = this.length
+    offset = 0
+  // Buffer#write(string, offset[, length][, encoding])
+  } else if (isFinite(offset)) {
+    offset = offset | 0
+    if (isFinite(length)) {
+      length = length | 0
+      if (encoding === undefined) encoding = 'utf8'
+    } else {
+      encoding = length
+      length = undefined
+    }
+  // legacy write(string, encoding, offset, length) - remove in v0.13
+  } else {
+    throw new Error(
+      'Buffer.write(string, encoding, offset[, length]) is no longer supported'
+    )
+  }
+
+  var remaining = this.length - offset
+  if (length === undefined || length > remaining) length = remaining
+
+  if ((string.length > 0 && (length < 0 || offset < 0)) || offset > this.length) {
+    throw new RangeError('Attempt to write outside buffer bounds')
+  }
+
+  if (!encoding) encoding = 'utf8'
+
+  var loweredCase = false
+  for (;;) {
+    switch (encoding) {
+      case 'hex':
+        return hexWrite(this, string, offset, length)
+
+      case 'utf8':
+      case 'utf-8':
+        return utf8Write(this, string, offset, length)
+
+      case 'ascii':
+        return asciiWrite(this, string, offset, length)
+
+      case 'latin1':
+      case 'binary':
+        return latin1Write(this, string, offset, length)
+
+      case 'base64':
+        // Warning: maxLength not taken into account in base64Write
+        return base64Write(this, string, offset, length)
+
+      case 'ucs2':
+      case 'ucs-2':
+      case 'utf16le':
+      case 'utf-16le':
+        return ucs2Write(this, string, offset, length)
+
+      default:
+        if (loweredCase) throw new TypeError('Unknown encoding: ' + encoding)
+        encoding = ('' + encoding).toLowerCase()
+        loweredCase = true
+    }
+  }
+}
+
+Buffer.prototype.toJSON = function toJSON () {
+  return {
+    type: 'Buffer',
+    data: Array.prototype.slice.call(this._arr || this, 0)
+  }
+}
+
+function base64Slice (buf, start, end) {
+  if (start === 0 && end === buf.length) {
+    return base64.fromByteArray(buf)
+  } else {
+    return base64.fromByteArray(buf.slice(start, end))
+  }
+}
+
+function utf8Slice (buf, start, end) {
+  end = Math.min(buf.length, end)
+  var res = []
+
+  var i = start
+  while (i < end) {
+    var firstByte = buf[i]
+    var codePoint = null
+    var bytesPerSequence = (firstByte > 0xEF) ? 4
+      : (firstByte > 0xDF) ? 3
+      : (firstByte > 0xBF) ? 2
+      : 1
+
+    if (i + bytesPerSequence <= end) {
+      var secondByte, thirdByte, fourthByte, tempCodePoint
+
+      switch (bytesPerSequence) {
+        case 1:
+          if (firstByte < 0x80) {
+            codePoint = firstByte
+          }
+          break
+        case 2:
+          secondByte = buf[i + 1]
+          if ((secondByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0x1F) << 0x6 | (secondByte & 0x3F)
+            if (tempCodePoint > 0x7F) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 3:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0xC | (secondByte & 0x3F) << 0x6 | (thirdByte & 0x3F)
+            if (tempCodePoint > 0x7FF && (tempCodePoint < 0xD800 || tempCodePoint > 0xDFFF)) {
+              codePoint = tempCodePoint
+            }
+          }
+          break
+        case 4:
+          secondByte = buf[i + 1]
+          thirdByte = buf[i + 2]
+          fourthByte = buf[i + 3]
+          if ((secondByte & 0xC0) === 0x80 && (thirdByte & 0xC0) === 0x80 && (fourthByte & 0xC0) === 0x80) {
+            tempCodePoint = (firstByte & 0xF) << 0x12 | (secondByte & 0x3F) << 0xC | (thirdByte & 0x3F) << 0x6 | (fourthByte & 0x3F)
+            if (tempCodePoint > 0xFFFF && tempCodePoint < 0x110000) {
+              codePoint = tempCodePoint
+            }
+          }
+      }
+    }
+
+    if (codePoint === null) {
+      // we did not generate a valid codePoint so insert a
+      // replacement char (U+FFFD) and advance only 1 byte
+      codePoint = 0xFFFD
+      bytesPerSequence = 1
+    } else if (codePoint > 0xFFFF) {
+      // encode to utf16 (surrogate pair dance)
+      codePoint -= 0x10000
+      res.push(codePoint >>> 10 & 0x3FF | 0xD800)
+      codePoint = 0xDC00 | codePoint & 0x3FF
+    }
+
+    res.push(codePoint)
+    i += bytesPerSequence
+  }
+
+  return decodeCodePointsArray(res)
+}
+
+// Based on http://stackoverflow.com/a/22747272/680742, the browser with
+// the lowest limit is Chrome, with 0x10000 args.
+// We go 1 magnitude less, for safety
+var MAX_ARGUMENTS_LENGTH = 0x1000
+
+function decodeCodePointsArray (codePoints) {
+  var len = codePoints.length
+  if (len <= MAX_ARGUMENTS_LENGTH) {
+    return String.fromCharCode.apply(String, codePoints) // avoid extra slice()
+  }
+
+  // Decode in chunks to avoid "call stack size exceeded".
+  var res = ''
+  var i = 0
+  while (i < len) {
+    res += String.fromCharCode.apply(
+      String,
+      codePoints.slice(i, i += MAX_ARGUMENTS_LENGTH)
+    )
+  }
+  return res
+}
+
+function asciiSlice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i] & 0x7F)
+  }
+  return ret
+}
+
+function latin1Slice (buf, start, end) {
+  var ret = ''
+  end = Math.min(buf.length, end)
+
+  for (var i = start; i < end; ++i) {
+    ret += String.fromCharCode(buf[i])
+  }
+  return ret
+}
+
+function hexSlice (buf, start, end) {
+  var len = buf.length
+
+  if (!start || start < 0) start = 0
+  if (!end || end < 0 || end > len) end = len
+
+  var out = ''
+  for (var i = start; i < end; ++i) {
+    out += toHex(buf[i])
+  }
+  return out
+}
+
+function utf16leSlice (buf, start, end) {
+  var bytes = buf.slice(start, end)
+  var res = ''
+  for (var i = 0; i < bytes.length; i += 2) {
+    res += String.fromCharCode(bytes[i] + bytes[i + 1] * 256)
+  }
+  return res
+}
+
+Buffer.prototype.slice = function slice (start, end) {
+  var len = this.length
+  start = ~~start
+  end = end === undefined ? len : ~~end
+
+  if (start < 0) {
+    start += len
+    if (start < 0) start = 0
+  } else if (start > len) {
+    start = len
+  }
+
+  if (end < 0) {
+    end += len
+    if (end < 0) end = 0
+  } else if (end > len) {
+    end = len
+  }
+
+  if (end < start) end = start
+
+  var newBuf
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    newBuf = this.subarray(start, end)
+    newBuf.__proto__ = Buffer.prototype
+  } else {
+    var sliceLen = end - start
+    newBuf = new Buffer(sliceLen, undefined)
+    for (var i = 0; i < sliceLen; ++i) {
+      newBuf[i] = this[i + start]
+    }
+  }
+
+  return newBuf
+}
+
+/*
+ * Need to make sure that buffer isn't trying to write out of bounds.
+ */
+function checkOffset (offset, ext, length) {
+  if ((offset % 1) !== 0 || offset < 0) throw new RangeError('offset is not uint')
+  if (offset + ext > length) throw new RangeError('Trying to access beyond buffer length')
+}
+
+Buffer.prototype.readUIntLE = function readUIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUIntBE = function readUIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    checkOffset(offset, byteLength, this.length)
+  }
+
+  var val = this[offset + --byteLength]
+  var mul = 1
+  while (byteLength > 0 && (mul *= 0x100)) {
+    val += this[offset + --byteLength] * mul
+  }
+
+  return val
+}
+
+Buffer.prototype.readUInt8 = function readUInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  return this[offset]
+}
+
+Buffer.prototype.readUInt16LE = function readUInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return this[offset] | (this[offset + 1] << 8)
+}
+
+Buffer.prototype.readUInt16BE = function readUInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  return (this[offset] << 8) | this[offset + 1]
+}
+
+Buffer.prototype.readUInt32LE = function readUInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return ((this[offset]) |
+      (this[offset + 1] << 8) |
+      (this[offset + 2] << 16)) +
+      (this[offset + 3] * 0x1000000)
+}
+
+Buffer.prototype.readUInt32BE = function readUInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] * 0x1000000) +
+    ((this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    this[offset + 3])
+}
+
+Buffer.prototype.readIntLE = function readIntLE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var val = this[offset]
+  var mul = 1
+  var i = 0
+  while (++i < byteLength && (mul *= 0x100)) {
+    val += this[offset + i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readIntBE = function readIntBE (offset, byteLength, noAssert) {
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) checkOffset(offset, byteLength, this.length)
+
+  var i = byteLength
+  var mul = 1
+  var val = this[offset + --i]
+  while (i > 0 && (mul *= 0x100)) {
+    val += this[offset + --i] * mul
+  }
+  mul *= 0x80
+
+  if (val >= mul) val -= Math.pow(2, 8 * byteLength)
+
+  return val
+}
+
+Buffer.prototype.readInt8 = function readInt8 (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 1, this.length)
+  if (!(this[offset] & 0x80)) return (this[offset])
+  return ((0xff - this[offset] + 1) * -1)
+}
+
+Buffer.prototype.readInt16LE = function readInt16LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset] | (this[offset + 1] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt16BE = function readInt16BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 2, this.length)
+  var val = this[offset + 1] | (this[offset] << 8)
+  return (val & 0x8000) ? val | 0xFFFF0000 : val
+}
+
+Buffer.prototype.readInt32LE = function readInt32LE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset]) |
+    (this[offset + 1] << 8) |
+    (this[offset + 2] << 16) |
+    (this[offset + 3] << 24)
+}
+
+Buffer.prototype.readInt32BE = function readInt32BE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+
+  return (this[offset] << 24) |
+    (this[offset + 1] << 16) |
+    (this[offset + 2] << 8) |
+    (this[offset + 3])
+}
+
+Buffer.prototype.readFloatLE = function readFloatLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, true, 23, 4)
+}
+
+Buffer.prototype.readFloatBE = function readFloatBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 4, this.length)
+  return ieee754.read(this, offset, false, 23, 4)
+}
+
+Buffer.prototype.readDoubleLE = function readDoubleLE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, true, 52, 8)
+}
+
+Buffer.prototype.readDoubleBE = function readDoubleBE (offset, noAssert) {
+  if (!noAssert) checkOffset(offset, 8, this.length)
+  return ieee754.read(this, offset, false, 52, 8)
+}
+
+function checkInt (buf, value, offset, ext, max, min) {
+  if (!Buffer.isBuffer(buf)) throw new TypeError('"buffer" argument must be a Buffer instance')
+  if (value > max || value < min) throw new RangeError('"value" argument is out of bounds')
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+}
+
+Buffer.prototype.writeUIntLE = function writeUIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var mul = 1
+  var i = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUIntBE = function writeUIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  byteLength = byteLength | 0
+  if (!noAssert) {
+    var maxBytes = Math.pow(2, 8 * byteLength) - 1
+    checkInt(this, value, offset, byteLength, maxBytes, 0)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    this[offset + i] = (value / mul) & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeUInt8 = function writeUInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0xff, 0)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+function objectWriteUInt16 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 2); i < j; ++i) {
+    buf[offset + i] = (value & (0xff << (8 * (littleEndian ? i : 1 - i)))) >>>
+      (littleEndian ? i : 1 - i) * 8
+  }
+}
+
+Buffer.prototype.writeUInt16LE = function writeUInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeUInt16BE = function writeUInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0xffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+function objectWriteUInt32 (buf, value, offset, littleEndian) {
+  if (value < 0) value = 0xffffffff + value + 1
+  for (var i = 0, j = Math.min(buf.length - offset, 4); i < j; ++i) {
+    buf[offset + i] = (value >>> (littleEndian ? i : 3 - i) * 8) & 0xff
+  }
+}
+
+Buffer.prototype.writeUInt32LE = function writeUInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset + 3] = (value >>> 24)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 1] = (value >>> 8)
+    this[offset] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeUInt32BE = function writeUInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0xffffffff, 0)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeIntLE = function writeIntLE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = 0
+  var mul = 1
+  var sub = 0
+  this[offset] = value & 0xFF
+  while (++i < byteLength && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i - 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeIntBE = function writeIntBE (value, offset, byteLength, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) {
+    var limit = Math.pow(2, 8 * byteLength - 1)
+
+    checkInt(this, value, offset, byteLength, limit - 1, -limit)
+  }
+
+  var i = byteLength - 1
+  var mul = 1
+  var sub = 0
+  this[offset + i] = value & 0xFF
+  while (--i >= 0 && (mul *= 0x100)) {
+    if (value < 0 && sub === 0 && this[offset + i + 1] !== 0) {
+      sub = 1
+    }
+    this[offset + i] = ((value / mul) >> 0) - sub & 0xFF
+  }
+
+  return offset + byteLength
+}
+
+Buffer.prototype.writeInt8 = function writeInt8 (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 1, 0x7f, -0x80)
+  if (!Buffer.TYPED_ARRAY_SUPPORT) value = Math.floor(value)
+  if (value < 0) value = 0xff + value + 1
+  this[offset] = (value & 0xff)
+  return offset + 1
+}
+
+Buffer.prototype.writeInt16LE = function writeInt16LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+  } else {
+    objectWriteUInt16(this, value, offset, true)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt16BE = function writeInt16BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 2, 0x7fff, -0x8000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 8)
+    this[offset + 1] = (value & 0xff)
+  } else {
+    objectWriteUInt16(this, value, offset, false)
+  }
+  return offset + 2
+}
+
+Buffer.prototype.writeInt32LE = function writeInt32LE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value & 0xff)
+    this[offset + 1] = (value >>> 8)
+    this[offset + 2] = (value >>> 16)
+    this[offset + 3] = (value >>> 24)
+  } else {
+    objectWriteUInt32(this, value, offset, true)
+  }
+  return offset + 4
+}
+
+Buffer.prototype.writeInt32BE = function writeInt32BE (value, offset, noAssert) {
+  value = +value
+  offset = offset | 0
+  if (!noAssert) checkInt(this, value, offset, 4, 0x7fffffff, -0x80000000)
+  if (value < 0) value = 0xffffffff + value + 1
+  if (Buffer.TYPED_ARRAY_SUPPORT) {
+    this[offset] = (value >>> 24)
+    this[offset + 1] = (value >>> 16)
+    this[offset + 2] = (value >>> 8)
+    this[offset + 3] = (value & 0xff)
+  } else {
+    objectWriteUInt32(this, value, offset, false)
+  }
+  return offset + 4
+}
+
+function checkIEEE754 (buf, value, offset, ext, max, min) {
+  if (offset + ext > buf.length) throw new RangeError('Index out of range')
+  if (offset < 0) throw new RangeError('Index out of range')
+}
+
+function writeFloat (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 4, 3.4028234663852886e+38, -3.4028234663852886e+38)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 23, 4)
+  return offset + 4
+}
+
+Buffer.prototype.writeFloatLE = function writeFloatLE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeFloatBE = function writeFloatBE (value, offset, noAssert) {
+  return writeFloat(this, value, offset, false, noAssert)
+}
+
+function writeDouble (buf, value, offset, littleEndian, noAssert) {
+  if (!noAssert) {
+    checkIEEE754(buf, value, offset, 8, 1.7976931348623157E+308, -1.7976931348623157E+308)
+  }
+  ieee754.write(buf, value, offset, littleEndian, 52, 8)
+  return offset + 8
+}
+
+Buffer.prototype.writeDoubleLE = function writeDoubleLE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, true, noAssert)
+}
+
+Buffer.prototype.writeDoubleBE = function writeDoubleBE (value, offset, noAssert) {
+  return writeDouble(this, value, offset, false, noAssert)
+}
+
+// copy(targetBuffer, targetStart=0, sourceStart=0, sourceEnd=buffer.length)
+Buffer.prototype.copy = function copy (target, targetStart, start, end) {
+  if (!start) start = 0
+  if (!end && end !== 0) end = this.length
+  if (targetStart >= target.length) targetStart = target.length
+  if (!targetStart) targetStart = 0
+  if (end > 0 && end < start) end = start
+
+  // Copy 0 bytes; we're done
+  if (end === start) return 0
+  if (target.length === 0 || this.length === 0) return 0
+
+  // Fatal error conditions
+  if (targetStart < 0) {
+    throw new RangeError('targetStart out of bounds')
+  }
+  if (start < 0 || start >= this.length) throw new RangeError('sourceStart out of bounds')
+  if (end < 0) throw new RangeError('sourceEnd out of bounds')
+
+  // Are we oob?
+  if (end > this.length) end = this.length
+  if (target.length - targetStart < end - start) {
+    end = target.length - targetStart + start
+  }
+
+  var len = end - start
+  var i
+
+  if (this === target && start < targetStart && targetStart < end) {
+    // descending copy from end
+    for (i = len - 1; i >= 0; --i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else if (len < 1000 || !Buffer.TYPED_ARRAY_SUPPORT) {
+    // ascending copy from start
+    for (i = 0; i < len; ++i) {
+      target[i + targetStart] = this[i + start]
+    }
+  } else {
+    Uint8Array.prototype.set.call(
+      target,
+      this.subarray(start, start + len),
+      targetStart
+    )
+  }
+
+  return len
+}
+
+// Usage:
+//    buffer.fill(number[, offset[, end]])
+//    buffer.fill(buffer[, offset[, end]])
+//    buffer.fill(string[, offset[, end]][, encoding])
+Buffer.prototype.fill = function fill (val, start, end, encoding) {
+  // Handle string cases:
+  if (typeof val === 'string') {
+    if (typeof start === 'string') {
+      encoding = start
+      start = 0
+      end = this.length
+    } else if (typeof end === 'string') {
+      encoding = end
+      end = this.length
+    }
+    if (val.length === 1) {
+      var code = val.charCodeAt(0)
+      if (code < 256) {
+        val = code
+      }
+    }
+    if (encoding !== undefined && typeof encoding !== 'string') {
+      throw new TypeError('encoding must be a string')
+    }
+    if (typeof encoding === 'string' && !Buffer.isEncoding(encoding)) {
+      throw new TypeError('Unknown encoding: ' + encoding)
+    }
+  } else if (typeof val === 'number') {
+    val = val & 255
+  }
+
+  // Invalid ranges are not set to a default, so can range check early.
+  if (start < 0 || this.length < start || this.length < end) {
+    throw new RangeError('Out of range index')
+  }
+
+  if (end <= start) {
+    return this
+  }
+
+  start = start >>> 0
+  end = end === undefined ? this.length : end >>> 0
+
+  if (!val) val = 0
+
+  var i
+  if (typeof val === 'number') {
+    for (i = start; i < end; ++i) {
+      this[i] = val
+    }
+  } else {
+    var bytes = Buffer.isBuffer(val)
+      ? val
+      : utf8ToBytes(new Buffer(val, encoding).toString())
+    var len = bytes.length
+    for (i = 0; i < end - start; ++i) {
+      this[i + start] = bytes[i % len]
+    }
+  }
+
+  return this
+}
+
+// HELPER FUNCTIONS
+// ================
+
+var INVALID_BASE64_RE = /[^+\/0-9A-Za-z-_]/g
+
+function base64clean (str) {
+  // Node strips out invalid characters like \n and \t from the string, base64-js does not
+  str = stringtrim(str).replace(INVALID_BASE64_RE, '')
+  // Node converts strings with length < 2 to ''
+  if (str.length < 2) return ''
+  // Node allows for non-padded base64 strings (missing trailing ===), base64-js does not
+  while (str.length % 4 !== 0) {
+    str = str + '='
+  }
+  return str
+}
+
+function stringtrim (str) {
+  if (str.trim) return str.trim()
+  return str.replace(/^\s+|\s+$/g, '')
+}
+
+function toHex (n) {
+  if (n < 16) return '0' + n.toString(16)
+  return n.toString(16)
+}
+
+function utf8ToBytes (string, units) {
+  units = units || Infinity
+  var codePoint
+  var length = string.length
+  var leadSurrogate = null
+  var bytes = []
+
+  for (var i = 0; i < length; ++i) {
+    codePoint = string.charCodeAt(i)
+
+    // is surrogate component
+    if (codePoint > 0xD7FF && codePoint < 0xE000) {
+      // last char was a lead
+      if (!leadSurrogate) {
+        // no lead yet
+        if (codePoint > 0xDBFF) {
+          // unexpected trail
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        } else if (i + 1 === length) {
+          // unpaired lead
+          if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+          continue
+        }
+
+        // valid lead
+        leadSurrogate = codePoint
+
+        continue
+      }
+
+      // 2 leads in a row
+      if (codePoint < 0xDC00) {
+        if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+        leadSurrogate = codePoint
+        continue
+      }
+
+      // valid surrogate pair
+      codePoint = (leadSurrogate - 0xD800 << 10 | codePoint - 0xDC00) + 0x10000
+    } else if (leadSurrogate) {
+      // valid bmp char, but last char was a lead
+      if ((units -= 3) > -1) bytes.push(0xEF, 0xBF, 0xBD)
+    }
+
+    leadSurrogate = null
+
+    // encode utf8
+    if (codePoint < 0x80) {
+      if ((units -= 1) < 0) break
+      bytes.push(codePoint)
+    } else if (codePoint < 0x800) {
+      if ((units -= 2) < 0) break
+      bytes.push(
+        codePoint >> 0x6 | 0xC0,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x10000) {
+      if ((units -= 3) < 0) break
+      bytes.push(
+        codePoint >> 0xC | 0xE0,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else if (codePoint < 0x110000) {
+      if ((units -= 4) < 0) break
+      bytes.push(
+        codePoint >> 0x12 | 0xF0,
+        codePoint >> 0xC & 0x3F | 0x80,
+        codePoint >> 0x6 & 0x3F | 0x80,
+        codePoint & 0x3F | 0x80
+      )
+    } else {
+      throw new Error('Invalid code point')
+    }
+  }
+
+  return bytes
+}
+
+function asciiToBytes (str) {
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    // Node's code seems to be doing this and not & 0x7F..
+    byteArray.push(str.charCodeAt(i) & 0xFF)
+  }
+  return byteArray
+}
+
+function utf16leToBytes (str, units) {
+  var c, hi, lo
+  var byteArray = []
+  for (var i = 0; i < str.length; ++i) {
+    if ((units -= 2) < 0) break
+
+    c = str.charCodeAt(i)
+    hi = c >> 8
+    lo = c % 256
+    byteArray.push(lo)
+    byteArray.push(hi)
+  }
+
+  return byteArray
+}
+
+function base64ToBytes (str) {
+  return base64.toByteArray(base64clean(str))
+}
+
+function blitBuffer (src, dst, offset, length) {
+  for (var i = 0; i < length; ++i) {
+    if ((i + offset >= dst.length) || (i >= src.length)) break
+    dst[i + offset] = src[i]
+  }
+  return i
+}
+
+function isnan (val) {
+  return val !== val // eslint-disable-line no-self-compare
+}
+
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../webpack/buildin/global.js */ 3)))
+
+/***/ }),
+/* 74 */
+/*!*****************************************!*\
+  !*** ./node_modules/base64-js/index.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+exports.byteLength = byteLength
+exports.toByteArray = toByteArray
+exports.fromByteArray = fromByteArray
+
+var lookup = []
+var revLookup = []
+var Arr = typeof Uint8Array !== 'undefined' ? Uint8Array : Array
+
+var code = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+for (var i = 0, len = code.length; i < len; ++i) {
+  lookup[i] = code[i]
+  revLookup[code.charCodeAt(i)] = i
+}
+
+// Support decoding URL-safe base64 strings, as Node.js does.
+// See: https://en.wikipedia.org/wiki/Base64#URL_applications
+revLookup['-'.charCodeAt(0)] = 62
+revLookup['_'.charCodeAt(0)] = 63
+
+function getLens (b64) {
+  var len = b64.length
+
+  if (len % 4 > 0) {
+    throw new Error('Invalid string. Length must be a multiple of 4')
+  }
+
+  // Trim off extra bytes after placeholder bytes are found
+  // See: https://github.com/beatgammit/base64-js/issues/42
+  var validLen = b64.indexOf('=')
+  if (validLen === -1) validLen = len
+
+  var placeHoldersLen = validLen === len
+    ? 0
+    : 4 - (validLen % 4)
+
+  return [validLen, placeHoldersLen]
+}
+
+// base64 is 4/3 + up to two characters of the original data
+function byteLength (b64) {
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function _byteLength (b64, validLen, placeHoldersLen) {
+  return ((validLen + placeHoldersLen) * 3 / 4) - placeHoldersLen
+}
+
+function toByteArray (b64) {
+  var tmp
+  var lens = getLens(b64)
+  var validLen = lens[0]
+  var placeHoldersLen = lens[1]
+
+  var arr = new Arr(_byteLength(b64, validLen, placeHoldersLen))
+
+  var curByte = 0
+
+  // if there are placeholders, only get up to the last complete 4 chars
+  var len = placeHoldersLen > 0
+    ? validLen - 4
+    : validLen
+
+  var i
+  for (i = 0; i < len; i += 4) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 18) |
+      (revLookup[b64.charCodeAt(i + 1)] << 12) |
+      (revLookup[b64.charCodeAt(i + 2)] << 6) |
+      revLookup[b64.charCodeAt(i + 3)]
+    arr[curByte++] = (tmp >> 16) & 0xFF
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 2) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 2) |
+      (revLookup[b64.charCodeAt(i + 1)] >> 4)
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  if (placeHoldersLen === 1) {
+    tmp =
+      (revLookup[b64.charCodeAt(i)] << 10) |
+      (revLookup[b64.charCodeAt(i + 1)] << 4) |
+      (revLookup[b64.charCodeAt(i + 2)] >> 2)
+    arr[curByte++] = (tmp >> 8) & 0xFF
+    arr[curByte++] = tmp & 0xFF
+  }
+
+  return arr
+}
+
+function tripletToBase64 (num) {
+  return lookup[num >> 18 & 0x3F] +
+    lookup[num >> 12 & 0x3F] +
+    lookup[num >> 6 & 0x3F] +
+    lookup[num & 0x3F]
+}
+
+function encodeChunk (uint8, start, end) {
+  var tmp
+  var output = []
+  for (var i = start; i < end; i += 3) {
+    tmp =
+      ((uint8[i] << 16) & 0xFF0000) +
+      ((uint8[i + 1] << 8) & 0xFF00) +
+      (uint8[i + 2] & 0xFF)
+    output.push(tripletToBase64(tmp))
+  }
+  return output.join('')
+}
+
+function fromByteArray (uint8) {
+  var tmp
+  var len = uint8.length
+  var extraBytes = len % 3 // if we have 1 byte left, pad 2 bytes
+  var parts = []
+  var maxChunkLength = 16383 // must be multiple of 3
+
+  // go through the array every three bytes, we'll deal with trailing stuff later
+  for (var i = 0, len2 = len - extraBytes; i < len2; i += maxChunkLength) {
+    parts.push(encodeChunk(uint8, i, (i + maxChunkLength) > len2 ? len2 : (i + maxChunkLength)))
+  }
+
+  // pad the end with zeros, but make sure to not forget the extra bytes
+  if (extraBytes === 1) {
+    tmp = uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 2] +
+      lookup[(tmp << 4) & 0x3F] +
+      '=='
+    )
+  } else if (extraBytes === 2) {
+    tmp = (uint8[len - 2] << 8) + uint8[len - 1]
+    parts.push(
+      lookup[tmp >> 10] +
+      lookup[(tmp >> 4) & 0x3F] +
+      lookup[(tmp << 2) & 0x3F] +
+      '='
+    )
+  }
+
+  return parts.join('')
+}
+
+
+/***/ }),
+/* 75 */
+/*!***************************************!*\
+  !*** ./node_modules/ieee754/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _arrayWithHoles(arr) {
-  if (Array.isArray(arr)) return arr;
+/*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */
+exports.read = function (buffer, offset, isLE, mLen, nBytes) {
+  var e, m
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var nBits = -7
+  var i = isLE ? (nBytes - 1) : 0
+  var d = isLE ? -1 : 1
+  var s = buffer[offset + i]
+
+  i += d
+
+  e = s & ((1 << (-nBits)) - 1)
+  s >>= (-nBits)
+  nBits += eLen
+  for (; nBits > 0; e = (e * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  m = e & ((1 << (-nBits)) - 1)
+  e >>= (-nBits)
+  nBits += mLen
+  for (; nBits > 0; m = (m * 256) + buffer[offset + i], i += d, nBits -= 8) {}
+
+  if (e === 0) {
+    e = 1 - eBias
+  } else if (e === eMax) {
+    return m ? NaN : ((s ? -1 : 1) * Infinity)
+  } else {
+    m = m + Math.pow(2, mLen)
+    e = e - eBias
+  }
+  return (s ? -1 : 1) * m * Math.pow(2, e - mLen)
 }
-module.exports = _arrayWithHoles, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+exports.write = function (buffer, value, offset, isLE, mLen, nBytes) {
+  var e, m, c
+  var eLen = (nBytes * 8) - mLen - 1
+  var eMax = (1 << eLen) - 1
+  var eBias = eMax >> 1
+  var rt = (mLen === 23 ? Math.pow(2, -24) - Math.pow(2, -77) : 0)
+  var i = isLE ? 0 : (nBytes - 1)
+  var d = isLE ? 1 : -1
+  var s = value < 0 || (value === 0 && 1 / value < 0) ? 1 : 0
+
+  value = Math.abs(value)
+
+  if (isNaN(value) || value === Infinity) {
+    m = isNaN(value) ? 1 : 0
+    e = eMax
+  } else {
+    e = Math.floor(Math.log(value) / Math.LN2)
+    if (value * (c = Math.pow(2, -e)) < 1) {
+      e--
+      c *= 2
+    }
+    if (e + eBias >= 1) {
+      value += rt / c
+    } else {
+      value += rt * Math.pow(2, 1 - eBias)
+    }
+    if (value * c >= 2) {
+      e++
+      c /= 2
+    }
+
+    if (e + eBias >= eMax) {
+      m = 0
+      e = eMax
+    } else if (e + eBias >= 1) {
+      m = ((value * c) - 1) * Math.pow(2, mLen)
+      e = e + eBias
+    } else {
+      m = value * Math.pow(2, eBias - 1) * Math.pow(2, mLen)
+      e = 0
+    }
+  }
+
+  for (; mLen >= 8; buffer[offset + i] = m & 0xff, i += d, m /= 256, mLen -= 8) {}
+
+  e = (e << mLen) | m
+  eLen += mLen
+  for (; eLen > 0; buffer[offset + i] = e & 0xff, i += d, e /= 256, eLen -= 8) {}
+
+  buffer[offset + i - d] |= s * 128
+}
+
 
 /***/ }),
+/* 76 */
+/*!***************************************!*\
+  !*** ./node_modules/isarray/index.js ***!
+  \***************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-/***/ 62:
+var toString = {}.toString;
+
+module.exports = Array.isArray || function (arr) {
+  return toString.call(arr) == '[object Array]';
+};
+
+
+/***/ }),
+/* 77 */
+/*!*****************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/util/route.js ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+/**
+ * 路由跳转方法，该方法相对于直接使用uni.xxx的好处是使用更加简单快捷
+ * 并且带有路由拦截功能
+ */
+var Router = /*#__PURE__*/function () {
+  function Router() {
+    (0, _classCallCheck2.default)(this, Router);
+    // 原始属性定义
+    this.config = {
+      type: 'navigateTo',
+      url: '',
+      delta: 1,
+      // navigateBack页面后退时,回退的层数
+      params: {},
+      // 传递的参数
+      animationType: 'pop-in',
+      // 窗口动画,只在APP有效
+      animationDuration: 300,
+      // 窗口动画持续时间,单位毫秒,只在APP有效
+      intercept: false // 是否需要拦截
+    };
+    // 因为route方法是需要对外赋值给另外的对象使用，同时route内部有使用this，会导致route失去上下文
+    // 这里在构造函数中进行this绑定
+    this.route = this.route.bind(this);
+  }
+
+  // 判断url前面是否有"/"，如果没有则加上，否则无法跳转
+  (0, _createClass2.default)(Router, [{
+    key: "addRootPath",
+    value: function addRootPath(url) {
+      return url[0] === '/' ? url : "/".concat(url);
+    }
+
+    // 整合路由参数
+  }, {
+    key: "mixinParam",
+    value: function mixinParam(url, params) {
+      url = url && this.addRootPath(url);
+
+      // 使用正则匹配，主要依据是判断是否有"/","?","="等，如“/page/index/index?name=mary"
+      // 如果有url中有get参数，转换后无需带上"?"
+      var query = '';
+      if (/.*\/.*\?.*=.*/.test(url)) {
+        // object对象转为get类型的参数
+        query = uni.$u.queryParams(params, false);
+        // 因为已有get参数,所以后面拼接的参数需要带上"&"隔开
+        return url += "&".concat(query);
+      }
+      // 直接拼接参数，因为此处url中没有后面的query参数，也就没有"?/&"之类的符号
+      query = uni.$u.queryParams(params);
+      return url += query;
+    }
+
+    // 对外的方法名称
+  }, {
+    key: "route",
+    value: function () {
+      var _route = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        var options,
+          params,
+          mergeConfig,
+          isNext,
+          _args = arguments;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                options = _args.length > 0 && _args[0] !== undefined ? _args[0] : {};
+                params = _args.length > 1 && _args[1] !== undefined ? _args[1] : {};
+                // 合并用户的配置和内部的默认配置
+                mergeConfig = {};
+                if (typeof options === 'string') {
+                  // 如果options为字符串，则为route(url, params)的形式
+                  mergeConfig.url = this.mixinParam(options, params);
+                  mergeConfig.type = 'navigateTo';
+                } else {
+                  mergeConfig = uni.$u.deepMerge(this.config, options);
+                  // 否则正常使用mergeConfig中的url和params进行拼接
+                  mergeConfig.url = this.mixinParam(options.url, options.params);
+                }
+
+                // 如果本次跳转的路径和本页面路径一致，不执行跳转，防止用户快速点击跳转按钮，造成多次跳转同一个页面的问题
+                if (!(mergeConfig.url === uni.$u.page())) {
+                  _context.next = 6;
+                  break;
+                }
+                return _context.abrupt("return");
+              case 6:
+                if (params.intercept) {
+                  this.config.intercept = params.intercept;
+                }
+                // params参数也带给拦截器
+                mergeConfig.params = params;
+                // 合并内外部参数
+                mergeConfig = uni.$u.deepMerge(this.config, mergeConfig);
+                // 判断用户是否定义了拦截器
+                if (!(typeof uni.$u.routeIntercept === 'function')) {
+                  _context.next = 16;
+                  break;
+                }
+                _context.next = 12;
+                return new Promise(function (resolve, reject) {
+                  uni.$u.routeIntercept(mergeConfig, resolve);
+                });
+              case 12:
+                isNext = _context.sent;
+                // 如果isNext为true，则执行路由跳转
+                isNext && this.openPage(mergeConfig);
+                _context.next = 17;
+                break;
+              case 16:
+                this.openPage(mergeConfig);
+              case 17:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+      function route() {
+        return _route.apply(this, arguments);
+      }
+      return route;
+    }() // 执行路由跳转
+  }, {
+    key: "openPage",
+    value: function openPage(config) {
+      // 解构参数
+      var url = config.url,
+        type = config.type,
+        delta = config.delta,
+        animationType = config.animationType,
+        animationDuration = config.animationDuration;
+      if (config.type == 'navigateTo' || config.type == 'to') {
+        uni.navigateTo({
+          url: url,
+          animationType: animationType,
+          animationDuration: animationDuration
+        });
+      }
+      if (config.type == 'redirectTo' || config.type == 'redirect') {
+        uni.redirectTo({
+          url: url
+        });
+      }
+      if (config.type == 'switchTab' || config.type == 'tab') {
+        uni.switchTab({
+          url: url
+        });
+      }
+      if (config.type == 'reLaunch' || config.type == 'launch') {
+        uni.reLaunch({
+          url: url
+        });
+      }
+      if (config.type == 'navigateBack' || config.type == 'back') {
+        uni.navigateBack({
+          delta: delta
+        });
+      }
+    }
+  }]);
+  return Router;
+}();
+var _default = new Router().route;
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 78 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/colorGradient.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 求两个颜色之间的渐变值
+ * @param {string} startColor 开始的颜色
+ * @param {string} endColor 结束的颜色
+ * @param {number} step 颜色等分的份额
+ * */
+function colorGradient() {
+  var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rgb(0, 0, 0)';
+  var endColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'rgb(255, 255, 255)';
+  var step = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 10;
+  var startRGB = hexToRgb(startColor, false); // 转换为rgb数组模式
+  var startR = startRGB[0];
+  var startG = startRGB[1];
+  var startB = startRGB[2];
+  var endRGB = hexToRgb(endColor, false);
+  var endR = endRGB[0];
+  var endG = endRGB[1];
+  var endB = endRGB[2];
+  var sR = (endR - startR) / step; // 总差值
+  var sG = (endG - startG) / step;
+  var sB = (endB - startB) / step;
+  var colorArr = [];
+  for (var i = 0; i < step; i++) {
+    // 计算每一步的hex值
+    var hex = rgbToHex("rgb(".concat(Math.round(sR * i + startR), ",").concat(Math.round(sG * i + startG), ",").concat(Math.round(sB * i + startB), ")"));
+    // 确保第一个颜色值为startColor的值
+    if (i === 0) hex = rgbToHex(startColor);
+    // 确保最后一个颜色值为endColor的值
+    if (i === step - 1) hex = rgbToHex(endColor);
+    colorArr.push(hex);
+  }
+  return colorArr;
+}
+
+// 将hex表示方式转换为rgb表示方式(这里返回rgb数组模式)
+function hexToRgb(sColor) {
+  var str = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  sColor = String(sColor).toLowerCase();
+  if (sColor && reg.test(sColor)) {
+    if (sColor.length === 4) {
+      var sColorNew = '#';
+      for (var i = 1; i < 4; i += 1) {
+        sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
+      }
+      sColor = sColorNew;
+    }
+    // 处理六位的颜色值
+    var sColorChange = [];
+    for (var _i = 1; _i < 7; _i += 2) {
+      sColorChange.push(parseInt("0x".concat(sColor.slice(_i, _i + 2))));
+    }
+    if (!str) {
+      return sColorChange;
+    }
+    return "rgb(".concat(sColorChange[0], ",").concat(sColorChange[1], ",").concat(sColorChange[2], ")");
+  }
+  if (/^(rgb|RGB)/.test(sColor)) {
+    var arr = sColor.replace(/(?:\(|\)|rgb|RGB)*/g, '').split(',');
+    return arr.map(function (val) {
+      return Number(val);
+    });
+  }
+  return sColor;
+}
+
+// 将rgb表示方式转换为hex表示方式
+function rgbToHex(rgb) {
+  var _this = rgb;
+  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  if (/^(rgb|RGB)/.test(_this)) {
+    var aColor = _this.replace(/(?:\(|\)|rgb|RGB)*/g, '').split(',');
+    var strHex = '#';
+    for (var i = 0; i < aColor.length; i++) {
+      var hex = Number(aColor[i]).toString(16);
+      hex = String(hex).length == 1 ? "".concat(0, hex) : hex; // 保证每个rgb的值为2位
+      if (hex === '0') {
+        hex += hex;
+      }
+      strHex += hex;
+    }
+    if (strHex.length !== 7) {
+      strHex = _this;
+    }
+    return strHex;
+  }
+  if (reg.test(_this)) {
+    var aNum = _this.replace(/#/, '').split('');
+    if (aNum.length === 6) {
+      return _this;
+    }
+    if (aNum.length === 3) {
+      var numHex = '#';
+      for (var _i2 = 0; _i2 < aNum.length; _i2 += 1) {
+        numHex += aNum[_i2] + aNum[_i2];
+      }
+      return numHex;
+    }
+  } else {
+    return _this;
+  }
+}
+
+/**
+* JS颜色十六进制转换为rgb或rgba,返回的格式为 rgba（255，255，255，0.5）字符串
+* sHex为传入的十六进制的色值
+* alpha为rgba的透明度
+*/
+function colorToRgba(color, alpha) {
+  color = rgbToHex(color);
+  // 十六进制颜色值的正则表达式
+  var reg = /^#([0-9a-fA-f]{3}|[0-9a-fA-f]{6})$/;
+  /* 16进制颜色转为RGB格式 */
+  var sColor = String(color).toLowerCase();
+  if (sColor && reg.test(sColor)) {
+    if (sColor.length === 4) {
+      var sColorNew = '#';
+      for (var i = 1; i < 4; i += 1) {
+        sColorNew += sColor.slice(i, i + 1).concat(sColor.slice(i, i + 1));
+      }
+      sColor = sColorNew;
+    }
+    // 处理六位的颜色值
+    var sColorChange = [];
+    for (var _i3 = 1; _i3 < 7; _i3 += 2) {
+      sColorChange.push(parseInt("0x".concat(sColor.slice(_i3, _i3 + 2))));
+    }
+    // return sColorChange.join(',')
+    return "rgba(".concat(sColorChange.join(','), ",").concat(alpha, ")");
+  }
+  return sColor;
+}
+var _default = {
+  colorGradient: colorGradient,
+  hexToRgb: hexToRgb,
+  rgbToHex: rgbToHex,
+  colorToRgba: colorToRgba
+};
+exports.default = _default;
+
+/***/ }),
+/* 79 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/test.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+/**
+ * 验证电子邮箱格式
+ */
+function email(value) {
+  return /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z0-9]+$/.test(value);
+}
+
+/**
+ * 验证手机格式
+ */
+function mobile(value) {
+  return /^1([3589]\d|4[5-9]|6[1-2,4-7]|7[0-8])\d{8}$/.test(value);
+}
+
+/**
+ * 验证URL格式
+ */
+function url(value) {
+  return /^((https|http|ftp|rtsp|mms):\/\/)(([0-9a-zA-Z_!~*'().&=+$%-]+: )?[0-9a-zA-Z_!~*'().&=+$%-]+@)?(([0-9]{1,3}.){3}[0-9]{1,3}|([0-9a-zA-Z_!~*'()-]+.)*([0-9a-zA-Z][0-9a-zA-Z-]{0,61})?[0-9a-zA-Z].[a-zA-Z]{2,6})(:[0-9]{1,4})?((\/?)|(\/[0-9a-zA-Z_!~*'().;?:@&=+$,%#-]+)+\/?)$/.test(value);
+}
+
+/**
+ * 验证日期格式
+ */
+function date(value) {
+  if (!value) return false;
+  // 判断是否数值或者字符串数值(意味着为时间戳)，转为数值，否则new Date无法识别字符串时间戳
+  if (number(value)) value = +value;
+  return !/Invalid|NaN/.test(new Date(value).toString());
+}
+
+/**
+ * 验证ISO类型的日期格式
+ */
+function dateISO(value) {
+  return /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/.test(value);
+}
+
+/**
+ * 验证十进制数字
+ */
+function number(value) {
+  return /^[\+-]?(\d+\.?\d*|\.\d+|\d\.\d+e\+\d+)$/.test(value);
+}
+
+/**
+ * 验证字符串
+ */
+function string(value) {
+  return typeof value === 'string';
+}
+
+/**
+ * 验证整数
+ */
+function digits(value) {
+  return /^\d+$/.test(value);
+}
+
+/**
+ * 验证身份证号码
+ */
+function idCard(value) {
+  return /^[1-9]\d{5}[1-9]\d{3}((0\d)|(1[0-2]))(([0|1|2]\d)|3[0-1])\d{3}([0-9]|X)$/.test(value);
+}
+
+/**
+ * 是否车牌号
+ */
+function carNo(value) {
+  // 新能源车牌
+  var xreg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}(([0-9]{5}[DF]$)|([DF][A-HJ-NP-Z0-9][0-9]{4}$))/;
+  // 旧车牌
+  var creg = /^[京津沪渝冀豫云辽黑湘皖鲁新苏浙赣鄂桂甘晋蒙陕吉闽贵粤青藏川宁琼使领A-Z]{1}[A-Z]{1}[A-HJ-NP-Z0-9]{4}[A-HJ-NP-Z0-9挂学警港澳]{1}$/;
+  if (value.length === 7) {
+    return creg.test(value);
+  }
+  if (value.length === 8) {
+    return xreg.test(value);
+  }
+  return false;
+}
+
+/**
+ * 金额,只允许2位小数
+ */
+function amount(value) {
+  // 金额，只允许保留两位小数
+  return /^[1-9]\d*(,\d{3})*(\.\d{1,2})?$|^0\.\d{1,2}$/.test(value);
+}
+
+/**
+ * 中文
+ */
+function chinese(value) {
+  var reg = /^[\u4e00-\u9fa5]+$/gi;
+  return reg.test(value);
+}
+
+/**
+ * 只能输入字母
+ */
+function letter(value) {
+  return /^[a-zA-Z]*$/.test(value);
+}
+
+/**
+ * 只能是字母或者数字
+ */
+function enOrNum(value) {
+  // 英文或者数字
+  var reg = /^[0-9a-zA-Z]*$/g;
+  return reg.test(value);
+}
+
+/**
+ * 验证是否包含某个值
+ */
+function contains(value, param) {
+  return value.indexOf(param) >= 0;
+}
+
+/**
+ * 验证一个值范围[min, max]
+ */
+function range(value, param) {
+  return value >= param[0] && value <= param[1];
+}
+
+/**
+ * 验证一个长度范围[min, max]
+ */
+function rangeLength(value, param) {
+  return value.length >= param[0] && value.length <= param[1];
+}
+
+/**
+ * 是否固定电话
+ */
+function landline(value) {
+  var reg = /^\d{3,4}-\d{7,8}(-\d{3,4})?$/;
+  return reg.test(value);
+}
+
+/**
+ * 判断是否为空
+ */
+function empty(value) {
+  switch ((0, _typeof2.default)(value)) {
+    case 'undefined':
+      return true;
+    case 'string':
+      if (value.replace(/(^[ \t\n\r]*)|([ \t\n\r]*$)/g, '').length == 0) return true;
+      break;
+    case 'boolean':
+      if (!value) return true;
+      break;
+    case 'number':
+      if (value === 0 || isNaN(value)) return true;
+      break;
+    case 'object':
+      if (value === null || value.length === 0) return true;
+      for (var i in value) {
+        return false;
+      }
+      return true;
+  }
+  return false;
+}
+
+/**
+ * 是否json字符串
+ */
+function jsonString(value) {
+  if (typeof value === 'string') {
+    try {
+      var obj = JSON.parse(value);
+      if ((0, _typeof2.default)(obj) === 'object' && obj) {
+        return true;
+      }
+      return false;
+    } catch (e) {
+      return false;
+    }
+  }
+  return false;
+}
+
+/**
+ * 是否数组
+ */
+function array(value) {
+  if (typeof Array.isArray === 'function') {
+    return Array.isArray(value);
+  }
+  return Object.prototype.toString.call(value) === '[object Array]';
+}
+
+/**
+ * 是否对象
+ */
+function object(value) {
+  return Object.prototype.toString.call(value) === '[object Object]';
+}
+
+/**
+ * 是否短信验证码
+ */
+function code(value) {
+  var len = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 6;
+  return new RegExp("^\\d{".concat(len, "}$")).test(value);
+}
+
+/**
+ * 是否函数方法
+ * @param {Object} value
+ */
+function func(value) {
+  return typeof value === 'function';
+}
+
+/**
+ * 是否promise对象
+ * @param {Object} value
+ */
+function promise(value) {
+  return object(value) && func(value.then) && func(value.catch);
+}
+
+/** 是否图片格式
+ * @param {Object} value
+ */
+function image(value) {
+  var newValue = value.split('?')[0];
+  var IMAGE_REGEXP = /\.(jpeg|jpg|gif|png|svg|webp|jfif|bmp|dpg)/i;
+  return IMAGE_REGEXP.test(newValue);
+}
+
+/**
+ * 是否视频格式
+ * @param {Object} value
+ */
+function video(value) {
+  var VIDEO_REGEXP = /\.(mp4|mpg|mpeg|dat|asf|avi|rm|rmvb|mov|wmv|flv|mkv|m3u8)/i;
+  return VIDEO_REGEXP.test(value);
+}
+
+/**
+ * 是否为正则对象
+ * @param {Object}
+ * @return {Boolean}
+ */
+function regExp(o) {
+  return o && Object.prototype.toString.call(o) === '[object RegExp]';
+}
+var _default = {
+  email: email,
+  mobile: mobile,
+  url: url,
+  date: date,
+  dateISO: dateISO,
+  number: number,
+  digits: digits,
+  idCard: idCard,
+  carNo: carNo,
+  amount: amount,
+  chinese: chinese,
+  letter: letter,
+  enOrNum: enOrNum,
+  contains: contains,
+  range: range,
+  rangeLength: rangeLength,
+  empty: empty,
+  isEmpty: empty,
+  jsonString: jsonString,
+  landline: landline,
+  object: object,
+  array: array,
+  code: code,
+  func: func,
+  promise: promise,
+  video: video,
+  image: image,
+  regExp: regExp,
+  string: string
+};
+exports.default = _default;
+
+/***/ }),
+/* 80 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/debounce.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var timeout = null;
+
+/**
+ * 防抖原理：一定时间内，只有最后一次操作，再过wait毫秒后才执行函数
+ *
+ * @param {Function} func 要执行的回调函数
+ * @param {Number} wait 延时的时间
+ * @param {Boolean} immediate 是否立即执行
+ * @return null
+ */
+function debounce(func) {
+  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
+  var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  // 清除定时器
+  if (timeout !== null) clearTimeout(timeout);
+  // 立即执行，此类情况一般用不到
+  if (immediate) {
+    var callNow = !timeout;
+    timeout = setTimeout(function () {
+      timeout = null;
+    }, wait);
+    if (callNow) typeof func === 'function' && func();
+  } else {
+    // 设置定时器，当最后一次操作后，timeout不会再被清除，所以在延时wait毫秒后执行func回调方法
+    timeout = setTimeout(function () {
+      typeof func === 'function' && func();
+    }, wait);
+  }
+}
+var _default = debounce;
+exports.default = _default;
+
+/***/ }),
+/* 81 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/throttle.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var timer;
+var flag;
+/**
+ * 节流原理：在一定时间内，只能触发一次
+ *
+ * @param {Function} func 要执行的回调函数
+ * @param {Number} wait 延时的时间
+ * @param {Boolean} immediate 是否立即执行
+ * @return null
+ */
+function throttle(func) {
+  var wait = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 500;
+  var immediate = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  if (immediate) {
+    if (!flag) {
+      flag = true;
+      // 如果是立即执行，则在wait毫秒内开始时执行
+      typeof func === 'function' && func();
+      timer = setTimeout(function () {
+        flag = false;
+      }, wait);
+    }
+  } else if (!flag) {
+    flag = true;
+    // 如果是非立即执行，则在wait毫秒内的结束处执行
+    timer = setTimeout(function () {
+      flag = false;
+      typeof func === 'function' && func();
+    }, wait);
+  }
+}
+var _default = throttle;
+exports.default = _default;
+
+/***/ }),
+/* 82 */
+/*!*********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/index.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var _test = _interopRequireDefault(__webpack_require__(/*! ./test.js */ 79));
+var _digit = __webpack_require__(/*! ./digit.js */ 83);
+/**
+ * @description 如果value小于min，取min；如果value大于max，取max
+ * @param {number} min
+ * @param {number} max
+ * @param {number} value
+ */
+function range() {
+  var min = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var value = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+  return Math.max(min, Math.min(max, Number(value)));
+}
+
+/**
+ * @description 用于获取用户传递值的px值  如果用户传递了"xxpx"或者"xxrpx"，取出其数值部分，如果是"xxxrpx"还需要用过uni.upx2px进行转换
+ * @param {number|string} value 用户传递值的px值
+ * @param {boolean} unit
+ * @returns {number|string}
+ */
+function getPx(value) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  if (_test.default.number(value)) {
+    return unit ? "".concat(value, "px") : Number(value);
+  }
+  // 如果带有rpx，先取出其数值部分，再转为px值
+  if (/(rpx|upx)$/.test(value)) {
+    return unit ? "".concat(uni.upx2px(parseInt(value)), "px") : Number(uni.upx2px(parseInt(value)));
+  }
+  return unit ? "".concat(parseInt(value), "px") : parseInt(value);
+}
+
+/**
+ * @description 进行延时，以达到可以简写代码的目的 比如: await uni.$u.sleep(20)将会阻塞20ms
+ * @param {number} value 堵塞时间 单位ms 毫秒
+ * @returns {Promise} 返回promise
+ */
+function sleep() {
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 30;
+  return new Promise(function (resolve) {
+    setTimeout(function () {
+      resolve();
+    }, value);
+  });
+}
+/**
+ * @description 运行期判断平台
+ * @returns {string} 返回所在平台(小写)
+ * @link 运行期判断平台 https://uniapp.dcloud.io/frame?id=判断平台
+ */
+function os() {
+  return uni.getSystemInfoSync().platform.toLowerCase();
+}
+/**
+ * @description 获取系统信息同步接口
+ * @link 获取系统信息同步接口 https://uniapp.dcloud.io/api/system/info?id=getsysteminfosync
+ */
+function sys() {
+  return uni.getSystemInfoSync();
+}
+
+/**
+ * @description 取一个区间数
+ * @param {Number} min 最小值
+ * @param {Number} max 最大值
+ */
+function random(min, max) {
+  if (min >= 0 && max > 0 && max >= min) {
+    var gab = max - min + 1;
+    return Math.floor(Math.random() * gab + min);
+  }
+  return 0;
+}
+
+/**
+ * @param {Number} len uuid的长度
+ * @param {Boolean} firstU 将返回的首字母置为"u"
+ * @param {Nubmer} radix 生成uuid的基数(意味着返回的字符串都是这个基数),2-二进制,8-八进制,10-十进制,16-十六进制
+ */
+function guid() {
+  var len = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 32;
+  var firstU = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var radix = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  var uuid = [];
+  radix = radix || chars.length;
+  if (len) {
+    // 如果指定uuid长度,只是取随机的字符,0|x为位运算,能去掉x的小数位,返回整数位
+    for (var i = 0; i < len; i++) {
+      uuid[i] = chars[0 | Math.random() * radix];
+    }
+  } else {
+    var r;
+    // rfc4122标准要求返回的uuid中,某些位为固定的字符
+    uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+    uuid[14] = '4';
+    for (var _i = 0; _i < 36; _i++) {
+      if (!uuid[_i]) {
+        r = 0 | Math.random() * 16;
+        uuid[_i] = chars[_i == 19 ? r & 0x3 | 0x8 : r];
+      }
+    }
+  }
+  // 移除第一个字符,并用u替代,因为第一个字符为数值时,该guuid不能用作id或者class
+  if (firstU) {
+    uuid.shift();
+    return "u".concat(uuid.join(''));
+  }
+  return uuid.join('');
+}
+
+/**
+* @description 获取父组件的参数，因为支付宝小程序不支持provide/inject的写法
+   this.$parent在非H5中，可以准确获取到父组件，但是在H5中，需要多次this.$parent.$parent.xxx
+   这里默认值等于undefined有它的含义，因为最顶层元素(组件)的$parent就是undefined，意味着不传name
+   值(默认为undefined)，就是查找最顶层的$parent
+*  @param {string|undefined} name 父组件的参数名
+*/
+function $parent() {
+  var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : undefined;
+  var parent = this.$parent;
+  // 通过while历遍，这里主要是为了H5需要多层解析的问题
+  while (parent) {
+    // 父组件
+    if (parent.$options && parent.$options.name !== name) {
+      // 如果组件的name不相等，继续上一级寻找
+      parent = parent.$parent;
+    } else {
+      return parent;
+    }
+  }
+  return false;
+}
+
+/**
+ * @description 样式转换
+ * 对象转字符串，或者字符串转对象
+ * @param {object | string} customStyle 需要转换的目标
+ * @param {String} target 转换的目的，object-转为对象，string-转为字符串
+ * @returns {object|string}
+ */
+function addStyle(customStyle) {
+  var target = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'object';
+  // 字符串转字符串，对象转对象情形，直接返回
+  if (_test.default.empty(customStyle) || (0, _typeof2.default)(customStyle) === 'object' && target === 'object' || target === 'string' && typeof customStyle === 'string') {
+    return customStyle;
+  }
+  // 字符串转对象
+  if (target === 'object') {
+    // 去除字符串样式中的两端空格(中间的空格不能去掉，比如padding: 20px 0如果去掉了就错了)，空格是无用的
+    customStyle = trim(customStyle);
+    // 根据";"将字符串转为数组形式
+    var styleArray = customStyle.split(';');
+    var style = {};
+    // 历遍数组，拼接成对象
+    for (var i = 0; i < styleArray.length; i++) {
+      // 'font-size:20px;color:red;'，如此最后字符串有";"的话，会导致styleArray最后一个元素为空字符串，这里需要过滤
+      if (styleArray[i]) {
+        var item = styleArray[i].split(':');
+        style[trim(item[0])] = trim(item[1]);
+      }
+    }
+    return style;
+  }
+  // 这里为对象转字符串形式
+  var string = '';
+  for (var _i2 in customStyle) {
+    // 驼峰转为中划线的形式，否则css内联样式，无法识别驼峰样式属性名
+    var key = _i2.replace(/([A-Z])/g, '-$1').toLowerCase();
+    string += "".concat(key, ":").concat(customStyle[_i2], ";");
+  }
+  // 去除两端空格
+  return trim(string);
+}
+
+/**
+ * @description 添加单位，如果有rpx，upx，%，px等单位结尾或者值为auto，直接返回，否则加上px单位结尾
+ * @param {string|number} value 需要添加单位的值
+ * @param {string} unit 添加的单位名 比如px
+ */
+function addUnit() {
+  var _uni$$u$config$unit, _uni, _uni$$u, _uni$$u$config;
+  var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'auto';
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : (_uni$$u$config$unit = (_uni = uni) === null || _uni === void 0 ? void 0 : (_uni$$u = _uni.$u) === null || _uni$$u === void 0 ? void 0 : (_uni$$u$config = _uni$$u.config) === null || _uni$$u$config === void 0 ? void 0 : _uni$$u$config.unit) !== null && _uni$$u$config$unit !== void 0 ? _uni$$u$config$unit : 'px';
+  value = String(value);
+  // 用uView内置验证规则中的number判断是否为数值
+  return _test.default.number(value) ? "".concat(value).concat(unit) : value;
+}
+
+/**
+ * @description 深度克隆
+ * @param {object} obj 需要深度克隆的对象
+ * @param cache 缓存
+ * @returns {*} 克隆后的对象或者原值（不是对象）
+ */
+function deepClone(obj) {
+  var cache = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new WeakMap();
+  if (obj === null || (0, _typeof2.default)(obj) !== 'object') return obj;
+  if (cache.has(obj)) return cache.get(obj);
+  var clone;
+  if (obj instanceof Date) {
+    clone = new Date(obj.getTime());
+  } else if (obj instanceof RegExp) {
+    clone = new RegExp(obj);
+  } else if (obj instanceof Map) {
+    clone = new Map(Array.from(obj, function (_ref) {
+      var _ref2 = (0, _slicedToArray2.default)(_ref, 2),
+        key = _ref2[0],
+        value = _ref2[1];
+      return [key, deepClone(value, cache)];
+    }));
+  } else if (obj instanceof Set) {
+    clone = new Set(Array.from(obj, function (value) {
+      return deepClone(value, cache);
+    }));
+  } else if (Array.isArray(obj)) {
+    clone = obj.map(function (value) {
+      return deepClone(value, cache);
+    });
+  } else if (Object.prototype.toString.call(obj) === '[object Object]') {
+    clone = Object.create(Object.getPrototypeOf(obj));
+    cache.set(obj, clone);
+    for (var _i3 = 0, _Object$entries = Object.entries(obj); _i3 < _Object$entries.length; _i3++) {
+      var _Object$entries$_i = (0, _slicedToArray2.default)(_Object$entries[_i3], 2),
+        key = _Object$entries$_i[0],
+        value = _Object$entries$_i[1];
+      clone[key] = deepClone(value, cache);
+    }
+  } else {
+    clone = Object.assign({}, obj);
+  }
+  cache.set(obj, clone);
+  return clone;
+}
+
+/**
+ * @description JS对象深度合并
+ * @param {object} target 需要拷贝的对象
+ * @param {object} source 拷贝的来源对象
+ * @returns {object|boolean} 深度合并后的对象或者false（入参有不是对象）
+ */
+function deepMerge() {
+  var target = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var source = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+  target = deepClone(target);
+  if ((0, _typeof2.default)(target) !== 'object' || target === null || (0, _typeof2.default)(source) !== 'object' || source === null) return target;
+  var merged = Array.isArray(target) ? target.slice() : Object.assign({}, target);
+  for (var prop in source) {
+    if (!source.hasOwnProperty(prop)) continue;
+    var sourceValue = source[prop];
+    var targetValue = merged[prop];
+    if (sourceValue instanceof Date) {
+      merged[prop] = new Date(sourceValue);
+    } else if (sourceValue instanceof RegExp) {
+      merged[prop] = new RegExp(sourceValue);
+    } else if (sourceValue instanceof Map) {
+      merged[prop] = new Map(sourceValue);
+    } else if (sourceValue instanceof Set) {
+      merged[prop] = new Set(sourceValue);
+    } else if ((0, _typeof2.default)(sourceValue) === 'object' && sourceValue !== null) {
+      merged[prop] = deepMerge(targetValue, sourceValue);
+    } else {
+      merged[prop] = sourceValue;
+    }
+  }
+  return merged;
+}
+
+/**
+ * @description error提示
+ * @param {*} err 错误内容
+ */
+function error(err) {
+  // 开发环境才提示，生产环境不会提示
+  if (true) {
+    console.error("uView\u63D0\u793A\uFF1A".concat(err));
+  }
+}
+
+/**
+ * @description 打乱数组
+ * @param {array} array 需要打乱的数组
+ * @returns {array} 打乱后的数组
+ */
+function randomArray() {
+  var array = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  // 原理是sort排序,Math.random()产生0<= x < 1之间的数,会导致x-0.05大于或者小于0
+  return array.sort(function () {
+    return Math.random() - 0.5;
+  });
+}
+
+// padStart 的 polyfill，因为某些机型或情况，还无法支持es7的padStart，比如电脑版的微信小程序
+// 所以这里做一个兼容polyfill的兼容处理
+if (!String.prototype.padStart) {
+  // 为了方便表示这里 fillString 用了ES6 的默认参数，不影响理解
+  String.prototype.padStart = function (maxLength) {
+    var fillString = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : ' ';
+    if (Object.prototype.toString.call(fillString) !== '[object String]') {
+      throw new TypeError('fillString must be String');
+    }
+    var str = this;
+    // 返回 String(str) 这里是为了使返回的值是字符串字面量，在控制台中更符合直觉
+    if (str.length >= maxLength) return String(str);
+    var fillLength = maxLength - str.length;
+    var times = Math.ceil(fillLength / fillString.length);
+    while (times >>= 1) {
+      fillString += fillString;
+      if (times === 1) {
+        fillString += fillString;
+      }
+    }
+    return fillString.slice(0, fillLength) + str;
+  };
+}
+
+/**
+ * @description 格式化时间
+ * @param {String|Number} dateTime 需要格式化的时间戳
+ * @param {String} fmt 格式化规则 yyyy:mm:dd|yyyy:mm|yyyy年mm月dd日|yyyy年mm月dd日 hh时MM分等,可自定义组合 默认yyyy-mm-dd
+ * @returns {string} 返回格式化后的字符串
+ */
+function timeFormat() {
+  var dateTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var formatStr = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
+  var date;
+  // 若传入时间为假值，则取当前时间
+  if (!dateTime) {
+    date = new Date();
+  }
+  // 若为unix秒时间戳，则转为毫秒时间戳（逻辑有点奇怪，但不敢改，以保证历史兼容）
+  else if (/^\d{10}$/.test(dateTime === null || dateTime === void 0 ? void 0 : dateTime.toString().trim())) {
+    date = new Date(dateTime * 1000);
+  }
+  // 若用户传入字符串格式时间戳，new Date无法解析，需做兼容
+  else if (typeof dateTime === 'string' && /^\d+$/.test(dateTime.trim())) {
+    date = new Date(Number(dateTime));
+  }
+  // 处理平台性差异，在Safari/Webkit中，new Date仅支持/作为分割符的字符串时间
+  // 处理 '2022-07-10 01:02:03'，跳过 '2022-07-10T01:02:03'
+  else if (typeof dateTime === 'string' && dateTime.includes('-') && !dateTime.includes('T')) {
+    date = new Date(dateTime.replace(/-/g, '/'));
+  }
+  // 其他都认为符合 RFC 2822 规范
+  else {
+    date = new Date(dateTime);
+  }
+  var timeSource = {
+    'y': date.getFullYear().toString(),
+    // 年
+    'm': (date.getMonth() + 1).toString().padStart(2, '0'),
+    // 月
+    'd': date.getDate().toString().padStart(2, '0'),
+    // 日
+    'h': date.getHours().toString().padStart(2, '0'),
+    // 时
+    'M': date.getMinutes().toString().padStart(2, '0'),
+    // 分
+    's': date.getSeconds().toString().padStart(2, '0') // 秒
+    // 有其他格式化字符需求可以继续添加，必须转化成字符串
+  };
+
+  for (var key in timeSource) {
+    var _ref3 = new RegExp("".concat(key, "+")).exec(formatStr) || [],
+      _ref4 = (0, _slicedToArray2.default)(_ref3, 1),
+      ret = _ref4[0];
+    if (ret) {
+      // 年可能只需展示两位
+      var beginIndex = key === 'y' && ret.length === 2 ? 2 : 0;
+      formatStr = formatStr.replace(ret, timeSource[key].slice(beginIndex));
+    }
+  }
+  return formatStr;
+}
+
+/**
+ * @description 时间戳转为多久之前
+ * @param {String|Number} timestamp 时间戳
+ * @param {String|Boolean} format
+ * 格式化规则如果为时间格式字符串，超出一定时间范围，返回固定的时间格式；
+ * 如果为布尔值false，无论什么时间，都返回多久以前的格式
+ * @returns {string} 转化后的内容
+ */
+function timeFrom() {
+  var timestamp = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy-mm-dd';
+  if (timestamp == null) timestamp = Number(new Date());
+  timestamp = parseInt(timestamp);
+  // 判断用户输入的时间戳是秒还是毫秒,一般前端js获取的时间戳是毫秒(13位),后端传过来的为秒(10位)
+  if (timestamp.toString().length == 10) timestamp *= 1000;
+  var timer = new Date().getTime() - timestamp;
+  timer = parseInt(timer / 1000);
+  // 如果小于5分钟,则返回"刚刚",其他以此类推
+  var tips = '';
+  switch (true) {
+    case timer < 300:
+      tips = '刚刚';
+      break;
+    case timer >= 300 && timer < 3600:
+      tips = "".concat(parseInt(timer / 60), "\u5206\u949F\u524D");
+      break;
+    case timer >= 3600 && timer < 86400:
+      tips = "".concat(parseInt(timer / 3600), "\u5C0F\u65F6\u524D");
+      break;
+    case timer >= 86400 && timer < 2592000:
+      tips = "".concat(parseInt(timer / 86400), "\u5929\u524D");
+      break;
+    default:
+      // 如果format为false，则无论什么时间戳，都显示xx之前
+      if (format === false) {
+        if (timer >= 2592000 && timer < 365 * 86400) {
+          tips = "".concat(parseInt(timer / (86400 * 30)), "\u4E2A\u6708\u524D");
+        } else {
+          tips = "".concat(parseInt(timer / (86400 * 365)), "\u5E74\u524D");
+        }
+      } else {
+        tips = timeFormat(timestamp, format);
+      }
+  }
+  return tips;
+}
+
+/**
+ * @description 去除空格
+ * @param String str 需要去除空格的字符串
+ * @param String pos both(左右)|left|right|all 默认both
+ */
+function trim(str) {
+  var pos = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'both';
+  str = String(str);
+  if (pos == 'both') {
+    return str.replace(/^\s+|\s+$/g, '');
+  }
+  if (pos == 'left') {
+    return str.replace(/^\s*/, '');
+  }
+  if (pos == 'right') {
+    return str.replace(/(\s*$)/g, '');
+  }
+  if (pos == 'all') {
+    return str.replace(/\s+/g, '');
+  }
+  return str;
+}
+
+/**
+ * @description 对象转url参数
+ * @param {object} data,对象
+ * @param {Boolean} isPrefix,是否自动加上"?"
+ * @param {string} arrayFormat 规则 indices|brackets|repeat|comma
+ */
+function queryParams() {
+  var data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var isPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var arrayFormat = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'brackets';
+  var prefix = isPrefix ? '?' : '';
+  var _result = [];
+  if (['indices', 'brackets', 'repeat', 'comma'].indexOf(arrayFormat) == -1) arrayFormat = 'brackets';
+  var _loop = function _loop(key) {
+    var value = data[key];
+    // 去掉为空的参数
+    if (['', undefined, null].indexOf(value) >= 0) {
+      return "continue";
+    }
+    // 如果值为数组，另行处理
+    if (value.constructor === Array) {
+      // e.g. {ids: [1, 2, 3]}
+      switch (arrayFormat) {
+        case 'indices':
+          // 结果: ids[0]=1&ids[1]=2&ids[2]=3
+          for (var i = 0; i < value.length; i++) {
+            _result.push("".concat(key, "[").concat(i, "]=").concat(value[i]));
+          }
+          break;
+        case 'brackets':
+          // 结果: ids[]=1&ids[]=2&ids[]=3
+          value.forEach(function (_value) {
+            _result.push("".concat(key, "[]=").concat(_value));
+          });
+          break;
+        case 'repeat':
+          // 结果: ids=1&ids=2&ids=3
+          value.forEach(function (_value) {
+            _result.push("".concat(key, "=").concat(_value));
+          });
+          break;
+        case 'comma':
+          // 结果: ids=1,2,3
+          var commaStr = '';
+          value.forEach(function (_value) {
+            commaStr += (commaStr ? ',' : '') + _value;
+          });
+          _result.push("".concat(key, "=").concat(commaStr));
+          break;
+        default:
+          value.forEach(function (_value) {
+            _result.push("".concat(key, "[]=").concat(_value));
+          });
+      }
+    } else {
+      _result.push("".concat(key, "=").concat(value));
+    }
+  };
+  for (var key in data) {
+    var _ret = _loop(key);
+    if (_ret === "continue") continue;
+  }
+  return _result.length ? prefix + _result.join('&') : '';
+}
+
+/**
+ * 显示消息提示框
+ * @param {String} title 提示的内容，长度与 icon 取值有关。
+ * @param {Number} duration 提示的延迟时间，单位毫秒，默认：2000
+ */
+function toast(title) {
+  var duration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2000;
+  uni.showToast({
+    title: String(title),
+    icon: 'none',
+    duration: duration
+  });
+}
+
+/**
+ * @description 根据主题type值,获取对应的图标
+ * @param {String} type 主题名称,primary|info|error|warning|success
+ * @param {boolean} fill 是否使用fill填充实体的图标
+ */
+function type2icon() {
+  var type = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'success';
+  var fill = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  // 如果非预置值,默认为success
+  if (['primary', 'info', 'error', 'warning', 'success'].indexOf(type) == -1) type = 'success';
+  var iconName = '';
+  // 目前(2019-12-12),info和primary使用同一个图标
+  switch (type) {
+    case 'primary':
+      iconName = 'info-circle';
+      break;
+    case 'info':
+      iconName = 'info-circle';
+      break;
+    case 'error':
+      iconName = 'close-circle';
+      break;
+    case 'warning':
+      iconName = 'error-circle';
+      break;
+    case 'success':
+      iconName = 'checkmark-circle';
+      break;
+    default:
+      iconName = 'checkmark-circle';
+  }
+  // 是否是实体类型,加上-fill,在icon组件库中,实体的类名是后面加-fill的
+  if (fill) iconName += '-fill';
+  return iconName;
+}
+
+/**
+ * @description 数字格式化
+ * @param {number|string} number 要格式化的数字
+ * @param {number} decimals 保留几位小数
+ * @param {string} decimalPoint 小数点符号
+ * @param {string} thousandsSeparator 千分位符号
+ * @returns {string} 格式化后的数字
+ */
+function priceFormat(number) {
+  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+  var decimalPoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
+  var thousandsSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ',';
+  number = "".concat(number).replace(/[^0-9+-Ee.]/g, '');
+  var n = !isFinite(+number) ? 0 : +number;
+  var prec = !isFinite(+decimals) ? 0 : Math.abs(decimals);
+  var sep = typeof thousandsSeparator === 'undefined' ? ',' : thousandsSeparator;
+  var dec = typeof decimalPoint === 'undefined' ? '.' : decimalPoint;
+  var s = '';
+  s = (prec ? (0, _digit.round)(n, prec) + '' : "".concat(Math.round(n))).split('.');
+  var re = /(-?\d+)(\d{3})/;
+  while (re.test(s[0])) {
+    s[0] = s[0].replace(re, "$1".concat(sep, "$2"));
+  }
+  if ((s[1] || '').length < prec) {
+    s[1] = s[1] || '';
+    s[1] += new Array(prec - s[1].length + 1).join('0');
+  }
+  return s.join(dec);
+}
+
+/**
+ * @description 获取duration值
+ * 如果带有ms或者s直接返回，如果大于一定值，认为是ms单位，小于一定值，认为是s单位
+ * 比如以30位阈值，那么300大于30，可以理解为用户想要的是300ms，而不是想花300s去执行一个动画
+ * @param {String|number} value 比如: "1s"|"100ms"|1|100
+ * @param {boolean} unit  提示: 如果是false 默认返回number
+ * @return {string|number}
+ */
+function getDuration(value) {
+  var unit = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var valueNum = parseInt(value);
+  if (unit) {
+    if (/s$/.test(value)) return value;
+    return value > 30 ? "".concat(value, "ms") : "".concat(value, "s");
+  }
+  if (/ms$/.test(value)) return valueNum;
+  if (/s$/.test(value)) return valueNum > 30 ? valueNum : valueNum * 1000;
+  return valueNum;
+}
+
+/**
+ * @description 日期的月或日补零操作
+ * @param {String} value 需要补零的值
+ */
+function padZero(value) {
+  return "00".concat(value).slice(-2);
+}
+
+/**
+ * @description 在u-form的子组件内容发生变化，或者失去焦点时，尝试通知u-form执行校验方法
+ * @param {*} instance
+ * @param {*} event
+ */
+function formValidate(instance, event) {
+  var formItem = uni.$u.$parent.call(instance, 'u-form-item');
+  var form = uni.$u.$parent.call(instance, 'u-form');
+  // 如果发生变化的input或者textarea等，其父组件中有u-form-item或者u-form等，就执行form的validate方法
+  // 同时将form-item的pros传递给form，让其进行精确对象验证
+  if (formItem && form) {
+    form.validateField(formItem.prop, function () {}, event);
+  }
+}
+
+/**
+ * @description 获取某个对象下的属性，用于通过类似'a.b.c'的形式去获取一个对象的的属性的形式
+ * @param {object} obj 对象
+ * @param {string} key 需要获取的属性字段
+ * @returns {*}
+ */
+function getProperty(obj, key) {
+  if (!obj) {
+    return;
+  }
+  if (typeof key !== 'string' || key === '') {
+    return '';
+  }
+  if (key.indexOf('.') !== -1) {
+    var keys = key.split('.');
+    var firstObj = obj[keys[0]] || {};
+    for (var i = 1; i < keys.length; i++) {
+      if (firstObj) {
+        firstObj = firstObj[keys[i]];
+      }
+    }
+    return firstObj;
+  }
+  return obj[key];
+}
+
+/**
+ * @description 设置对象的属性值，如果'a.b.c'的形式进行设置
+ * @param {object} obj 对象
+ * @param {string} key 需要设置的属性
+ * @param {string} value 设置的值
+ */
+function setProperty(obj, key, value) {
+  if (!obj) {
+    return;
+  }
+  // 递归赋值
+  var inFn = function inFn(_obj, keys, v) {
+    // 最后一个属性key
+    if (keys.length === 1) {
+      _obj[keys[0]] = v;
+      return;
+    }
+    // 0~length-1个key
+    while (keys.length > 1) {
+      var k = keys[0];
+      if (!_obj[k] || (0, _typeof2.default)(_obj[k]) !== 'object') {
+        _obj[k] = {};
+      }
+      var _key = keys.shift();
+      // 自调用判断是否存在属性，不存在则自动创建对象
+      inFn(_obj[k], keys, v);
+    }
+  };
+  if (typeof key !== 'string' || key === '') {} else if (key.indexOf('.') !== -1) {
+    // 支持多层级赋值操作
+    var keys = key.split('.');
+    inFn(obj, keys, value);
+  } else {
+    obj[key] = value;
+  }
+}
+
+/**
+ * @description 获取当前页面路径
+ */
+function page() {
+  var _pages$route, _pages;
+  var pages = getCurrentPages();
+  // 某些特殊情况下(比如页面进行redirectTo时的一些时机)，pages可能为空数组
+  return "/".concat((_pages$route = (_pages = pages[pages.length - 1]) === null || _pages === void 0 ? void 0 : _pages.route) !== null && _pages$route !== void 0 ? _pages$route : '');
+}
+
+/**
+ * @description 获取当前路由栈实例数组
+ */
+function pages() {
+  var pages = getCurrentPages();
+  return pages;
+}
+
+/**
+ * 获取页面历史栈指定层实例
+ * @param back {number} [0] - 0或者负数，表示获取历史栈的哪一层，0表示获取当前页面实例，-1 表示获取上一个页面实例。默认0。
+ */
+function getHistoryPage() {
+  var back = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var pages = getCurrentPages();
+  var len = pages.length;
+  return pages[len - 1 + back];
+}
+
+/**
+ * @description 修改uView内置属性值
+ * @param {object} props 修改内置props属性
+ * @param {object} config 修改内置config属性
+ * @param {object} color 修改内置color属性
+ * @param {object} zIndex 修改内置zIndex属性
+ */
+function setConfig(_ref5) {
+  var _ref5$props = _ref5.props,
+    props = _ref5$props === void 0 ? {} : _ref5$props,
+    _ref5$config = _ref5.config,
+    config = _ref5$config === void 0 ? {} : _ref5$config,
+    _ref5$color = _ref5.color,
+    color = _ref5$color === void 0 ? {} : _ref5$color,
+    _ref5$zIndex = _ref5.zIndex,
+    zIndex = _ref5$zIndex === void 0 ? {} : _ref5$zIndex;
+  var deepMerge = uni.$u.deepMerge;
+  uni.$u.config = deepMerge(uni.$u.config, config);
+  uni.$u.props = deepMerge(uni.$u.props, props);
+  uni.$u.color = deepMerge(uni.$u.color, color);
+  uni.$u.zIndex = deepMerge(uni.$u.zIndex, zIndex);
+}
+var _default = {
+  range: range,
+  getPx: getPx,
+  sleep: sleep,
+  os: os,
+  sys: sys,
+  random: random,
+  guid: guid,
+  $parent: $parent,
+  addStyle: addStyle,
+  addUnit: addUnit,
+  deepClone: deepClone,
+  deepMerge: deepMerge,
+  error: error,
+  randomArray: randomArray,
+  timeFormat: timeFormat,
+  timeFrom: timeFrom,
+  trim: trim,
+  queryParams: queryParams,
+  toast: toast,
+  type2icon: type2icon,
+  priceFormat: priceFormat,
+  getDuration: getDuration,
+  padZero: padZero,
+  formValidate: formValidate,
+  getProperty: getProperty,
+  setProperty: setProperty,
+  page: page,
+  pages: pages,
+  getHistoryPage: getHistoryPage,
+  setConfig: setConfig
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 83 */
+/*!*********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/digit.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+exports.divide = divide;
+exports.enableBoundaryChecking = enableBoundaryChecking;
+exports.minus = minus;
+exports.plus = plus;
+exports.round = round;
+exports.times = times;
+var _toArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/toArray */ 84));
+var _boundaryCheckingState = true; // 是否进行越界检查的全局开关
+
+/**
+ * 把错误的数据转正
+ * @private
+ * @example strip(0.09999999999999998)=0.1
+ */
+function strip(num) {
+  var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 15;
+  return +parseFloat(Number(num).toPrecision(precision));
+}
+
+/**
+ * Return digits length of a number
+ * @private
+ * @param {*number} num Input number
+ */
+function digitLength(num) {
+  // Get digit length of e
+  var eSplit = num.toString().split(/[eE]/);
+  var len = (eSplit[0].split('.')[1] || '').length - +(eSplit[1] || 0);
+  return len > 0 ? len : 0;
+}
+
+/**
+ * 把小数转成整数,如果是小数则放大成整数
+ * @private
+ * @param {*number} num 输入数
+ */
+function float2Fixed(num) {
+  if (num.toString().indexOf('e') === -1) {
+    return Number(num.toString().replace('.', ''));
+  }
+  var dLen = digitLength(num);
+  return dLen > 0 ? strip(Number(num) * Math.pow(10, dLen)) : Number(num);
+}
+
+/**
+ * 检测数字是否越界，如果越界给出提示
+ * @private
+ * @param {*number} num 输入数
+ */
+function checkBoundary(num) {
+  if (_boundaryCheckingState) {
+    if (num > Number.MAX_SAFE_INTEGER || num < Number.MIN_SAFE_INTEGER) {
+      console.warn("".concat(num, " \u8D85\u51FA\u4E86\u7CBE\u5EA6\u9650\u5236\uFF0C\u7ED3\u679C\u53EF\u80FD\u4E0D\u6B63\u786E"));
+    }
+  }
+}
+
+/**
+ * 把递归操作扁平迭代化
+ * @param {number[]} arr 要操作的数字数组
+ * @param {function} operation 迭代操作
+ * @private
+ */
+function iteratorOperation(arr, operation) {
+  var _arr = (0, _toArray2.default)(arr),
+    num1 = _arr[0],
+    num2 = _arr[1],
+    others = _arr.slice(2);
+  var res = operation(num1, num2);
+  others.forEach(function (num) {
+    res = operation(res, num);
+  });
+  return res;
+}
+
+/**
+ * 高精度乘法
+ * @export
+ */
+function times() {
+  for (var _len = arguments.length, nums = new Array(_len), _key = 0; _key < _len; _key++) {
+    nums[_key] = arguments[_key];
+  }
+  if (nums.length > 2) {
+    return iteratorOperation(nums, times);
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
+  var num1Changed = float2Fixed(num1);
+  var num2Changed = float2Fixed(num2);
+  var baseNum = digitLength(num1) + digitLength(num2);
+  var leftValue = num1Changed * num2Changed;
+  checkBoundary(leftValue);
+  return leftValue / Math.pow(10, baseNum);
+}
+
+/**
+ * 高精度加法
+ * @export
+ */
+function plus() {
+  for (var _len2 = arguments.length, nums = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    nums[_key2] = arguments[_key2];
+  }
+  if (nums.length > 2) {
+    return iteratorOperation(nums, plus);
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
+  // 取最大的小数位
+  var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  // 把小数都转为整数然后再计算
+  return (times(num1, baseNum) + times(num2, baseNum)) / baseNum;
+}
+
+/**
+ * 高精度减法
+ * @export
+ */
+function minus() {
+  for (var _len3 = arguments.length, nums = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+    nums[_key3] = arguments[_key3];
+  }
+  if (nums.length > 2) {
+    return iteratorOperation(nums, minus);
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
+  var baseNum = Math.pow(10, Math.max(digitLength(num1), digitLength(num2)));
+  return (times(num1, baseNum) - times(num2, baseNum)) / baseNum;
+}
+
+/**
+ * 高精度除法
+ * @export
+ */
+function divide() {
+  for (var _len4 = arguments.length, nums = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+    nums[_key4] = arguments[_key4];
+  }
+  if (nums.length > 2) {
+    return iteratorOperation(nums, divide);
+  }
+  var num1 = nums[0],
+    num2 = nums[1];
+  var num1Changed = float2Fixed(num1);
+  var num2Changed = float2Fixed(num2);
+  checkBoundary(num1Changed);
+  checkBoundary(num2Changed);
+  // 重要，这里必须用strip进行修正
+  return times(num1Changed / num2Changed, strip(Math.pow(10, digitLength(num2) - digitLength(num1))));
+}
+
+/**
+ * 四舍五入
+ * @export
+ */
+function round(num, ratio) {
+  var base = Math.pow(10, ratio);
+  var result = divide(Math.round(Math.abs(times(num, base))), base);
+  if (num < 0 && result !== 0) {
+    result = times(result, -1);
+  }
+  // 位数不足则补0
+  return result;
+}
+
+/**
+ * 是否进行边界检查，默认开启
+ * @param flag 标记开关，true 为开启，false 为关闭，默认为 true
+ * @export
+ */
+function enableBoundaryChecking() {
+  var flag = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+  _boundaryCheckingState = flag;
+}
+var _default = {
+  times: times,
+  plus: plus,
+  minus: minus,
+  divide: divide,
+  round: round,
+  enableBoundaryChecking: enableBoundaryChecking
+};
+exports.default = _default;
+
+/***/ }),
+/* 84 */
+/*!********************************************************!*\
+  !*** ./node_modules/@babel/runtime/helpers/toArray.js ***!
+  \********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var arrayWithHoles = __webpack_require__(/*! ./arrayWithHoles.js */ 6);
+var iterableToArray = __webpack_require__(/*! ./iterableToArray.js */ 20);
+var unsupportedIterableToArray = __webpack_require__(/*! ./unsupportedIterableToArray.js */ 8);
+var nonIterableRest = __webpack_require__(/*! ./nonIterableRest.js */ 10);
+function _toArray(arr) {
+  return arrayWithHoles(arr) || iterableToArray(arr) || unsupportedIterableToArray(arr) || nonIterableRest();
+}
+module.exports = _toArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 85 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/config.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// 此版本发布于2023-03-27
+var version = '2.0.36';
+
+// 开发环境才提示，生产环境不会提示
+if (true) {
+  console.log("\n %c uView V".concat(version, " %c https://uviewui.com/ \n\n"), 'color: #ffffff; background: #3c9cff; padding:5px 0; border-radius: 5px;');
+}
+var _default = {
+  v: version,
+  version: version,
+  // 主题名称
+  type: ['primary', 'success', 'info', 'error', 'warning'],
+  // 颜色部分，本来可以通过scss的:export导出供js使用，但是奈何nvue不支持
+  color: {
+    'u-primary': '#2979ff',
+    'u-warning': '#ff9900',
+    'u-success': '#19be6b',
+    'u-error': '#fa3534',
+    'u-info': '#909399',
+    'u-main-color': '#303133',
+    'u-content-color': '#606266',
+    'u-tips-color': '#909399',
+    'u-light-color': '#c0c4cc'
+  },
+  // 默认单位，可以通过配置为rpx，那么在用于传入组件大小参数为数值时，就默认为rpx
+  unit: 'px'
+};
+exports.default = _default;
+
+/***/ }),
+/* 86 */
+/*!*******************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _config = _interopRequireDefault(__webpack_require__(/*! ./config */ 85));
+var _actionSheet = _interopRequireDefault(__webpack_require__(/*! ./props/actionSheet.js */ 87));
+var _album = _interopRequireDefault(__webpack_require__(/*! ./props/album.js */ 88));
+var _alert = _interopRequireDefault(__webpack_require__(/*! ./props/alert.js */ 89));
+var _avatar = _interopRequireDefault(__webpack_require__(/*! ./props/avatar */ 90));
+var _avatarGroup = _interopRequireDefault(__webpack_require__(/*! ./props/avatarGroup */ 91));
+var _backtop = _interopRequireDefault(__webpack_require__(/*! ./props/backtop */ 92));
+var _badge = _interopRequireDefault(__webpack_require__(/*! ./props/badge */ 93));
+var _button = _interopRequireDefault(__webpack_require__(/*! ./props/button */ 94));
+var _calendar = _interopRequireDefault(__webpack_require__(/*! ./props/calendar */ 95));
+var _carKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/carKeyboard */ 96));
+var _cell = _interopRequireDefault(__webpack_require__(/*! ./props/cell */ 97));
+var _cellGroup = _interopRequireDefault(__webpack_require__(/*! ./props/cellGroup */ 98));
+var _checkbox = _interopRequireDefault(__webpack_require__(/*! ./props/checkbox */ 99));
+var _checkboxGroup = _interopRequireDefault(__webpack_require__(/*! ./props/checkboxGroup */ 100));
+var _circleProgress = _interopRequireDefault(__webpack_require__(/*! ./props/circleProgress */ 101));
+var _code = _interopRequireDefault(__webpack_require__(/*! ./props/code */ 102));
+var _codeInput = _interopRequireDefault(__webpack_require__(/*! ./props/codeInput */ 103));
+var _col = _interopRequireDefault(__webpack_require__(/*! ./props/col */ 104));
+var _collapse = _interopRequireDefault(__webpack_require__(/*! ./props/collapse */ 105));
+var _collapseItem = _interopRequireDefault(__webpack_require__(/*! ./props/collapseItem */ 106));
+var _columnNotice = _interopRequireDefault(__webpack_require__(/*! ./props/columnNotice */ 107));
+var _countDown = _interopRequireDefault(__webpack_require__(/*! ./props/countDown */ 108));
+var _countTo = _interopRequireDefault(__webpack_require__(/*! ./props/countTo */ 109));
+var _datetimePicker = _interopRequireDefault(__webpack_require__(/*! ./props/datetimePicker */ 110));
+var _divider = _interopRequireDefault(__webpack_require__(/*! ./props/divider */ 111));
+var _empty = _interopRequireDefault(__webpack_require__(/*! ./props/empty */ 112));
+var _form = _interopRequireDefault(__webpack_require__(/*! ./props/form */ 113));
+var _formItem = _interopRequireDefault(__webpack_require__(/*! ./props/formItem */ 114));
+var _gap = _interopRequireDefault(__webpack_require__(/*! ./props/gap */ 115));
+var _grid = _interopRequireDefault(__webpack_require__(/*! ./props/grid */ 116));
+var _gridItem = _interopRequireDefault(__webpack_require__(/*! ./props/gridItem */ 117));
+var _icon = _interopRequireDefault(__webpack_require__(/*! ./props/icon */ 118));
+var _image = _interopRequireDefault(__webpack_require__(/*! ./props/image */ 119));
+var _indexAnchor = _interopRequireDefault(__webpack_require__(/*! ./props/indexAnchor */ 120));
+var _indexList = _interopRequireDefault(__webpack_require__(/*! ./props/indexList */ 121));
+var _input = _interopRequireDefault(__webpack_require__(/*! ./props/input */ 122));
+var _keyboard = _interopRequireDefault(__webpack_require__(/*! ./props/keyboard */ 123));
+var _line = _interopRequireDefault(__webpack_require__(/*! ./props/line */ 124));
+var _lineProgress = _interopRequireDefault(__webpack_require__(/*! ./props/lineProgress */ 125));
+var _link = _interopRequireDefault(__webpack_require__(/*! ./props/link */ 126));
+var _list = _interopRequireDefault(__webpack_require__(/*! ./props/list */ 127));
+var _listItem = _interopRequireDefault(__webpack_require__(/*! ./props/listItem */ 128));
+var _loadingIcon = _interopRequireDefault(__webpack_require__(/*! ./props/loadingIcon */ 129));
+var _loadingPage = _interopRequireDefault(__webpack_require__(/*! ./props/loadingPage */ 130));
+var _loadmore = _interopRequireDefault(__webpack_require__(/*! ./props/loadmore */ 131));
+var _modal = _interopRequireDefault(__webpack_require__(/*! ./props/modal */ 132));
+var _navbar = _interopRequireDefault(__webpack_require__(/*! ./props/navbar */ 133));
+var _noNetwork = _interopRequireDefault(__webpack_require__(/*! ./props/noNetwork */ 135));
+var _noticeBar = _interopRequireDefault(__webpack_require__(/*! ./props/noticeBar */ 136));
+var _notify = _interopRequireDefault(__webpack_require__(/*! ./props/notify */ 137));
+var _numberBox = _interopRequireDefault(__webpack_require__(/*! ./props/numberBox */ 138));
+var _numberKeyboard = _interopRequireDefault(__webpack_require__(/*! ./props/numberKeyboard */ 139));
+var _overlay = _interopRequireDefault(__webpack_require__(/*! ./props/overlay */ 140));
+var _parse = _interopRequireDefault(__webpack_require__(/*! ./props/parse */ 141));
+var _picker = _interopRequireDefault(__webpack_require__(/*! ./props/picker */ 142));
+var _popup = _interopRequireDefault(__webpack_require__(/*! ./props/popup */ 143));
+var _radio = _interopRequireDefault(__webpack_require__(/*! ./props/radio */ 144));
+var _radioGroup = _interopRequireDefault(__webpack_require__(/*! ./props/radioGroup */ 145));
+var _rate = _interopRequireDefault(__webpack_require__(/*! ./props/rate */ 146));
+var _readMore = _interopRequireDefault(__webpack_require__(/*! ./props/readMore */ 147));
+var _row = _interopRequireDefault(__webpack_require__(/*! ./props/row */ 148));
+var _rowNotice = _interopRequireDefault(__webpack_require__(/*! ./props/rowNotice */ 149));
+var _scrollList = _interopRequireDefault(__webpack_require__(/*! ./props/scrollList */ 150));
+var _search = _interopRequireDefault(__webpack_require__(/*! ./props/search */ 151));
+var _section = _interopRequireDefault(__webpack_require__(/*! ./props/section */ 152));
+var _skeleton = _interopRequireDefault(__webpack_require__(/*! ./props/skeleton */ 153));
+var _slider = _interopRequireDefault(__webpack_require__(/*! ./props/slider */ 154));
+var _statusBar = _interopRequireDefault(__webpack_require__(/*! ./props/statusBar */ 155));
+var _steps = _interopRequireDefault(__webpack_require__(/*! ./props/steps */ 156));
+var _stepsItem = _interopRequireDefault(__webpack_require__(/*! ./props/stepsItem */ 157));
+var _sticky = _interopRequireDefault(__webpack_require__(/*! ./props/sticky */ 158));
+var _subsection = _interopRequireDefault(__webpack_require__(/*! ./props/subsection */ 159));
+var _swipeAction = _interopRequireDefault(__webpack_require__(/*! ./props/swipeAction */ 160));
+var _swipeActionItem = _interopRequireDefault(__webpack_require__(/*! ./props/swipeActionItem */ 161));
+var _swiper = _interopRequireDefault(__webpack_require__(/*! ./props/swiper */ 162));
+var _swipterIndicator = _interopRequireDefault(__webpack_require__(/*! ./props/swipterIndicator */ 163));
+var _switch2 = _interopRequireDefault(__webpack_require__(/*! ./props/switch */ 164));
+var _tabbar = _interopRequireDefault(__webpack_require__(/*! ./props/tabbar */ 165));
+var _tabbarItem = _interopRequireDefault(__webpack_require__(/*! ./props/tabbarItem */ 166));
+var _tabs = _interopRequireDefault(__webpack_require__(/*! ./props/tabs */ 167));
+var _tag = _interopRequireDefault(__webpack_require__(/*! ./props/tag */ 168));
+var _text = _interopRequireDefault(__webpack_require__(/*! ./props/text */ 169));
+var _textarea = _interopRequireDefault(__webpack_require__(/*! ./props/textarea */ 170));
+var _toast = _interopRequireDefault(__webpack_require__(/*! ./props/toast */ 171));
+var _toolbar = _interopRequireDefault(__webpack_require__(/*! ./props/toolbar */ 172));
+var _tooltip = _interopRequireDefault(__webpack_require__(/*! ./props/tooltip */ 173));
+var _transition = _interopRequireDefault(__webpack_require__(/*! ./props/transition */ 174));
+var _upload = _interopRequireDefault(__webpack_require__(/*! ./props/upload */ 175));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var color = _config.default.color;
+var _default = _objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread(_objectSpread({}, _actionSheet.default), _album.default), _alert.default), _avatar.default), _avatarGroup.default), _backtop.default), _badge.default), _button.default), _calendar.default), _carKeyboard.default), _cell.default), _cellGroup.default), _checkbox.default), _checkboxGroup.default), _circleProgress.default), _code.default), _codeInput.default), _col.default), _collapse.default), _collapseItem.default), _columnNotice.default), _countDown.default), _countTo.default), _datetimePicker.default), _divider.default), _empty.default), _form.default), _formItem.default), _gap.default), _grid.default), _gridItem.default), _icon.default), _image.default), _indexAnchor.default), _indexList.default), _input.default), _keyboard.default), _line.default), _lineProgress.default), _link.default), _list.default), _listItem.default), _loadingIcon.default), _loadingPage.default), _loadmore.default), _modal.default), _navbar.default), _noNetwork.default), _noticeBar.default), _notify.default), _numberBox.default), _numberKeyboard.default), _overlay.default), _parse.default), _picker.default), _popup.default), _radio.default), _radioGroup.default), _rate.default), _readMore.default), _row.default), _rowNotice.default), _scrollList.default), _search.default), _section.default), _skeleton.default), _slider.default), _statusBar.default), _steps.default), _stepsItem.default), _sticky.default), _subsection.default), _swipeAction.default), _swipeActionItem.default), _swiper.default), _swipterIndicator.default), _switch2.default), _tabbar.default), _tabbarItem.default), _tabs.default), _tag.default), _text.default), _textarea.default), _toast.default), _toolbar.default), _tooltip.default), _transition.default), _upload.default);
+exports.default = _default;
+
+/***/ }),
+/* 87 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/actionSheet.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:44:35
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/actionSheet.js
+ */
+var _default = {
+  // action-sheet组件
+  actionSheet: {
+    show: false,
+    title: '',
+    description: '',
+    actions: function actions() {
+      return [];
+    },
+    index: '',
+    cancelText: '',
+    closeOnClickAction: true,
+    safeAreaInsetBottom: true,
+    openType: '',
+    closeOnClickOverlay: true,
+    round: 0
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 88 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/album.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:47:24
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/album.js
+ */
+var _default = {
+  // album 组件
+  album: {
+    urls: function urls() {
+      return [];
+    },
+    keyName: '',
+    singleSize: 180,
+    multipleSize: 70,
+    space: 6,
+    singleMode: 'scaleToFill',
+    multipleMode: 'aspectFill',
+    maxCount: 9,
+    previewFullImage: true,
+    rowCount: 3,
+    showMore: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 89 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/alert.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:48:53
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/alert.js
+ */
+var _default = {
+  // alert警告组件
+  alert: {
+    title: '',
+    type: 'warning',
+    description: '',
+    closable: false,
+    showIcon: false,
+    effect: 'light',
+    center: false,
+    fontSize: 14
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 90 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/avatar.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:49:22
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatar.js
+ */
+var _default = {
+  // avatar 组件
+  avatar: {
+    src: '',
+    shape: 'circle',
+    size: 40,
+    mode: 'scaleToFill',
+    text: '',
+    bgColor: '#c0c4cc',
+    color: '#ffffff',
+    fontSize: 18,
+    icon: '',
+    mpAvatar: false,
+    randomBgColor: false,
+    defaultUrl: '',
+    colorIndex: '',
+    name: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 91 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/avatarGroup.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:49:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/avatarGroup.js
+ */
+var _default = {
+  // avatarGroup 组件
+  avatarGroup: {
+    urls: function urls() {
+      return [];
+    },
+    maxCount: 5,
+    shape: 'circle',
+    mode: 'scaleToFill',
+    showMore: true,
+    size: 40,
+    keyName: '',
+    gap: 0.5,
+    extraValue: 0
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 92 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/backtop.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:50:18
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/backtop.js
+ */
+var _default = {
+  // backtop组件
+  backtop: {
+    mode: 'circle',
+    icon: 'arrow-upward',
+    text: '',
+    duration: 100,
+    scrollTop: 0,
+    top: 400,
+    bottom: 100,
+    right: 20,
+    zIndex: 9,
+    iconStyle: function iconStyle() {
+      return {
+        color: '#909399',
+        fontSize: '19px'
+      };
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 93 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/badge.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 19:51:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/badge.js
+ */
+var _default = {
+  // 徽标数组件
+  badge: {
+    isDot: false,
+    value: '',
+    show: true,
+    max: 999,
+    type: 'error',
+    showZero: false,
+    bgColor: null,
+    color: null,
+    shape: 'circle',
+    numberType: 'overflow',
+    offset: function offset() {
+      return [];
+    },
+    inverted: false,
+    absolute: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 94 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/button.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:51:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/button.js
+ */
+var _default = {
+  // button组件
+  button: {
+    hairline: false,
+    type: 'info',
+    size: 'normal',
+    shape: 'square',
+    plain: false,
+    disabled: false,
+    loading: false,
+    loadingText: '',
+    loadingMode: 'spinner',
+    loadingSize: 15,
+    openType: '',
+    formType: '',
+    appParameter: '',
+    hoverStopPropagation: true,
+    lang: 'en',
+    sessionFrom: '',
+    sendMessageTitle: '',
+    sendMessagePath: '',
+    sendMessageImg: '',
+    showMessageCard: false,
+    dataName: '',
+    throttleTime: 0,
+    hoverStartTime: 0,
+    hoverStayTime: 200,
+    text: '',
+    icon: '',
+    iconColor: '',
+    color: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 95 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/calendar.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:52:43
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/calendar.js
+ */
+var _default = {
+  // calendar 组件
+  calendar: {
+    title: '日期选择',
+    showTitle: true,
+    showSubtitle: true,
+    mode: 'single',
+    startText: '开始',
+    endText: '结束',
+    customList: function customList() {
+      return [];
+    },
+    color: '#3c9cff',
+    minDate: 0,
+    maxDate: 0,
+    defaultDate: null,
+    maxCount: Number.MAX_SAFE_INTEGER,
+    // Infinity
+    rowHeight: 56,
+    formatter: null,
+    showLunar: false,
+    showMark: true,
+    confirmText: '确定',
+    confirmDisabledText: '确定',
+    show: false,
+    closeOnClickOverlay: false,
+    readonly: false,
+    showConfirm: true,
+    maxRange: Number.MAX_SAFE_INTEGER,
+    // Infinity
+    rangePrompt: '',
+    showRangePrompt: true,
+    allowSameDay: false,
+    round: 0,
+    monthNum: 3
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 96 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/carKeyboard.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:53:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/carKeyboard.js
+ */
+var _default = {
+  // 车牌号键盘
+  carKeyboard: {
+    random: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 97 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/cell.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 20:53:09
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cell.js
+ */
+var _default = {
+  // cell组件的props
+  cell: {
+    customClass: '',
+    title: '',
+    label: '',
+    value: '',
+    icon: '',
+    disabled: false,
+    border: true,
+    center: false,
+    url: '',
+    linkType: 'navigateTo',
+    clickable: false,
+    isLink: false,
+    required: false,
+    arrowDirection: '',
+    iconStyle: {},
+    rightIconStyle: {},
+    rightIcon: 'arrow-right',
+    titleStyle: {},
+    size: '',
+    stop: true,
+    name: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 98 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/cellGroup.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:54:16
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/cellGroup.js
+ */
+var _default = {
+  // cell-group组件的props
+  cellGroup: {
+    title: '',
+    border: true,
+    customStyle: {}
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 99 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/checkbox.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-23 21:06:59
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkbox.js
+ */
+var _default = {
+  // checkbox组件
+  checkbox: {
+    name: '',
+    shape: '',
+    size: '',
+    checkbox: false,
+    disabled: '',
+    activeColor: '',
+    inactiveColor: '',
+    iconSize: '',
+    iconColor: '',
+    label: '',
+    labelSize: '',
+    labelColor: '',
+    labelDisabled: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 100 */
+/*!*********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/checkboxGroup.js ***!
+  \*********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:54:47
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/checkboxGroup.js
+ */
+var _default = {
+  // checkbox-group组件
+  checkboxGroup: {
+    name: '',
+    value: function value() {
+      return [];
+    },
+    shape: 'square',
+    disabled: false,
+    activeColor: '#2979ff',
+    inactiveColor: '#c8c9cc',
+    size: 18,
+    placement: 'row',
+    labelSize: 14,
+    labelColor: '#303133',
+    labelDisabled: false,
+    iconColor: '#ffffff',
+    iconSize: 12,
+    iconPlacement: 'left',
+    borderBottom: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 101 */
+/*!**********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/circleProgress.js ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:02
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/circleProgress.js
+ */
+var _default = {
+  // circleProgress 组件
+  circleProgress: {
+    percentage: 30
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 102 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/code.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/code.js
+ */
+var _default = {
+  // code 组件
+  code: {
+    seconds: 60,
+    startText: '获取验证码',
+    changeText: 'X秒重新获取',
+    endText: '重新获取',
+    keepRunning: false,
+    uniqueKey: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 103 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/codeInput.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:55:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/codeInput.js
+ */
+var _default = {
+  // codeInput 组件
+  codeInput: {
+    adjustPosition: true,
+    maxlength: 6,
+    dot: false,
+    mode: 'box',
+    hairline: false,
+    space: 10,
+    value: '',
+    focus: false,
+    bold: false,
+    color: '#606266',
+    fontSize: 18,
+    size: 35,
+    disabledKeyboard: false,
+    borderColor: '#c9cacc',
+    disabledDot: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 104 */
+/*!***********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/col.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:12
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/col.js
+ */
+var _default = {
+  // col 组件
+  col: {
+    span: 12,
+    offset: 0,
+    justify: 'start',
+    align: 'stretch',
+    textAlign: 'left'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 105 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/collapse.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:30
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapse.js
+ */
+var _default = {
+  // collapse 组件
+  collapse: {
+    value: null,
+    accordion: false,
+    border: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 106 */
+/*!********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/collapseItem.js ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:56:42
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/collapseItem.js
+ */
+var _default = {
+  // collapseItem 组件
+  collapseItem: {
+    title: '',
+    value: '',
+    label: '',
+    disabled: false,
+    isLink: true,
+    clickable: true,
+    border: true,
+    align: 'left',
+    name: '',
+    icon: '',
+    duration: 300
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 107 */
+/*!********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/columnNotice.js ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:16
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/columnNotice.js
+ */
+var _default = {
+  // columnNotice 组件
+  columnNotice: {
+    text: '',
+    icon: 'volume',
+    mode: '',
+    color: '#f9ae3d',
+    bgColor: '#fdf6ec',
+    fontSize: 14,
+    speed: 80,
+    step: false,
+    duration: 1500,
+    disableTouch: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 108 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/countDown.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:11:29
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countDown.js
+ */
+var _default = {
+  // u-count-down 计时器组件
+  countDown: {
+    time: 0,
+    format: 'HH:mm:ss',
+    autoStart: true,
+    millisecond: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 109 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/countTo.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/countTo.js
+ */
+var _default = {
+  // countTo 组件
+  countTo: {
+    startVal: 0,
+    endVal: 0,
+    duration: 2000,
+    autoplay: true,
+    decimals: 0,
+    useEasing: true,
+    decimal: '.',
+    color: '#606266',
+    fontSize: 22,
+    bold: false,
+    separator: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 110 */
+/*!**********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/datetimePicker.js ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:57:48
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/datetimePicker.js
+ */
+var _default = {
+  // datetimePicker 组件
+  datetimePicker: {
+    show: false,
+    showToolbar: true,
+    value: '',
+    title: '',
+    mode: 'datetime',
+    maxDate: new Date(new Date().getFullYear() + 10, 0, 1).getTime(),
+    minDate: new Date(new Date().getFullYear() - 10, 0, 1).getTime(),
+    minHour: 0,
+    maxHour: 23,
+    minMinute: 0,
+    maxMinute: 59,
+    filter: null,
+    formatter: null,
+    loading: false,
+    itemHeight: 44,
+    cancelText: '取消',
+    confirmText: '确认',
+    cancelColor: '#909193',
+    confirmColor: '#3c9cff',
+    visibleItemCount: 5,
+    closeOnClickOverlay: false,
+    defaultIndex: function defaultIndex() {
+      return [];
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 111 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/divider.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:58:03
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/divider.js
+ */
+var _default = {
+  // divider组件
+  divider: {
+    dashed: false,
+    hairline: true,
+    dot: false,
+    textPosition: 'center',
+    text: '',
+    textSize: 14,
+    textColor: '#909399',
+    lineColor: '#dcdfe6'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 112 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/empty.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:27
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/empty.js
+ */
+var _default = {
+  // empty组件
+  empty: {
+    icon: '',
+    text: '',
+    textColor: '#c0c4cc',
+    textSize: 14,
+    iconColor: '#c0c4cc',
+    iconSize: 90,
+    mode: 'data',
+    width: 160,
+    height: 160,
+    show: true,
+    marginTop: 0
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 113 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/form.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/form.js
+ */
+var _default = {
+  // form 组件
+  form: {
+    model: function model() {
+      return {};
+    },
+    rules: function rules() {
+      return {};
+    },
+    errorType: 'message',
+    borderBottom: true,
+    labelPosition: 'left',
+    labelWidth: 45,
+    labelAlign: 'left',
+    labelStyle: function labelStyle() {
+      return {};
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 114 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/formItem.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:04:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/formItem.js
+ */
+var _default = {
+  // formItem 组件
+  formItem: {
+    label: '',
+    prop: '',
+    borderBottom: '',
+    labelPosition: '',
+    labelWidth: '',
+    rightIcon: '',
+    leftIcon: '',
+    required: false,
+    leftIconStyle: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 115 */
+/*!***********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/gap.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:25
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gap.js
+ */
+var _default = {
+  // gap组件
+  gap: {
+    bgColor: 'transparent',
+    height: 20,
+    marginTop: 0,
+    marginBottom: 0,
+    customStyle: {}
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 116 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/grid.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:57
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/grid.js
+ */
+var _default = {
+  // grid组件
+  grid: {
+    col: 3,
+    border: false,
+    align: 'left'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 117 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/gridItem.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/gridItem.js
+ */
+var _default = {
+  // grid-item组件
+  gridItem: {
+    name: null,
+    bgColor: 'transparent'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 118 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/icon.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 85));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 18:00:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/icon.js
+ */
+
+var color = _config.default.color;
+var _default = {
+  // icon组件
+  icon: {
+    name: '',
+    color: color['u-content-color'],
+    size: '16px',
+    bold: false,
+    index: '',
+    hoverClass: '',
+    customPrefix: 'uicon',
+    label: '',
+    labelPos: 'right',
+    labelSize: '15px',
+    labelColor: color['u-content-color'],
+    space: '3px',
+    imgMode: '',
+    width: '',
+    height: '',
+    top: 0,
+    stop: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 119 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/image.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:51
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/image.js
+ */
+var _default = {
+  // image组件
+  image: {
+    src: '',
+    mode: 'aspectFill',
+    width: '300',
+    height: '225',
+    shape: 'square',
+    radius: 0,
+    lazyLoad: true,
+    showMenuByLongpress: true,
+    loadingIcon: 'photo',
+    errorIcon: 'error-circle',
+    showLoading: true,
+    showError: true,
+    fade: true,
+    webp: false,
+    duration: 500,
+    bgColor: '#f3f4f6'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 120 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/indexAnchor.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:15
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexAnchor.js
+ */
+var _default = {
+  // indexAnchor 组件
+  indexAnchor: {
+    text: '',
+    color: '#606266',
+    size: 14,
+    bgColor: '#dedede',
+    height: 32
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 121 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/indexList.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:35
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/indexList.js
+ */
+var _default = {
+  // indexList 组件
+  indexList: {
+    inactiveColor: '#606266',
+    activeColor: '#5677fc',
+    indexList: function indexList() {
+      return [];
+    },
+    sticky: true,
+    customNavHeight: 0
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 122 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/input.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:13:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/input.js
+ */
+var _default = {
+  // index 组件
+  input: {
+    value: '',
+    type: 'text',
+    fixed: false,
+    disabled: false,
+    disabledColor: '#f5f7fa',
+    clearable: false,
+    password: false,
+    maxlength: -1,
+    placeholder: null,
+    placeholderClass: 'input-placeholder',
+    placeholderStyle: 'color: #c0c4cc',
+    showWordLimit: false,
+    confirmType: 'done',
+    confirmHold: false,
+    holdKeyboard: false,
+    focus: false,
+    autoBlur: false,
+    disableDefaultPadding: false,
+    cursor: -1,
+    cursorSpacing: 30,
+    selectionStart: -1,
+    selectionEnd: -1,
+    adjustPosition: true,
+    inputAlign: 'left',
+    fontSize: '15px',
+    color: '#303133',
+    prefixIcon: '',
+    prefixIconStyle: '',
+    suffixIcon: '',
+    suffixIconStyle: '',
+    border: 'surround',
+    readonly: false,
+    shape: 'square',
+    formatter: null
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 123 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/keyboard.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/keyboard.js
+ */
+var _default = {
+  // 键盘组件
+  keyboard: {
+    mode: 'number',
+    dotDisabled: false,
+    tooltip: true,
+    showTips: true,
+    tips: '',
+    showCancel: true,
+    showConfirm: true,
+    random: false,
+    safeAreaInsetBottom: true,
+    closeOnClickOverlay: true,
+    show: false,
+    overlay: true,
+    zIndex: 10075,
+    cancelText: '取消',
+    confirmText: '确定',
+    autoChange: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 124 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/line.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:04:49
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/line.js
+ */
+var _default = {
+  // line组件
+  line: {
+    color: '#d6d7d9',
+    length: '100%',
+    direction: 'row',
+    hairline: true,
+    margin: 0,
+    dashed: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 125 */
+/*!********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/lineProgress.js ***!
+  \********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:14:11
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/lineProgress.js
+ */
+var _default = {
+  // lineProgress 组件
+  lineProgress: {
+    activeColor: '#19be6b',
+    inactiveColor: '#ececec',
+    percentage: 0,
+    showText: true,
+    height: 12
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 126 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/link.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 85));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:45:36
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/link.js
+ */
+
+var color = _config.default.color;
+var _default = {
+  // link超链接组件props参数
+  link: {
+    color: color['u-primary'],
+    fontSize: 15,
+    underLine: false,
+    href: '',
+    mpTips: '链接已复制，请在浏览器打开',
+    lineColor: '',
+    text: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 127 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/list.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:14:53
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/list.js
+ */
+var _default = {
+  // list 组件
+  list: {
+    showScrollbar: false,
+    lowerThreshold: 50,
+    upperThreshold: 0,
+    scrollTop: 0,
+    offsetAccuracy: 10,
+    enableFlex: false,
+    pagingEnabled: false,
+    scrollable: true,
+    scrollIntoView: '',
+    scrollWithAnimation: false,
+    enableBackToTop: false,
+    height: 0,
+    width: 0,
+    preLoadScreen: 1
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 128 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/listItem.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:40
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/listItem.js
+ */
+var _default = {
+  // listItem 组件
+  listItem: {
+    anchor: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 129 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/loadingIcon.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _config = _interopRequireDefault(__webpack_require__(/*! ../config */ 85));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:45:47
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingIcon.js
+ */
+
+var color = _config.default.color;
+var _default = {
+  // loading-icon加载中图标组件
+  loadingIcon: {
+    show: true,
+    color: color['u-tips-color'],
+    textColor: color['u-tips-color'],
+    vertical: false,
+    mode: 'spinner',
+    size: 24,
+    textSize: 15,
+    text: '',
+    timingFunction: 'ease-in-out',
+    duration: 1200,
+    inactiveColor: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 130 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/loadingPage.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:00:23
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadingPage.js
+ */
+var _default = {
+  // loading-page组件
+  loadingPage: {
+    loadingText: '正在加载',
+    image: '',
+    loadingMode: 'circle',
+    loading: false,
+    bgColor: '#ffffff',
+    color: '#C8C8C8',
+    fontSize: 19,
+    iconSize: 28,
+    loadingColor: '#C8C8C8'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 131 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/loadmore.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:26
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/loadmore.js
+ */
+var _default = {
+  // loadmore 组件
+  loadmore: {
+    status: 'loadmore',
+    bgColor: 'transparent',
+    icon: true,
+    fontSize: 14,
+    iconSize: 17,
+    color: '#606266',
+    loadingIcon: 'spinner',
+    loadmoreText: '加载更多',
+    loadingText: '正在加载...',
+    nomoreText: '没有更多了',
+    isDot: false,
+    iconColor: '#b7b7b7',
+    marginTop: 10,
+    marginBottom: 10,
+    height: 'auto',
+    line: false,
+    lineColor: '#E6E8EB',
+    dashed: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 132 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/modal.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:15:59
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/modal.js
+ */
+var _default = {
+  // modal 组件
+  modal: {
+    show: false,
+    title: '',
+    content: '',
+    confirmText: '确认',
+    cancelText: '取消',
+    showConfirmButton: true,
+    showCancelButton: false,
+    confirmColor: '#2979ff',
+    cancelColor: '#606266',
+    buttonReverse: false,
+    zoom: true,
+    asyncClose: false,
+    closeOnClickOverlay: false,
+    negativeTop: 0,
+    width: '650rpx',
+    confirmButtonShape: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 133 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/navbar.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _color = _interopRequireDefault(__webpack_require__(/*! ../color */ 134));
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:16:18
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/navbar.js
+ */
+var _default = {
+  // navbar 组件
+  navbar: {
+    safeAreaInsetTop: true,
+    placeholder: false,
+    fixed: true,
+    border: false,
+    leftIcon: 'arrow-left',
+    leftText: '',
+    rightText: '',
+    rightIcon: '',
+    title: '',
+    bgColor: '#ffffff',
+    titleWidth: '400rpx',
+    height: '44px',
+    leftIconSize: 20,
+    leftIconColor: _color.default.mainColor,
+    autoBack: false,
+    titleStyle: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 134 */
+/*!*******************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/color.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// 为了让用户能够自定义主题，会逐步弃用此文件，各颜色通过css提供
+// 为了给某些特殊场景使用和向后兼容，无需删除此文件(2020-06-20)
+var color = {
+  primary: '#3c9cff',
+  info: '#909399',
+  default: '#909399',
+  warning: '#f9ae3d',
+  error: '#f56c6c',
+  success: '#5ac725',
+  mainColor: '#303133',
+  contentColor: '#606266',
+  tipsColor: '#909399',
+  lightColor: '#c0c4cc',
+  borderColor: '#e4e7ed'
+};
+var _default = color;
+exports.default = _default;
+
+/***/ }),
+/* 135 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/noNetwork.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:16:39
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noNetwork.js
+ */
+var _default = {
+  // noNetwork
+  noNetwork: {
+    tips: '哎呀，网络信号丢失',
+    zIndex: '',
+    image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAYAAAB5fY51AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAABLKADAAQAAAABAAABLAAAAADYYILnAABAAElEQVR4Ae29CZhkV3kefNeq6m2W7tn3nl0aCbHIAgmQPGB+sLCNzSID9g9PYrAf57d/+4+DiW0cy8QBJ06c2In/PLFDHJ78+MGCGNsYgyxwIwktwEijAc1ohtmnZ+2Z7p5eq6vu9r/vuXWrq25VdVV1V3dXVX9Hmj73nv285963vvOd75yraeIEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQaD8E9PbrkvRopSMwMBBYRs+5O/yJS68cPnzYXel4tFP/jXbqjPRFEAiCQNe6Bw/6gdFn9Oy9Q90LLG2DgBBW2wyldIQIPPPCte2a5q3jtR+4ff/4wuBuXotrDwSEsNpjHKUXQODppy+udYJMEUEZgbd94DvnNwlA7YGAEFZ7jOOK78Xp06eTTkq7sxwQhmXuf/754VXl4iSstRAQwmqt8ZLWlkHg0UcD49qYfUjXfLtMtOZ7npExJu4iqZWLl7DWQUAIq3XGSlpaAYHD77q8xwuCOSUoXw8Sl0eMux977DGzQjES3AIICGG1wCBJEysj8PXnz230XXdr5RQFMYbRvWnv6w8UhMhliyGwYghr4Pjg3oEXL34ey9zyC9tiD2ml5h47dr1LN7S6CMjz/A3PvHh1Z6UyJby5EVgRhKUe7Kz/JU0LfvrJo5f+Y3MPibSuFgQGBgasYSd9l6GDsup0WS/T/9RTp9fXmU2SNwECdQ92E7S57iaMeJnPQLK6ixkDLfjlb7546RfrLkQyNBcC3dsP6oHWMd9G+V3JgwPHh7rnm1/yLQ8CbU9Y33zp0j+nZFUMb/DHmB7+SHGY3LUKAk8cObtD00xlHDrfNge+Z2ozU3c9dvx4Yr5lSL6lR6CtCWvg6OAPw9z538ZhhZRl6XrwhW8du1KX/iNejtwvPQIDR8+vSRqJ/obU7GupjdNdh2gW0ZDypJBFR6BtB2rg2OVtuub9JcmpHIpBoK1xfffLzx4f7C0XL2HNiYDp6bs9z23Ypn1fC1Y/9PCFDc3ZW2lVHIG2JKzTp4Ok7nv/G6Q054MIvda+bNb74pEgKGtwGAdL7pcfAa8vOKEZ2kyjWuLr7uDh+/qvN6o8KWdxEWhLwroyeek/g4zuqwU6kNrhyZcu/UktaSXN8iNwuL9/RuvVXtJ9PbPQ1vhmcP6t9+47u9ByJP/SIdB2hDVw9MJHQFYfrQdCph84evFX68kjaZcPAZJWwjMXRFpJ2zr91tfuvrh8vZCa54NA2xGWrunvmg8QWCJ/N4ir7fCYDxatkOeBB7an501agXbygVdvv9IK/ZQ2FiPQdi9osGbH+zRNf7y4m9Xu9Me7N9nv0HXdr5ZS4psHgXpJC9P/wDRTx0Vn1TxjWG9LGrbaUm/Fi5meSvcrkxf/Cg/ow9XqAUk91v3qHT97r6471dJKfHMi8Oyzgx1Z03t1YAQVT2MwgsC3u+yXHzi0faQ5eyGtqgWBtpOw2Ol9+/TM+sTOn8L08MtzgQCy+tOHXr3jA0JWc6HU/HF5Scssr4jXcYqfP6V/T8iq+ceyWgvbUsKKOn38eJAYyl56TAuCEr2WYei//9Crd/5GlFb81kdASVopSFrerKRlaoZj9HR+700H10+0fg+lB21NWBxe2lhNHsUpDZr27mi4dV379R9+za4/iO7Fbx8ECknLCPTsTDJ17O33bJpqnx6u7J60PWFxeAcCbMV56dJfQKf1bkMLfuGh1+76zMoe9vbuPUnLsb2DtmOe5HSxvXsrvWtLBEhaTx29+Ma27Jx0ShAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQaEsEVoQdVluO3BJ06ptHL34b1XRjp4Ch6Rq24+kmjG4Nwwg+9uA9u/73EjRBqhAEihAoe3xwUQq5WTYEzp0b3ZnV/Ncf6O/9AvY9wlh/6dy3X7ncN512Zw9BVLXjuAP4np44vnQtkZoEgVkEhLBmsWiKqwsXpjbPBOn3gRfenwnc+7GBe+zsjclvonFDS9nA9Iy/u3x9+vAP3735VPk4CRUEFhcBIazFxbfm0k9fHD7k+v4nQFaPQIrx8Gmyx/GJ0J/t7ez7mw0b9MmaC2pQQgh0/ZSm4g5TwueWWtqLt0HuVy4CQljLPPYnB0depTn+b3t+8B4t0AdBUv93h2H9xc6da0aXs2m+r1WQsLRnl7NdUvfKRkAIa5nG//r1oGtsZvjTgev/kqYHF/TA+AXoqv4npJemOEiQU1Eo2l+G0movBK1UBBPU7s9E1+ILAkuNgKwSLjXiqO/khVtvARH8dxDBRkMzPrF/V+9/BlG5y9CUqlXinHv9mRPXtvuus88L9H3JPv2zD2yXExCqAicJBIFWRwAvv3Xqwq0/Pnn+lv/K+ZvfPH3p9p5W75O0fxaBp793ce3AwIDMWmYhafiVgNtwSMsXeHp4eNXJC8Nf0PAdRCiuf/XgrnWUqsqotcvnl9DmRkCdweX4b9N7+m/ih+mbMraLM14yJVwcXItKpT1VRve+ArC3Qqn+3gM7132jKEGZm6tXg86J7OhDfuA/iHwPUpfUZSfu2L59tXxEoQxeyxkEgjKeOnLxHb4RqC+NY5H3+2953d4XlrNN7Vq3ENYij+yZwbG9jpt9GkBPQ5H9zgP9607OVeWp87cOQtn9zwJf+xDMNFfj+jryPqXpxj8c2Nn7P+SXey70lidu4IXzb0DNB4tr9751+HV7zxSHyd1CERDCWiiCc+QPjUCnsaqmZ62O5IN7N/VUNP48ee7mAZDTf4Tt049iUG4Guv4ZfNLos9UIbo7qJWoJEHjy+bP7fNsoOcnW0A0/aacef8PdG28sQTNWTBVCWIs01OfPj66BpfqTmq732UnjgT1bei+Vq4pTv7HM8Ceg2/o1qLQug7T+FaaM3IqTLZdewpoHgYEjV9fphvOj+OShWa5V+CxvZtpzv/LwG/aNl4uXsPoRwI+4uEYjAJ2GmdG8L0FK2mYa+tsrkdXZy+P7x2ZuHdW14P+BLdank9q6Qwd3rf+ckFWjR6Tx5Q2cP58K9Jm3VCIr1ogt48lO237r3//96YofeG18y9q7RFklXITxPXV+5DchKb3ZDMy37Nu5tuxG4R9cHH6b42QfAzlds+3EPXu2rfrBIjRFilwkBIIR7SHoJDurFU89ZOd680Gke6JaWomvjoBIWNUxqivFD87fej0e0n8Fwvr0/t1rnyqX+QfnRz7g+8FX8Rv8vL3auF/IqhxKzR2WCPxXqKeq3krDTdj2ierpJEUtCIgOqxaUakwzNBR0D09yiqePHOjveyOkpxLr9VMXb73V97S/h3nDXx7Y2fdPkAYbncW1IgIDxy5vM7LZt/hgrnLtxyaBrJNxv/72N+6tuNhSLp+EVUZACKsyNnXHvHL+1qcgNf2KbSXu2bt9dcmS9qlzo/fARgcmCtpzB3b1/Vg5QiuslLowENyDWDn8cSjl98PgdBviu03N+rl9/WufLEwr18uDwLdevLTF1YK3xnVZ2HI1bUxrT7z5zTuXdRP78qCyeLUKYTUI25OXbm4JPO00TBj+6I7+db8ZL3ZwMOiYdG4dA1lN9HWte2iuI2NAVPapC8O/CGPR34Ip/AZIbIMo7yX8G9QMbcS09P+2b1vf5XgdrXaPfiYns9oeLLEd8D1/B7Dp0E1jGP042pXQj7RKf546cmGzp+tv1TRf6YQD35/QO3seP3xow5IfC9QqmM23naJ0ny9ysXwgq98BWc0kVhv/Nhalbqe8kd/Fr8MOSEr3zEVWrwyO3I29hl+E9LUHGf+nAXI6sGPdd8uV2YphIKnE5IyL6bLxk7cn3bdkHHefrpvJAExMZ1uBZmqeNzXtfzUzk/m/ens7LjV7Px+8d9e1579/44l0duZtge+Np5zEEw8c2pBu9na3YvtEwmrAqNE8IZvNHsep5//yjl3r/0O8yFOXbv0QCO05gP0JGIL+fjw+uj91YeRh/Dp/PtCDM7Zpfmjvjt6Xo7hW9ycmJjaYduf7Hdf/8HTGfa3rG9rYxLSWnsloPg7fijZV8oFM2Ja2a9t6EJd7bCztvHP7us4rrdD/r3/7ct9I99jEI4cOiQ3dIg2YEFYDgOUJDFj1e8TqX7cT4kImXuQr5279A4DeBEX8ayvprU4N3rovcALot/TH13T0fXDTJn0qXk4r3k9OTm4y7a6PzjjORzOOvn1kbEqbnEprPhRzwAKzwFLHk05hv6Yd6N+o3R6beG50aPSdr3qV6IJKkVp5ITIlXOCYn4Yexr0w/DO6YXymHFlR0e5r7tsM3fxgJbI6fW1ivTeT+SsYmr54cFff+5Cu5X+hb94Merp6/J/PusGvTE6724eGJ7RpSFOkKPCUZvBPBccoHBet3Rwe13rX9tw/PjXzZ5hKvr8SfhWKkeA2REAIa4GD6p0feRdWBnvxjv2PckVhVfBf4A29uG/X2i+Ui2eYn8n8NryuDr3jPfWSFV5k44UT137eshIP2K7/64cObbheqZ6lCp+Ydt8TBO7vTM5od1+/NR4SFVhoLpKKt410lnE8LTMzo3V2dLznxLkhYgQ9obiVjEDln7mVjEodfYcpw+MAsftg/7qSDbAnb97sCSb0Yei2fqOcbovVqKNnNO8HmAE9Cv3Wp+uoWjt27HpXNqH9WTKR+kBHKqEFbvo5y3N/avfu4g23R45f3WGa1k9ZicTd0zPTf/f6O7f8dT311Jp2fHzmgJlI/N70jPPe4bEZ6Kg4qw0lqlrLiNKBiLWerpTW25PUbkPXZViW62ecHz+4d8PXojTirzwEyhq8rTwYFtRjvpX/rlwJ+iSXugPbMuyKBOHo3geRJtuT7PujcmVUCuPJlhnL/9NUqvMD2eyM5sxMaIlE4n7XML907tyNjcxHQjty4sZv66Z1xEok/xNW5n4uZSf+8sT5m++vVO58wkEu5sR09pd9w/rWyET2vReujiqygrSopn/zKZN5qMeirotKeTyolm7p/+X06Wvr51ue5Gt9BISwFjiGsLl6N6SrvylXDNTK70D4mX071pwtF88w6Jd/DG/1E1u26NOV0pQL71y3/8PJVOcHMzPTWkcCH2YGOaTTaS2RTN6f1fQvvvDK1bdnbO2JZCr1SeRfn05Pa1PTU0gXJBKW+ecnzlxvCGndhFQ1NRP8bcY1/vjS9bF1V26MwHwsVKiXa3etYVw1TNhYJ3TDjQCO42jJVMcez7J+t9YyJF37ISCEtahjGjxkGDr2DJZ31D8h5vUQJL5RPkXlUMM07u3qSGidICvkzzuSlmlZb0olrK9hD9v9JCrPC196JoPMAolFg6CV+PPj54YeyWecx8Vk2v1Q0rSfhFT18LnBmzBRyNalp5qrSuq7kiAsh4SFa7oZ9M0wzI+cPHOjZPo9V1kS1z4ICGEt4lhiCvZrSa2jol7qzPXJPk6nIGbVbWfUvcr7hO9MP97ZVXpggOu6ajplYStj7l1XvbRMXbPAbp6HzSSBlkraNknrvfVCcPt2sHYi7f3pTDb47KUbYxuvKqkKpYBXKBnV869c3WgbDEixAck0FGFFfEzJzbIsO9C1TyrcymWWsLZGIHoW2rqTzdo5dXyykz0NC8l779i5vu4zwM+eHVntGP5jqVTq/6AkVc5NZ3wNH2lVxNWZNIukMSjiNd9z0+CHp5DXAdX4SAg203w8GB5IATtODHzdK8C15kEjhXvNS9rWA11dnfcMDY9prscss48RySakrOLWqODCoIKAgkuVgsS0urtD60haeV1YYVbbtjUn6/74HXvW/11huFy3PwKzT1r797Upe3jq4sib9u9Y+wxe+vh7W1N7jx49v6ZzbffnQD4/Cj1Pfjx54XiBls6GVuTUc9mQsOIO9mPQFdkIRlz4fy5JLm2ZMOqTcJaXIqpcqnixVe+rdbZ3dbc2OT0D0wZIibHSksmklslknvx+//q3PiKnXcTQae/b+LPQ3r1t0969cOL6G7o6E09qgZegdMJBpVQ1DbKCpyUt6oPKz/4NEJalCAuZFIuEVBJd+jgLh4rvAiFqUVGkhJZMWFp3Z0obGSu/d5gSnWmavuO6h+/cvYHSobgVgoAYjrb4QPMUiGtj1/79jBMkLBwiTlMASlYzTkhWCJyTrGAyMOFkst/BoYMmuIIyGJYcMXMMdNwHPhYN1qWS1t6ZLGaKZL8yzFXTr15BooLLMugHMBRNKgW+It8y9TEcJGt4rvcRFCCEVQbFdg0Swmrxkb0+cf2XOzq73kgdFieEXF2jdEUJKQH6SVWQrNjtZDKlpTPp38U58iUbthk/Ph7sN6zg/xudSGvD4xkq6otcnnjyF0XRRTflkyC0IIJE1JG0QbqGNpMNp5xFhRTcZDNoj66988SFm5vv3LX+WkGUXLYxAuXnCW3c4XbqGs9hwjv+a9lsuN+ahOJSCoLjNDAFvVUll0p1aNPp6adTweSflEszPO48oFn+4yOTmR+6enOshKyYhzWpf/jDuuf6x2aV/qNRaPG/1d0gUXWCA0uu7GhMmkqmerEc8KOVU0lMuyFQ+Ylut562YX9Sncmf7Ojo3BDZWbGLtMkiUVXSWTFNuMqWuYG530f7+/tnGFboxsfdd9mm8XdDo9O7rg6NFq0CFqZr5DWlK9qV0fZqGvZchSuPlevB2VmG/hOV4yWm3RAQwmrhEcW64qu4ykfJho52Vp3J8quBYQooqWDKADftBd6HD+5efyoKj/zR8ew/hWXY56/cnFh7a3RCTTGjuMX0SVB9qzu1qfQM+jO3dBW1g6uVSHv/qVNX10Vh4rc3AkJYLTy+WA/8ou9kJjo7bOh+DLVFZ64TEbCyBktxI5PJZj56R//Gx+NdH5vM4vuI+p8NXh9LjU1iw3EZhXc8TyPuuV9wDaaCfBjTM06N0hVWQmHBDzvSDZ5tvqYR7ZAymh8BIazmH6OKLbzv0KZvJEz3ZzEFnEolaEtV2XEaCLKadrIz//TQnk1/EU85NuH8th8Yf4j9gMZUOrNkZEVZCnsbtTU9KW18GqcKFyjh420sd2+j33pg3F8uTsLaDwEhrBYf04O7N/2t7/o/C2FoGnsIy/YGlvAwSfCvZzLOe+8oR1ZT3u/5uvHJC9dGtJlMrfqjslXVHwjpat2aLi2rjFFLjUSrFUjlO0juddXSSXx7ICCE1QbjiHO0/hofbPgwpnDTOR2V6hWNQqGUx34890noet5yaO+Gko3Y45PO7/uB/lvnrwxrWdha1absbgxo1FWtwplXqYSJY5Nn5lU3bLHQmGA/yko0plVSSjMjIITVzKNTR9sO7dv8RSeb/T9BWmMkKv4D+YzBXuljV7yxd+zfte6VeHGKrHTz4+cv38JWmyUmKzSGG5z7VndoE7kz3uPtq+Welvhwm39weVjOyaoFsBZPI4TV4gNY2Pw79mz8KyebeRIH+VEZTaX0sf27+v794TKmCxNTzr/2NOPj5wZBVjjdYSklq6jN69dyKuhqmWztivYob+RTSkPbe/xMdlMUJn77IiCE1W5jq+s4dYEO6mzsYAmvi/+CrH7LDYxPcBq4HGTFVcG1ULLT5orS1ULIkoSFI2cMHKG8obiXcteOCAhhtdmo6gaOh4EWWlkyYU9gvHswXfgV19d/7+LVkSWfBrItJJhObL/p7elQR8fUZnEV70XxPc01sM+xrzhU7toRgZIHuh07uZL6xA3LBaYB+Ar8rBsfz34YX1j+D5eu317QNGy2xPquSE4mDuXb2IujY2AgytNE67RiKFshzuwCR5s9ZSMlsK0QEMJqq+GkBKOF5yFzRoidK5BoFCeMjM/8mG+a//Xy0Li55KYLBRiTrGjwOQ1br4VMBQuKVJeQKVPxMLlvPwSEsNpsTEECmBLSgbHUpwD1YGwse59l2p+9fmuig4fiNZIowrqq/6Xeqm9Vh9JbjcOKvqFtACX7gV8kTVZvkaRoRQSEsFpx1OZoM2iKxxuHLtDcsZlgLzYZfv7m7XSv+r7fIm234XSP/8o5ktWqzqSyZr89PoXPYDTYkZvziw0NLluKayoEyq4iNVULpTF1IaDjHHZmoAW4aep9geN8fiLt998cGYdtVp7K6iqzXGJFUCAi7jdkuapsBJKcPBwgyP8YRyV7B04Q3dDbpY3jg6gupoMNla5U41BbUN9n0sr1ScKaHwEhrOYfo7paCAW0WiWknihhW/0Tabf/6tDtxpIVSIhGnz1dSXUkDL8fSHKi4/lWPId9Kp3Vxqegp8J/m9f14D6DQ/nmb281FwgkZ1Dj7bnSSFx7ICCE1R7jmO8FJJr8jCvjeNrIxFjDJBpKVaSlXhwDw384MyucBoLAGEfHI5ptO6n1YAq4FjorH9IWjUOnFlF3pj62aui3whbI33ZGQAir/UY3XCVEvzgdw/8NcSyGUhSlpVWQrFg2p39xp0JYLyIohaXxdZ2FGofG6yi85/QS32F0Asu8URgu1+2JgCjd22xcsVElPC85169Gaa1YTkRWJKpSqooBiQQzONvq9sRULKKxtzzAEJw1api2EFZjoW3K0oSwmnJY5tcoSD09HanEDztubnfO/IopyUWC6sUmZUpW5aSqkgwgK04DxxaZrFivacCaIdAuH9zaM1rSDgloOwSEsNpoSMenvU93dXb+EE5taFivKElRqd67qrNmsqIF+yjMF/i56MV2JqadYKxXMDXM6+4Wu04pf/kQEMJaPuwbWvPticwj4Il/NnTrdl7JrqaDC5wTUle1GmdWWVCw1+JotjA6PgnThsIdQrXknF8arkJi/+R355dbcrUaArU9ha3WqxXW3tHR9C5dN//T9eEJ3aGdUwP7T0V7F86Mr0VW4mF6o2NTS/ilaB2HDmb8wA2+08AuS1FNjIAQVhMPTi1NgwRkGKbxRxMz3uaJSRzVUkumOtLwo6Zc7aOkVdEhynN9NQ1cyuNqeEqD67mX9TXGyxXbJhFthYAQVosP58S0909czfqJqzdGODVqaG/IUbCWr2p0yukfp4FUtDfeir1yl8IPUGjPHFy/fqJyKolpJwSEsFp4NEfT6Z3YBvOp8MvMc0hAi9hHNQ1cBrJil5TUZxhfXsTuSdFNhoAQVpMNSD3NMTzzU1PZYAM/ProYkg3UV5rHT8lXmA7SwnwEq4FLLVkRI04HM+n0LdvzvlEPZpK2tREQwmrR8ZucCd7hePr7rw2N5PfxLUZXON1zHKz4kb0KnIttP6Njk8tyaimbwXPrsW/yq3v3bhoqaJZctjkCQlgtOMCYCnU4GedTI+NpQ32XbxH7QOmKG5nzdIWZJz8HNkKygqI9TmSL2JSiovGVn0A39c8WBcpN2yMghNWCQ4zPc0HRbr6GEs6chJFnmfl3knZO4/hmII1B6fiFG9br0s6qAeXPp2WUrhzHeXH/jr6n5pNf8rQuAkJYLTZ2kK7Wul7w6zeGx9DyUsZovOodOizosTg1TM9k1Wogpa7lIisOF+w48E/7E5B1Y/cgtdizsBKbK6c1tNioT6X9n3MDcyePOo7OoJqrC6S0+ZIYV+GSOHxvc18PJCxXG4ed13I727axqTp9yk9rX1jutkj9S4+ASFhLj/m8axwdDdbgELxfGsLpoZyqVXPVU1QugVJUV0dC27p+FaaBWWxknq6ceAljTNMiAf/BoUMbJpewWqmqSRAQCatJBqKWZpgJ731Zx9pJM4aK0hXe5vlKVFEbKFlxs3PvqpSSqpbzKztRm+gnEkktnU6/2GFMfa4wXK5XDgJCWC0y1iAR6/Z49iOjY7C5qkG6mk+3SFQGlEP8FFdnygrNFqBsn1OxP5+K5pGHbcBhqhT8fqu/v39mHkVIljZAQAirRQYx7Wj3Zj3tddQjVVJ4l50CMjHe8mqOTJCCvmoTyIrENXx7Uinbm4Gs2PZUqkObnp76i0N7N36tWl8kvn0RaGnCGhgILKPn3B3+xKVXDh8+nPseX3sOlpt13+P4uonv71WeDqLr1ampFB8S1JrulNaHc9rTMxltcpofOeWns0rTLkeIZUHRnpm5YibMf7kc9UudzYNAyyrd8ZLpWvfgQT8w+oyevXeo++bBtaEtQd9s1/ffRsV3I6eDJCp+nourgH04UZQnhIYfWm1o8xdUGCU8/E/bil89sH3dlQUVJplbHoGWJaxnXri2HTvd1nEEcCBS3z++MLi75UejQgcmJjL92ax/gNJPo6QekhVXAbdvXI3D+XQ1Bcxiu02zTAEjKFIdHTQS/S8Hd2/4YhQm/spFoCUJ6+mnL651gkwRQRmBt33gO+c3teNQYin/oG6aKX5rcKEukqqoWN+Ij5vy81v8UATDG0WGC21jlJ96K6wKPpWd8H8jChN/ZSPQcoR1+vTppJPS7iw3bIZl7n/++eFV5eJaOczX9Z2YvM1LPxWpocBHKv8qHHdMqSphGUqqahaThfj40ITBcbLnsDj6oXvu2bS4n96JVy73TYtASxHWo48GxrUx+5Cu+XY5RH3PMzLGxF0ktXLxrRoGNVPPfNtOolIrgElLGYH2wbZqcipdIFVFlDbfGhqfj9bskCaHHS/7gTt3r73Y+BqkxFZFoKUI6/C7Lu/Bl1jmlKB8PUhcHjHufuyxx/g5lbZw+BL7bX4EoiZqyS0T0uM0j1+82QSl+ua+bhxj7GjD2LicwWkLzaarigbKsmDJ7gcTmezMBw/t3ixntUfAiK8QaBmzhq8/f26j77pbaxo3w+jetPf1B5D2RE3pmzyR4/nH+Mti4Wx1dUrCHO0lSVGqskFUnakkpn6mhu086jgYHkWTW3Wbo4Tli6L5gqYHE47vfeDufVv+YflaIjU3KwItIWEdO3a9Szc0ElDNDqcLbHjmxas7a87QxAnX9ljfxcr+Mzs29ykpi1O8iJjoR/cm5o7dnUl89LRLW93dyWmVIip+Kp7pmlWqIvQ8Mga9Gslm3Efu3LX+K008HNK0ZUSgplnGMrZPGxgYsIKeXa/TA61jPu0w0+7xBx/cd3M+eZspD0wbDgWm+RXP13cODY/jWGKuGAb48jG+agNpilbqlKZoWDqDY2AyjtNUlupzYZlKpXgaxIVMNv0zd+/d+uxcaSVuZSPQ/IT13TN34QRvZW81n6HSDdMLUqmjh9tgd//Fi8OHEl3JL3Z2dh3MzGA7XU664llVWRz/QhLjNYmsmaWp/DjCjqIDdlaZTOZZ1/A+fGj7hjP5OLkQBMog0NSE9cSRszuswNhdpt31BRnazM3U9IuPHDrUuG+419eChqU+cvzqjp7u5P9KJpMPpqc51Zv9QntLkFQBEqZluVCw/7nhaP9i376+8YIouRQEyiLQtIQ1cPT8GjOw7vE8tyFtxBrb2MBXdh579FF99g0vC0nzB548ebNHT2l/aFmJj1BPBYyav9EFLaQ+jdPAVNL8/pZ13a8qiJLLOhAAjvrTRy/d0enbF+69d0tzHFhWR/vnk7Rple6mp+9uFFkRGF8LVj/08IUN8wGp2fIcPLh+4sCu9R+F3ucj0MLf4vaVVnChqYWmdaQS2jpY2vd0djh86Vqh7c3Yxm8dudTPxaW0lrn7yJEjZW0Tm7HdC2lT0xKW1xecgHE3FDWNcb7uDh6+r/96Y0prjlIO7ur7TOD5b3ayzt9ylY0Gl83qKFXZsCXrXdOlrV3djf2LBr556JOshLDmMWhPPXV6vav5O5jVxYLUhNl3iIbV8yiqpbI0bQcP85C2Xu0l3dczC0XUN4Pzb71339mFltOM+Q/0rzu5f2fvu1zH+QDOt3uZ0pbVRMRFouJK5qqeTkhVqyBdtdUmhGV5JI4cudrpd5kHiyp3tTU/8s6r+4rC2vCmaQmLWJO0Ep65INJK2tbpt75298U2HLuiLh3oX/95L+0/kHUyvwTieiUJHVEimVzy1UKeWMqv2pCoKEVFRNXT1aHawnBx80eAZj7TwcxdAc5Gi5fiaNnNT37nCk4xaV/X1IRF2B94YHt63qQVaCcfePX2K+07fMU9U7qtHev+xE/7r3cc70O+6w1gxuV0dHZiusgvJS/O7IskRXLs6KCxqj+B26t9a3uUREWi4plbQlTFYzXvu+7tB3EIUGel/L6e3TNw5NS8zYAqldss4YvzBC9C7559drAja3qvDoyg6pwCP+KBZaVOPPjazS1vMLpQKE9fuPnawDB+EqehPwzWuAuSl8LPg90WVxhJJPWQCUmPBAWTBEz1TFUGpqO3wYYvIPgr2az35a2b1/50V6f1e1NTlVcvEzB0xRekj67usu5FmS2/crvQcaol/zeeObfTSOj91dIq28PxiaOHDx9quy8LtQxhcZBqIS0Dhkl2l/3yA4e2j1Qb2JUUD1Iyz1waOQib0vsxKXsAFvH3wMB0JySwtZC+DBPTN5BOCEnhrI1BuKe9l6tIzsVCiD6E0DOabrwI2elZ09aP7N3aNxjheXvK+a1OENa0EFYEyYL9rz072Ju03ZpNQKj7Xd899cKhNrA9LASvZTY/s9GcHoK0XsrakLS8UklLxyl+/rj+/Qfu2367sJNyTS7SuZfneO7ffweBGScu3NwAqWgrTvTc5jjBZmw87tMCfRXYKQWOgula4OiBOQUZ7DZuhrAGdQXxV0zPuCaGnkv3VPGHOpPw7+QPR62OM5HhdNddGOeX2kmCbSnC4mDlSStVTFr4eLljdHV+702vWz9R66Cu5HS5h5hmHvz3QiOxwJTRo2BGgY06dm7OVhewYGAY6s75oD+ZDs4JPY9JyqSCQ7ABqftd5VFM3/j2Ja4mtsWpJQSq6ZXu5UZTKeJnsHpohiYPRqBn04nkS2+CQWW59BK2dAjwS0Y4IHDz2ERWG8Gnwm7iK9W3sFmbvrqGPzw6gW8eTmvTM07XmTPX28KYd7EQ3rjnvv1QFHbPt3zT9DcMPHd+13zzN1s+/hC2rKOo7NjeQdsxT5LEWrYjbdLw05eHtwWe9jl0542u62HZHZIVpalY/yIlP5X3MHYddLLZfy4fmYiBhNuB509vw+rG3tKY+kOwGHLi7W/cS91jS7v4s9TSnZHGLx8CICH9lXNDX+zpWfXuycnaBV2e3e567nAm4973qv0bzy1fD5qr5oEB7KXt0u7B3Loh7yhWVfypbOalh9+wr6U3mbfklLC5Hi1pDRE4ef7Wj+EEiZ+amqpvJT2bzWjJRLIPR3n9riA5i4DZg720DSIrlsrvHXSZ9p7ZGlrzSgirNcetqVp9/vz5FJTqj6JRejTdq6eBMzNpHP9s//QrF4bvrydfO6f1JrCX1mvcXlo98Kembjotr3wXwmrnp36J+pYNeh5JdqRem83O77gxkpxtW3bgOZ/g1HKJmt3U1Rw+3D+zrc89aunagnWzpq6PdxujLz388L4F78tdbtCEsJZ7BFq8/sHBoMPX/I9hyrGgnuDUUZzrnnz7yQu3HlxQQW2Ued++fZmJ1e5LoPB5k5ZpWCPXz+08du+99zrtAI0QVjuM4jL2YcIZeh+2+9wF49MFtYJSlgmHE0g/JlLWLJQPg7RmhtyXsJ18eja0tivsXhj6xy9ve/mRR5TRcG2ZmjyViN9NPkDN3Dz1FW5z9XM4i+s1ME1YcFNpUIrVLHzJzHnwjl0bn1twgW1UwPHjxxPXpztejR0HFTc+F3YXRwxdfdM9W08D0zrs4wtLaM5rkbCac1xaolWOvurhZIPIih0OdVm2haNTfqUlAFjCRnJP4HBn+iUqz6tVa2nGpTe/etsP2o2s2G8hrGqjL/FlEQC5GHghfplSUSMdvwaEA/9+4vjpa3c2stx2KIsfUek2dr+EuXNF2xEjSJx98w/tbFt7NiGsdniSl6EPp84O3W/Z1oPzXRms1GRKWdCJdeCIlJ+vlGYlh997r+70+EPH8NHJEtLCauCph+7bmj81ox1xEsJqx1Fdij4Zxi9AT2KSYBrtslgxhOD2gWOyz7AstFzx6zFHj1mGobYUYAgC9cHge3ddK5uhjQKFsNpoMJeqK6+8cm0X6noXiWUxHA8WxAdWNyQM45HFKL8dyiRpueM7jllmMGpnjO+1w9fNaxmXxiogaqlR0jQdAkeOBPjczrnOiQ6jw88ESSOA6KT7iQzOHEvavu1pZsLQg4QPP/DdZG9Xx/vWrOr+mfR03SvtNffdxleAQIgvTzjBT0w409Mpu2faufZy+vDhw5WPMa25dEnYqggIYbXqyNXY7i/jCyvdfmaVb5hdVsLp9LJGp43j1/1A7/RdvdMwPRzEboRnLVHe9vEvL3eXBOB4ZMta22H+TiqV2LJQ26u5u6Bju44Z3J7O/Lvp6cwPmBanOwQ4uNHRTWMK21bSvh1Mm642nTWCtKkH07rnTE72aOO0XZq7bIltVQSEsFp15HLthg5J/+aJE12m3tVjOPYq1/dW4cTjHnwMYhXOce8xDd3y/PJW6OpMdsTRVy4iK/rKMR/jwvz825VIHFzT3fkx13UW/dnhRy3GJyeeHEs7n1XNibUPFvY6vtGDw5vV9w0Vofn81qGhZfDhi3HX8SfQ/3HPMse9CWcCX0gel2OIFJIt+2fRH7qWRaYJG85NxldGzV4tGayFSLQ24+q9ULyu9gJfMU5ELTn6wUISTl03NHz1KzyiJLqmX657OLLdSJgoXTO7cBxyN172blier4YCvBsFdSNXV2dC35tKJrbzfPfFdjwvC/qs9MSMxxNRsSqmT6LhUDQHE+jUBE7UnATXTuLsrRn01K2l/x6+qItiR3TNG8V59KNB0DGSfNXGUXwJY2Gm+osNhpSvEBDCasIHgVLTt75/aQ0MnXpBNb2QgNYEntfr4wu/nBYpKQLtxtdwAh0SBX3VDe7nM/Ha5vf1Fb/CURS2bCTAWWuxR229qRsbQQQbUed61LfW14JVKKsTJ5sk8WUcHbtlNANyTOhgcmAGKH7p3m1FWpqtuZCu+LByVdKHVMjpKEQrBwIW9tnpXOIH+QTDSH/D9f0bmCLewDn1I4HmwtAypPDZ/oe9oXKf/aMPsWxSs/RR13FHrURiZE1gDR86tKHEdCDMKX+XCwEhrOVCvqBeHNaW6ui11/mWDtLQ1kEiWodXE4rwYgepAPssTPCMOjIdAk94TZ8pMZjch8HjDorGFUTUAwlkh64be0A9/ZCatiDZWtOyE7ClQmIdJICJFYhA+TRV4Fo5/QIHiUvrTEbkVRCxiJfsSBbfYk87OTExXxdazY5yUgiRKfpHQ1YSkONmAZY+gV4NIeVFfCXoLNA5h/Plb5LzWAyzF+IVXdNnvO/6GcsyhjC1vmWZ7s2pO3fdOqzriy9asnJxZREoerDLppDAhiIAEtCfO3F5rW0a6z1PX4/nf53nG5RqqrpieSnULEVh8cx4E7ugH78H8tG9eP/24oVezY+pkpA8b/abhPF8le75BqdsXUtaFeaTlTI2IByEoU1l8oq1mkokcZHElIRoWmpejMMCMyCvQXyy7JjjuUcgOl4tLCzCMpTHgFpcgkViX/dH/ax2Szf8m2Yqc/MN+1r7BM/C/rfCtRDWEozSkbMjq7NTY5t13dqE6dhG3wsSqlp+C9DDi0ifLrqmT1f6BgUaPjiHN0lJAGAfvpWcI4XjiHIMF6ocO/EjmMa9HeelQ1LT1PRpoce/sJwOTCQtc+kfGQp6Uxl+9JWtmL+jNEaJ0gKBgbsygR58B4sHfwV5aliVWg3vCHv6ymHcdG868IzrVsK6pnd71+/dsmXxbD3m3/W2ybn0T1/bQFe5I8euX+9ybuqbXMPbDA7ZCKV4uMOecyz+9OfmWvj9x9zEw6JW+JuOX298WhE6qtwLEV3TL1tb/AWj7sqwfqaro/sdmcyM+vBp2XzzDEzaBiQsNH+e+eeTjQ+ohwqnG0BYhfVzNYKrkOmpyauYYH8KvD8G6RPBszrC6Jq+ystl0ghzXEZjR5+O4+iZwTh+eG7Yqa5rq/3hGzzTSkXKn4YgIITVABjBP+ZzP7i8ydasrZCetuCHvIvFRs92SEdlpnCYE2LOQi12OA7RNf1yjrphHIyE9yOXPnfNMDg70DpdTf8DWDKs5rRvMVwChAWrUgh21HzllD0NrigqlxKVC7bKQuOOWeGiuI7OTkhb6T8C/Xw3xkel9cXxj6eIxiY3Hhx3X9dHsWJwDaa3l1+zd9Mt/F4tUk/ijWnP+/DBb8++LWqvnh0c7NDGta0pO7kl6zpb8AJzEUr91kYEFdeBRCt69Nm4+AsSl6jwjVGckY6VwPwUpLhLURx9xliWvxFHi/w+zB0SWCnLsVpxnoXesSI2ngp4zmRJXPgf/0IleGH51R6uwjeX5MR76qtITh7+8N9Cp4GF7Sm8Zl1s35pVXVomm/5c1vG+Wm284njHJeJq44/FjixUAld8w7uijW6+xo3MhW2S6+oIVHumqpewglJ87+LFtcFUcqur+1vxwPcZJqYPMOyhXw6GKI4+4/GwQpjCBhe+6XDIpFb06PM+np5hhS5eXzw9bLJ2pBLGv4Fe36BU4kA6IQGw8MUY6MJywVeqDs54Z69zrWdY7jI3G1ZtUiSV6zzDI3IqLLew/wu9jspl+yywrA1pEed5QceXPT3jBb/DLrA5ua5UHZ/4eMTbFx+fwvE3DJO8fANrjlctL7giJhRx9MrfR89R+VgJ1Y6currONuwd0FNsxwtV02mPlWGLy1TxlPHf6Hh8PH9xesvw9yRM+5PIRT2ZIgVKKZxWUY/PT8aTFPji0i3m4Ed1hDWV/7uY9bNGtiGqAyorJRWSqCgdkrQiR5KddrwPlsq8xfhG6efvx8dvtiQczDdmmPaldDBxSVYeZ3GJXxUMWzxq5d4fPz7Ym7X1HTAL2A7NqtJHEQ3qtCPjw3LoxB/v+OMZ5VVzR5aHWRuErYA+y4uu6fM+Xl9J/lh7bFvbY+vmv0bWos9tsXAWSLIiaSnyApHxJz6SbFSFuXTw8i86r5vVRW1m+6IHmUREAuI0lcREP5q2ztWPrO9/YK54xsXHI56+cePvj3qBfimZNS+J5FWMcrjptThsRd4dPX9+DcwEd5iQphwozfkCwJKaLv9ewHYKeicfSudwShcnJDBBOD3MTwGRO0cqLIj73jQTaejDBYaPHTBgJ/i5+HyYijd95sFhRzkzB7yL2IrCtGwezj9nOQVTUlfPwiicifnu5J0qHHd8mXHIG6ZD7JQqIk9kJK6QwAokMWRUhMaSeJ0vcfaiXNhs7PyuwpYV51Vh+EM/Pu2M9GckpyiOuZm2Wvtom+Y4me8xPbvIIujzPu6Wbvyt1ejL3U7Sv/v754ZHsORwaX3KGdwiJhO5pzY+Mivk/urVq52jTnIXlEc78LKu8qAMx/G8kHhyOicosz0ovM3IrIDKb15HSvDoOoqv+hMLYCOWI8ash0vmufryZVcqLz4u8fym3ov1xT/EVp4UDUTn4/iS0xW+sZTMojASmLqGp64iH4FRXJQ2TKj+lv7JVRTVxwQkm9APyaboGnGMzSVR6VR87ipsVT645ovOzi5tamb6zzB1/nqzjz+s9YetwLioZW5C8jq08K9+1IxS8yQsfF6ap1WL2BK8VOaJc6NbPcPrx7wJ++hmHQUPvOaQgMJ3ETtVlERDP0wVsQ19uPgcLQyt/Dc+p4jlL6k/1xa2qVyh5ApEzEoErm/DsPOTXV3de6anq36roFyRdYWVbVSshHJEMt98saIXfIu9koplYZL6m/hUz7kS/Jt0/PE8+Jj6X/Y6k+fv2tA1BKIvB/OC8WnGAmp5dpqx3XW36fjgYK/upXbhFd+BrRlqn16MfkrspkoC4hnirYjbUVWzs4rHx8uL3cerjwt0TA4RcBcsuX8Rn97q54okVsCKJJ9YkSvy1gJR4aOtnAr6OJP+L13d+BKBKMEzHhAfgDh6yzD+vqHjTDDvYpAxLqwEfVdbE9bpIEi6V27tdLP+LnzPrWS/XrRTnz5d4e79+LNY7r4kP+Z7Jv7z1LyPL0B4Tb+ci9cXLy+eJ54e8Rw//rqqcUR+HOrgYVprJbBl5E2w63oI64J7k8mUDZLGhmAXs19ucVkxP8gKQu4ptCxbMy2TW3KAGI4u1P207ztH3CDx/7bL+Cdse8h1Zy5ev7Dp8uHD7blJuy0J69TV8XW6l92Dl3cbLG6g98idbhDgdANcY1ZY9o2N4mpNr96GRf1Da3Wui0RW69F1bWslvp81LD2xDTOGu9DhQzBc7AcYfYlkAqo6A6ozqHNBYJTESGitTGShsp0qQSxT4AcoPJQw0LBlEPhBFakHDjoLvY+XgVIyg7WK77tG8n9pvpHXBbXL+OMBd7FN6KLu+uf27esbX9RHdIkLbxvCGhgYsDb3v2a7obt7YHakpKmYiqgE2ioqJbzIOszXcSov/DAzRRNehyJKvPx4+igv/ZLKEaCkoZxUFMYXE1I8f7Xyq/UHp9CkAlfbCF3NdlhS7IQguA0N2wiJYy1ktC5IISb1Okr5jSYruy2SGlYkIkKLSC3yy/WrUWGzSnjaTUX/QEhYQuNewLCdwBFKRkpOuAfr4sBnwwfDg6B0MHagORhBHNqHw5WxTwYav6lAt/42MBLfrYZXHO9w3Ftr/B0Hp0pY+tkD29ddAz5ln8NGjddSlNPyhHV8aKjbzAS7Dd3egRcvgRHJWyrHASw9Pyp+vlSxEluH0jWAGQF9VVZMpxHVRZ/xSKQU4PR5Xy0+/sLQZCFS9DN/XKtSeh5WrL2x+sMyZv+W67+vwz5eC7oDx12rm9pakNg639B68XL3Qh+2Bm94DySxHhg0daBHSQhiCbyyyMS9SDi8RhEHyYP1qD9qak0S4VGn5VYrSTRKEkKHWYYiHuQmCYb/YKYLqS+3H5LYckxJmz6qhSYJ5yNgzgtuclESpncBfN8Fj3lgJdCSGpHcGECoxrouMoHjzO+4evLLMB1VKxJV8Wyj8Q80Ix043jnTu32hlTdkh08Yn7UWcnio9Qs3pzZm0lN7LCOxIdIZxbuQ1+lAVFFxJB7aMeUIiPkiPRPjo2v6dPF4FVjHnxi/oQK0Az/bymf5uI7ayGLj6eM63nrbF5VNXzV7nv3HViQL3JAEaSV1z0iBNJIgJBCYkSKJYbdjEiSHw7a0BI5s6QBBbINUswMUsQ6E11UojZGccA9dcZDBdQY+TgyFTgkiEKYyIBvstAQzIRk8cBJ+A2j4gZFDFWAqjAp3V5IhQYYwwUJ57ByS0QINzMYK8FyrRxt3KNbXb2qG/UVNT5wDyCt6/A0boGbdqzPA4tD21SPquWihPy1FWHjQzYs3xnZkM95ePIZd8RccBx1xez/UPowp46I4+uVcLD9/8Plq0Gfy6Jp+uez5uqPyY+UtNN5DuVQc06drpv4bIDXsjtsMpdkOSC79QK4Xog3PzwF4IBNCBiIhpBSpoE8jioqWaM2KCRuOqwLXgIQItKIe0lCYD/lZjoqgGIo0+J++SsmMKA8eqQ21qHuUh2PfzQHN6vgG6vVK8GfmQhcbr3Yff+AEi3rtdCtNF8u/eIWD2ATXx4Mg0XH1Vr/hm7sDQw8PvyvTrriKWocEE0C6oM/kJRJHrAykgj6WGlq+JUifu6YfS6pu4/UVa6AgQcXKi78ApekhcWFBwMstEkTX9MvVHw+Lt2ex+4+Pg62CxgsHEwZbAdgWIJfA+ICkfDRYtyAwWWB7Ay8F8VT/KB0bOJ4Gx/CQfUKSwZGrJJs8iZHYgB0zMB+zk8hopQ8hEcEog2ERASIBAOL5fIrVIKLxXKtzKPZLgZUckvGf+/nH5HsK0+Uz3316zeAjj3D23Lwu90w0ZwNpiZ72UnvwfO/AXIFnXfLBxLOsHn6yiLqmr3oQ04LHX9hq6TFHI6txrlYWkHj98UT1lh8vryR/rIKq6aO204drdP8hRWF3itmLUw42QnW1CSTSA2IAIXkWOBYKLWw8wjVqNkEaFqjFwLQNJhWI4ZiFoiq6QX0SbsEo6HMoWVFCYprwjw6FP65BXCSoXJwiOwpnFK9A6yiWkQhRDwA9XAfpwLS/AqnqSKP7jwapquiznXFXMn6x8Yg/X/HySvLHKqiaPlZfvf0H6BloAM/v3tpzHkJwUx59Uxb4GE5Lfnt2ZGS16SX3+F5mq4llfegtwnaSR6J5EC8hPUV6IDaS6aDnoZ5DpYe6AtdgOr4pyhXLNPH0KKCo/DDP7N+S+mI6qHzbQr7AbdgW+iylWn0l5cf6E29ftfSN6L9lGl04x30tOtMHklmLhxpClW9BL4S1T+i2uNPRp+0FflD0AN9A9LHnmHGBBfJCE3QL9ALiguoJqiu+64gDzWGIIAlhzhaSDsMV/yjJi3BxyY9khP9BXBSzEMY/AFORGMmM1yyKZfmm+ZKuJf4uMHV1THEj+o+S864E7zYd/8Dliqp2MamvPbt9uw4dY/M4DnXTuMuXx/scK9iHLcbryzfKwvOJBSGNPl10Tb8WV0xYyMFymDdXXv46Kq+ueChJQI4WlSUqf8StOf5CNdXqr9afxe8/Gm6AoLAqGKyCGLSG350ACFzKM2FvaeOseEhFOsjItdQ2S6wYYmkOdl2+CfLBvmpIV55vYY2Qn6uAxAWC40zbhxSmWArcQj0TSIiSU37mx0kgVesgLereOSz8E5EWJa6Qzyh1hZEcO7xY4Ct9WLfNvwa+5xA2h6uGP6vMPxMsZ8WNf0Gf+cOCw9usq51a5+kNG9Sn1IjJsjoO0LI7EpVra/vxhPdFs7JyjYriohlbTAKGxO1C6oJEljseOLqmTxfPX66OucJK66OUNzuDjK7p05UIbGwX25I/vrj4BYrnD0uZ/Rtvfzz9fPsPIkgkbL0DZNMFRVEHFEY2ZCBTcwMLdfCsCCVN4SwpE9YG+ARNgD24IDHYSYB1yNCYDkLRFoC8oOUG40AKQx5IYyAmlQ6SF7dDoSof0hbJiApzqLs43aPc5UG+AvVQ/4T7nGQFQiJ5kdbAkmgH2Sz0FaWB4gLrad22v4nmuvPt/yzCc1+V4t0e4z93r8PYwDCvNANxLSthkai0jmCf5+jq6y6Y4SkjTfoKprgWufj9Dg3AozBmiK7pl3H8WDH3u0YfLY6u6c/HVS2vSvsxoygyTF2q/qNenEyjJ5NJPYGPRidME1M1/JYqwyoNq32Ihu4J0z5M+WA2DoqwEI9wfmEaEhQJzPNsKNOh0jJwrfRVJqbnNOrC6IGwQFzgHiKrpCuq2kE+FizrMXWE7IWCEKemg7hSiimOQchNIC3EchqpHlBO95TshQThkwF5TL9k+Mm/MZLGzVo3AlQdLzagDle1vCYd/wU9/5Z5ZcyZPnNow/J8ZHZZCGtsbKw3rdn7nIzTx42o0WfP1cPKuYJ6XPFs5q7p8zmKx5v8cdcxDeMPOR1fj+gh4X10TV/dukiC+nJPeLy8eH1hrtm/UVvpKxcrP2oL/dlcs1eQ9PCeo73wGcp+R2Xyvlp74vH19B9EkoA2CYKUlcQqJCQj6vkoyBjh/IurcJiy4Zxy2FMptRBO7sK3kClR0UYUZAX+wMqfC1ICiYHMYBsKSQsSFKaAUEqZLoiK00ASFsgpN0UEUWE6yOkiiArE6NmUb91OWwAAEuNJREFUszCNxA0c/uBoF04W86YOarWQAYjGmHBBEIkUiXEqib025hNmInWknv6zKo77Sh3/RvcfSx5Xl4O4yr5Y7NxiuEEQFT4uvs8yrF5VvosX28LLS185vsiRHkc9YPiJtrCbJIzHyx3gJdfpl80flZWPR6qIxJghus7xjSqj4E9UNn2VvN76Csqq6XIR+48OYEeGlcAaXhLfQwxNQcgQEI9IErOOxBUuCuDLz9Arm5iyOTaYy7Jty8hAb2VCm43ZmwnwQTbgFpAWyA4SGEKhaMdgYNpngKAcpeMCAfFjYGE4yAqco3RZ0LorUqOkxVkf6AgzvFBPFbISSsOUD+WRrWijpcwbmI4Gomj4yxAIv4bPVU+q9sfxk/EP36UlfP49N3vNWr/m9CZdX/zzjDDofAoW3XHVr9NPHdB8p2+uORl/mjFLUktMbBTtkSJbpLCRxYyD5OpJps/4+DJuvq5IIgoLqfi3pLzcRuloM7QSzKImsBSWG80LVKkxkSvOkFHaCjL5QvrPN9rwvaSVtEg2ICmQCNRQkGjwnlOpNktMxdds+GxcRFrIyCmhTQMEUJjl4qwtzPbAOVC8o0DUZroGiMmBpEUfRBZ4DvRUJC4/1GOpij1ML9XU0PJdFxIZGsOpJkkOQ0YdFh5CPodKl0WfRqQkVUhTIEf1iN4GkdJU4Rx/xsJfHkpfMv4cd+IAUJb1+YdkfSU7NXp6+/bti7qquKiEdfVq0Gl2TO2DonYzAcUTCv0slCB8FuGia/q8j7iAPl30aNIPHVKq55w+00MvjFLo05WmV8H5P9XLzydVF/H0xbGl9UGfjm226B98po2u6fO+0f3H9M7SbT1h+FoS00ybSmm+5/RZHxzbwWvVHtSvNuLRR4BKl0vPtHRhWh1SESUsNBkH0qjvNiAx4MA1JDBc4yBmTPmwJArJCFM+dA1SE5XsmFIqRTzKUrZYkMio78IUkauFoW6Mcbin1GWrOR8nqOEUEUQFmuK3ZdEw6NFg92s9j3XLp0CIsAuS8VdPkcKhCZ9/KAc81x/c3NdzFjy6KHZc0YPNh7VhDg9jYnh4co9n2dvx1nLalys7Rimx2xLGigfEJBQ0Xr149FkBVb04BQiTlPAFbTiDxRGKM1pJf5AgarPKG0sQu413N07hkCANO5m0fSebtCwziW5DqMISHTRMJCDF23inYbmsauNCHq+Vn1ta5dErzKN8psP/RiIXVpAegKJQ30Y06AQSEXdAIpdL0wbTNsLpoSIeCwRJHZYBpTusIFAIlPC0iqL5AxoCcmLPQkkLdITRCc0dSFqQD1A51g4pLOXmhZCwDMO2BpH9q6ZtDoU4oKQIy5yEynFnv+mzw+0+/q3Sf5yT4aYs89zq1alLIK7wYeQANcCpgW5AOaqIARzxcudrXrMTz+cuFAxBI1Rw06eLKz3xsnDikt+Mmr9mWBlXrbySeJAlTt8MXJImXHRNv0zx2GpWZ3r0KKqzXHlRHH26+fQf+mkbg56ADjppUuihMJl7BEhGtmnj+4Phj1lEUAzjaQcgJkzcqPPmlI/yjdJV8Trf/+hbeYyP0uMS0zSVF8SEaSELxkhR6a7IC1IVHkNMBWEkCljxYQ7YXgWKrDCHw2ohJDDKSkr5Tst3TANBp7DdgkTFKSOpxYMtV2i3hXQoJjwbBo3L4oibAajdXmSbCl01PEvi6x3PetMvwfi3cv+xHpPRk8GZvo6Oq5y5FvZlvtfqQZ5v5igfH7iRdHqrn/H24McyEb6ejCUxkCwqEATi8JDNKtWRIxI6wrLj+aOyQgIqLT/KTZ+OLYnCFGHE60PdSgzIgVmcfrbt5evjYkB97VeNyv8plx/UYoChElhYgB7KtD3PAUWRpejIVNzNAjNzyDuYRqnrMF5dIx4CkTrlAJQRps2FhZIX5lqYwfFLOygTBeSmkUhDEgNvIC7MR5ML6JhozoCpn+858G1utbH4j7BRT0Z9VlZzbTyOKJCKeCjkqYbkFBJh+DXCPVcKuXKIFURlm8WBoZSFOBCYmk6i33ioT+Kw1CegEMspcFfe+M8+rRySNum/YUwm9I7TPT04NWOBDg/nwtz16xMbEp3mPswIOuI6G7wBSlynz1pQWZEIP0smIcEEWN3QsfJDn+nj9FFSPh73wilgdE2f+eOumo4pPqWI2kI/LKu4RVXLq7H/kJopRUFhnkj4joNT9KC/BlZgAIVD1I+cwASVUBgCIsF1KEQxJLpGPKHGP5LYrAs5ikREnmJ61KF4K5cG1+REVS6HC1JauGroYYcOrLWUEp6MSF0UpoZgK5hV2dgEzeNLYbMBnRQZEUPnOwGMT6GOp57Kg/0WTCMYjnsQHpDmlJFTR5IcNt/alvV1PdF5NsKcLSpGG03L6QcjnWDpeIXqgFYb//A9wGi1+fMPDeqY7nae6uvT530KKp+JebkhHJyX6Fqz33X83tCgRr1d6gXBH+XnFtEwDmEVMBfAtbK7UvHxVTb1gGLQokbFVBZMDtUJHmT+dsPxmqSRU2nkrxkWxhfbOfEVwLov4sIaonSRr1qZy6vy8xliPbn+qPjYHxSm6mJwdB357DfaVtJ/BMLeW0/ayVQSR6TA5AB7h8kwmFeRrFBUSFYkJk7GsM+F5SuiCQmFBEriCskHYcxfEM9ozBjBS/yaKD//rBzndjD3BHswAcmqwFdhOWGugCw5owwpEt9sxMlVGWQEK4GlcAOi1XAcL6eLICfdcMFmNDnH7xdO/YTCHTkxM2B6EiSPbuXmHrZO5eJy4Iu6lfo2Gu8orFfA+PM9UMjnHpBIx9v+/Q9Wm8nMfcMTE1d7u7vP4Ec6fzy1wqOGP3xI63JHjgT2/rsy/boTbMP0pe78dVUWS5wjK0VUjIqNN3kA62ZYeIcfxofXDFNFUZBTT4W6m71mWBlXrb4yWSoEYWh0jVIUdJEmzA6o18mRDN7dCplCEkK8IiP4WRAU9OO8j5wimZB3SAhKYlJEphLkJCaSEP7PEdxsfVG5UWFxP6qPPngTlvBED6IWLN8dTPmg8ocFPPRXWBdlFWqqCEmLlhAgLRtKdLaAkpQNfRUM6DUQGOUiTimNEaT7FvRVw/F6K91XG4/mHf9KPaovvJ36jzfSS1mpc6mUdhnvhZL4a0GjZsKBKK+n0+kt0AHvztCAsIzjeeAeUKVPF1l101cBWCICxcGmcPalUeHRnyguIsJYej79fFnpKxdjrKhu+spVK69Ke+OW6SXlh7Xk/8b7D5umJKY6nUiQAEmp5ZKoD5Ay8kTFzcAsJIrL+ZREYCWAaU4ubXRNP8wfpuSuGubHMwCJhSuGPCiYJIMw5GV6xkfY0Wd+WoPiBAlEhvnzNluw3SKZYTkQHIQ5J1RQDg7Lw/QQGUIdFp4wcC9KgQ/7KkxjucEHROVmc3ZaCFfEjMxUvlPvBZ0WhT1Q1zG06hQKyGPA9qEh4bPRJuO/0p//WvoPyXpa77BPr9L1mn64QiJRT0vlP3jg1oyn0/th1dnN6VOkQyh8wVRuPpLUH9GHi+sckD4vLaj43NSHLwfv8cKjbGxdgc97JUpFpIRbpovKYHTUltkpHYkyEqNYf1gWfZU+Vn+JiMZERS4qKyTAMv1hmwoItLT/aL6OL9cn8A4mknhDkR5CUuh43ExhAXjnIQVxRQ9UwnU1JM73meHISINzlY/1Ir3jwNQBtui5IpU3K2mFZbEUEhgJiHlZhkqI8rws7hPFxBHlZ5romu1CGRSv2HyQEQiLPkwefJcSk2o0mU+F8Z46KswbKd8qvRUWiq7BsuoYlF/q+Jd839p4/KNnFHhw+Fbc819r/y3dHO7qsk9D2lLPBvEq59SLXC6CYSCq1OTk5F48g+FxLyQSvvyzhFK8taaYL1ACiYdkkSOg/HVO4irmAySLlR8+yHy5wnaWysTF7YmnRxdyecMXFDcxx3KjNCUEGUtb2r4Iixwh5qebxEG58v2Hkh0ERqlLp5kClNLkngLSyF8XExrZi089SYbFm9DRg1FCbEKyoxQE8sqFkTOgTwrDVIPCP/k8qpRcGrxMEXmxnpwjUeXbhjpgA2bBNsp0HPQWOiwNOnddw5YcNIdSFyzTlUKehEbrLDxDNn7osjCXPw5FO22qgPfKHn/pf8XxxxetvSvYlX8BxBVKCdGDmPPDhz0W+Oijjxof//jHt+Hh2oko/qKqFx4l0BJQmQIwS3RNn/fxZXqGFbq4nQzimI9tKFs+S1S1KJ9XoQkEfUQwtKg98fSzefMMwmx5F28/IqK2RLjM2b54/gX0H0v6+IiDZSVgHJogfYWNzDMUpCtsUkKg4pKIUJAsnNTlkjNWzfBCPMOhi8JAiCSqPBmyMFVQ1OdctQwLywNZ5cPCpDl80D6IhjzBASQF0sUeREpSJCyE4ceSpJXbEO2612AHepaTSRn/YrtEAD3n8xV/ntv4+S96nyGRO9gccQZmEPiBK3bRi5kPHcG+v2T32n2+53bxNY8oQyWIB0SR9OmqxMeTh5lm/8azx8srEbCQNSqTpUTX+eagwCiPqiWeQAXO/olHV2tPaYUFjWCxsQJjt7MV564K6iOB2Xj1adNGa3PqDMFl4XwSSnAQCUIibqFPlwtTwbiOkoSR+JvLx3KYv9BXaSrlLyifSegQBNMFTAWhiIeFArRZnoX+8Y2EzKhbnuNlYO9wFpZXkwoH5Kmj/6qOFTz+0n8+Y4Y/2pVIcJqY35+YJ6wjEN33ZzL9kPY3hWjx6Sv+RcByLIQAZZYQJSn2C944FRF/QkvjQ31XZDcV04GVPOGl+WdJEhVGbaNPV3d7Va7ZP83U/1ACgzTjkg4gjUFvHhGWkrPAPnnBLNeFSEKKfAbzOu9yBAUdVj6cZURpZuU3XOUILioD93x2IEnxxFGc9c6M+M93cHSNZVzHquBQDeMn4x898wQ2us7pgGvAbyU8/z5e5EupVEqtJirCgp4KHxVI7sbrQIYKHyKF3+yvIvEEX8FsQNk9qXwgBpgQwNo7p9OKrukzfdzF08+WTmYrV35YF+tU8bEpYImInGtLVH+8PkzZ8iQcVpjrawXCLOHH5uo/9JmWjbXHJMQcNhVW8bOklbsumnJw7Q+cgtVK2mJxAUNNKKncp54KHuzAwnjCE01B1UIHA1A80ik/IkdIfTj6mE8MXh2sSKZhdHUd+IcDykwFLj4eMv7Fv+il75c8/xEmeHaojD+jZ4LgbsPVVvO5iutg4oSAFCCiAqVp/jrUKRU8mzVexsube05ff3tiD0Q1wkP/ojrYgeiaftiheHsjLKL4GrudTxYvb0H9h94bpzeAwCD4cAqJf5SmlBjFH5D8ChVC1Q8KyIkrjtgbE64y4lqtINJHel5Hq4q4ZdsYzsWBWaU+rkFWtFzQbiNNnWciNbT/qD4+Hitq/FdE/3mWzmvQU+W4hZZPenQuRHRNfylcvfVjpUqz0Tj6dNE1/fm4euufTx1z5am3/hr6z6lj9A9ElneKwPJ3IYEVEpqKys0YFeUhoDBP4TV/+bjVIkfqKuu8/ixC/+tqR73111V4DYnrrb+G8a+h1tkk9dY/m7MxV7XUzwdP3ApBgCYG6Co+L6/+kcB4X0g0ERFFzwXjojBc5q8ZhqOKtWEoROmLEwSWBIHowVySyqSS5kIABEYhisRFEov8SgRWGD6K9OMgq8IwBIkTBBYXASGsxcW3pUoHgfF5iIiLPv9x+03kuLxMqaqsUj1KJL4gsFgICGEtFrJtUG6OwDhtJHHhqLOl+dBAG0AnXRAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBAFBQBAQBAQBQUAQEAQEAUFAEBAEBIGVhMD/D0fV/fpMMM+gAAAAAElFTkSuQmCC'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 136 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/noticeBar.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:17:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/noticeBar.js
+ */
+var _default = {
+  // noticeBar
+  noticeBar: {
+    text: function text() {
+      return [];
+    },
+    direction: 'row',
+    step: false,
+    icon: 'volume',
+    mode: '',
+    color: '#f9ae3d',
+    bgColor: '#fdf6ec',
+    speed: 80,
+    fontSize: 14,
+    duration: 2000,
+    disableTouch: true,
+    url: '',
+    linkType: 'navigateTo'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 137 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/notify.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:10:21
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/notify.js
+ */
+var _default = {
+  // notify组件
+  notify: {
+    top: 0,
+    type: 'primary',
+    color: '#ffffff',
+    bgColor: '',
+    message: '',
+    duration: 3000,
+    fontSize: 15,
+    safeAreaInsetTop: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 138 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/numberBox.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:11:46
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberBox.js
+ */
+var _default = {
+  // 步进器组件
+  numberBox: {
+    name: '',
+    value: 0,
+    min: 1,
+    max: Number.MAX_SAFE_INTEGER,
+    step: 1,
+    integer: false,
+    disabled: false,
+    disabledInput: false,
+    asyncChange: false,
+    inputWidth: 35,
+    showMinus: true,
+    showPlus: true,
+    decimalLength: null,
+    longPress: true,
+    color: '#323233',
+    buttonSize: 30,
+    bgColor: '#EBECEE',
+    cursorSpacing: 100,
+    disableMinus: false,
+    disablePlus: false,
+    iconStyle: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 139 */
+/*!**********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/numberKeyboard.js ***!
+  \**********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:08:05
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/numberKeyboard.js
+ */
+var _default = {
+  // 数字键盘
+  numberKeyboard: {
+    mode: 'number',
+    dotDisabled: false,
+    random: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 140 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/overlay.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/overlay.js
+ */
+var _default = {
+  // overlay组件
+  overlay: {
+    show: false,
+    zIndex: 10070,
+    duration: 300,
+    opacity: 0.5
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 141 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/parse.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:17:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/parse.js
+ */
+var _default = {
+  // parse
+  parse: {
+    copyLink: true,
+    errorImg: '',
+    lazyLoad: false,
+    loadingImg: '',
+    pauseVideo: true,
+    previewImg: true,
+    setTitle: true,
+    showImgMenu: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 142 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/picker.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/picker.js
+ */
+var _default = {
+  // picker
+  picker: {
+    show: false,
+    showToolbar: true,
+    title: '',
+    columns: function columns() {
+      return [];
+    },
+    loading: false,
+    itemHeight: 44,
+    cancelText: '取消',
+    confirmText: '确定',
+    cancelColor: '#909193',
+    confirmColor: '#3c9cff',
+    visibleItemCount: 5,
+    keyName: 'text',
+    closeOnClickOverlay: false,
+    defaultIndex: function defaultIndex() {
+      return [];
+    },
+    immediateChange: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 143 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/popup.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:06:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/popup.js
+ */
+var _default = {
+  // popup组件
+  popup: {
+    show: false,
+    overlay: true,
+    mode: 'bottom',
+    duration: 300,
+    closeable: false,
+    overlayStyle: function overlayStyle() {},
+    closeOnClickOverlay: true,
+    zIndex: 10075,
+    safeAreaInsetBottom: true,
+    safeAreaInsetTop: false,
+    closeIconPos: 'top-right',
+    round: 0,
+    zoom: true,
+    bgColor: '',
+    overlayOpacity: 0.5
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 144 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/radio.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:02:34
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radio.js
+ */
+var _default = {
+  // radio组件
+  radio: {
+    name: '',
+    shape: '',
+    disabled: '',
+    labelDisabled: '',
+    activeColor: '',
+    inactiveColor: '',
+    iconSize: '',
+    labelSize: '',
+    label: '',
+    labelColor: '',
+    size: '',
+    iconColor: '',
+    placement: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 145 */
+/*!******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/radioGroup.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:03:12
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/radioGroup.js
+ */
+var _default = {
+  // radio-group组件
+  radioGroup: {
+    value: '',
+    disabled: false,
+    shape: 'circle',
+    activeColor: '#2979ff',
+    inactiveColor: '#c8c9cc',
+    name: '',
+    size: 18,
+    placement: 'row',
+    label: '',
+    labelColor: '#303133',
+    labelSize: 14,
+    labelDisabled: false,
+    iconColor: '#ffffff',
+    iconSize: 12,
+    borderBottom: false,
+    iconPlacement: 'left'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 146 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/rate.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:05:09
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rate.js
+ */
+var _default = {
+  // rate组件
+  rate: {
+    value: 1,
+    count: 5,
+    disabled: false,
+    size: 18,
+    inactiveColor: '#b2b2b2',
+    activeColor: '#FA3534',
+    gutter: 4,
+    minCount: 1,
+    allowHalf: false,
+    activeIcon: 'star-fill',
+    inactiveIcon: 'star',
+    touchable: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 147 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/readMore.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:41
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/readMore.js
+ */
+var _default = {
+  // readMore
+  readMore: {
+    showHeight: 400,
+    toggle: false,
+    closeText: '展开阅读全文',
+    openText: '收起',
+    color: '#2979ff',
+    fontSize: 14,
+    textIndent: '2em',
+    name: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 148 */
+/*!***********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/row.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:18:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/row.js
+ */
+var _default = {
+  // row
+  row: {
+    gutter: 0,
+    justify: 'start',
+    align: 'center'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 149 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/rowNotice.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/rowNotice.js
+ */
+var _default = {
+  // rowNotice
+  rowNotice: {
+    text: '',
+    icon: 'volume',
+    mode: '',
+    color: '#f9ae3d',
+    bgColor: '#fdf6ec',
+    fontSize: 14,
+    speed: 80
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 150 */
+/*!******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/scrollList.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:28
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/scrollList.js
+ */
+var _default = {
+  // scrollList
+  scrollList: {
+    indicatorWidth: 50,
+    indicatorBarWidth: 20,
+    indicator: true,
+    indicatorColor: '#f2f2f2',
+    indicatorActiveColor: '#3c9cff',
+    indicatorStyle: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 151 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/search.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:19:45
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/search.js
+ */
+var _default = {
+  // search
+  search: {
+    shape: 'round',
+    bgColor: '#f2f2f2',
+    placeholder: '请输入关键字',
+    clearabled: true,
+    focus: false,
+    showAction: true,
+    actionStyle: function actionStyle() {
+      return {};
+    },
+    actionText: '搜索',
+    inputAlign: 'left',
+    inputStyle: function inputStyle() {
+      return {};
+    },
+    disabled: false,
+    borderColor: 'transparent',
+    searchIconColor: '#909399',
+    searchIconSize: 22,
+    color: '#606266',
+    placeholderColor: '#909399',
+    searchIcon: 'search',
+    margin: '0',
+    animation: false,
+    value: '',
+    maxlength: '-1',
+    height: 32,
+    label: null
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 152 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/section.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:33
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/section.js
+ */
+var _default = {
+  // u-section组件
+  section: {
+    title: '',
+    subTitle: '更多',
+    right: true,
+    fontSize: 15,
+    bold: true,
+    color: '#303133',
+    subColor: '#909399',
+    showLine: true,
+    lineColor: '',
+    arrow: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 153 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/skeleton.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:20:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/skeleton.js
+ */
+var _default = {
+  // skeleton
+  skeleton: {
+    loading: true,
+    animate: true,
+    rows: 0,
+    rowsWidth: '100%',
+    rowsHeight: 18,
+    title: true,
+    titleWidth: '50%',
+    titleHeight: 18,
+    avatar: false,
+    avatarSize: 32,
+    avatarShape: 'circle'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 154 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/slider.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:08:25
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/slider.js
+ */
+var _default = {
+  // slider组件
+  slider: {
+    value: 0,
+    blockSize: 18,
+    min: 0,
+    max: 100,
+    step: 1,
+    activeColor: '#2979ff',
+    inactiveColor: '#c0c4cc',
+    blockColor: '#ffffff',
+    showValue: false,
+    disabled: false,
+    blockStyle: function blockStyle() {}
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 155 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/statusBar.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:20:39
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/statusBar.js
+ */
+var _default = {
+  // statusBar
+  statusBar: {
+    bgColor: 'transparent'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 156 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/steps.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:37
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/steps.js
+ */
+var _default = {
+  // steps组件
+  steps: {
+    direction: 'row',
+    current: 0,
+    activeColor: '#3c9cff',
+    inactiveColor: '#969799',
+    activeIcon: '',
+    inactiveIcon: '',
+    dot: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 157 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/stepsItem.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/stepsItem.js
+ */
+var _default = {
+  // steps-item组件
+  stepsItem: {
+    title: '',
+    desc: '',
+    iconSize: 17,
+    error: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 158 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/sticky.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:30
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/sticky.js
+ */
+var _default = {
+  // sticky组件
+  sticky: {
+    offsetTop: 0,
+    customNavHeight: 0,
+    disabled: false,
+    bgColor: 'transparent',
+    zIndex: '',
+    index: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 159 */
+/*!******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/subsection.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:12:20
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/subsection.js
+ */
+var _default = {
+  // subsection组件
+  subsection: {
+    list: [],
+    current: 0,
+    activeColor: '#3c9cff',
+    inactiveColor: '#303133',
+    mode: 'button',
+    fontSize: 12,
+    bold: true,
+    bgColor: '#eeeeef',
+    keyName: 'name'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 160 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/swipeAction.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:00:42
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeAction.js
+ */
+var _default = {
+  // swipe-action组件
+  swipeAction: {
+    autoClose: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 161 */
+/*!***********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/swipeActionItem.js ***!
+  \***********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:01:13
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swipeActionItem.js
+ */
+var _default = {
+  // swipeActionItem 组件
+  swipeActionItem: {
+    show: false,
+    name: '',
+    disabled: false,
+    threshold: 20,
+    autoClose: true,
+    options: [],
+    duration: 300
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 162 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/swiper.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:21:38
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiper.js
+ */
+var _default = {
+  // swiper 组件
+  swiper: {
+    list: function list() {
+      return [];
+    },
+    indicator: false,
+    indicatorActiveColor: '#FFFFFF',
+    indicatorInactiveColor: 'rgba(255, 255, 255, 0.35)',
+    indicatorStyle: '',
+    indicatorMode: 'line',
+    autoplay: true,
+    current: 0,
+    currentItemId: '',
+    interval: 3000,
+    duration: 300,
+    circular: false,
+    previousMargin: 0,
+    nextMargin: 0,
+    acceleration: false,
+    displayMultipleItems: 1,
+    easingFunction: 'default',
+    keyName: 'url',
+    imgMode: 'aspectFill',
+    height: 130,
+    bgColor: '#f3f4f6',
+    radius: 4,
+    loading: false,
+    showTitle: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 163 */
+/*!************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/swipterIndicator.js ***!
+  \************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:07
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/swiperIndicator.js
+ */
+var _default = {
+  // swiperIndicator 组件
+  swiperIndicator: {
+    length: 0,
+    current: 0,
+    indicatorActiveColor: '',
+    indicatorInactiveColor: '',
+    indicatorMode: 'line'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 164 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/switch.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:24
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/switch.js
+ */
+var _default = {
+  // switch
+  switch: {
+    loading: false,
+    disabled: false,
+    size: 25,
+    activeColor: '#2979ff',
+    inactiveColor: '#ffffff',
+    value: false,
+    activeValue: true,
+    inactiveValue: false,
+    asyncChange: false,
+    space: 0
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 165 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/tabbar.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:40
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbar.js
+ */
+var _default = {
+  // tabbar
+  tabbar: {
+    value: null,
+    safeAreaInsetBottom: true,
+    border: true,
+    zIndex: 1,
+    activeColor: '#1989fa',
+    inactiveColor: '#7d7e80',
+    fixed: true,
+    placeholder: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 166 */
+/*!******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/tabbarItem.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:22:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabbarItem.js
+ */
+var _default = {
+  //
+  tabbarItem: {
+    name: null,
+    icon: '',
+    badge: null,
+    dot: false,
+    text: '',
+    badgeStyle: 'top: 6px;right:2px;'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 167 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/tabs.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tabs.js
+ */
+var _default = {
+  //
+  tabs: {
+    duration: 300,
+    list: function list() {
+      return [];
+    },
+    lineColor: '#3c9cff',
+    activeStyle: function activeStyle() {
+      return {
+        color: '#303133'
+      };
+    },
+    inactiveStyle: function inactiveStyle() {
+      return {
+        color: '#606266'
+      };
+    },
+    lineWidth: 20,
+    lineHeight: 3,
+    lineBgSize: 'cover',
+    itemStyle: function itemStyle() {
+      return {
+        height: '44px'
+      };
+    },
+    scrollable: true,
+    current: 0,
+    keyName: 'name'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 168 */
+/*!***********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/tag.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:37
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tag.js
+ */
+var _default = {
+  // tag 组件
+  tag: {
+    type: 'primary',
+    disabled: false,
+    size: 'medium',
+    shape: 'square',
+    text: '',
+    bgColor: '',
+    color: '',
+    borderColor: '',
+    closeColor: '#C6C7CB',
+    name: '',
+    plainFill: false,
+    plain: false,
+    closable: false,
+    show: true,
+    icon: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 169 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/text.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:23:58
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/text.js
+ */
+var _default = {
+  // text 组件
+  text: {
+    type: '',
+    show: true,
+    text: '',
+    prefixIcon: '',
+    suffixIcon: '',
+    mode: '',
+    href: '',
+    format: '',
+    call: false,
+    openType: '',
+    bold: false,
+    block: false,
+    lines: '',
+    color: '#303133',
+    size: 15,
+    iconStyle: function iconStyle() {
+      return {
+        fontSize: '15px'
+      };
+    },
+    decoration: 'none',
+    margin: 0,
+    lineHeight: '',
+    align: 'left',
+    wordWrap: 'normal'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 170 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/textarea.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:24:32
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/textarea.js
+ */
+var _default = {
+  // textarea 组件
+  textarea: {
+    value: '',
+    placeholder: '',
+    placeholderClass: 'textarea-placeholder',
+    placeholderStyle: 'color: #c0c4cc',
+    height: 70,
+    confirmType: 'done',
+    disabled: false,
+    count: false,
+    focus: false,
+    autoHeight: false,
+    fixed: false,
+    cursorSpacing: 0,
+    cursor: '',
+    showConfirmBar: true,
+    selectionStart: -1,
+    selectionEnd: -1,
+    adjustPosition: true,
+    disableDefaultPadding: false,
+    holdKeyboard: false,
+    maxlength: 140,
+    border: 'surround',
+    formatter: null
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 171 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/toast.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:07:07
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toast.js
+ */
+var _default = {
+  // toast组件
+  toast: {
+    zIndex: 10090,
+    loading: false,
+    text: '',
+    icon: '',
+    type: '',
+    loadingMode: '',
+    show: '',
+    overlay: false,
+    position: 'center',
+    params: function params() {},
+    duration: 2000,
+    isTab: false,
+    url: '',
+    callback: null,
+    back: false
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 172 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/toolbar.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:24:55
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/toolbar.js
+ */
+var _default = {
+  // toolbar 组件
+  toolbar: {
+    show: true,
+    cancelText: '取消',
+    confirmText: '确认',
+    cancelColor: '#909193',
+    confirmColor: '#3c9cff',
+    title: ''
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 173 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/tooltip.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:25:14
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/tooltip.js
+ */
+var _default = {
+  // tooltip 组件
+  tooltip: {
+    text: '',
+    copyText: '',
+    size: 14,
+    color: '#606266',
+    bgColor: 'transparent',
+    direction: 'top',
+    zIndex: 10071,
+    showCopy: true,
+    buttons: function buttons() {
+      return [];
+    },
+    overlay: true,
+    showToast: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 174 */
+/*!******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/transition.js ***!
+  \******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 16:59:00
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/transition.js
+ */
+var _default = {
+  // transition动画组件的props
+  transition: {
+    show: false,
+    mode: 'fade',
+    duration: '300',
+    timingFunction: 'ease-out'
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 175 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/props/upload.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/*
+ * @Author       : LQ
+ * @Description  :
+ * @version      : 1.0
+ * @Date         : 2021-08-20 16:44:21
+ * @LastAuthor   : LQ
+ * @lastTime     : 2021-08-20 17:09:50
+ * @FilePath     : /u-view2.0/uview-ui/libs/config/props/upload.js
+ */
+var _default = {
+  // upload组件
+  upload: {
+    accept: 'image',
+    capture: function capture() {
+      return ['album', 'camera'];
+    },
+    compressed: true,
+    camera: 'back',
+    maxDuration: 60,
+    uploadIcon: 'camera-fill',
+    uploadIconColor: '#D3D4D6',
+    useBeforeRead: false,
+    previewFullImage: true,
+    maxCount: 52,
+    disabled: false,
+    imageMode: 'aspectFill',
+    name: '',
+    sizeType: function sizeType() {
+      return ['original', 'compressed'];
+    },
+    multiple: false,
+    deletable: true,
+    maxSize: Number.MAX_VALUE,
+    fileList: function fileList() {
+      return [];
+    },
+    uploadText: '',
+    width: 80,
+    height: 80,
+    previewImage: true
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 176 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/config/zIndex.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+// uniapp在H5中各API的z-index值如下：
+/**
+ * actionsheet: 999
+ * modal: 999
+ * navigate: 998
+ * tabbar: 998
+ * toast: 999
+ */
+var _default = {
+  toast: 10090,
+  noNetwork: 10080,
+  // popup包含popup，actionsheet，keyboard，picker的值
+  popup: 10075,
+  mask: 10070,
+  navbar: 980,
+  topTips: 975,
+  sticky: 970,
+  indexListSticky: 965
+};
+exports.default = _default;
+
+/***/ }),
+/* 177 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/function/platform.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 注意：
+ * 此部分内容，在vue-cli模式下，需要在vue.config.js加入如下内容才有效：
+ * module.exports = {
+ *     transpileDependencies: ['uview-v2']
+ * }
+ */
+
+var platform = 'none';
+platform = 'vue2';
+platform = 'weixin';
+platform = 'mp';
+var _default = platform;
+exports.default = _default;
+
+/***/ }),
+/* 178 */
+/*!*************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni.promisify.adaptor.js ***!
+  \*************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/* WEBPACK VAR INJECTION */(function(uni) {var _typeof = __webpack_require__(/*! @babel/runtime/helpers/typeof */ 13);
+uni.addInterceptor({
+  returnValue: function returnValue(res) {
+    if (!(!!res && (_typeof(res) === "object" || typeof res === "function") && typeof res.then === "function")) {
+      return res;
+    }
+    return new Promise(function (resolve, reject) {
+      res.then(function (res) {
+        return res[0] ? reject(res[0]) : resolve(res[1]);
+      });
+    });
+  }
+});
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 179 */,
+/* 180 */,
+/* 181 */,
+/* 182 */,
+/* 183 */,
+/* 184 */,
+/* 185 */,
+/* 186 */,
+/* 187 */,
+/* 188 */,
+/* 189 */,
+/* 190 */,
+/* 191 */,
+/* 192 */,
+/* 193 */
 /*!***********************************************************************************************************************!*\
   !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/json-gps/js_sdk/gps.js ***!
   \***********************************************************************************************************************/
@@ -27992,84 +32527,8069 @@ exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-
-/***/ 7:
-/*!*********************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/iterableToArrayLimit.js ***!
-  \*********************************************************************/
+/* 194 */,
+/* 195 */,
+/* 196 */,
+/* 197 */,
+/* 198 */,
+/* 199 */,
+/* 200 */,
+/* 201 */,
+/* 202 */,
+/* 203 */,
+/* 204 */,
+/* 205 */,
+/* 206 */,
+/* 207 */,
+/* 208 */,
+/* 209 */,
+/* 210 */,
+/* 211 */,
+/* 212 */,
+/* 213 */,
+/* 214 */,
+/* 215 */,
+/* 216 */,
+/* 217 */,
+/* 218 */
+/*!****************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/static/logo.png ***!
+  \****************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-function _iterableToArrayLimit(r, l) {
-  var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"];
-  if (null != t) {
-    var e,
-      n,
-      i,
-      u,
-      a = [],
-      f = !0,
-      o = !1;
-    try {
-      if (i = (t = t.call(r)).next, 0 === l) {
-        if (Object(t) !== t) return;
-        f = !1;
-      } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0) {
-        ;
-      }
-    } catch (r) {
-      o = !0, n = r;
-    } finally {
-      try {
-        if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return;
-      } finally {
-        if (o) throw n;
-      }
-    }
-    return a;
-  }
-}
-module.exports = _iterableToArrayLimit, module.exports.__esModule = true, module.exports["default"] = module.exports;
+module.exports = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAAEi6oPRAAAKQ2lDQ1BJQ0MgcHJvZmlsZQAAeNqdU3dYk/cWPt/3ZQ9WQtjwsZdsgQAiI6wIyBBZohCSAGGEEBJAxYWIClYUFRGcSFXEgtUKSJ2I4qAouGdBiohai1VcOO4f3Ke1fXrv7e371/u855zn/M55zw+AERImkeaiagA5UoU8Otgfj09IxMm9gAIVSOAEIBDmy8JnBcUAAPADeXh+dLA//AGvbwACAHDVLiQSx+H/g7pQJlcAIJEA4CIS5wsBkFIAyC5UyBQAyBgAsFOzZAoAlAAAbHl8QiIAqg0A7PRJPgUA2KmT3BcA2KIcqQgAjQEAmShHJAJAuwBgVYFSLALAwgCgrEAiLgTArgGAWbYyRwKAvQUAdo5YkA9AYACAmUIszAAgOAIAQx4TzQMgTAOgMNK/4KlfcIW4SAEAwMuVzZdL0jMUuJXQGnfy8ODiIeLCbLFCYRcpEGYJ5CKcl5sjE0jnA0zODAAAGvnRwf44P5Dn5uTh5mbnbO/0xaL+a/BvIj4h8d/+vIwCBAAQTs/v2l/l5dYDcMcBsHW/a6lbANpWAGjf+V0z2wmgWgrQevmLeTj8QB6eoVDIPB0cCgsL7SViob0w44s+/zPhb+CLfvb8QB7+23rwAHGaQJmtwKOD/XFhbnauUo7nywRCMW735yP+x4V//Y4p0eI0sVwsFYrxWIm4UCJNx3m5UpFEIcmV4hLpfzLxH5b9CZN3DQCshk/ATrYHtctswH7uAQKLDljSdgBAfvMtjBoLkQAQZzQyefcAAJO/+Y9AKwEAzZek4wAAvOgYXKiUF0zGCAAARKCBKrBBBwzBFKzADpzBHbzAFwJhBkRADCTAPBBCBuSAHAqhGJZBGVTAOtgEtbADGqARmuEQtMExOA3n4BJcgetwFwZgGJ7CGLyGCQRByAgTYSE6iBFijtgizggXmY4EImFINJKApCDpiBRRIsXIcqQCqUJqkV1II/ItchQ5jVxA+pDbyCAyivyKvEcxlIGyUQPUAnVAuagfGorGoHPRdDQPXYCWomvRGrQePYC2oqfRS+h1dAB9io5jgNExDmaM2WFcjIdFYIlYGibHFmPlWDVWjzVjHVg3dhUbwJ5h7wgkAouAE+wIXoQQwmyCkJBHWExYQ6gl7CO0EroIVwmDhDHCJyKTqE+0JXoS+cR4YjqxkFhGrCbuIR4hniVeJw4TX5NIJA7JkuROCiElkDJJC0lrSNtILaRTpD7SEGmcTCbrkG3J3uQIsoCsIJeRt5APkE+S+8nD5LcUOsWI4kwJoiRSpJQSSjVlP+UEpZ8yQpmgqlHNqZ7UCKqIOp9aSW2gdlAvU4epEzR1miXNmxZDy6Qto9XQmmlnafdoL+l0ugndgx5Fl9CX0mvoB+nn6YP0dwwNhg2Dx0hiKBlrGXsZpxi3GS+ZTKYF05eZyFQw1zIbmWeYD5hvVVgq9ip8FZHKEpU6lVaVfpXnqlRVc1U/1XmqC1SrVQ+rXlZ9pkZVs1DjqQnUFqvVqR1Vu6k2rs5Sd1KPUM9RX6O+X/2C+mMNsoaFRqCGSKNUY7fGGY0hFsYyZfFYQtZyVgPrLGuYTWJbsvnsTHYF+xt2L3tMU0NzqmasZpFmneZxzQEOxrHg8DnZnErOIc4NznstAy0/LbHWaq1mrX6tN9p62r7aYu1y7Rbt69rvdXCdQJ0snfU6bTr3dQm6NrpRuoW623XP6j7TY+t56Qn1yvUO6d3RR/Vt9KP1F+rv1u/RHzcwNAg2kBlsMThj8MyQY+hrmGm40fCE4agRy2i6kcRoo9FJoye4Ju6HZ+M1eBc+ZqxvHGKsNN5l3Gs8YWJpMtukxKTF5L4pzZRrmma60bTTdMzMyCzcrNisyeyOOdWca55hvtm82/yNhaVFnMVKizaLx5balnzLBZZNlvesmFY+VnlW9VbXrEnWXOss623WV2xQG1ebDJs6m8u2qK2brcR2m23fFOIUjynSKfVTbtox7PzsCuya7AbtOfZh9iX2bfbPHcwcEh3WO3Q7fHJ0dcx2bHC866ThNMOpxKnD6VdnG2ehc53zNRemS5DLEpd2lxdTbaeKp26fesuV5RruutK10/Wjm7ub3K3ZbdTdzD3Ffav7TS6bG8ldwz3vQfTw91jicczjnaebp8LzkOcvXnZeWV77vR5Ps5wmntYwbcjbxFvgvct7YDo+PWX6zukDPsY+Ap96n4e+pr4i3z2+I37Wfpl+B/ye+zv6y/2P+L/hefIW8U4FYAHBAeUBvYEagbMDawMfBJkEpQc1BY0FuwYvDD4VQgwJDVkfcpNvwBfyG/ljM9xnLJrRFcoInRVaG/owzCZMHtYRjobPCN8Qfm+m+UzpzLYIiOBHbIi4H2kZmRf5fRQpKjKqLupRtFN0cXT3LNas5Fn7Z72O8Y+pjLk722q2cnZnrGpsUmxj7Ju4gLiquIF4h/hF8ZcSdBMkCe2J5MTYxD2J43MC52yaM5zkmlSWdGOu5dyiuRfm6c7Lnnc8WTVZkHw4hZgSl7I/5YMgQlAvGE/lp25NHRPyhJuFT0W+oo2iUbG3uEo8kuadVpX2ON07fUP6aIZPRnXGMwlPUit5kRmSuSPzTVZE1t6sz9lx2S05lJyUnKNSDWmWtCvXMLcot09mKyuTDeR55m3KG5OHyvfkI/lz89sVbIVM0aO0Uq5QDhZML6greFsYW3i4SL1IWtQz32b+6vkjC4IWfL2QsFC4sLPYuHhZ8eAiv0W7FiOLUxd3LjFdUrpkeGnw0n3LaMuylv1Q4lhSVfJqedzyjlKD0qWlQyuCVzSVqZTJy26u9Fq5YxVhlWRV72qX1VtWfyoXlV+scKyorviwRrjm4ldOX9V89Xlt2treSrfK7etI66Trbqz3Wb+vSr1qQdXQhvANrRvxjeUbX21K3nShemr1js20zcrNAzVhNe1bzLas2/KhNqP2ep1/XctW/a2rt77ZJtrWv913e/MOgx0VO97vlOy8tSt4V2u9RX31btLugt2PGmIbur/mft24R3dPxZ6Pe6V7B/ZF7+tqdG9s3K+/v7IJbVI2jR5IOnDlm4Bv2pvtmne1cFoqDsJB5cEn36Z8e+NQ6KHOw9zDzd+Zf7f1COtIeSvSOr91rC2jbaA9ob3v6IyjnR1eHUe+t/9+7zHjY3XHNY9XnqCdKD3x+eSCk+OnZKeenU4/PdSZ3Hn3TPyZa11RXb1nQ8+ePxd07ky3X/fJ897nj13wvHD0Ivdi2yW3S609rj1HfnD94UivW2/rZffL7Vc8rnT0Tes70e/Tf/pqwNVz1/jXLl2feb3vxuwbt24m3Ry4Jbr1+Hb27Rd3Cu5M3F16j3iv/L7a/eoH+g/qf7T+sWXAbeD4YMBgz8NZD+8OCYee/pT/04fh0kfMR9UjRiONj50fHxsNGr3yZM6T4aeypxPPyn5W/3nrc6vn3/3i+0vPWPzY8Av5i8+/rnmp83Lvq6mvOscjxx+8znk98ab8rc7bfe+477rfx70fmSj8QP5Q89H6Y8en0E/3Pud8/vwv94Tz+4A5JREAAAAZdEVYdFNvZnR3YXJlAEFkb2JlIEltYWdlUmVhZHlxyWU8AAADKmlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS42LWMxMzIgNzkuMTU5Mjg0LCAyMDE2LzA0LzE5LTEzOjEzOjQwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpGRkE0MjcxNTdEQzYxMUU4QkZBOERDOEVCQ0U0NTBGMSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpGRkE0MjcxNDdEQzYxMUU4QkZBOERDOEVCQ0U0NTBGMSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ0MgMjAxNS41IChNYWNpbnRvc2gpIj4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6QkE4RkFCN0M3REM1MTFFOEJGQThEQzhFQkNFNDUwRjEiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6QkE4RkFCN0Q3REM1MTFFOEJGQThEQzhFQkNFNDUwRjEiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz5BZZ+3AAAB1ElEQVR42mJkAALtmZb/GfAAJkIKwIoYiAA4FV1JO0Ylk0hWxILLHTgV6cyywqoIIIAYiQinb8S4iYs036E7esgEJq6ABAGAACImMBmo5m6yDcLlR5gcNnnaumhADWIhJoOTbRC+9ILPa9+o4TWAAAIlyDVAOphCc1SYqGAICNwZxumIidi8NILz2qhBdCyPaOcicgq1wRnYAAFErRKSgZo+GzSOoWpQD1sHsRCjCDnzkpp90DM+If2jUTbqoFEHjZZDpJYroyFESeNmNFHTykEqg8g9bwACCNRiVAYyLgEx1wA7Zu3V9OMhVBt1opajBlsaCh7NZaMOGnXQgFeupHZjKO1CjUbZqINGHTTqoFEHjTpo1EGjDhqMgw342kejUTaahggpoOdg1WiUjTpoODoIvL7tzSBykB5AgPbtGIdBGIYCaBR16swROEQvzT06cxjm1lRFDC0LcpXC+xJzpIdJhOW8e4z359MVWSde1C32xRYasC0mCmascDZzrQz+7NgABAgQINnRY/iUrb5D9v9l9toqCBAgQIAAAQIESAABAgQIEKCD5ZK9QPaMigoCdIJP7NdjOyoIECBAgGQBGjB8zVDjam153T0OqInJbBAWfdg8AExKZVcA71uIAAAAAElFTkSuQmCC"
 
 /***/ }),
-
-/***/ 8:
-/*!***************************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/unsupportedIterableToArray.js ***!
-  \***************************************************************************/
+/* 219 */,
+/* 220 */,
+/* 221 */,
+/* 222 */,
+/* 223 */,
+/* 224 */,
+/* 225 */,
+/* 226 */,
+/* 227 */,
+/* 228 */,
+/* 229 */,
+/* 230 */,
+/* 231 */,
+/* 232 */,
+/* 233 */,
+/* 234 */,
+/* 235 */,
+/* 236 */,
+/* 237 */,
+/* 238 */,
+/* 239 */,
+/* 240 */,
+/* 241 */,
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */
+/*!*********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-upgrade-center-app/utils/check-update.js ***!
+  \*********************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-var arrayLikeToArray = __webpack_require__(/*! ./arrayLikeToArray.js */ 9);
-function _unsupportedIterableToArray(o, minLen) {
-  if (!o) return;
-  if (typeof o === "string") return arrayLikeToArray(o, minLen);
-  var n = Object.prototype.toString.call(o).slice(8, -1);
-  if (n === "Object" && o.constructor) n = o.constructor.name;
-  if (n === "Map" || n === "Set") return Array.from(o);
-  if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return arrayLikeToArray(o, minLen);
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+var _callCheckVersion = _interopRequireDefault(__webpack_require__(/*! ./call-check-version */ 288));
+// 推荐再App.vue中使用
+var PACKAGE_INFO_KEY = '__package_info__';
+function _default() {}
+
+/**
+ * 使用 uni.showModal 升级
+ */
+function updateUseModal(packageInfo) {
+  var title = packageInfo.title,
+    contents = packageInfo.contents,
+    is_mandatory = packageInfo.is_mandatory,
+    url = packageInfo.url,
+    platform = packageInfo.platform,
+    type = packageInfo.type;
+  var isWGT = type === 'wgt';
+  var isiOS = !isWGT ? platform.includes('iOS') : false;
+  var confirmText = isiOS ? '立即跳转更新' : '立即下载更新';
+  return uni.showModal({
+    title: title,
+    content: contents,
+    showCancel: !is_mandatory,
+    confirmText: confirmText,
+    success: function success(res) {
+      if (res.cancel) return;
+
+      // 安装包下载
+      if (isiOS) {
+        plus.runtime.openURL(url);
+        return;
+      }
+      uni.showToast({
+        title: '后台下载中……',
+        duration: 1000
+      });
+
+      // wgt 和 安卓下载更新
+      downloadTask = uni.downloadFile({
+        url: url,
+        success: function success(res) {
+          if (res.statusCode !== 200) {
+            console.error('下载安装包失败', err);
+            return;
+          }
+          // 下载好直接安装，下次启动生效
+          plus.runtime.install(res.tempFilePath, {
+            force: false
+          }, function () {
+            if (is_mandatory) {
+              //更新完重启app
+              plus.runtime.restart();
+              return;
+            }
+            uni.showModal({
+              title: '安装成功是否重启？',
+              success: function success(res) {
+                if (res.confirm) {
+                  //更新完重启app
+                  plus.runtime.restart();
+                }
+              }
+            });
+          }, function (err) {
+            uni.showModal({
+              title: '更新失败',
+              content: err.message,
+              showCancel: false
+            });
+          });
+        }
+      });
+    }
+  });
 }
-module.exports = _unsupportedIterableToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ }),
-
-/***/ 9:
-/*!*****************************************************************!*\
-  !*** ./node_modules/@babel/runtime/helpers/arrayLikeToArray.js ***!
-  \*****************************************************************/
+/* 288 */
+/*!***************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-upgrade-center-app/utils/call-check-version.js ***!
+  \***************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-function _arrayLikeToArray(arr, len) {
-  if (len == null || len > arr.length) len = arr.length;
-  for (var i = 0, arr2 = new Array(len); i < len; i++) {
-    arr2[i] = arr[i];
-  }
-  return arr2;
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+function _default() {
+  return new Promise(function (resolve, reject) {
+    reject({
+      message: '请在App中使用'
+    });
+  });
 }
-module.exports = _arrayLikeToArray, module.exports.__esModule = true, module.exports["default"] = module.exports;
+
+/***/ }),
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */,
+/* 308 */,
+/* 309 */,
+/* 310 */,
+/* 311 */,
+/* 312 */,
+/* 313 */,
+/* 314 */,
+/* 315 */,
+/* 316 */,
+/* 317 */,
+/* 318 */,
+/* 319 */,
+/* 320 */,
+/* 321 */,
+/* 322 */,
+/* 323 */
+/*!***************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/settings/dc-push/push.js ***!
+  \***************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+/**
+ * 判断Push是否开启
+ */
+function isTurnedOnPush() {
+  var isOn = undefined;
+  try {
+    if ('iOS' == plus.os.name) {
+      var types = 0;
+      var app = plus.ios.invoke('UIApplication', 'sharedApplication');
+      var settings = plus.ios.invoke(app, 'currentUserNotificationSettings');
+      if (settings) {
+        types = settings.plusGetAttribute('types');
+        plus.ios.deleteObject(settings);
+      } else {
+        types = plus.ios.invoke(app, 'enabledRemoteNotificationTypes');
+      }
+      plus.ios.deleteObject(app);
+      isOn = 0 != types;
+    } else {
+      var main = plus.android.runtimeMainActivity();
+      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
+      isOn = plus.android.invoke(manager, 'isPushTurnedOn', main);
+    }
+  } catch (e) {
+    console.error('exception in isTurnedOnPush@dc-push!!');
+  }
+  return isOn;
+}
+
+/**
+ * 打开Push
+ * Android平台 - 打开个推（UniPush）的推送通道
+ * iOS平台 - 如果开启通知功能，则打开应用的设置页面引导用户开启通知
+ */
+function turnOnPush() {
+  try {
+    if ('iOS' == plus.os.name) {
+      // 如果设置中没有开启通知，则打开应用的设置界面
+      if (!isTurnedOnPush()) {
+        settingInIos();
+      }
+    } else {
+      var main = plus.android.runtimeMainActivity();
+      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
+      plus.android.invoke(manager, 'turnOnPush', main);
+    }
+  } catch (e) {
+    console.error('exception in turnOnPush@dc-push!!');
+  }
+}
+
+/**
+ * 关闭Push
+ * Android平台 - 关闭个推（UniPush）的推送通道
+ * iOS平台 - 不做任何操作
+ */
+function trunOffPush() {
+  try {
+    if ('iOS' == plus.os.name) {
+      // 这里不做任何操作（不引导用户关闭应用的推送能力），应该通知业务服务器不向此用户下发推送消息
+    } else {
+      var main = plus.android.runtimeMainActivity();
+      var manager = plus.android.invoke('com.igexin.sdk.PushManager', 'getInstance');
+      plus.android.invoke(manager, 'turnOffPush', main);
+    }
+  } catch (e) {
+    console.error('exception in trunOffPush@dc-push!!');
+  }
+}
+
+/**
+ * iOS平台打开应用设置界面
+ */
+function settingInIos() {
+  try {
+    if ('iOS' == plus.os.name) {
+      var app = plus.ios.invoke('UIApplication', 'sharedApplication');
+      var setting = plus.ios.invoke('NSURL', 'URLWithString:', 'app-settings:');
+      plus.ios.invoke(app, 'openURL:', setting);
+      plus.ios.deleteObject(setting);
+      plus.ios.deleteObject(app);
+    }
+  } catch (e) {
+    console.error('exception in settingInIos@dc-push!!');
+  }
+}
+/**
+ * android打开应用设置页面
+ */
+function settingInAndroid() {
+  if (uni.getSystemInfoSync().platform == "android") {
+    var main = plus.android.runtimeMainActivity();
+    var Intent = plus.android.importClass('android.content.Intent');
+    var Settings = plus.android.importClass('android.provider.Settings');
+    var intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+    // 安卓跳转设置页面详细查看(https://ask.dcloud.net.cn/question/14732)
+    main.startActivity(intent);
+  }
+}
+/**
+ * 打开应用设置界面
+ */
+function setting() {
+  if (uni.getSystemInfoSync().platform == "ios") {
+    settingInIos();
+  }
+  if (uni.getSystemInfoSync().platform == "android") {
+    settingInAndroid();
+  }
+}
+var _default = {
+  isOn: isTurnedOnPush,
+  iosSetting: settingInIos,
+  on: turnOnPush,
+  off: trunOffPush,
+  setting: setting
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 324 */,
+/* 325 */,
+/* 326 */,
+/* 327 */,
+/* 328 */,
+/* 329 */,
+/* 330 */,
+/* 331 */,
+/* 332 */,
+/* 333 */,
+/* 334 */,
+/* 335 */,
+/* 336 */,
+/* 337 */,
+/* 338 */,
+/* 339 */,
+/* 340 */,
+/* 341 */,
+/* 342 */,
+/* 343 */,
+/* 344 */,
+/* 345 */,
+/* 346 */,
+/* 347 */,
+/* 348 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/common/login-page.mixin.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _vuex = __webpack_require__(/*! vuex */ 46);
+var _loginSuccess2 = _interopRequireDefault(__webpack_require__(/*! ./loginSuccess.js */ 349));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+var mixin = {
+  methods: _objectSpread(_objectSpread({}, (0, _vuex.mapMutations)({
+    setUserInfo: 'user/login'
+  })), {}, {
+    loginSuccess: function loginSuccess(result) {
+      (0, _loginSuccess2.default)(result);
+      delete result.userInfo.token;
+      if (result.type == "register") {
+        result.userInfo._id = result.uid;
+      }
+      this.setUserInfo(result.userInfo);
+    }
+  })
+};
+var _default = mixin;
+exports.default = _default;
+
+/***/ }),
+/* 349 */
+/*!************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/common/loginSuccess.js ***!
+  \************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+function _default(result) {
+  uni.showToast({
+    title: '登录成功',
+    icon: 'none'
+  });
+  console.log('登录成功', result);
+  var delta = 0; //判断需要返回几层
+  var pages = getCurrentPages();
+  // console.log(pages);
+  pages.forEach(function (page, index) {
+    // console.log(pages[pages.length-index-1].route.split('/')[2]);
+    pages[pages.length - index - 1].route.split('/');
+    if (pages[pages.length - index - 1].route.split('/')[2] == 'login-page') {
+      delta++;
+    }
+  });
+  // console.log('判断需要返回几层',delta);
+  uni.navigateBack({
+    delta: delta
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 350 */,
+/* 351 */,
+/* 352 */,
+/* 353 */,
+/* 354 */,
+/* 355 */,
+/* 356 */,
+/* 357 */,
+/* 358 */,
+/* 359 */,
+/* 360 */,
+/* 361 */,
+/* 362 */,
+/* 363 */,
+/* 364 */,
+/* 365 */,
+/* 366 */,
+/* 367 */,
+/* 368 */,
+/* 369 */,
+/* 370 */,
+/* 371 */,
+/* 372 */,
+/* 373 */,
+/* 374 */,
+/* 375 */,
+/* 376 */,
+/* 377 */,
+/* 378 */,
+/* 379 */,
+/* 380 */
+/*!***********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/login-page/register/validator.js ***!
+  \***********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  "username": {
+    "rules": [{
+      required: true,
+      errorMessage: '请输入用户名'
+    }, {
+      minLength: 3,
+      maxLength: 32,
+      errorMessage: '用户名长度在 {minLength} 到 {maxLength} 个字符'
+    }, {
+      validateFunction: function validateFunction(rule, value, data, callback) {
+        console.log(value);
+        if (/^1\d{10}$/.test(value) || /^(\w-*\.*)+@(\w-?)+(\.\w{2,})+$/.test(value)) {
+          callback('用户名不能是：手机号或邮箱');
+        }
+        ;
+        return true;
+      }
+    }],
+    "label": "用户名"
+  },
+  "password": {
+    "rules": [{
+      required: true,
+      errorMessage: '请输入密码'
+    }, {
+      minLength: 6,
+      maxLength: 20,
+      errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符'
+    }],
+    "label": "密码"
+  },
+  "pwd2": {
+    "rules": [{
+      required: true,
+      errorMessage: '再次输入密码'
+    }, {
+      minLength: 6,
+      maxLength: 20,
+      errorMessage: '密码长度在 {minLength} 到 {maxLength} 个字符'
+    }, {
+      validateFunction: function validateFunction(rule, value, data, callback) {
+        console.log(value);
+        if (value != data.password) {
+          callback('两次输入密码不一致');
+        }
+        ;
+        return true;
+      }
+    }],
+    "label": "确认密码"
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 381 */,
+/* 382 */,
+/* 383 */,
+/* 384 */,
+/* 385 */,
+/* 386 */,
+/* 387 */,
+/* 388 */,
+/* 389 */,
+/* 390 */,
+/* 391 */,
+/* 392 */,
+/* 393 */,
+/* 394 */,
+/* 395 */,
+/* 396 */,
+/* 397 */,
+/* 398 */,
+/* 399 */,
+/* 400 */,
+/* 401 */,
+/* 402 */,
+/* 403 */,
+/* 404 */,
+/* 405 */,
+/* 406 */,
+/* 407 */,
+/* 408 */,
+/* 409 */,
+/* 410 */,
+/* 411 */,
+/* 412 */,
+/* 413 */
+/*!*************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-feedback/js_sdk/validator/opendb-feedback.js ***!
+  \*************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.enumConverter = void 0;
+exports.filterToWhere = filterToWhere;
+exports.validator = void 0;
+var _slicedToArray2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/slicedToArray */ 5));
+function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it.return != null) it.return(); } finally { if (didErr) throw err; } } }; }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+// 表单校验规则由 schema2code 生成，不建议直接修改校验规则，而建议通过 schema2code 生成, 详情: https://uniapp.dcloud.net.cn/uniCloud/schema
+
+var validator = {
+  "content": {
+    "rules": [{
+      "required": true
+    }, {
+      "format": "string"
+    }],
+    "label": "留言内容/回复内容"
+  },
+  "imgs": {
+    "rules": [{
+      "format": "array"
+    }, {
+      "arrayType": "file"
+    }, {
+      "maxLength": 6
+    }],
+    "label": "图片列表"
+  },
+  "contact": {
+    "rules": [{
+      "format": "string"
+    }],
+    "label": "联系人"
+  },
+  "mobile": {
+    "rules": [{
+      "format": "string"
+    }, {
+      "pattern": "^\\+?[0-9-]{3,20}$"
+    }],
+    "label": "联系电话"
+  }
+};
+exports.validator = validator;
+var enumConverter = {};
+exports.enumConverter = enumConverter;
+function filterToWhere(filter, command) {
+  var where = {};
+  for (var field in filter) {
+    var _filter$field = filter[field],
+      type = _filter$field.type,
+      value = _filter$field.value;
+    switch (type) {
+      case "search":
+        if (typeof value === 'string' && value.length) {
+          where[field] = new RegExp(value);
+        }
+        break;
+      case "select":
+        if (value.length) {
+          var selectValue = [];
+          var _iterator = _createForOfIteratorHelper(value),
+            _step;
+          try {
+            for (_iterator.s(); !(_step = _iterator.n()).done;) {
+              var s = _step.value;
+              selectValue.push(command.eq(s));
+            }
+          } catch (err) {
+            _iterator.e(err);
+          } finally {
+            _iterator.f();
+          }
+          where[field] = command.or(selectValue);
+        }
+        break;
+      case "range":
+        if (value.length) {
+          var gt = value[0];
+          var lt = value[1];
+          where[field] = command.and([command.gte(gt), command.lte(lt)]);
+        }
+        break;
+      case "date":
+        if (value.length) {
+          var _value = (0, _slicedToArray2.default)(value, 2),
+            _s = _value[0],
+            e = _value[1];
+          var startDate = new Date(_s);
+          var endDate = new Date(e);
+          where[field] = command.and([command.gte(startDate), command.lte(endDate)]);
+        }
+        break;
+      case "timestamp":
+        if (value.length) {
+          var _value2 = (0, _slicedToArray2.default)(value, 2),
+            _startDate = _value2[0],
+            _endDate = _value2[1];
+          where[field] = command.and([command.gte(_startDate), command.lte(_endDate)]);
+        }
+        break;
+    }
+  }
+  return where;
+}
+
+/***/ }),
+/* 414 */,
+/* 415 */,
+/* 416 */,
+/* 417 */,
+/* 418 */,
+/* 419 */,
+/* 420 */,
+/* 421 */,
+/* 422 */,
+/* 423 */,
+/* 424 */,
+/* 425 */,
+/* 426 */,
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */,
+/* 453 */,
+/* 454 */,
+/* 455 */,
+/* 456 */,
+/* 457 */,
+/* 458 */,
+/* 459 */,
+/* 460 */,
+/* 461 */,
+/* 462 */,
+/* 463 */,
+/* 464 */,
+/* 465 */,
+/* 466 */
+/*!**********************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/function/voucher_center_.js ***!
+  \**********************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _App = _interopRequireDefault(__webpack_require__(/*! ../../App.vue */ 39));
+//本页面由uniapp切片工具生成，uni-app切片-可视化设计工具(一套代码编译到7个平台iOS、Android、H5、小程序)，软件下载地址：http://www.ymznkf.com/new_view_669.htm
+
+// 定义全局参数,控制数据加载
+var _self,
+  page = 1,
+  timer = null;
+var _default = {
+  data: function data() {
+    return {
+      loadingText: '',
+      animation: '',
+      animationData: {},
+      money: '0.00',
+      //充值金额
+      payType: '',
+      //单选框选中值
+
+      page: 0,
+      //当前分页页码
+      apiUrl: 'https://www.ymznkf.com/wx_server',
+      //后端接口地址
+      id: '',
+      //传值使用,方便存在本地的locakStorage  
+      del_id: '' //方便存在本地的locakStorage  
+    };
+  },
+
+  components: {},
+  onLoad: function onLoad(options) {
+    _self = this;
+
+    //检查是否登录参考代码,需要用的时候，可以把注释取掉
+    //if(this.checkLogin()==false){
+    //	return;
+    //}
+
+    //this.getLaction();//得到gps
+
+    this.page = 0;
+
+    //检测有没有传入id参数
+    if (options.id != null && options.id != "") {
+      this.id = options.id;
+    }
+
+    // 初始化一个动画
+    var animation = uni.createAnimation({
+      transformOrigin: "50% 0 50%",
+      duration: 1000,
+      //动画持续1秒
+      timingFunction: 'linear',
+      //linear 全程匀速运动
+      delay: 200 //延迟两秒执行动画
+    });
+
+    this.animation = animation;
+    this.scaleAndScale();
+
+    //执行初始化,需要用的时候，可以把注释取掉
+    //this.Refresh("init");
+  },
+  onShow: function onShow() {
+    console.log("on show");
+    //if(this.checkLogin()==false){
+    //	return;
+    //}
+
+    //执行初始化,需要用的时候，可以把注释取掉
+    //this.Refresh("init");
+  },
+
+  onPullDownRefresh: function onPullDownRefresh() {
+    //下拉刷新的时候请求一次数据
+    this.Refresh();
+  },
+  methods: {
+    // 定义动画内容
+    scaleAndScale: function scaleAndScale() {
+      // 定义动画内容
+      this.animation.opacity(0, 1).step(); //先放大1,2倍
+      this.animation.opacity(1, 0).step(); //缩小至原来的大小
+      // 导出动画数据传递给data层
+      this.animationData = this.animation.export(); //每次执行导出动画时 会覆盖之前的动画
+    },
+    noscaleAndScale: function noscaleAndScale() {
+      this.animation.scale(1, 1).step();
+      this.animationData = this.animation.export();
+    },
+    /**
+    * btSubmit_21处理函数
+    * 数据绑定  data-index="{{index}}" 
+    * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
+    */
+    btSubmit_21_click: function btSubmit_21_click(event) {
+      if (this.money == '') {
+        uni.showToast({
+          title: '充值金额不能为空！',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
+      if (this.payType == '') {
+        uni.showToast({
+          title: '充值方式不能为空！',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
+    },
+    /**
+    * input处理函数
+    */
+    money_input: function money_input(event) {
+      this.money = event.target.value;
+      console.log(event.target.value);
+    },
+    /**
+    * radio处理函数
+    */
+    payType_change: function payType_change(event) {
+      console.log(event.target.value);
+      this.payType = event.target.value;
+    },
+    /**
+    * voucher_center__55_55处理函数
+    * 数据绑定  data-index="{{index}}" 
+    * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
+    */
+    voucher_center__55_55_click: function voucher_center__55_55_click(event) {},
+    /**
+    * voucher_center__58_58处理函数
+    * 数据绑定  data-index="{{index}}" 
+    * 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
+    */
+    voucher_center__58_58_click: function voucher_center__58_58_click(event) {},
+    //刷新数据
+    Refresh: function Refresh(_action) {
+      uni.showLoading();
+
+      //提交到服务器
+      var that = this;
+      var url = that.apiUrl + '{server_code_file_path}';
+      console.log(url);
+      uni.request({
+        url: url,
+        //后端接口地址，需要改成自己的接口地址
+        data: {
+          action: _action,
+          //上传动作，如按钮点击会产生click动作，分页也会产生，在后端根据具体的动作来判断事件
+          uid: that.getUid(),
+          //上传用户id,在登录中获得
+          //上传页面中的变量
+          //定义变量---start
+          money: that.money,
+          payType: that.payType,
+          //定义变量---end
+          id: that.id,
+          //上传id值，后端可以根据此值来操作当前id
+          del_id: that.del_id,
+          //在列表中删除按钮选中时，上传到有后端，进行删除操作
+          page: that.page
+        },
+        method: 'GET',
+        success: function success(res) {
+          //后端返回数据
+
+          // 隐藏导航栏加载框  
+          uni.hideNavigationBarLoading();
+          // 停止下拉动作  
+          uni.stopPullDownRefresh();
+
+          // 隐藏加载框  
+          uni.hideLoading();
+          var tmp = res.data;
+
+          //初始化，对页面上的控件进行赋值操作
+          if (_action == "init") {
+            that.payType_array = tmp.payType_array;
+          }
+          that.money = tmp.money;
+
+          //如果后端有返回消息，则弹出消息提示
+          if (tmp.message != null && tmp.message != "") {
+            uni.showToast({
+              title: tmp.message,
+              icon: 'none',
+              duration: 2000
+            });
+          }
+
+          //如果后端有返回页码，则更改当前页码
+          if (tmp.page != null && tmp.page != "") {
+            page = tmp.page;
+          }
+        },
+        fail: function fail(res) {
+          uni.showToast({
+            title: "服务器访问失败",
+            icon: 'none',
+            duration: 2000
+          });
+          console.log(res.data);
+          console.log('is failed');
+        }
+      });
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 467 */,
+/* 468 */,
+/* 469 */,
+/* 470 */,
+/* 471 */,
+/* 472 */,
+/* 473 */,
+/* 474 */,
+/* 475 */,
+/* 476 */,
+/* 477 */,
+/* 478 */,
+/* 479 */,
+/* 480 */,
+/* 481 */,
+/* 482 */,
+/* 483 */,
+/* 484 */,
+/* 485 */,
+/* 486 */,
+/* 487 */,
+/* 488 */,
+/* 489 */
+/*!**************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/utils/tool.js ***!
+  \**************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.parseTime = parseTime;
+exports.timeInterval = timeInterval;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+//时间间隔函数
+function timeInterval(timesData) {
+  //如果时间格式是正确的，那下面这一步转化时间格式就可以不用了
+  var dateBegin = timesData; //将-转化为/，使用new Date    
+  var dateEnd = new Date(); //获取当前时间   
+  var dateDiff = Math.abs(dateEnd.getTime() - dateBegin); //时间差的毫秒数
+  var yearDiff = Math.floor(dateDiff / (24 * 3600 * 1000 * 365));
+  var dayDiff = Math.floor(dateDiff / (24 * 3600 * 1000)); //计算出相差天数
+  var leave1 = dateDiff % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+  var hours = Math.floor(leave1 / (3600 * 1000)); //计算出小时数
+  //计算相差分钟数
+  var leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+  var minutes = Math.floor(leave2 / (60 * 1000)); //计算相差分钟数
+  //计算相差秒数
+  var leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+  var seconds = Math.round(leave3 / 1000);
+  var timesString = '';
+  if (yearDiff != 0) {
+    timesString = yearDiff + '年前';
+  } else if (yearDiff == 0 && dayDiff != 0) {
+    timesString = dayDiff + '天前';
+  } else if (dayDiff == 0 && hours != 0) {
+    timesString = hours + '小时前';
+  } else if (hours == 0 && minutes != 0) {
+    timesString = minutes + '分钟前';
+  } else if (minutes == 0 && seconds < 60) {
+    timesString = '刚刚';
+  }
+  return timesString;
+}
+
+// 日期格式化
+function parseTime(time, pattern) {
+  if (arguments.length === 0 || !time) {
+    return null;
+  }
+  var format = pattern || '{y}-{m}-{d} {h}:{i}:{s}';
+  var date;
+  if ((0, _typeof2.default)(time) === 'object') {
+    date = time;
+  } else {
+    if (typeof time === 'string' && /^[0-9]+$/.test(time)) {
+      time = parseInt(time);
+    } else if (typeof time === 'string') {
+      time = time.replace(new RegExp(/-/gm), '/').replace('T', ' ').replace(new RegExp(/\.[\d]{3}/gm), '');
+    }
+    if (typeof time === 'number' && time.toString().length === 10) {
+      time = time * 1000;
+    }
+    date = new Date(time);
+  }
+  var formatObj = {
+    y: date.getFullYear(),
+    m: date.getMonth() + 1,
+    d: date.getDate(),
+    h: date.getHours(),
+    i: date.getMinutes(),
+    s: date.getSeconds(),
+    a: date.getDay()
+  };
+  var time_str = format.replace(/{(y|m|d|h|i|s|a)+}/g, function (result, key) {
+    var value = formatObj[key];
+    // Note: getDay() returns 0 on Sunday
+    if (key === 'a') {
+      return ['日', '一', '二', '三', '四', '五', '六'][value];
+    }
+    if (result.length > 0 && value < 10) {
+      value = '0' + value;
+    }
+    return value || 0;
+  });
+  return time_str;
+}
+
+/***/ }),
+/* 490 */,
+/* 491 */,
+/* 492 */,
+/* 493 */,
+/* 494 */,
+/* 495 */,
+/* 496 */,
+/* 497 */,
+/* 498 */,
+/* 499 */,
+/* 500 */,
+/* 501 */,
+/* 502 */,
+/* 503 */,
+/* 504 */,
+/* 505 */,
+/* 506 */,
+/* 507 */,
+/* 508 */,
+/* 509 */,
+/* 510 */,
+/* 511 */,
+/* 512 */,
+/* 513 */,
+/* 514 */,
+/* 515 */,
+/* 516 */,
+/* 517 */,
+/* 518 */,
+/* 519 */,
+/* 520 */,
+/* 521 */,
+/* 522 */,
+/* 523 */,
+/* 524 */,
+/* 525 */,
+/* 526 */
+/*!****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-icons/components/uni-icons/uniicons_file_vue.js ***!
+  \****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.fontData = void 0;
+var fontData = [{
+  "font_class": "arrow-down",
+  "unicode": "\uE6BE"
+}, {
+  "font_class": "arrow-left",
+  "unicode": "\uE6BC"
+}, {
+  "font_class": "arrow-right",
+  "unicode": "\uE6BB"
+}, {
+  "font_class": "arrow-up",
+  "unicode": "\uE6BD"
+}, {
+  "font_class": "auth",
+  "unicode": "\uE6AB"
+}, {
+  "font_class": "auth-filled",
+  "unicode": "\uE6CC"
+}, {
+  "font_class": "back",
+  "unicode": "\uE6B9"
+}, {
+  "font_class": "bars",
+  "unicode": "\uE627"
+}, {
+  "font_class": "calendar",
+  "unicode": "\uE6A0"
+}, {
+  "font_class": "calendar-filled",
+  "unicode": "\uE6C0"
+}, {
+  "font_class": "camera",
+  "unicode": "\uE65A"
+}, {
+  "font_class": "camera-filled",
+  "unicode": "\uE658"
+}, {
+  "font_class": "cart",
+  "unicode": "\uE631"
+}, {
+  "font_class": "cart-filled",
+  "unicode": "\uE6D0"
+}, {
+  "font_class": "chat",
+  "unicode": "\uE65D"
+}, {
+  "font_class": "chat-filled",
+  "unicode": "\uE659"
+}, {
+  "font_class": "chatboxes",
+  "unicode": "\uE696"
+}, {
+  "font_class": "chatboxes-filled",
+  "unicode": "\uE692"
+}, {
+  "font_class": "chatbubble",
+  "unicode": "\uE697"
+}, {
+  "font_class": "chatbubble-filled",
+  "unicode": "\uE694"
+}, {
+  "font_class": "checkbox",
+  "unicode": "\uE62B"
+}, {
+  "font_class": "checkbox-filled",
+  "unicode": "\uE62C"
+}, {
+  "font_class": "checkmarkempty",
+  "unicode": "\uE65C"
+}, {
+  "font_class": "circle",
+  "unicode": "\uE65B"
+}, {
+  "font_class": "circle-filled",
+  "unicode": "\uE65E"
+}, {
+  "font_class": "clear",
+  "unicode": "\uE66D"
+}, {
+  "font_class": "close",
+  "unicode": "\uE673"
+}, {
+  "font_class": "closeempty",
+  "unicode": "\uE66C"
+}, {
+  "font_class": "cloud-download",
+  "unicode": "\uE647"
+}, {
+  "font_class": "cloud-download-filled",
+  "unicode": "\uE646"
+}, {
+  "font_class": "cloud-upload",
+  "unicode": "\uE645"
+}, {
+  "font_class": "cloud-upload-filled",
+  "unicode": "\uE648"
+}, {
+  "font_class": "color",
+  "unicode": "\uE6CF"
+}, {
+  "font_class": "color-filled",
+  "unicode": "\uE6C9"
+}, {
+  "font_class": "compose",
+  "unicode": "\uE67F"
+}, {
+  "font_class": "contact",
+  "unicode": "\uE693"
+}, {
+  "font_class": "contact-filled",
+  "unicode": "\uE695"
+}, {
+  "font_class": "down",
+  "unicode": "\uE6B8"
+}, {
+  "font_class": "bottom",
+  "unicode": "\uE6B8"
+}, {
+  "font_class": "download",
+  "unicode": "\uE68D"
+}, {
+  "font_class": "download-filled",
+  "unicode": "\uE681"
+}, {
+  "font_class": "email",
+  "unicode": "\uE69E"
+}, {
+  "font_class": "email-filled",
+  "unicode": "\uE69A"
+}, {
+  "font_class": "eye",
+  "unicode": "\uE651"
+}, {
+  "font_class": "eye-filled",
+  "unicode": "\uE66A"
+}, {
+  "font_class": "eye-slash",
+  "unicode": "\uE6B3"
+}, {
+  "font_class": "eye-slash-filled",
+  "unicode": "\uE6B4"
+}, {
+  "font_class": "fire",
+  "unicode": "\uE6A1"
+}, {
+  "font_class": "fire-filled",
+  "unicode": "\uE6C5"
+}, {
+  "font_class": "flag",
+  "unicode": "\uE65F"
+}, {
+  "font_class": "flag-filled",
+  "unicode": "\uE660"
+}, {
+  "font_class": "folder-add",
+  "unicode": "\uE6A9"
+}, {
+  "font_class": "folder-add-filled",
+  "unicode": "\uE6C8"
+}, {
+  "font_class": "font",
+  "unicode": "\uE6A3"
+}, {
+  "font_class": "forward",
+  "unicode": "\uE6BA"
+}, {
+  "font_class": "gear",
+  "unicode": "\uE664"
+}, {
+  "font_class": "gear-filled",
+  "unicode": "\uE661"
+}, {
+  "font_class": "gift",
+  "unicode": "\uE6A4"
+}, {
+  "font_class": "gift-filled",
+  "unicode": "\uE6C4"
+}, {
+  "font_class": "hand-down",
+  "unicode": "\uE63D"
+}, {
+  "font_class": "hand-down-filled",
+  "unicode": "\uE63C"
+}, {
+  "font_class": "hand-up",
+  "unicode": "\uE63F"
+}, {
+  "font_class": "hand-up-filled",
+  "unicode": "\uE63E"
+}, {
+  "font_class": "headphones",
+  "unicode": "\uE630"
+}, {
+  "font_class": "heart",
+  "unicode": "\uE639"
+}, {
+  "font_class": "heart-filled",
+  "unicode": "\uE641"
+}, {
+  "font_class": "help",
+  "unicode": "\uE679"
+}, {
+  "font_class": "help-filled",
+  "unicode": "\uE674"
+}, {
+  "font_class": "home",
+  "unicode": "\uE662"
+}, {
+  "font_class": "home-filled",
+  "unicode": "\uE663"
+}, {
+  "font_class": "image",
+  "unicode": "\uE670"
+}, {
+  "font_class": "image-filled",
+  "unicode": "\uE678"
+}, {
+  "font_class": "images",
+  "unicode": "\uE650"
+}, {
+  "font_class": "images-filled",
+  "unicode": "\uE64B"
+}, {
+  "font_class": "info",
+  "unicode": "\uE669"
+}, {
+  "font_class": "info-filled",
+  "unicode": "\uE649"
+}, {
+  "font_class": "left",
+  "unicode": "\uE6B7"
+}, {
+  "font_class": "link",
+  "unicode": "\uE6A5"
+}, {
+  "font_class": "list",
+  "unicode": "\uE644"
+}, {
+  "font_class": "location",
+  "unicode": "\uE6AE"
+}, {
+  "font_class": "location-filled",
+  "unicode": "\uE6AF"
+}, {
+  "font_class": "locked",
+  "unicode": "\uE66B"
+}, {
+  "font_class": "locked-filled",
+  "unicode": "\uE668"
+}, {
+  "font_class": "loop",
+  "unicode": "\uE633"
+}, {
+  "font_class": "mail-open",
+  "unicode": "\uE643"
+}, {
+  "font_class": "mail-open-filled",
+  "unicode": "\uE63A"
+}, {
+  "font_class": "map",
+  "unicode": "\uE667"
+}, {
+  "font_class": "map-filled",
+  "unicode": "\uE666"
+}, {
+  "font_class": "map-pin",
+  "unicode": "\uE6AD"
+}, {
+  "font_class": "map-pin-ellipse",
+  "unicode": "\uE6AC"
+}, {
+  "font_class": "medal",
+  "unicode": "\uE6A2"
+}, {
+  "font_class": "medal-filled",
+  "unicode": "\uE6C3"
+}, {
+  "font_class": "mic",
+  "unicode": "\uE671"
+}, {
+  "font_class": "mic-filled",
+  "unicode": "\uE677"
+}, {
+  "font_class": "micoff",
+  "unicode": "\uE67E"
+}, {
+  "font_class": "micoff-filled",
+  "unicode": "\uE6B0"
+}, {
+  "font_class": "minus",
+  "unicode": "\uE66F"
+}, {
+  "font_class": "minus-filled",
+  "unicode": "\uE67D"
+}, {
+  "font_class": "more",
+  "unicode": "\uE64D"
+}, {
+  "font_class": "more-filled",
+  "unicode": "\uE64E"
+}, {
+  "font_class": "navigate",
+  "unicode": "\uE66E"
+}, {
+  "font_class": "navigate-filled",
+  "unicode": "\uE67A"
+}, {
+  "font_class": "notification",
+  "unicode": "\uE6A6"
+}, {
+  "font_class": "notification-filled",
+  "unicode": "\uE6C1"
+}, {
+  "font_class": "paperclip",
+  "unicode": "\uE652"
+}, {
+  "font_class": "paperplane",
+  "unicode": "\uE672"
+}, {
+  "font_class": "paperplane-filled",
+  "unicode": "\uE675"
+}, {
+  "font_class": "person",
+  "unicode": "\uE699"
+}, {
+  "font_class": "person-filled",
+  "unicode": "\uE69D"
+}, {
+  "font_class": "personadd",
+  "unicode": "\uE69F"
+}, {
+  "font_class": "personadd-filled",
+  "unicode": "\uE698"
+}, {
+  "font_class": "personadd-filled-copy",
+  "unicode": "\uE6D1"
+}, {
+  "font_class": "phone",
+  "unicode": "\uE69C"
+}, {
+  "font_class": "phone-filled",
+  "unicode": "\uE69B"
+}, {
+  "font_class": "plus",
+  "unicode": "\uE676"
+}, {
+  "font_class": "plus-filled",
+  "unicode": "\uE6C7"
+}, {
+  "font_class": "plusempty",
+  "unicode": "\uE67B"
+}, {
+  "font_class": "pulldown",
+  "unicode": "\uE632"
+}, {
+  "font_class": "pyq",
+  "unicode": "\uE682"
+}, {
+  "font_class": "qq",
+  "unicode": "\uE680"
+}, {
+  "font_class": "redo",
+  "unicode": "\uE64A"
+}, {
+  "font_class": "redo-filled",
+  "unicode": "\uE655"
+}, {
+  "font_class": "refresh",
+  "unicode": "\uE657"
+}, {
+  "font_class": "refresh-filled",
+  "unicode": "\uE656"
+}, {
+  "font_class": "refreshempty",
+  "unicode": "\uE6BF"
+}, {
+  "font_class": "reload",
+  "unicode": "\uE6B2"
+}, {
+  "font_class": "right",
+  "unicode": "\uE6B5"
+}, {
+  "font_class": "scan",
+  "unicode": "\uE62A"
+}, {
+  "font_class": "search",
+  "unicode": "\uE654"
+}, {
+  "font_class": "settings",
+  "unicode": "\uE653"
+}, {
+  "font_class": "settings-filled",
+  "unicode": "\uE6CE"
+}, {
+  "font_class": "shop",
+  "unicode": "\uE62F"
+}, {
+  "font_class": "shop-filled",
+  "unicode": "\uE6CD"
+}, {
+  "font_class": "smallcircle",
+  "unicode": "\uE67C"
+}, {
+  "font_class": "smallcircle-filled",
+  "unicode": "\uE665"
+}, {
+  "font_class": "sound",
+  "unicode": "\uE684"
+}, {
+  "font_class": "sound-filled",
+  "unicode": "\uE686"
+}, {
+  "font_class": "spinner-cycle",
+  "unicode": "\uE68A"
+}, {
+  "font_class": "staff",
+  "unicode": "\uE6A7"
+}, {
+  "font_class": "staff-filled",
+  "unicode": "\uE6CB"
+}, {
+  "font_class": "star",
+  "unicode": "\uE688"
+}, {
+  "font_class": "star-filled",
+  "unicode": "\uE68F"
+}, {
+  "font_class": "starhalf",
+  "unicode": "\uE683"
+}, {
+  "font_class": "trash",
+  "unicode": "\uE687"
+}, {
+  "font_class": "trash-filled",
+  "unicode": "\uE685"
+}, {
+  "font_class": "tune",
+  "unicode": "\uE6AA"
+}, {
+  "font_class": "tune-filled",
+  "unicode": "\uE6CA"
+}, {
+  "font_class": "undo",
+  "unicode": "\uE64F"
+}, {
+  "font_class": "undo-filled",
+  "unicode": "\uE64C"
+}, {
+  "font_class": "up",
+  "unicode": "\uE6B6"
+}, {
+  "font_class": "top",
+  "unicode": "\uE6B6"
+}, {
+  "font_class": "upload",
+  "unicode": "\uE690"
+}, {
+  "font_class": "upload-filled",
+  "unicode": "\uE68E"
+}, {
+  "font_class": "videocam",
+  "unicode": "\uE68C"
+}, {
+  "font_class": "videocam-filled",
+  "unicode": "\uE689"
+}, {
+  "font_class": "vip",
+  "unicode": "\uE6A8"
+}, {
+  "font_class": "vip-filled",
+  "unicode": "\uE6C6"
+}, {
+  "font_class": "wallet",
+  "unicode": "\uE6B1"
+}, {
+  "font_class": "wallet-filled",
+  "unicode": "\uE6C2"
+}, {
+  "font_class": "weibo",
+  "unicode": "\uE68B"
+}, {
+  "font_class": "weixin",
+  "unicode": "\uE691"
+}];
+
+// export const fontData = JSON.parse<IconsDataItem>(fontDataJson)
+exports.fontData = fontData;
+
+/***/ }),
+/* 527 */,
+/* 528 */,
+/* 529 */,
+/* 530 */,
+/* 531 */,
+/* 532 */,
+/* 533 */,
+/* 534 */,
+/* 535 */,
+/* 536 */,
+/* 537 */,
+/* 538 */,
+/* 539 */,
+/* 540 */,
+/* 541 */,
+/* 542 */,
+/* 543 */,
+/* 544 */,
+/* 545 */,
+/* 546 */,
+/* 547 */,
+/* 548 */,
+/* 549 */,
+/* 550 */,
+/* 551 */,
+/* 552 */,
+/* 553 */,
+/* 554 */,
+/* 555 */
+/*!*******************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/index.js ***!
+  \*******************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 556));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 557));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 558));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 556 */
+/*!******************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/en.json ***!
+  \******************************************************************************************************************************************************/
+/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"Search enter content\"}");
+
+/***/ }),
+/* 557 */
+/*!***********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hans.json ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"请输入搜索内容\"}");
+
+/***/ }),
+/* 558 */
+/*!***********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-search-bar/components/uni-search-bar/i18n/zh-Hant.json ***!
+  \***********************************************************************************************************************************************************/
+/*! exports provided: uni-search-bar.cancel, uni-search-bar.placeholder, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-search-bar.cancel\":\"cancel\",\"uni-search-bar.placeholder\":\"請輸入搜索內容\"}");
+
+/***/ }),
+/* 559 */,
+/* 560 */,
+/* 561 */,
+/* 562 */,
+/* 563 */,
+/* 564 */,
+/* 565 */,
+/* 566 */,
+/* 567 */,
+/* 568 */,
+/* 569 */,
+/* 570 */,
+/* 571 */,
+/* 572 */,
+/* 573 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-sticky/props.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 吸顶容器到顶部某个距离的时候，进行吸顶，在H5平台，NavigationBar为44px
+    offsetTop: {
+      type: [String, Number],
+      default: uni.$u.props.sticky.offsetTop
+    },
+    // 自定义导航栏的高度
+    customNavHeight: {
+      type: [String, Number],
+      default: uni.$u.props.sticky.customNavHeight
+    },
+    // 是否开启吸顶功能
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.sticky.disabled
+    },
+    // 吸顶区域的背景颜色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.sticky.bgColor
+    },
+    // z-index值
+    zIndex: {
+      type: [String, Number],
+      default: uni.$u.props.sticky.zIndex
+    },
+    // 列表中的索引值
+    index: {
+      type: [String, Number],
+      default: uni.$u.props.sticky.index
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 574 */,
+/* 575 */,
+/* 576 */,
+/* 577 */,
+/* 578 */,
+/* 579 */,
+/* 580 */,
+/* 581 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-tabs/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 滑块的移动过渡时间，单位ms
+    duration: {
+      type: Number,
+      default: uni.$u.props.tabs.duration
+    },
+    // tabs标签数组
+    list: {
+      type: Array,
+      default: uni.$u.props.tabs.list
+    },
+    // 滑块颜色
+    lineColor: {
+      type: String,
+      default: uni.$u.props.tabs.lineColor
+    },
+    // 菜单选择中时的样式
+    activeStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.activeStyle
+    },
+    // 菜单非选中时的样式
+    inactiveStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.inactiveStyle
+    },
+    // 滑块长度
+    lineWidth: {
+      type: [String, Number],
+      default: uni.$u.props.tabs.lineWidth
+    },
+    // 滑块高度
+    lineHeight: {
+      type: [String, Number],
+      default: uni.$u.props.tabs.lineHeight
+    },
+    // 滑块背景显示大小，当滑块背景设置为图片时使用
+    lineBgSize: {
+      type: String,
+      default: uni.$u.props.tabs.lineBgSize
+    },
+    // 菜单item的样式
+    itemStyle: {
+      type: [String, Object],
+      default: uni.$u.props.tabs.itemStyle
+    },
+    // 菜单是否可滚动
+    scrollable: {
+      type: Boolean,
+      default: uni.$u.props.tabs.scrollable
+    },
+    // 当前选中标签的索引
+    current: {
+      type: [Number, String],
+      default: uni.$u.props.tabs.current
+    },
+    // 默认读取的键名
+    keyName: {
+      type: String,
+      default: uni.$u.props.tabs.keyName
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 582 */,
+/* 583 */,
+/* 584 */,
+/* 585 */,
+/* 586 */,
+/* 587 */,
+/* 588 */,
+/* 589 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-line/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    color: {
+      type: String,
+      default: uni.$u.props.line.color
+    },
+    // 长度，竖向时表现为高度，横向时表现为长度，可以为百分比，带px单位的值等
+    length: {
+      type: [String, Number],
+      default: uni.$u.props.line.length
+    },
+    // 线条方向，col-竖向，row-横向
+    direction: {
+      type: String,
+      default: uni.$u.props.line.direction
+    },
+    // 是否显示细边框
+    hairline: {
+      type: Boolean,
+      default: uni.$u.props.line.hairline
+    },
+    // 线条与上下左右元素的间距，字符串形式，如"30px"、"20px 30px"
+    margin: {
+      type: [String, Number],
+      default: uni.$u.props.line.margin
+    },
+    // 是否虚线，true-虚线，false-实线
+    dashed: {
+      type: Boolean,
+      default: uni.$u.props.line.dashed
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 590 */,
+/* 591 */,
+/* 592 */,
+/* 593 */,
+/* 594 */,
+/* 595 */,
+/* 596 */,
+/* 597 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-image/props.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 图片地址
+    src: {
+      type: String,
+      default: uni.$u.props.image.src
+    },
+    // 裁剪模式
+    mode: {
+      type: String,
+      default: uni.$u.props.image.mode
+    },
+    // 宽度，单位任意
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.image.width
+    },
+    // 高度，单位任意
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.image.height
+    },
+    // 图片形状，circle-圆形，square-方形
+    shape: {
+      type: String,
+      default: uni.$u.props.image.shape
+    },
+    // 圆角，单位任意
+    radius: {
+      type: [String, Number],
+      default: uni.$u.props.image.radius
+    },
+    // 是否懒加载，微信小程序、App、百度小程序、字节跳动小程序
+    lazyLoad: {
+      type: Boolean,
+      default: uni.$u.props.image.lazyLoad
+    },
+    // 开启长按图片显示识别微信小程序码菜单
+    showMenuByLongpress: {
+      type: Boolean,
+      default: uni.$u.props.image.showMenuByLongpress
+    },
+    // 加载中的图标，或者小图片
+    loadingIcon: {
+      type: String,
+      default: uni.$u.props.image.loadingIcon
+    },
+    // 加载失败的图标，或者小图片
+    errorIcon: {
+      type: String,
+      default: uni.$u.props.image.errorIcon
+    },
+    // 是否显示加载中的图标或者自定义的slot
+    showLoading: {
+      type: Boolean,
+      default: uni.$u.props.image.showLoading
+    },
+    // 是否显示加载错误的图标或者自定义的slot
+    showError: {
+      type: Boolean,
+      default: uni.$u.props.image.showError
+    },
+    // 是否需要淡入效果
+    fade: {
+      type: Boolean,
+      default: uni.$u.props.image.fade
+    },
+    // 只支持网络资源，只对微信小程序有效
+    webp: {
+      type: Boolean,
+      default: uni.$u.props.image.webp
+    },
+    // 过渡时间，单位ms
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.image.duration
+    },
+    // 背景颜色，用于深色页面加载图片时，为了和背景色融合
+    bgColor: {
+      type: String,
+      default: uni.$u.props.image.bgColor
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 598 */,
+/* 599 */,
+/* 600 */,
+/* 601 */,
+/* 602 */,
+/* 603 */,
+/* 604 */,
+/* 605 */,
+/* 606 */,
+/* 607 */,
+/* 608 */,
+/* 609 */,
+/* 610 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-rate/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 用于v-model双向绑定选中的星星数量
+    value: {
+      type: [String, Number],
+      default: uni.$u.props.rate.value
+    },
+    // 要显示的星星数量
+    count: {
+      type: [String, Number],
+      default: uni.$u.props.rate.count
+    },
+    // 是否不可选中
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.rate.disabled
+    },
+    // 是否只读
+    readonly: {
+      type: Boolean,
+      default: uni.$u.props.rate.readonly
+    },
+    // 星星的大小，单位px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.rate.size
+    },
+    // 未选中时的颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.rate.inactiveColor
+    },
+    // 选中的颜色
+    activeColor: {
+      type: String,
+      default: uni.$u.props.rate.activeColor
+    },
+    // 星星之间的间距，单位px
+    gutter: {
+      type: [String, Number],
+      default: uni.$u.props.rate.gutter
+    },
+    // 最少能选择的星星个数
+    minCount: {
+      type: [String, Number],
+      default: uni.$u.props.rate.minCount
+    },
+    // 是否允许半星
+    allowHalf: {
+      type: Boolean,
+      default: uni.$u.props.rate.allowHalf
+    },
+    // 选中时的图标(星星)
+    activeIcon: {
+      type: String,
+      default: uni.$u.props.rate.activeIcon
+    },
+    // 未选中时的图标(星星)
+    inactiveIcon: {
+      type: String,
+      default: uni.$u.props.rate.inactiveIcon
+    },
+    // 是否可以通过滑动手势选择评分
+    touchable: {
+      type: Boolean,
+      default: uni.$u.props.rate.touchable
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 611 */,
+/* 612 */,
+/* 613 */,
+/* 614 */,
+/* 615 */,
+/* 616 */,
+/* 617 */,
+/* 618 */
+/*!*****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-textarea/props.js ***!
+  \*****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 输入框的内容
+    value: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.value
+    },
+    // 输入框为空时占位符
+    placeholder: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.placeholder
+    },
+    // 指定placeholder的样式类，注意页面或组件的style中写了scoped时，需要在类名前写/deep/
+    placeholderClass: {
+      type: String,
+      default: uni.$u.props.input.placeholderClass
+    },
+    // 指定placeholder的样式
+    placeholderStyle: {
+      type: [String, Object],
+      default: uni.$u.props.input.placeholderStyle
+    },
+    // 输入框高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.height
+    },
+    // 设置键盘右下角按钮的文字，仅微信小程序，App-vue和H5有效
+    confirmType: {
+      type: String,
+      default: uni.$u.props.textarea.confirmType
+    },
+    // 是否禁用
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.textarea.disabled
+    },
+    // 是否显示统计字数
+    count: {
+      type: Boolean,
+      default: uni.$u.props.textarea.count
+    },
+    // 是否自动获取焦点，nvue不支持，H5取决于浏览器的实现
+    focus: {
+      type: Boolean,
+      default: uni.$u.props.textarea.focus
+    },
+    // 是否自动增加高度
+    autoHeight: {
+      type: Boolean,
+      default: uni.$u.props.textarea.autoHeight
+    },
+    // 如果textarea是在一个position:fixed的区域，需要显示指定属性fixed为true
+    fixed: {
+      type: Boolean,
+      default: uni.$u.props.textarea.fixed
+    },
+    // 指定光标与键盘的距离
+    cursorSpacing: {
+      type: Number,
+      default: uni.$u.props.textarea.cursorSpacing
+    },
+    // 指定focus时的光标位置
+    cursor: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.cursor
+    },
+    // 是否显示键盘上方带有”完成“按钮那一栏，
+    showConfirmBar: {
+      type: Boolean,
+      default: uni.$u.props.textarea.showConfirmBar
+    },
+    // 光标起始位置，自动聚焦时有效，需与selection-end搭配使用
+    selectionStart: {
+      type: Number,
+      default: uni.$u.props.textarea.selectionStart
+    },
+    // 光标结束位置，自动聚焦时有效，需与selection-start搭配使用
+    selectionEnd: {
+      type: Number,
+      default: uni.$u.props.textarea.selectionEnd
+    },
+    // 键盘弹起时，是否自动上推页面
+    adjustPosition: {
+      type: Boolean,
+      default: uni.$u.props.textarea.adjustPosition
+    },
+    // 是否去掉 iOS 下的默认内边距，只微信小程序有效
+    disableDefaultPadding: {
+      type: Boolean,
+      default: uni.$u.props.textarea.disableDefaultPadding
+    },
+    // focus时，点击页面的时候不收起键盘，只微信小程序有效
+    holdKeyboard: {
+      type: Boolean,
+      default: uni.$u.props.textarea.holdKeyboard
+    },
+    // 最大输入长度，设置为 -1 的时候不限制最大长度
+    maxlength: {
+      type: [String, Number],
+      default: uni.$u.props.textarea.maxlength
+    },
+    // 边框类型，surround-四周边框，bottom-底部边框
+    border: {
+      type: String,
+      default: uni.$u.props.textarea.border
+    },
+    // 用于处理或者过滤输入框内容的方法
+    formatter: {
+      type: [Function, null],
+      default: uni.$u.props.textarea.formatter
+    },
+    // 是否忽略组件内对文本合成系统事件的处理
+    ignoreCompositionEvent: {
+      type: Boolean,
+      default: true
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 619 */,
+/* 620 */,
+/* 621 */,
+/* 622 */,
+/* 623 */,
+/* 624 */,
+/* 625 */,
+/* 626 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-upload/utils.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni, wx) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.chooseFile = chooseFile;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+function pickExclude(obj, keys) {
+  // 某些情况下，type可能会为
+  if (!['[object Object]', '[object File]'].includes(Object.prototype.toString.call(obj))) {
+    return {};
+  }
+  return Object.keys(obj).reduce(function (prev, key) {
+    if (!keys.includes(key)) {
+      prev[key] = obj[key];
+    }
+    return prev;
+  }, {});
+}
+function formatImage(res) {
+  return res.tempFiles.map(function (item) {
+    return _objectSpread(_objectSpread({}, pickExclude(item, ['path'])), {}, {
+      type: 'image',
+      url: item.path,
+      thumb: item.path,
+      size: item.size
+    });
+  });
+}
+function formatVideo(res) {
+  return [_objectSpread(_objectSpread({}, pickExclude(res, ['tempFilePath', 'thumbTempFilePath', 'errMsg'])), {}, {
+    type: 'video',
+    url: res.tempFilePath,
+    thumb: res.thumbTempFilePath,
+    size: res.size
+  })];
+}
+function formatMedia(res) {
+  return res.tempFiles.map(function (item) {
+    return _objectSpread(_objectSpread({}, pickExclude(item, ['fileType', 'thumbTempFilePath', 'tempFilePath'])), {}, {
+      type: res.type,
+      url: item.tempFilePath,
+      thumb: res.type === 'video' ? item.thumbTempFilePath : item.tempFilePath,
+      size: item.size
+    });
+  });
+}
+function formatFile(res) {
+  return res.tempFiles.map(function (item) {
+    return _objectSpread(_objectSpread({}, pickExclude(item, ['path'])), {}, {
+      url: item.path,
+      size: item.size
+    });
+  });
+}
+function chooseFile(_ref) {
+  var accept = _ref.accept,
+    multiple = _ref.multiple,
+    capture = _ref.capture,
+    compressed = _ref.compressed,
+    maxDuration = _ref.maxDuration,
+    sizeType = _ref.sizeType,
+    camera = _ref.camera,
+    maxCount = _ref.maxCount;
+  return new Promise(function (resolve, reject) {
+    switch (accept) {
+      case 'image':
+        uni.chooseImage({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          sourceType: capture,
+          sizeType: sizeType,
+          success: function success(res) {
+            return resolve(formatImage(res));
+          },
+          fail: reject
+        });
+        break;
+
+      // 只有微信小程序才支持chooseMedia接口
+      case 'media':
+        wx.chooseMedia({
+          count: multiple ? Math.min(maxCount, 9) : 1,
+          sourceType: capture,
+          maxDuration: maxDuration,
+          sizeType: sizeType,
+          camera: camera,
+          success: function success(res) {
+            return resolve(formatMedia(res));
+          },
+          fail: reject
+        });
+        break;
+      case 'video':
+        uni.chooseVideo({
+          sourceType: capture,
+          compressed: compressed,
+          maxDuration: maxDuration,
+          camera: camera,
+          success: function success(res) {
+            return resolve(formatVideo(res));
+          },
+          fail: reject
+        });
+        break;
+
+      // 只有微信小程序才支持chooseMessageFile接口
+      case 'file':
+        wx.chooseMessageFile({
+          count: multiple ? maxCount : 1,
+          type: accept,
+          success: function success(res) {
+            return resolve(formatFile(res));
+          },
+          fail: reject
+        });
+        break;
+      default:
+        // 此为保底选项，在accept不为上面任意一项的时候选取全部文件
+
+        wx.chooseMessageFile({
+          count: multiple ? maxCount : 1,
+          type: 'all',
+          success: function success(res) {
+            return resolve(formatFile(res));
+          },
+          fail: reject
+        });
+    }
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"]))
+
+/***/ }),
+/* 627 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-upload/mixin.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  watch: {
+    // 监听accept的变化，判断是否符合个平台要求
+    // 只有微信小程序才支持选择媒体，文件类型，所以这里做一个判断提示
+    accept: {
+      immediate: true,
+      handler: function handler(val) {}
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 628 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-upload/props.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 接受的文件类型, 可选值为all media image file video
+    accept: {
+      type: String,
+      default: uni.$u.props.upload.accept
+    },
+    // 	图片或视频拾取模式，当accept为image类型时设置capture可选额外camera可以直接调起摄像头
+    capture: {
+      type: [String, Array],
+      default: uni.$u.props.upload.capture
+    },
+    // 当accept为video时生效，是否压缩视频，默认为true
+    compressed: {
+      type: Boolean,
+      default: uni.$u.props.upload.compressed
+    },
+    // 当accept为video时生效，可选值为back或front
+    camera: {
+      type: String,
+      default: uni.$u.props.upload.camera
+    },
+    // 当accept为video时生效，拍摄视频最长拍摄时间，单位秒
+    maxDuration: {
+      type: Number,
+      default: uni.$u.props.upload.maxDuration
+    },
+    // 上传区域的图标，只能内置图标
+    uploadIcon: {
+      type: String,
+      default: uni.$u.props.upload.uploadIcon
+    },
+    // 上传区域的图标的颜色，默认
+    uploadIconColor: {
+      type: String,
+      default: uni.$u.props.upload.uploadIconColor
+    },
+    // 是否开启文件读取前事件
+    useBeforeRead: {
+      type: Boolean,
+      default: uni.$u.props.upload.useBeforeRead
+    },
+    // 读取后的处理函数
+    afterRead: {
+      type: Function,
+      default: null
+    },
+    // 读取前的处理函数
+    beforeRead: {
+      type: Function,
+      default: null
+    },
+    // 是否显示组件自带的图片预览功能
+    previewFullImage: {
+      type: Boolean,
+      default: uni.$u.props.upload.previewFullImage
+    },
+    // 最大上传数量
+    maxCount: {
+      type: [String, Number],
+      default: uni.$u.props.upload.maxCount
+    },
+    // 是否启用
+    disabled: {
+      type: Boolean,
+      default: uni.$u.props.upload.disabled
+    },
+    // 预览上传的图片时的裁剪模式，和image组件mode属性一致
+    imageMode: {
+      type: String,
+      default: uni.$u.props.upload.imageMode
+    },
+    // 标识符，可以在回调函数的第二项参数中获取
+    name: {
+      type: String,
+      default: uni.$u.props.upload.name
+    },
+    // 所选的图片的尺寸, 可选值为original compressed
+    sizeType: {
+      type: Array,
+      default: uni.$u.props.upload.sizeType
+    },
+    // 是否开启图片多选，部分安卓机型不支持
+    multiple: {
+      type: Boolean,
+      default: uni.$u.props.upload.multiple
+    },
+    // 是否展示删除按钮
+    deletable: {
+      type: Boolean,
+      default: uni.$u.props.upload.deletable
+    },
+    // 文件大小限制，单位为byte
+    maxSize: {
+      type: [String, Number],
+      default: uni.$u.props.upload.maxSize
+    },
+    // 显示已上传的文件列表
+    fileList: {
+      type: Array,
+      default: uni.$u.props.upload.fileList
+    },
+    // 上传区域的提示文字
+    uploadText: {
+      type: String,
+      default: uni.$u.props.upload.uploadText
+    },
+    // 内部预览图片区域和选择图片按钮的区域宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.upload.width
+    },
+    // 内部预览图片区域和选择图片按钮的区域高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.upload.height
+    },
+    // 是否在上传完成后展示预览图
+    previewImage: {
+      type: Boolean,
+      default: uni.$u.props.upload.previewImage
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 629 */,
+/* 630 */,
+/* 631 */,
+/* 632 */,
+/* 633 */,
+/* 634 */,
+/* 635 */,
+/* 636 */
+/*!***************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-avatar/props.js ***!
+  \***************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 头像图片路径(不能为相对路径)
+    src: {
+      type: String,
+      default: uni.$u.props.avatar.src
+    },
+    // 头像形状，circle-圆形，square-方形
+    shape: {
+      type: String,
+      default: uni.$u.props.avatar.shape
+    },
+    // 头像尺寸
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.avatar.size
+    },
+    // 裁剪模式
+    mode: {
+      type: String,
+      default: uni.$u.props.avatar.mode
+    },
+    // 显示的文字
+    text: {
+      type: String,
+      default: uni.$u.props.avatar.text
+    },
+    // 背景色
+    bgColor: {
+      type: String,
+      default: uni.$u.props.avatar.bgColor
+    },
+    // 文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.avatar.color
+    },
+    // 文字大小
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.avatar.fontSize
+    },
+    // 显示的图标
+    icon: {
+      type: String,
+      default: uni.$u.props.avatar.icon
+    },
+    // 显示小程序头像，只对百度，微信，QQ小程序有效
+    mpAvatar: {
+      type: Boolean,
+      default: uni.$u.props.avatar.mpAvatar
+    },
+    // 是否使用随机背景色
+    randomBgColor: {
+      type: Boolean,
+      default: uni.$u.props.avatar.randomBgColor
+    },
+    // 加载失败的默认头像(组件有内置默认图片)
+    defaultUrl: {
+      type: String,
+      default: uni.$u.props.avatar.defaultUrl
+    },
+    // 如果配置了randomBgColor为true，且配置了此值，则从默认的背景色数组中取出对应索引的颜色值，取值0-19之间
+    colorIndex: {
+      type: [String, Number],
+      // 校验参数规则，索引在0-19之间
+      validator: function validator(n) {
+        return uni.$u.test.range(n, [0, 19]) || n === '';
+      },
+      default: uni.$u.props.avatar.colorIndex
+    },
+    // 组件标识符
+    name: {
+      type: String,
+      default: uni.$u.props.avatar.name
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 637 */,
+/* 638 */,
+/* 639 */,
+/* 640 */,
+/* 641 */,
+/* 642 */,
+/* 643 */,
+/* 644 */
+/*!************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/index.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _en_json__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./en.json */ 645);
+var _en_json__WEBPACK_IMPORTED_MODULE_0___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./en.json */ 645, 1);
+/* harmony import */ var _es_json__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./es.json */ 646);
+var _es_json__WEBPACK_IMPORTED_MODULE_1___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./es.json */ 646, 1);
+/* harmony import */ var _fr_json__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./fr.json */ 647);
+var _fr_json__WEBPACK_IMPORTED_MODULE_2___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./fr.json */ 647, 1);
+/* harmony import */ var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./zh-Hans.json */ 648);
+var _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hans.json */ 648, 1);
+/* harmony import */ var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./zh-Hant.json */ 649);
+var _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4___namespace = /*#__PURE__*/__webpack_require__.t(/*! ./zh-Hant.json */ 649, 1);
+
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  en: _en_json__WEBPACK_IMPORTED_MODULE_0__,
+  es: _es_json__WEBPACK_IMPORTED_MODULE_1__,
+  fr: _fr_json__WEBPACK_IMPORTED_MODULE_2__,
+  'zh-Hans': _zh_Hans_json__WEBPACK_IMPORTED_MODULE_3__,
+  'zh-Hant': _zh_Hant_json__WEBPACK_IMPORTED_MODULE_4__
+});
+
+
+/***/ }),
+/* 645 */
+/*!***********************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/en.json ***!
+  \***********************************************************************/
+/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"Success\",\"uniCloud.component.update.success\":\"Success\",\"uniCloud.component.update.showModal.title\":\"Tips\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"Tips\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
+
+/***/ }),
+/* 646 */
+/*!***********************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/es.json ***!
+  \***********************************************************************/
+/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
+
+/***/ }),
+/* 647 */
+/*!***********************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/fr.json ***!
+  \***********************************************************************/
+/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
+
+/***/ }),
+/* 648 */
+/*!****************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hans.json ***!
+  \****************************************************************************/
+/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否删除该数据\"}");
+
+/***/ }),
+/* 649 */
+/*!****************************************************************************!*\
+  !*** ./node_modules/@dcloudio/uni-cli-shared/components/i18n/zh-Hant.json ***!
+  \****************************************************************************/
+/*! exports provided: uniCloud.component.add.success, uniCloud.component.update.success, uniCloud.component.update.showModal.title, uniCloud.component.update.showModal.content, uniCloud.component.remove.showModal.title, uniCloud.component.remove.showModal.content, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uniCloud.component.add.success\":\"新增成功\",\"uniCloud.component.update.success\":\"修改成功\",\"uniCloud.component.update.showModal.title\":\"提示\",\"uniCloud.component.update.showModal.content\":\"是否更新该数据\",\"uniCloud.component.remove.showModal.title\":\"提示\",\"uniCloud.component.remove.showModal.content\":\"是否刪除數據\"}");
+
+/***/ }),
+/* 650 */,
+/* 651 */,
+/* 652 */,
+/* 653 */,
+/* 654 */,
+/* 655 */,
+/* 656 */,
+/* 657 */,
+/* 658 */,
+/* 659 */,
+/* 660 */,
+/* 661 */,
+/* 662 */,
+/* 663 */,
+/* 664 */,
+/* 665 */,
+/* 666 */,
+/* 667 */,
+/* 668 */,
+/* 669 */
+/*!********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-dateformat/components/uni-dateformat/date-format.js ***!
+  \********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.formatDate = formatDate;
+exports.friendlyDate = friendlyDate;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+// yyyy-MM-dd hh:mm:ss.SSS 所有支持的类型
+function pad(str) {
+  var length = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  str += '';
+  while (str.length < length) {
+    str = '0' + str;
+  }
+  return str.slice(-length);
+}
+var parser = {
+  yyyy: function yyyy(dateObj) {
+    return pad(dateObj.year, 4);
+  },
+  yy: function yy(dateObj) {
+    return pad(dateObj.year);
+  },
+  MM: function MM(dateObj) {
+    return pad(dateObj.month);
+  },
+  M: function M(dateObj) {
+    return dateObj.month;
+  },
+  dd: function dd(dateObj) {
+    return pad(dateObj.day);
+  },
+  d: function d(dateObj) {
+    return dateObj.day;
+  },
+  hh: function hh(dateObj) {
+    return pad(dateObj.hour);
+  },
+  h: function h(dateObj) {
+    return dateObj.hour;
+  },
+  mm: function mm(dateObj) {
+    return pad(dateObj.minute);
+  },
+  m: function m(dateObj) {
+    return dateObj.minute;
+  },
+  ss: function ss(dateObj) {
+    return pad(dateObj.second);
+  },
+  s: function s(dateObj) {
+    return dateObj.second;
+  },
+  SSS: function SSS(dateObj) {
+    return pad(dateObj.millisecond, 3);
+  },
+  S: function S(dateObj) {
+    return dateObj.millisecond;
+  }
+};
+
+// 这都n年了iOS依然不认识2020-12-12，需要转换为2020/12/12
+function getDate(time) {
+  if (time instanceof Date) {
+    return time;
+  }
+  switch ((0, _typeof2.default)(time)) {
+    case 'string':
+      {
+        // 2020-12-12T12:12:12.000Z、2020-12-12T12:12:12.000
+        if (time.indexOf('T') > -1) {
+          return new Date(time);
+        }
+        return new Date(time.replace(/-/g, '/'));
+      }
+    default:
+      return new Date(time);
+  }
+}
+function formatDate(date) {
+  var format = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'yyyy/MM/dd hh:mm:ss';
+  if (!date && date !== 0) {
+    return '';
+  }
+  date = getDate(date);
+  var dateObj = {
+    year: date.getFullYear(),
+    month: date.getMonth() + 1,
+    day: date.getDate(),
+    hour: date.getHours(),
+    minute: date.getMinutes(),
+    second: date.getSeconds(),
+    millisecond: date.getMilliseconds()
+  };
+  var tokenRegExp = /yyyy|yy|MM|M|dd|d|hh|h|mm|m|ss|s|SSS|SS|S/;
+  var flag = true;
+  var result = format;
+  while (flag) {
+    flag = false;
+    result = result.replace(tokenRegExp, function (matched) {
+      flag = true;
+      return parser[matched](dateObj);
+    });
+  }
+  return result;
+}
+function friendlyDate(time, _ref) {
+  var _ref$locale = _ref.locale,
+    locale = _ref$locale === void 0 ? 'zh' : _ref$locale,
+    _ref$threshold = _ref.threshold,
+    threshold = _ref$threshold === void 0 ? [60000, 3600000] : _ref$threshold,
+    _ref$format = _ref.format,
+    format = _ref$format === void 0 ? 'yyyy/MM/dd hh:mm:ss' : _ref$format;
+  if (time === '-') {
+    return time;
+  }
+  if (!time && time !== 0) {
+    return '';
+  }
+  var localeText = {
+    zh: {
+      year: '年',
+      month: '月',
+      day: '天',
+      hour: '小时',
+      minute: '分钟',
+      second: '秒',
+      ago: '前',
+      later: '后',
+      justNow: '刚刚',
+      soon: '马上',
+      template: '{num}{unit}{suffix}'
+    },
+    en: {
+      year: 'year',
+      month: 'month',
+      day: 'day',
+      hour: 'hour',
+      minute: 'minute',
+      second: 'second',
+      ago: 'ago',
+      later: 'later',
+      justNow: 'just now',
+      soon: 'soon',
+      template: '{num} {unit} {suffix}'
+    }
+  };
+  var text = localeText[locale] || localeText.zh;
+  var date = getDate(time);
+  var ms = date.getTime() - Date.now();
+  var absMs = Math.abs(ms);
+  if (absMs < threshold[0]) {
+    return ms < 0 ? text.justNow : text.soon;
+  }
+  if (absMs >= threshold[1]) {
+    return formatDate(date, format);
+  }
+  var num;
+  var unit;
+  var suffix = text.later;
+  if (ms < 0) {
+    suffix = text.ago;
+    ms = -ms;
+  }
+  var seconds = Math.floor(ms / 1000);
+  var minutes = Math.floor(seconds / 60);
+  var hours = Math.floor(minutes / 60);
+  var days = Math.floor(hours / 24);
+  var months = Math.floor(days / 30);
+  var years = Math.floor(months / 12);
+  switch (true) {
+    case years > 0:
+      num = years;
+      unit = text.year;
+      break;
+    case months > 0:
+      num = months;
+      unit = text.month;
+      break;
+    case days > 0:
+      num = days;
+      unit = text.day;
+      break;
+    case hours > 0:
+      num = hours;
+      unit = text.hour;
+      break;
+    case minutes > 0:
+      num = minutes;
+      unit = text.minute;
+      break;
+    default:
+      num = seconds;
+      unit = text.second;
+      break;
+  }
+  if (locale === 'en') {
+    if (num === 1) {
+      num = 'a';
+    } else {
+      unit += 's';
+    }
+  }
+  return text.template.replace(/{\s*num\s*}/g, num + '').replace(/{\s*unit\s*}/g, unit).replace(/{\s*suffix\s*}/g, suffix);
+}
+
+/***/ }),
+/* 670 */,
+/* 671 */,
+/* 672 */,
+/* 673 */,
+/* 674 */,
+/* 675 */
+/*!****************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/index.js ***!
+  \****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 676));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 677));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 676 */
+/*!***************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/en.json ***!
+  \***************************************************************************************************************************/
+/*! exports provided: noData, noNetwork, toSet, error, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"noData\":\"No Data\",\"noNetwork\":\"Network error\",\"toSet\":\"Go to settings\",\"error\":\"error\"}");
+
+/***/ }),
+/* 677 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-load-state/i18n/zh-Hans.json ***!
+  \********************************************************************************************************************************/
+/*! exports provided: noData, noNetwork, toSet, error, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"noData\":\"暂无数据\",\"noNetwork\":\"网络异常\",\"toSet\":\"前往设置\",\"error\":\"错误\"}");
+
+/***/ }),
+/* 678 */,
+/* 679 */,
+/* 680 */,
+/* 681 */,
+/* 682 */,
+/* 683 */,
+/* 684 */,
+/* 685 */,
+/* 686 */,
+/* 687 */,
+/* 688 */,
+/* 689 */,
+/* 690 */,
+/* 691 */,
+/* 692 */
+/*!******************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/bazaar-city_list/citylist.json ***!
+  \******************************************************************************************************************************/
+/*! exports provided: hotcity, city, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"hotcity\":{\"title\":\"热门城市\",\"lists\":[\"上海\",\"北京\",\"广州\",\"深圳\",\"武汉\",\"天津\",\"西安\",\"南京\",\"杭州\",\"成都\",\"重庆\"]},\"city\":[{\"title\":\"A\",\"lists\":[\"阿坝\",\"阿拉善\",\"阿里\",\"安康\",\"安庆\",\"鞍山\",\"安顺\",\"安阳\",\"澳门\"]},{\"title\":\"B\",\"lists\":[\"北京\",\"白银\",\"保定\",\"宝鸡\",\"保山\",\"包头\",\"巴中\",\"北海\",\"蚌埠\",\"本溪\",\"毕节\",\"滨州\",\"百色\",\"亳州\"]},{\"title\":\"C\",\"lists\":[\"重庆\",\"成都\",\"长沙\",\"长春\",\"沧州\",\"常德\",\"昌都\",\"长治\",\"常州\",\"巢湖\",\"潮州\",\"承德\",\"郴州\",\"赤峰\",\"池州\",\"崇左\",\"楚雄\",\"滁州\",\"朝阳\"]},{\"title\":\"D\",\"lists\":[\"大连\",\"东莞\",\"大理\",\"丹东\",\"大庆\",\"大同\",\"大兴安岭\",\"德宏\",\"德阳\",\"德州\",\"定西\",\"迪庆\",\"东营\"]},{\"title\":\"E\",\"lists\":[\"鄂尔多斯\",\"恩施\",\"鄂州\"]},{\"title\":\"F\",\"lists\":[\"福州\",\"防城港\",\"佛山\",\"抚顺\",\"抚州\",\"阜新\",\"阜阳\"]},{\"title\":\"G\",\"lists\":[\"广州\",\"桂林\",\"贵阳\",\"甘南\",\"赣州\",\"甘孜\",\"广安\",\"广元\",\"贵港\",\"果洛\"]},{\"title\":\"H\",\"lists\":[\"杭州\",\"哈尔滨\",\"合肥\",\"海口\",\"呼和浩特\",\"海北\",\"海东\",\"海南\",\"海西\",\"邯郸\",\"汉中\",\"鹤壁\",\"河池\",\"鹤岗\",\"黑河\",\"衡水\",\"衡阳\",\"河源\",\"贺州\",\"红河\",\"淮安\",\"淮北\",\"怀化\",\"淮南\",\"黄冈\",\"黄南\",\"黄山\",\"黄石\",\"惠州\",\"葫芦岛\",\"呼伦贝尔\",\"湖州\",\"菏泽\"]},{\"title\":\"J\",\"lists\":[\"济南\",\"佳木斯\",\"吉安\",\"江门\",\"焦作\",\"嘉兴\",\"嘉峪关\",\"揭阳\",\"吉林\",\"金昌\",\"晋城\",\"景德镇\",\"荆门\",\"荆州\",\"金华\",\"济宁\",\"晋中\",\"锦州\",\"九江\",\"酒泉\"]},{\"title\":\"K\",\"lists\":[\"昆明\",\"开封\"]},{\"title\":\"L\",\"lists\":[\"兰州\",\"拉萨\",\"来宾\",\"莱芜\",\"廊坊\",\"乐山\",\"凉山\",\"连云港\",\"聊城\",\"辽阳\",\"辽源\",\"丽江\",\"临沧\",\"临汾\",\"临夏\",\"临沂\",\"林芝\",\"丽水\",\"六安\",\"六盘水\",\"柳州\",\"陇南\",\"龙岩\",\"娄底\",\"漯河\",\"洛阳\",\"泸州\",\"吕梁\"]},{\"title\":\"M\",\"lists\":[\"马鞍山\",\"茂名\",\"眉山\",\"梅州\",\"绵阳\",\"牡丹江\"]},{\"title\":\"N\",\"lists\":[\"南京\",\"南昌\",\"南宁\",\"宁波\",\"南充\",\"南平\",\"南通\",\"南阳\",\"那曲\",\"内江\",\"宁德\",\"怒江\"]},{\"title\":\"P\",\"lists\":[\"盘锦\",\"攀枝花\",\"平顶山\",\"平凉\",\"萍乡\",\"莆田\",\"濮阳\"]},{\"title\":\"Q\",\"lists\":[\"青岛\",\"黔东南\",\"黔南\",\"黔西南\",\"庆阳\",\"清远\",\"秦皇岛\",\"钦州\",\"齐齐哈尔\",\"泉州\",\"曲靖\",\"衢州\"]},{\"title\":\"R\",\"lists\":[\"日喀则\",\"日照\"]},{\"title\":\"S\",\"lists\":[\"上海\",\"深圳\",\"苏州\",\"沈阳\",\"石家庄\",\"三门峡\",\"三明\",\"三亚\",\"商洛\",\"商丘\",\"上饶\",\"山南\",\"汕头\",\"汕尾\",\"韶关\",\"绍兴\",\"邵阳\",\"十堰\",\"朔州\",\"四平\",\"绥化\",\"遂宁\",\"随州\",\"宿迁\",\"宿州\"]},{\"title\":\"T\",\"lists\":[\"天津\",\"太原\",\"泰安\",\"泰州\",\"台州\",\"唐山\",\"天水\",\"铁岭\",\"铜川\",\"通化\",\"通辽\",\"铜陵\",\"铜仁\",\"台湾\"]},{\"title\":\"W\",\"lists\":[\"武汉\",\"乌鲁木齐\",\"无锡\",\"威海\",\"潍坊\",\"文山\",\"温州\",\"乌海\",\"芜湖\",\"乌兰察布\",\"武威\",\"梧州\"]},{\"title\":\"X\",\"lists\":[\"厦门\",\"西安\",\"西宁\",\"襄樊\",\"湘潭\",\"湘西\",\"咸宁\",\"咸阳\",\"孝感\",\"邢台\",\"新乡\",\"信阳\",\"新余\",\"忻州\",\"西双版纳\",\"宣城\",\"许昌\",\"徐州\",\"香港\",\"锡林郭勒\",\"兴安\"]},{\"title\":\"Y\",\"lists\":[\"银川\",\"雅安\",\"延安\",\"延边\",\"盐城\",\"阳江\",\"阳泉\",\"扬州\",\"烟台\",\"宜宾\",\"宜昌\",\"宜春\",\"营口\",\"益阳\",\"永州\",\"岳阳\",\"榆林\",\"运城\",\"云浮\",\"玉树\",\"玉溪\",\"玉林\"]},{\"title\":\"Z\",\"lists\":[\"杂多县\",\"赞皇县\",\"枣强县\",\"枣阳市\",\"枣庄\",\"泽库县\",\"增城市\",\"曾都区\",\"泽普县\",\"泽州县\",\"札达县\",\"扎赉特旗\",\"扎兰屯市\",\"扎鲁特旗\",\"扎囊县\",\"张北县\",\"张店区\",\"章贡区\",\"张家港\",\"张家界\",\"张家口\",\"漳平市\",\"漳浦县\",\"章丘市\",\"樟树市\",\"张湾区\",\"彰武县\",\"漳县\",\"张掖\",\"漳州\",\"长子县\",\"湛河区\",\"湛江\",\"站前区\",\"沾益县\",\"诏安县\",\"召陵区\",\"昭平县\",\"肇庆\",\"昭通\",\"赵县\",\"昭阳区\",\"招远市\",\"肇源县\",\"肇州县\",\"柞水县\",\"柘城县\",\"浙江\",\"镇安县\",\"振安区\",\"镇巴县\",\"正安县\",\"正定县\",\"正定新区\",\"正蓝旗\",\"正宁县\",\"蒸湘区\",\"正镶白旗\",\"正阳县\",\"郑州\",\"镇海区\",\"镇江\",\"浈江区\",\"镇康县\",\"镇赉县\",\"镇平县\",\"振兴区\",\"镇雄县\",\"镇原县\",\"志丹县\",\"治多县\",\"芝罘区\",\"枝江市\",\"芷江侗族自治县\",\"织金县\",\"中方县\",\"中江县\",\"钟楼区\",\"中牟县\",\"中宁县\",\"中山\",\"中山区\",\"钟山区\",\"钟山县\",\"中卫\",\"钟祥市\",\"中阳县\",\"中原区\",\"周村区\",\"周口\",\"周宁县\",\"舟曲县\",\"舟山\",\"周至县\",\"庄河市\",\"诸城市\",\"珠海\",\"珠晖区\",\"诸暨市\",\"驻马店\",\"准格尔旗\",\"涿鹿县\",\"卓尼\",\"涿州市\",\"卓资县\",\"珠山区\",\"竹山县\",\"竹溪县\",\"株洲\",\"株洲县\",\"淄博\",\"子长县\",\"淄川区\",\"自贡\",\"秭归县\",\"紫金县\",\"自流井区\",\"资溪县\",\"资兴市\",\"资阳\"]}]}");
+
+/***/ }),
+/* 693 */,
+/* 694 */,
+/* 695 */,
+/* 696 */,
+/* 697 */,
+/* 698 */,
+/* 699 */,
+/* 700 */,
+/* 701 */,
+/* 702 */,
+/* 703 */,
+/* 704 */,
+/* 705 */,
+/* 706 */,
+/* 707 */
+/*!*****************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/index.js ***!
+  \*****************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 708));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 709));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 708 */
+/*!****************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/en.json ***!
+  \****************************************************************************************************************************/
+/*! exports provided: accountLogin, SMSLogin, wechatLogin, appleLogin, oneClickLogin, QQLogin, xiaomiLogin, getProviderFail, loginErr, chooseOtherLogin, weibo, noAgree, gotIt, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"accountLogin\":\"Account\",\"SMSLogin\":\"SMS\",\"wechatLogin\":\"wechat\",\"appleLogin\":\"Apple\",\"oneClickLogin\":\"One click login\",\"QQLogin\":\"QQ\",\"xiaomiLogin\":\"Xiaomi\",\"getProviderFail\":\"Failed to get service provider\",\"loginErr\":\"Login service initialization error\",\"chooseOtherLogin\":\"Click the third-party login\",\"weibo\":\"weibo\",\"noAgree\":\"You have not agreed to the privacy policy agreement\",\"gotIt\":\"got it\"}");
+
+/***/ }),
+/* 709 */
+/*!*********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/uni-quick-login/i18n/zh-Hans.json ***!
+  \*********************************************************************************************************************************/
+/*! exports provided: accountLogin, SMSLogin, wechatLogin, appleLogin, oneClickLogin, QQLogin, xiaomiLogin, getProviderFail, loginErr, chooseOtherLogin, weibo, noAgree, gotIt, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"accountLogin\":\"账号登录\",\"SMSLogin\":\"短信验证码\",\"wechatLogin\":\"微信登录\",\"appleLogin\":\"苹果登录\",\"oneClickLogin\":\"一键登录\",\"QQLogin\":\"QQ登录\",\"xiaomiLogin\":\"小米登录\",\"getProviderFail\":\"获取服务供应商失败\",\"loginErr\":\"登录服务初始化错误\",\"chooseOtherLogin\":\"点击了第三方登录\",\"weibo\":\"微博\",\"noAgree\":\"你未同意隐私政策协议\",\"gotIt\":\"知道了\"}");
+
+/***/ }),
+/* 710 */,
+/* 711 */,
+/* 712 */,
+/* 713 */,
+/* 714 */,
+/* 715 */,
+/* 716 */,
+/* 717 */,
+/* 718 */,
+/* 719 */,
+/* 720 */,
+/* 721 */,
+/* 722 */,
+/* 723 */,
+/* 724 */,
+/* 725 */,
+/* 726 */,
+/* 727 */,
+/* 728 */,
+/* 729 */,
+/* 730 */,
+/* 731 */,
+/* 732 */,
+/* 733 */,
+/* 734 */,
+/* 735 */,
+/* 736 */,
+/* 737 */,
+/* 738 */
+/*!************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-sign-in/utils/ad.js ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 32));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 33));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 34));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+// ad.js
+var ADType = {
+  RewardedVideo: "RewardedVideo",
+  FullScreenVideo: "FullScreenVideo"
+};
+var AdHelper = /*#__PURE__*/function () {
+  function AdHelper() {
+    (0, _classCallCheck2.default)(this, AdHelper);
+    this._ads = {};
+  }
+  (0, _createClass2.default)(AdHelper, [{
+    key: "load",
+    value: function load(options, onload, onerror) {
+      var ops = this._fixOldOptions(options);
+      var adpid = ops.adpid;
+      if (!adpid || this.isBusy(adpid)) {
+        return;
+      }
+      this.get(ops).load(onload, onerror);
+    }
+  }, {
+    key: "show",
+    value: function show(options, onsuccess, onfail) {
+      var ops = this._fixOldOptions(options);
+      var adpid = ops.adpid;
+      if (!adpid) {
+        return;
+      }
+      uni.showLoading({
+        mask: true
+      });
+      var ad = this.get(ops);
+      ad.load(function () {
+        uni.hideLoading();
+        ad.show(function (e) {
+          onsuccess && onsuccess(e);
+        });
+      }, function (err) {
+        uni.hideLoading();
+        onfail && onfail(err);
+      });
+    }
+  }, {
+    key: "isBusy",
+    value: function isBusy(adpid) {
+      return this._ads[adpid] && this._ads[adpid].isLoading;
+    }
+  }, {
+    key: "get",
+    value: function get(options) {
+      var adpid = options.adpid,
+        _options$singleton = options.singleton,
+        singleton = _options$singleton === void 0 ? true : _options$singleton;
+      if (singleton === false) {
+        if (this._ads[adpid]) {
+          this._ads[adpid].destroy();
+          delete this._ads[adpid];
+        }
+      }
+      delete options.singleton;
+      if (!this._ads[adpid]) {
+        this._ads[adpid] = this._createAdInstance(options);
+      }
+      return this._ads[adpid];
+    }
+  }, {
+    key: "_createAdInstance",
+    value: function _createAdInstance(options) {
+      var adType = options.adType || ADType.RewardedVideo;
+      delete options.adType;
+      var ad = null;
+      if (adType === ADType.RewardedVideo) {
+        ad = new RewardedVideo(options);
+      } else if (adType === ADType.FullScreenVideo) {
+        ad = new FullScreenVideo(options);
+      }
+      return ad;
+    }
+  }, {
+    key: "_fixOldOptions",
+    value: function _fixOldOptions(options) {
+      return typeof options === "string" ? {
+        adpid: options
+      } : options;
+    }
+  }]);
+  return AdHelper;
+}();
+var EXPIRED_TIME = 1000 * 60 * 30;
+var ProviderType = {
+  CSJ: 'csj',
+  GDT: 'gdt'
+};
+var RETRY_COUNT = 1;
+var AdBase = /*#__PURE__*/function () {
+  function AdBase(adInstance) {
+    var _this = this;
+    var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+    (0, _classCallCheck2.default)(this, AdBase);
+    this._isLoad = false;
+    this._isLoading = false;
+    this._lastLoadTime = 0;
+    this._lastError = null;
+    this._retryCount = 0;
+    this._loadCallback = null;
+    this._closeCallback = null;
+    this._errorCallback = null;
+    var ad = this._ad = adInstance;
+    ad.onLoad(function (e) {
+      _this._isLoading = false;
+      _this._isLoad = true;
+      _this._lastLoadTime = Date.now();
+      _this.onLoad();
+    });
+    ad.onClose(function (e) {
+      _this._isLoad = false;
+      _this.onClose(e);
+    });
+    ad.onVerify && ad.onVerify(function (e) {
+      // e.isValid
+    });
+    ad.onError(function (_ref) {
+      var code = _ref.code,
+        message = _ref.message;
+      _this._isLoading = false;
+      var data = {
+        code: code,
+        errMsg: message
+      };
+      if (code === -5008) {
+        _this._loadAd();
+        return;
+      }
+      if (_this._retryCount < RETRY_COUNT) {
+        _this._retryCount += 1;
+        _this._loadAd();
+        return;
+      }
+      _this._lastError = data;
+      _this.onError(data);
+    });
+  }
+  (0, _createClass2.default)(AdBase, [{
+    key: "isExpired",
+    get: function get() {
+      return this._lastLoadTime !== 0 && Math.abs(Date.now() - this._lastLoadTime) > EXPIRED_TIME;
+    }
+  }, {
+    key: "isLoading",
+    get: function get() {
+      return this._isLoading;
+    }
+  }, {
+    key: "getProvider",
+    value: function getProvider() {
+      return this._ad.getProvider();
+    }
+  }, {
+    key: "load",
+    value: function load(onload, onerror) {
+      this._loadCallback = onload;
+      this._errorCallback = onerror;
+      if (this._isLoading) {
+        return;
+      }
+      if (this._isLoad) {
+        this.onLoad();
+        return;
+      }
+      this._retryCount = 0;
+      this._loadAd();
+    }
+  }, {
+    key: "show",
+    value: function show(onclose) {
+      this._closeCallback = onclose;
+      if (this._isLoading || !this._isLoad) {
+        return;
+      }
+      if (this._lastError !== null) {
+        this.onError(this._lastError);
+        return;
+      }
+      var provider = this.getProvider();
+      if (provider === ProviderType.CSJ && this.isExpired) {
+        this._loadAd();
+        return;
+      }
+      this._ad.show();
+    }
+  }, {
+    key: "onLoad",
+    value: function onLoad(e) {
+      if (this._loadCallback != null) {
+        this._loadCallback();
+      }
+    }
+  }, {
+    key: "onClose",
+    value: function onClose(e) {
+      if (this._closeCallback != null) {
+        this._closeCallback({
+          isEnded: e.isEnded
+        });
+      }
+    }
+  }, {
+    key: "onError",
+    value: function onError(e) {
+      if (this._errorCallback != null) {
+        this._errorCallback(e);
+      }
+    }
+  }, {
+    key: "destroy",
+    value: function destroy() {
+      this._ad.destroy();
+    }
+  }, {
+    key: "_loadAd",
+    value: function _loadAd() {
+      this._isLoad = false;
+      this._isLoading = true;
+      this._lastError = null;
+      this._ad.load();
+    }
+  }]);
+  return AdBase;
+}();
+var RewardedVideo = /*#__PURE__*/function (_AdBase) {
+  (0, _inherits2.default)(RewardedVideo, _AdBase);
+  var _super = _createSuper(RewardedVideo);
+  function RewardedVideo() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    (0, _classCallCheck2.default)(this, RewardedVideo);
+    return _super.call(this, plus.ad.createRewardedVideoAd(options), options);
+  }
+  return (0, _createClass2.default)(RewardedVideo);
+}(AdBase);
+var FullScreenVideo = /*#__PURE__*/function (_AdBase2) {
+  (0, _inherits2.default)(FullScreenVideo, _AdBase2);
+  var _super2 = _createSuper(FullScreenVideo);
+  function FullScreenVideo() {
+    var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+    (0, _classCallCheck2.default)(this, FullScreenVideo);
+    return _super2.call(this, plus.ad.createFullScreenVideoAd(options), options);
+  }
+  return (0, _createClass2.default)(FullScreenVideo);
+}(AdBase);
+var _default = new AdHelper();
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 739 */,
+/* 740 */,
+/* 741 */,
+/* 742 */,
+/* 743 */,
+/* 744 */,
+/* 745 */,
+/* 746 */
+/*!*************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/components/Sansnn-uQRCode/uqrcode.js ***!
+  \*************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+//---------------------------------------------------------------------
+// github https://github.com/Sansnn/uQRCode
+//---------------------------------------------------------------------
+
+var uQRCode = {};
+(function () {
+  //---------------------------------------------------------------------
+  // QRCode for JavaScript
+  //
+  // Copyright (c) 2009 Kazuhiko Arase
+  //
+  // URL: http://www.d-project.com/
+  //
+  // Licensed under the MIT license:
+  //   http://www.opensource.org/licenses/mit-license.php
+  //
+  // The word "QR Code" is registered trademark of 
+  // DENSO WAVE INCORPORATED
+  //   http://www.denso-wave.com/qrcode/faqpatent-e.html
+  //
+  //---------------------------------------------------------------------
+
+  //---------------------------------------------------------------------
+  // QR8bitByte
+  //---------------------------------------------------------------------
+
+  function QR8bitByte(data) {
+    this.mode = QRMode.MODE_8BIT_BYTE;
+    this.data = data;
+  }
+  QR8bitByte.prototype = {
+    getLength: function getLength(buffer) {
+      return this.data.length;
+    },
+    write: function write(buffer) {
+      for (var i = 0; i < this.data.length; i++) {
+        // not JIS ...
+        buffer.put(this.data.charCodeAt(i), 8);
+      }
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // QRCode
+  //---------------------------------------------------------------------
+
+  function QRCode(typeNumber, errorCorrectLevel) {
+    this.typeNumber = typeNumber;
+    this.errorCorrectLevel = errorCorrectLevel;
+    this.modules = null;
+    this.moduleCount = 0;
+    this.dataCache = null;
+    this.dataList = new Array();
+  }
+  QRCode.prototype = {
+    addData: function addData(data) {
+      var newData = new QR8bitByte(data);
+      this.dataList.push(newData);
+      this.dataCache = null;
+    },
+    isDark: function isDark(row, col) {
+      if (row < 0 || this.moduleCount <= row || col < 0 || this.moduleCount <= col) {
+        throw new Error(row + "," + col);
+      }
+      return this.modules[row][col];
+    },
+    getModuleCount: function getModuleCount() {
+      return this.moduleCount;
+    },
+    make: function make() {
+      // Calculate automatically typeNumber if provided is < 1
+      if (this.typeNumber < 1) {
+        var typeNumber = 1;
+        for (typeNumber = 1; typeNumber < 40; typeNumber++) {
+          var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, this.errorCorrectLevel);
+          var buffer = new QRBitBuffer();
+          var totalDataCount = 0;
+          for (var i = 0; i < rsBlocks.length; i++) {
+            totalDataCount += rsBlocks[i].dataCount;
+          }
+          for (var i = 0; i < this.dataList.length; i++) {
+            var data = this.dataList[i];
+            buffer.put(data.mode, 4);
+            buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
+            data.write(buffer);
+          }
+          if (buffer.getLengthInBits() <= totalDataCount * 8) break;
+        }
+        this.typeNumber = typeNumber;
+      }
+      this.makeImpl(false, this.getBestMaskPattern());
+    },
+    makeImpl: function makeImpl(test, maskPattern) {
+      this.moduleCount = this.typeNumber * 4 + 17;
+      this.modules = new Array(this.moduleCount);
+      for (var row = 0; row < this.moduleCount; row++) {
+        this.modules[row] = new Array(this.moduleCount);
+        for (var col = 0; col < this.moduleCount; col++) {
+          this.modules[row][col] = null; //(col + row) % 3;
+        }
+      }
+
+      this.setupPositionProbePattern(0, 0);
+      this.setupPositionProbePattern(this.moduleCount - 7, 0);
+      this.setupPositionProbePattern(0, this.moduleCount - 7);
+      this.setupPositionAdjustPattern();
+      this.setupTimingPattern();
+      this.setupTypeInfo(test, maskPattern);
+      if (this.typeNumber >= 7) {
+        this.setupTypeNumber(test);
+      }
+      if (this.dataCache == null) {
+        this.dataCache = QRCode.createData(this.typeNumber, this.errorCorrectLevel, this.dataList);
+      }
+      this.mapData(this.dataCache, maskPattern);
+    },
+    setupPositionProbePattern: function setupPositionProbePattern(row, col) {
+      for (var r = -1; r <= 7; r++) {
+        if (row + r <= -1 || this.moduleCount <= row + r) continue;
+        for (var c = -1; c <= 7; c++) {
+          if (col + c <= -1 || this.moduleCount <= col + c) continue;
+          if (0 <= r && r <= 6 && (c == 0 || c == 6) || 0 <= c && c <= 6 && (r == 0 || r == 6) || 2 <= r && r <= 4 && 2 <= c && c <= 4) {
+            this.modules[row + r][col + c] = true;
+          } else {
+            this.modules[row + r][col + c] = false;
+          }
+        }
+      }
+    },
+    getBestMaskPattern: function getBestMaskPattern() {
+      var minLostPoint = 0;
+      var pattern = 0;
+      for (var i = 0; i < 8; i++) {
+        this.makeImpl(true, i);
+        var lostPoint = QRUtil.getLostPoint(this);
+        if (i == 0 || minLostPoint > lostPoint) {
+          minLostPoint = lostPoint;
+          pattern = i;
+        }
+      }
+      return pattern;
+    },
+    createMovieClip: function createMovieClip(target_mc, instance_name, depth) {
+      var qr_mc = target_mc.createEmptyMovieClip(instance_name, depth);
+      var cs = 1;
+      this.make();
+      for (var row = 0; row < this.modules.length; row++) {
+        var y = row * cs;
+        for (var col = 0; col < this.modules[row].length; col++) {
+          var x = col * cs;
+          var dark = this.modules[row][col];
+          if (dark) {
+            qr_mc.beginFill(0, 100);
+            qr_mc.moveTo(x, y);
+            qr_mc.lineTo(x + cs, y);
+            qr_mc.lineTo(x + cs, y + cs);
+            qr_mc.lineTo(x, y + cs);
+            qr_mc.endFill();
+          }
+        }
+      }
+      return qr_mc;
+    },
+    setupTimingPattern: function setupTimingPattern() {
+      for (var r = 8; r < this.moduleCount - 8; r++) {
+        if (this.modules[r][6] != null) {
+          continue;
+        }
+        this.modules[r][6] = r % 2 == 0;
+      }
+      for (var c = 8; c < this.moduleCount - 8; c++) {
+        if (this.modules[6][c] != null) {
+          continue;
+        }
+        this.modules[6][c] = c % 2 == 0;
+      }
+    },
+    setupPositionAdjustPattern: function setupPositionAdjustPattern() {
+      var pos = QRUtil.getPatternPosition(this.typeNumber);
+      for (var i = 0; i < pos.length; i++) {
+        for (var j = 0; j < pos.length; j++) {
+          var row = pos[i];
+          var col = pos[j];
+          if (this.modules[row][col] != null) {
+            continue;
+          }
+          for (var r = -2; r <= 2; r++) {
+            for (var c = -2; c <= 2; c++) {
+              if (r == -2 || r == 2 || c == -2 || c == 2 || r == 0 && c == 0) {
+                this.modules[row + r][col + c] = true;
+              } else {
+                this.modules[row + r][col + c] = false;
+              }
+            }
+          }
+        }
+      }
+    },
+    setupTypeNumber: function setupTypeNumber(test) {
+      var bits = QRUtil.getBCHTypeNumber(this.typeNumber);
+      for (var i = 0; i < 18; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        this.modules[Math.floor(i / 3)][i % 3 + this.moduleCount - 8 - 3] = mod;
+      }
+      for (var i = 0; i < 18; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        this.modules[i % 3 + this.moduleCount - 8 - 3][Math.floor(i / 3)] = mod;
+      }
+    },
+    setupTypeInfo: function setupTypeInfo(test, maskPattern) {
+      var data = this.errorCorrectLevel << 3 | maskPattern;
+      var bits = QRUtil.getBCHTypeInfo(data);
+
+      // vertical		
+      for (var i = 0; i < 15; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        if (i < 6) {
+          this.modules[i][8] = mod;
+        } else if (i < 8) {
+          this.modules[i + 1][8] = mod;
+        } else {
+          this.modules[this.moduleCount - 15 + i][8] = mod;
+        }
+      }
+
+      // horizontal
+      for (var i = 0; i < 15; i++) {
+        var mod = !test && (bits >> i & 1) == 1;
+        if (i < 8) {
+          this.modules[8][this.moduleCount - i - 1] = mod;
+        } else if (i < 9) {
+          this.modules[8][15 - i - 1 + 1] = mod;
+        } else {
+          this.modules[8][15 - i - 1] = mod;
+        }
+      }
+
+      // fixed module
+      this.modules[this.moduleCount - 8][8] = !test;
+    },
+    mapData: function mapData(data, maskPattern) {
+      var inc = -1;
+      var row = this.moduleCount - 1;
+      var bitIndex = 7;
+      var byteIndex = 0;
+      for (var col = this.moduleCount - 1; col > 0; col -= 2) {
+        if (col == 6) col--;
+        while (true) {
+          for (var c = 0; c < 2; c++) {
+            if (this.modules[row][col - c] == null) {
+              var dark = false;
+              if (byteIndex < data.length) {
+                dark = (data[byteIndex] >>> bitIndex & 1) == 1;
+              }
+              var mask = QRUtil.getMask(maskPattern, row, col - c);
+              if (mask) {
+                dark = !dark;
+              }
+              this.modules[row][col - c] = dark;
+              bitIndex--;
+              if (bitIndex == -1) {
+                byteIndex++;
+                bitIndex = 7;
+              }
+            }
+          }
+          row += inc;
+          if (row < 0 || this.moduleCount <= row) {
+            row -= inc;
+            inc = -inc;
+            break;
+          }
+        }
+      }
+    }
+  };
+  QRCode.PAD0 = 0xEC;
+  QRCode.PAD1 = 0x11;
+  QRCode.createData = function (typeNumber, errorCorrectLevel, dataList) {
+    var rsBlocks = QRRSBlock.getRSBlocks(typeNumber, errorCorrectLevel);
+    var buffer = new QRBitBuffer();
+    for (var i = 0; i < dataList.length; i++) {
+      var data = dataList[i];
+      buffer.put(data.mode, 4);
+      buffer.put(data.getLength(), QRUtil.getLengthInBits(data.mode, typeNumber));
+      data.write(buffer);
+    }
+
+    // calc num max data.
+    var totalDataCount = 0;
+    for (var i = 0; i < rsBlocks.length; i++) {
+      totalDataCount += rsBlocks[i].dataCount;
+    }
+    if (buffer.getLengthInBits() > totalDataCount * 8) {
+      throw new Error("code length overflow. (" + buffer.getLengthInBits() + ">" + totalDataCount * 8 + ")");
+    }
+
+    // end code
+    if (buffer.getLengthInBits() + 4 <= totalDataCount * 8) {
+      buffer.put(0, 4);
+    }
+
+    // padding
+    while (buffer.getLengthInBits() % 8 != 0) {
+      buffer.putBit(false);
+    }
+
+    // padding
+    while (true) {
+      if (buffer.getLengthInBits() >= totalDataCount * 8) {
+        break;
+      }
+      buffer.put(QRCode.PAD0, 8);
+      if (buffer.getLengthInBits() >= totalDataCount * 8) {
+        break;
+      }
+      buffer.put(QRCode.PAD1, 8);
+    }
+    return QRCode.createBytes(buffer, rsBlocks);
+  };
+  QRCode.createBytes = function (buffer, rsBlocks) {
+    var offset = 0;
+    var maxDcCount = 0;
+    var maxEcCount = 0;
+    var dcdata = new Array(rsBlocks.length);
+    var ecdata = new Array(rsBlocks.length);
+    for (var r = 0; r < rsBlocks.length; r++) {
+      var dcCount = rsBlocks[r].dataCount;
+      var ecCount = rsBlocks[r].totalCount - dcCount;
+      maxDcCount = Math.max(maxDcCount, dcCount);
+      maxEcCount = Math.max(maxEcCount, ecCount);
+      dcdata[r] = new Array(dcCount);
+      for (var i = 0; i < dcdata[r].length; i++) {
+        dcdata[r][i] = 0xff & buffer.buffer[i + offset];
+      }
+      offset += dcCount;
+      var rsPoly = QRUtil.getErrorCorrectPolynomial(ecCount);
+      var rawPoly = new QRPolynomial(dcdata[r], rsPoly.getLength() - 1);
+      var modPoly = rawPoly.mod(rsPoly);
+      ecdata[r] = new Array(rsPoly.getLength() - 1);
+      for (var i = 0; i < ecdata[r].length; i++) {
+        var modIndex = i + modPoly.getLength() - ecdata[r].length;
+        ecdata[r][i] = modIndex >= 0 ? modPoly.get(modIndex) : 0;
+      }
+    }
+    var totalCodeCount = 0;
+    for (var i = 0; i < rsBlocks.length; i++) {
+      totalCodeCount += rsBlocks[i].totalCount;
+    }
+    var data = new Array(totalCodeCount);
+    var index = 0;
+    for (var i = 0; i < maxDcCount; i++) {
+      for (var r = 0; r < rsBlocks.length; r++) {
+        if (i < dcdata[r].length) {
+          data[index++] = dcdata[r][i];
+        }
+      }
+    }
+    for (var i = 0; i < maxEcCount; i++) {
+      for (var r = 0; r < rsBlocks.length; r++) {
+        if (i < ecdata[r].length) {
+          data[index++] = ecdata[r][i];
+        }
+      }
+    }
+    return data;
+  };
+
+  //---------------------------------------------------------------------
+  // QRMode
+  //---------------------------------------------------------------------
+
+  var QRMode = {
+    MODE_NUMBER: 1 << 0,
+    MODE_ALPHA_NUM: 1 << 1,
+    MODE_8BIT_BYTE: 1 << 2,
+    MODE_KANJI: 1 << 3
+  };
+
+  //---------------------------------------------------------------------
+  // QRErrorCorrectLevel
+  //---------------------------------------------------------------------
+
+  var QRErrorCorrectLevel = {
+    L: 1,
+    M: 0,
+    Q: 3,
+    H: 2
+  };
+
+  //---------------------------------------------------------------------
+  // QRMaskPattern
+  //---------------------------------------------------------------------
+
+  var QRMaskPattern = {
+    PATTERN000: 0,
+    PATTERN001: 1,
+    PATTERN010: 2,
+    PATTERN011: 3,
+    PATTERN100: 4,
+    PATTERN101: 5,
+    PATTERN110: 6,
+    PATTERN111: 7
+  };
+
+  //---------------------------------------------------------------------
+  // QRUtil
+  //---------------------------------------------------------------------
+
+  var QRUtil = {
+    PATTERN_POSITION_TABLE: [[], [6, 18], [6, 22], [6, 26], [6, 30], [6, 34], [6, 22, 38], [6, 24, 42], [6, 26, 46], [6, 28, 50], [6, 30, 54], [6, 32, 58], [6, 34, 62], [6, 26, 46, 66], [6, 26, 48, 70], [6, 26, 50, 74], [6, 30, 54, 78], [6, 30, 56, 82], [6, 30, 58, 86], [6, 34, 62, 90], [6, 28, 50, 72, 94], [6, 26, 50, 74, 98], [6, 30, 54, 78, 102], [6, 28, 54, 80, 106], [6, 32, 58, 84, 110], [6, 30, 58, 86, 114], [6, 34, 62, 90, 118], [6, 26, 50, 74, 98, 122], [6, 30, 54, 78, 102, 126], [6, 26, 52, 78, 104, 130], [6, 30, 56, 82, 108, 134], [6, 34, 60, 86, 112, 138], [6, 30, 58, 86, 114, 142], [6, 34, 62, 90, 118, 146], [6, 30, 54, 78, 102, 126, 150], [6, 24, 50, 76, 102, 128, 154], [6, 28, 54, 80, 106, 132, 158], [6, 32, 58, 84, 110, 136, 162], [6, 26, 54, 82, 110, 138, 166], [6, 30, 58, 86, 114, 142, 170]],
+    G15: 1 << 10 | 1 << 8 | 1 << 5 | 1 << 4 | 1 << 2 | 1 << 1 | 1 << 0,
+    G18: 1 << 12 | 1 << 11 | 1 << 10 | 1 << 9 | 1 << 8 | 1 << 5 | 1 << 2 | 1 << 0,
+    G15_MASK: 1 << 14 | 1 << 12 | 1 << 10 | 1 << 4 | 1 << 1,
+    getBCHTypeInfo: function getBCHTypeInfo(data) {
+      var d = data << 10;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15) >= 0) {
+        d ^= QRUtil.G15 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G15);
+      }
+      return (data << 10 | d) ^ QRUtil.G15_MASK;
+    },
+    getBCHTypeNumber: function getBCHTypeNumber(data) {
+      var d = data << 12;
+      while (QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18) >= 0) {
+        d ^= QRUtil.G18 << QRUtil.getBCHDigit(d) - QRUtil.getBCHDigit(QRUtil.G18);
+      }
+      return data << 12 | d;
+    },
+    getBCHDigit: function getBCHDigit(data) {
+      var digit = 0;
+      while (data != 0) {
+        digit++;
+        data >>>= 1;
+      }
+      return digit;
+    },
+    getPatternPosition: function getPatternPosition(typeNumber) {
+      return QRUtil.PATTERN_POSITION_TABLE[typeNumber - 1];
+    },
+    getMask: function getMask(maskPattern, i, j) {
+      switch (maskPattern) {
+        case QRMaskPattern.PATTERN000:
+          return (i + j) % 2 == 0;
+        case QRMaskPattern.PATTERN001:
+          return i % 2 == 0;
+        case QRMaskPattern.PATTERN010:
+          return j % 3 == 0;
+        case QRMaskPattern.PATTERN011:
+          return (i + j) % 3 == 0;
+        case QRMaskPattern.PATTERN100:
+          return (Math.floor(i / 2) + Math.floor(j / 3)) % 2 == 0;
+        case QRMaskPattern.PATTERN101:
+          return i * j % 2 + i * j % 3 == 0;
+        case QRMaskPattern.PATTERN110:
+          return (i * j % 2 + i * j % 3) % 2 == 0;
+        case QRMaskPattern.PATTERN111:
+          return (i * j % 3 + (i + j) % 2) % 2 == 0;
+        default:
+          throw new Error("bad maskPattern:" + maskPattern);
+      }
+    },
+    getErrorCorrectPolynomial: function getErrorCorrectPolynomial(errorCorrectLength) {
+      var a = new QRPolynomial([1], 0);
+      for (var i = 0; i < errorCorrectLength; i++) {
+        a = a.multiply(new QRPolynomial([1, QRMath.gexp(i)], 0));
+      }
+      return a;
+    },
+    getLengthInBits: function getLengthInBits(mode, type) {
+      if (1 <= type && type < 10) {
+        // 1 - 9
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 10;
+          case QRMode.MODE_ALPHA_NUM:
+            return 9;
+          case QRMode.MODE_8BIT_BYTE:
+            return 8;
+          case QRMode.MODE_KANJI:
+            return 8;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else if (type < 27) {
+        // 10 - 26
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 12;
+          case QRMode.MODE_ALPHA_NUM:
+            return 11;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 10;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else if (type < 41) {
+        // 27 - 40
+
+        switch (mode) {
+          case QRMode.MODE_NUMBER:
+            return 14;
+          case QRMode.MODE_ALPHA_NUM:
+            return 13;
+          case QRMode.MODE_8BIT_BYTE:
+            return 16;
+          case QRMode.MODE_KANJI:
+            return 12;
+          default:
+            throw new Error("mode:" + mode);
+        }
+      } else {
+        throw new Error("type:" + type);
+      }
+    },
+    getLostPoint: function getLostPoint(qrCode) {
+      var moduleCount = qrCode.getModuleCount();
+      var lostPoint = 0;
+
+      // LEVEL1
+
+      for (var row = 0; row < moduleCount; row++) {
+        for (var col = 0; col < moduleCount; col++) {
+          var sameCount = 0;
+          var dark = qrCode.isDark(row, col);
+          for (var r = -1; r <= 1; r++) {
+            if (row + r < 0 || moduleCount <= row + r) {
+              continue;
+            }
+            for (var c = -1; c <= 1; c++) {
+              if (col + c < 0 || moduleCount <= col + c) {
+                continue;
+              }
+              if (r == 0 && c == 0) {
+                continue;
+              }
+              if (dark == qrCode.isDark(row + r, col + c)) {
+                sameCount++;
+              }
+            }
+          }
+          if (sameCount > 5) {
+            lostPoint += 3 + sameCount - 5;
+          }
+        }
+      }
+
+      // LEVEL2
+
+      for (var row = 0; row < moduleCount - 1; row++) {
+        for (var col = 0; col < moduleCount - 1; col++) {
+          var count = 0;
+          if (qrCode.isDark(row, col)) count++;
+          if (qrCode.isDark(row + 1, col)) count++;
+          if (qrCode.isDark(row, col + 1)) count++;
+          if (qrCode.isDark(row + 1, col + 1)) count++;
+          if (count == 0 || count == 4) {
+            lostPoint += 3;
+          }
+        }
+      }
+
+      // LEVEL3
+
+      for (var row = 0; row < moduleCount; row++) {
+        for (var col = 0; col < moduleCount - 6; col++) {
+          if (qrCode.isDark(row, col) && !qrCode.isDark(row, col + 1) && qrCode.isDark(row, col + 2) && qrCode.isDark(row, col + 3) && qrCode.isDark(row, col + 4) && !qrCode.isDark(row, col + 5) && qrCode.isDark(row, col + 6)) {
+            lostPoint += 40;
+          }
+        }
+      }
+      for (var col = 0; col < moduleCount; col++) {
+        for (var row = 0; row < moduleCount - 6; row++) {
+          if (qrCode.isDark(row, col) && !qrCode.isDark(row + 1, col) && qrCode.isDark(row + 2, col) && qrCode.isDark(row + 3, col) && qrCode.isDark(row + 4, col) && !qrCode.isDark(row + 5, col) && qrCode.isDark(row + 6, col)) {
+            lostPoint += 40;
+          }
+        }
+      }
+
+      // LEVEL4
+
+      var darkCount = 0;
+      for (var col = 0; col < moduleCount; col++) {
+        for (var row = 0; row < moduleCount; row++) {
+          if (qrCode.isDark(row, col)) {
+            darkCount++;
+          }
+        }
+      }
+      var ratio = Math.abs(100 * darkCount / moduleCount / moduleCount - 50) / 5;
+      lostPoint += ratio * 10;
+      return lostPoint;
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // QRMath
+  //---------------------------------------------------------------------
+
+  var QRMath = {
+    glog: function glog(n) {
+      if (n < 1) {
+        throw new Error("glog(" + n + ")");
+      }
+      return QRMath.LOG_TABLE[n];
+    },
+    gexp: function gexp(n) {
+      while (n < 0) {
+        n += 255;
+      }
+      while (n >= 256) {
+        n -= 255;
+      }
+      return QRMath.EXP_TABLE[n];
+    },
+    EXP_TABLE: new Array(256),
+    LOG_TABLE: new Array(256)
+  };
+  for (var i = 0; i < 8; i++) {
+    QRMath.EXP_TABLE[i] = 1 << i;
+  }
+  for (var i = 8; i < 256; i++) {
+    QRMath.EXP_TABLE[i] = QRMath.EXP_TABLE[i - 4] ^ QRMath.EXP_TABLE[i - 5] ^ QRMath.EXP_TABLE[i - 6] ^ QRMath.EXP_TABLE[i - 8];
+  }
+  for (var i = 0; i < 255; i++) {
+    QRMath.LOG_TABLE[QRMath.EXP_TABLE[i]] = i;
+  }
+
+  //---------------------------------------------------------------------
+  // QRPolynomial
+  //---------------------------------------------------------------------
+
+  function QRPolynomial(num, shift) {
+    if (num.length == undefined) {
+      throw new Error(num.length + "/" + shift);
+    }
+    var offset = 0;
+    while (offset < num.length && num[offset] == 0) {
+      offset++;
+    }
+    this.num = new Array(num.length - offset + shift);
+    for (var i = 0; i < num.length - offset; i++) {
+      this.num[i] = num[i + offset];
+    }
+  }
+  QRPolynomial.prototype = {
+    get: function get(index) {
+      return this.num[index];
+    },
+    getLength: function getLength() {
+      return this.num.length;
+    },
+    multiply: function multiply(e) {
+      var num = new Array(this.getLength() + e.getLength() - 1);
+      for (var i = 0; i < this.getLength(); i++) {
+        for (var j = 0; j < e.getLength(); j++) {
+          num[i + j] ^= QRMath.gexp(QRMath.glog(this.get(i)) + QRMath.glog(e.get(j)));
+        }
+      }
+      return new QRPolynomial(num, 0);
+    },
+    mod: function mod(e) {
+      if (this.getLength() - e.getLength() < 0) {
+        return this;
+      }
+      var ratio = QRMath.glog(this.get(0)) - QRMath.glog(e.get(0));
+      var num = new Array(this.getLength());
+      for (var i = 0; i < this.getLength(); i++) {
+        num[i] = this.get(i);
+      }
+      for (var i = 0; i < e.getLength(); i++) {
+        num[i] ^= QRMath.gexp(QRMath.glog(e.get(i)) + ratio);
+      }
+
+      // recursive call
+      return new QRPolynomial(num, 0).mod(e);
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // QRRSBlock
+  //---------------------------------------------------------------------
+
+  function QRRSBlock(totalCount, dataCount) {
+    this.totalCount = totalCount;
+    this.dataCount = dataCount;
+  }
+  QRRSBlock.RS_BLOCK_TABLE = [
+  // L
+  // M
+  // Q
+  // H
+
+  // 1
+  [1, 26, 19], [1, 26, 16], [1, 26, 13], [1, 26, 9],
+  // 2
+  [1, 44, 34], [1, 44, 28], [1, 44, 22], [1, 44, 16],
+  // 3
+  [1, 70, 55], [1, 70, 44], [2, 35, 17], [2, 35, 13],
+  // 4		
+  [1, 100, 80], [2, 50, 32], [2, 50, 24], [4, 25, 9],
+  // 5
+  [1, 134, 108], [2, 67, 43], [2, 33, 15, 2, 34, 16], [2, 33, 11, 2, 34, 12],
+  // 6
+  [2, 86, 68], [4, 43, 27], [4, 43, 19], [4, 43, 15],
+  // 7		
+  [2, 98, 78], [4, 49, 31], [2, 32, 14, 4, 33, 15], [4, 39, 13, 1, 40, 14],
+  // 8
+  [2, 121, 97], [2, 60, 38, 2, 61, 39], [4, 40, 18, 2, 41, 19], [4, 40, 14, 2, 41, 15],
+  // 9
+  [2, 146, 116], [3, 58, 36, 2, 59, 37], [4, 36, 16, 4, 37, 17], [4, 36, 12, 4, 37, 13],
+  // 10		
+  [2, 86, 68, 2, 87, 69], [4, 69, 43, 1, 70, 44], [6, 43, 19, 2, 44, 20], [6, 43, 15, 2, 44, 16],
+  // 11
+  [4, 101, 81], [1, 80, 50, 4, 81, 51], [4, 50, 22, 4, 51, 23], [3, 36, 12, 8, 37, 13],
+  // 12
+  [2, 116, 92, 2, 117, 93], [6, 58, 36, 2, 59, 37], [4, 46, 20, 6, 47, 21], [7, 42, 14, 4, 43, 15],
+  // 13
+  [4, 133, 107], [8, 59, 37, 1, 60, 38], [8, 44, 20, 4, 45, 21], [12, 33, 11, 4, 34, 12],
+  // 14
+  [3, 145, 115, 1, 146, 116], [4, 64, 40, 5, 65, 41], [11, 36, 16, 5, 37, 17], [11, 36, 12, 5, 37, 13],
+  // 15
+  [5, 109, 87, 1, 110, 88], [5, 65, 41, 5, 66, 42], [5, 54, 24, 7, 55, 25], [11, 36, 12],
+  // 16
+  [5, 122, 98, 1, 123, 99], [7, 73, 45, 3, 74, 46], [15, 43, 19, 2, 44, 20], [3, 45, 15, 13, 46, 16],
+  // 17
+  [1, 135, 107, 5, 136, 108], [10, 74, 46, 1, 75, 47], [1, 50, 22, 15, 51, 23], [2, 42, 14, 17, 43, 15],
+  // 18
+  [5, 150, 120, 1, 151, 121], [9, 69, 43, 4, 70, 44], [17, 50, 22, 1, 51, 23], [2, 42, 14, 19, 43, 15],
+  // 19
+  [3, 141, 113, 4, 142, 114], [3, 70, 44, 11, 71, 45], [17, 47, 21, 4, 48, 22], [9, 39, 13, 16, 40, 14],
+  // 20
+  [3, 135, 107, 5, 136, 108], [3, 67, 41, 13, 68, 42], [15, 54, 24, 5, 55, 25], [15, 43, 15, 10, 44, 16],
+  // 21
+  [4, 144, 116, 4, 145, 117], [17, 68, 42], [17, 50, 22, 6, 51, 23], [19, 46, 16, 6, 47, 17],
+  // 22
+  [2, 139, 111, 7, 140, 112], [17, 74, 46], [7, 54, 24, 16, 55, 25], [34, 37, 13],
+  // 23
+  [4, 151, 121, 5, 152, 122], [4, 75, 47, 14, 76, 48], [11, 54, 24, 14, 55, 25], [16, 45, 15, 14, 46, 16],
+  // 24
+  [6, 147, 117, 4, 148, 118], [6, 73, 45, 14, 74, 46], [11, 54, 24, 16, 55, 25], [30, 46, 16, 2, 47, 17],
+  // 25
+  [8, 132, 106, 4, 133, 107], [8, 75, 47, 13, 76, 48], [7, 54, 24, 22, 55, 25], [22, 45, 15, 13, 46, 16],
+  // 26
+  [10, 142, 114, 2, 143, 115], [19, 74, 46, 4, 75, 47], [28, 50, 22, 6, 51, 23], [33, 46, 16, 4, 47, 17],
+  // 27
+  [8, 152, 122, 4, 153, 123], [22, 73, 45, 3, 74, 46], [8, 53, 23, 26, 54, 24], [12, 45, 15, 28, 46, 16],
+  // 28
+  [3, 147, 117, 10, 148, 118], [3, 73, 45, 23, 74, 46], [4, 54, 24, 31, 55, 25], [11, 45, 15, 31, 46, 16],
+  // 29
+  [7, 146, 116, 7, 147, 117], [21, 73, 45, 7, 74, 46], [1, 53, 23, 37, 54, 24], [19, 45, 15, 26, 46, 16],
+  // 30
+  [5, 145, 115, 10, 146, 116], [19, 75, 47, 10, 76, 48], [15, 54, 24, 25, 55, 25], [23, 45, 15, 25, 46, 16],
+  // 31
+  [13, 145, 115, 3, 146, 116], [2, 74, 46, 29, 75, 47], [42, 54, 24, 1, 55, 25], [23, 45, 15, 28, 46, 16],
+  // 32
+  [17, 145, 115], [10, 74, 46, 23, 75, 47], [10, 54, 24, 35, 55, 25], [19, 45, 15, 35, 46, 16],
+  // 33
+  [17, 145, 115, 1, 146, 116], [14, 74, 46, 21, 75, 47], [29, 54, 24, 19, 55, 25], [11, 45, 15, 46, 46, 16],
+  // 34
+  [13, 145, 115, 6, 146, 116], [14, 74, 46, 23, 75, 47], [44, 54, 24, 7, 55, 25], [59, 46, 16, 1, 47, 17],
+  // 35
+  [12, 151, 121, 7, 152, 122], [12, 75, 47, 26, 76, 48], [39, 54, 24, 14, 55, 25], [22, 45, 15, 41, 46, 16],
+  // 36
+  [6, 151, 121, 14, 152, 122], [6, 75, 47, 34, 76, 48], [46, 54, 24, 10, 55, 25], [2, 45, 15, 64, 46, 16],
+  // 37
+  [17, 152, 122, 4, 153, 123], [29, 74, 46, 14, 75, 47], [49, 54, 24, 10, 55, 25], [24, 45, 15, 46, 46, 16],
+  // 38
+  [4, 152, 122, 18, 153, 123], [13, 74, 46, 32, 75, 47], [48, 54, 24, 14, 55, 25], [42, 45, 15, 32, 46, 16],
+  // 39
+  [20, 147, 117, 4, 148, 118], [40, 75, 47, 7, 76, 48], [43, 54, 24, 22, 55, 25], [10, 45, 15, 67, 46, 16],
+  // 40
+  [19, 148, 118, 6, 149, 119], [18, 75, 47, 31, 76, 48], [34, 54, 24, 34, 55, 25], [20, 45, 15, 61, 46, 16]];
+  QRRSBlock.getRSBlocks = function (typeNumber, errorCorrectLevel) {
+    var rsBlock = QRRSBlock.getRsBlockTable(typeNumber, errorCorrectLevel);
+    if (rsBlock == undefined) {
+      throw new Error("bad rs block @ typeNumber:" + typeNumber + "/errorCorrectLevel:" + errorCorrectLevel);
+    }
+    var length = rsBlock.length / 3;
+    var list = new Array();
+    for (var i = 0; i < length; i++) {
+      var count = rsBlock[i * 3 + 0];
+      var totalCount = rsBlock[i * 3 + 1];
+      var dataCount = rsBlock[i * 3 + 2];
+      for (var j = 0; j < count; j++) {
+        list.push(new QRRSBlock(totalCount, dataCount));
+      }
+    }
+    return list;
+  };
+  QRRSBlock.getRsBlockTable = function (typeNumber, errorCorrectLevel) {
+    switch (errorCorrectLevel) {
+      case QRErrorCorrectLevel.L:
+        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 0];
+      case QRErrorCorrectLevel.M:
+        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 1];
+      case QRErrorCorrectLevel.Q:
+        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 2];
+      case QRErrorCorrectLevel.H:
+        return QRRSBlock.RS_BLOCK_TABLE[(typeNumber - 1) * 4 + 3];
+      default:
+        return undefined;
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // QRBitBuffer
+  //---------------------------------------------------------------------
+
+  function QRBitBuffer() {
+    this.buffer = new Array();
+    this.length = 0;
+  }
+  QRBitBuffer.prototype = {
+    get: function get(index) {
+      var bufIndex = Math.floor(index / 8);
+      return (this.buffer[bufIndex] >>> 7 - index % 8 & 1) == 1;
+    },
+    put: function put(num, length) {
+      for (var i = 0; i < length; i++) {
+        this.putBit((num >>> length - i - 1 & 1) == 1);
+      }
+    },
+    getLengthInBits: function getLengthInBits() {
+      return this.length;
+    },
+    putBit: function putBit(bit) {
+      var bufIndex = Math.floor(this.length / 8);
+      if (this.buffer.length <= bufIndex) {
+        this.buffer.push(0);
+      }
+      if (bit) {
+        this.buffer[bufIndex] |= 0x80 >>> this.length % 8;
+      }
+      this.length++;
+    }
+  };
+
+  //---------------------------------------------------------------------
+  // Support Chinese
+  //---------------------------------------------------------------------
+  function utf16To8(text) {
+    var result = '';
+    var c;
+    for (var i = 0; i < text.length; i++) {
+      c = text.charCodeAt(i);
+      if (c >= 0x0001 && c <= 0x007F) {
+        result += text.charAt(i);
+      } else if (c > 0x07FF) {
+        result += String.fromCharCode(0xE0 | c >> 12 & 0x0F);
+        result += String.fromCharCode(0x80 | c >> 6 & 0x3F);
+        result += String.fromCharCode(0x80 | c >> 0 & 0x3F);
+      } else {
+        result += String.fromCharCode(0xC0 | c >> 6 & 0x1F);
+        result += String.fromCharCode(0x80 | c >> 0 & 0x3F);
+      }
+    }
+    return result;
+  }
+  uQRCode = {
+    errorCorrectLevel: QRErrorCorrectLevel,
+    defaults: {
+      size: 354,
+      margin: 0,
+      backgroundColor: '#ffffff',
+      foregroundColor: '#000000',
+      fileType: 'png',
+      // 'jpg', 'png'
+      errorCorrectLevel: QRErrorCorrectLevel.H,
+      typeNumber: -1
+    },
+    make: function make(options) {
+      var _this = this;
+      return new Promise(function (reslove, reject) {
+        var defaultOptions = {
+          canvasId: options.canvasId,
+          componentInstance: options.componentInstance,
+          text: options.text,
+          size: _this.defaults.size,
+          margin: _this.defaults.margin,
+          backgroundColor: _this.defaults.backgroundColor,
+          foregroundColor: _this.defaults.foregroundColor,
+          fileType: _this.defaults.fileType,
+          errorCorrectLevel: _this.defaults.errorCorrectLevel,
+          typeNumber: _this.defaults.typeNumber
+        };
+        if (options) {
+          for (var i in options) {
+            defaultOptions[i] = options[i];
+          }
+        }
+        options = defaultOptions;
+        if (!options.canvasId) {
+          console.error('uQRCode: Please set canvasId!');
+          return;
+        }
+        function createCanvas() {
+          var qrcode = new QRCode(options.typeNumber, options.errorCorrectLevel);
+          qrcode.addData(utf16To8(options.text));
+          qrcode.make();
+          var ctx = uni.createCanvasContext(options.canvasId, options.componentInstance);
+          ctx.setFillStyle(options.backgroundColor);
+          ctx.fillRect(0, 0, options.size, options.size);
+          var tileW = (options.size - options.margin * 2) / qrcode.getModuleCount();
+          var tileH = tileW;
+          for (var row = 0; row < qrcode.getModuleCount(); row++) {
+            for (var col = 0; col < qrcode.getModuleCount(); col++) {
+              var style = qrcode.isDark(row, col) ? options.foregroundColor : options.backgroundColor;
+              ctx.setFillStyle(style);
+              var x = Math.round(col * tileW) + options.margin;
+              var y = Math.round(row * tileH) + options.margin;
+              var w = Math.ceil((col + 1) * tileW) - Math.floor(col * tileW);
+              var h = Math.ceil((row + 1) * tileW) - Math.floor(row * tileW);
+              ctx.fillRect(x, y, w, h);
+            }
+          }
+          setTimeout(function () {
+            ctx.draw(false, function () {
+              setTimeout(function () {
+                uni.canvasToTempFilePath({
+                  canvasId: options.canvasId,
+                  fileType: options.fileType,
+                  width: options.size,
+                  height: options.size,
+                  destWidth: options.size,
+                  destHeight: options.size,
+                  success: function success(res) {
+                    var resData; // 将统一为base64格式
+                    var tempFilePath = res.tempFilePath; // H5为base64，其他为相对路径
+
+                    uni.getFileSystemManager().readFile({
+                      filePath: tempFilePath,
+                      encoding: 'base64',
+                      success: function success(res) {
+                        resData = 'data:image/png;base64,' + res.data;
+                        options.success && options.success(resData);
+                        reslove(resData);
+                      }
+                    });
+                  },
+                  fail: function fail(error) {
+                    options.fail && options.fail(error);
+                    reject(error);
+                  },
+                  complete: function complete(res) {
+                    options.complete && options.complete(res);
+                  }
+                }, options.componentInstance);
+              }, options.text.length + 100);
+            }());
+          }, 150);
+        }
+        createCanvas();
+      });
+    }
+  };
+})();
+var _default = uQRCode;
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 747 */,
+/* 748 */,
+/* 749 */,
+/* 750 */,
+/* 751 */,
+/* 752 */,
+/* 753 */,
+/* 754 */,
+/* 755 */,
+/* 756 */,
+/* 757 */,
+/* 758 */,
+/* 759 */,
+/* 760 */,
+/* 761 */,
+/* 762 */,
+/* 763 */,
+/* 764 */
+/*!****************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/popup.js ***!
+  \****************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  data: function data() {
+    return {};
+  },
+  created: function created() {
+    this.popup = this.getParent();
+  },
+  methods: {
+    /**
+     * 获取父元素实例
+     */
+    getParent: function getParent() {
+      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'uniPopup';
+      var parent = this.$parent;
+      var parentName = parent.$options.name;
+      while (parentName !== name) {
+        parent = parent.$parent;
+        if (!parent) return false;
+        parentName = parent.$options.name;
+      }
+      return parent;
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 765 */
+/*!*********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/index.js ***!
+  \*********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 766));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 767));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 768));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 766 */
+/*!********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/en.json ***!
+  \********************************************************************************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"cancel\",\"uni-popup.ok\":\"ok\",\"uni-popup.placeholder\":\"pleace enter\",\"uni-popup.title\":\"Hint\",\"uni-popup.shareTitle\":\"Share to\"}");
+
+/***/ }),
+/* 767 */
+/*!*************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hans.json ***!
+  \*************************************************************************************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"确定\",\"uni-popup.placeholder\":\"请输入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
+
+/***/ }),
+/* 768 */
+/*!*************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-popup/components/uni-popup/i18n/zh-Hant.json ***!
+  \*************************************************************************************************************************************************/
+/*! exports provided: uni-popup.cancel, uni-popup.ok, uni-popup.placeholder, uni-popup.title, uni-popup.shareTitle, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-popup.cancel\":\"取消\",\"uni-popup.ok\":\"確定\",\"uni-popup.placeholder\":\"請輸入\",\"uni-popup.title\":\"提示\",\"uni-popup.shareTitle\":\"分享到\"}");
+
+/***/ }),
+/* 769 */,
+/* 770 */,
+/* 771 */,
+/* 772 */,
+/* 773 */,
+/* 774 */,
+/* 775 */,
+/* 776 */,
+/* 777 */,
+/* 778 */,
+/* 779 */,
+/* 780 */,
+/* 781 */,
+/* 782 */,
+/* 783 */
+/*!********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/pages/ucenter/userinfo/limeClipper/utils.js ***!
+  \********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.calcImageOffset = calcImageOffset;
+exports.calcImageScale = calcImageScale;
+exports.calcImageSize = calcImageSize;
+exports.calcPythagoreanTheorem = calcPythagoreanTheorem;
+exports.clipTouchMoveOfCalculate = clipTouchMoveOfCalculate;
+exports.determineDirection = determineDirection;
+exports.imageTouchMoveOfCalcOffset = imageTouchMoveOfCalcOffset;
+/**
+ * 判断手指触摸位置
+ */
+function determineDirection(clipX, clipY, clipWidth, clipHeight, currentX, currentY) {
+  /*
+   * (右下>>1 右上>>2 左上>>3 左下>>4)
+   */
+  var corner;
+  /**
+   * 思路：（利用直角坐标系）
+   *  1.找出裁剪框中心点
+   *  2.如点击坐标在上方点与左方点区域内，则点击为左上角
+   *  3.如点击坐标在下方点与右方点区域内，则点击为右下角
+   *  4.其他角同理
+   */
+  var mainPoint = [clipX + clipWidth / 2, clipY + clipHeight / 2]; // 中心点
+  var currentPoint = [currentX, currentY]; // 触摸点
+
+  if (currentPoint[0] <= mainPoint[0] && currentPoint[1] <= mainPoint[1]) {
+    corner = 3; // 左上
+  } else if (currentPoint[0] >= mainPoint[0] && currentPoint[1] <= mainPoint[1]) {
+    corner = 2; // 右上
+  } else if (currentPoint[0] <= mainPoint[0] && currentPoint[1] >= mainPoint[1]) {
+    corner = 4; // 左下
+  } else if (currentPoint[0] >= mainPoint[0] && currentPoint[1] >= mainPoint[1]) {
+    corner = 1; // 右下
+  }
+
+  return corner;
+}
+
+/**
+ * 图片边缘检测检测时，计算图片偏移量
+ */
+function calcImageOffset(data, scale) {
+  var left = data.imageLeft;
+  var top = data.imageTop;
+  scale = scale || data.scale;
+  var imageWidth = data.imageWidth;
+  var imageHeight = data.imageHeight;
+  if (data.angle / 90 % 2) {
+    imageWidth = data.imageHeight;
+    imageHeight = data.imageWidth;
+  }
+  var clipX = data.clipX,
+    clipWidth = data.clipWidth,
+    clipY = data.clipY,
+    clipHeight = data.clipHeight;
+
+  // 当前图片宽度/高度
+  var currentImageSize = function currentImageSize(size) {
+    return size * scale / 2;
+  };
+  var currentImageWidth = currentImageSize(imageWidth);
+  var currentImageHeight = currentImageSize(imageHeight);
+  left = clipX + currentImageWidth >= left ? left : clipX + currentImageWidth;
+  left = clipX + clipWidth - currentImageWidth <= left ? left : clipX + clipWidth - currentImageWidth;
+  top = clipY + currentImageHeight >= top ? top : clipY + currentImageHeight;
+  top = clipY + clipHeight - currentImageHeight <= top ? top : clipY + clipHeight - currentImageHeight;
+  return {
+    left: left,
+    top: top,
+    scale: scale
+  };
+}
+
+/**
+ * 图片边缘检测时，计算图片缩放比例
+ */
+function calcImageScale(data, scale) {
+  scale = scale || data.scale;
+  var imageWidth = data.imageWidth,
+    imageHeight = data.imageHeight,
+    clipWidth = data.clipWidth,
+    clipHeight = data.clipHeight,
+    angle = data.angle;
+  if (angle / 90 % 2) {
+    imageWidth = imageHeight;
+    imageHeight = imageWidth;
+  }
+  if (imageWidth * scale < clipWidth) {
+    scale = clipWidth / imageWidth;
+  }
+  if (imageHeight * scale < clipHeight) {
+    scale = Math.max(scale, clipHeight / imageHeight);
+  }
+  return scale;
+}
+
+/**
+ * 计算图片尺寸
+ */
+function calcImageSize(width, height, data) {
+  var imageWidth = width,
+    imageHeight = height;
+  var clipWidth = data.clipWidth,
+    clipHeight = data.clipHeight,
+    sysinfo = data.sysinfo,
+    originWidth = data.width,
+    originHeight = data.height;
+  if (imageWidth && imageHeight) {
+    if (imageWidth / imageHeight > (clipWidth || originWidth) / (clipWidth || originHeight)) {
+      imageHeight = clipHeight || originHeight;
+      imageWidth = width / height * imageHeight;
+    } else {
+      imageWidth = clipWidth || originWidth;
+      imageHeight = height / width * imageWidth;
+    }
+  } else {
+    var sys = sysinfo || uni.getSystemInfoSync();
+    imageWidth = sys.windowWidth;
+    imageHeight = 0;
+  }
+  return {
+    imageWidth: imageWidth,
+    imageHeight: imageHeight
+  };
+}
+
+/**
+ * 勾股定理求斜边
+ */
+function calcPythagoreanTheorem(width, height) {
+  return Math.sqrt(Math.pow(width, 2) + Math.pow(height, 2));
+}
+
+/**
+ * 拖动裁剪框时计算
+ */
+function clipTouchMoveOfCalculate(data, event) {
+  var clientX = event.touches[0].clientX;
+  var clientY = event.touches[0].clientY;
+  var clipWidth = data.clipWidth,
+    clipHeight = data.clipHeight,
+    oldClipY = data.clipY,
+    oldClipX = data.clipX,
+    clipStart = data.clipStart,
+    isLockRatio = data.isLockRatio,
+    maxWidth = data.maxWidth,
+    minWidth = data.minWidth,
+    maxHeight = data.maxHeight,
+    minHeight = data.minHeight;
+  maxWidth = maxWidth / 2;
+  minWidth = minWidth / 2;
+  minHeight = minHeight / 2;
+  maxHeight = maxHeight / 2;
+  var width = clipWidth,
+    height = clipHeight,
+    clipY = oldClipY,
+    clipX = oldClipX,
+    // 获取裁剪框实际宽度/高度
+    // 如果大于最大值则使用最大值
+    // 如果小于最小值则使用最小值
+    sizecorrect = function sizecorrect() {
+      width = width <= maxWidth ? width >= minWidth ? width : minWidth : maxWidth;
+      height = height <= maxHeight ? height >= minHeight ? height : minHeight : maxHeight;
+    },
+    sizeinspect = function sizeinspect() {
+      sizecorrect();
+      if ((width > maxWidth || width < minWidth || height > maxHeight || height < minHeight) && isLockRatio) {
+        return false;
+      } else {
+        return true;
+      }
+    };
+  //if (clipStart.corner) {
+  height = clipStart.height + (clipStart.corner > 1 && clipStart.corner < 4 ? 1 : -1) * (clipStart.y - clientY);
+  //}
+  switch (clipStart.corner) {
+    case 1:
+      width = clipStart.width - clipStart.x + clientX;
+      if (isLockRatio) {
+        height = width / (clipWidth / clipHeight);
+      }
+      if (!sizeinspect()) return;
+      break;
+    case 2:
+      width = clipStart.width - clipStart.x + clientX;
+      if (isLockRatio) {
+        height = width / (clipWidth / clipHeight);
+      }
+      if (!sizeinspect()) {
+        return;
+      } else {
+        clipY = clipStart.clipY - (height - clipStart.height);
+      }
+      break;
+    case 3:
+      width = clipStart.width + clipStart.x - clientX;
+      if (isLockRatio) {
+        height = width / (clipWidth / clipHeight);
+      }
+      if (!sizeinspect()) {
+        return;
+      } else {
+        clipY = clipStart.clipY - (height - clipStart.height);
+        clipX = clipStart.clipX - (width - clipStart.width);
+      }
+      break;
+    case 4:
+      width = clipStart.width + clipStart.x - clientX;
+      if (isLockRatio) {
+        height = width / (clipWidth / clipHeight);
+      }
+      if (!sizeinspect()) {
+        return;
+      } else {
+        clipX = clipStart.clipX - (width - clipStart.width);
+      }
+      break;
+    default:
+      break;
+  }
+  return {
+    width: width,
+    height: height,
+    clipX: clipX,
+    clipY: clipY
+  };
+}
+
+/**
+ * 单指拖动图片计算偏移
+ */
+function imageTouchMoveOfCalcOffset(data, clientXForLeft, clientYForLeft) {
+  var left = clientXForLeft - data.touchRelative[0].x,
+    top = clientYForLeft - data.touchRelative[0].y;
+  return {
+    left: left,
+    top: top
+  };
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 784 */,
+/* 785 */,
+/* 786 */,
+/* 787 */,
+/* 788 */,
+/* 789 */,
+/* 790 */,
+/* 791 */,
+/* 792 */,
+/* 793 */,
+/* 794 */,
+/* 795 */,
+/* 796 */,
+/* 797 */,
+/* 798 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-forms/components/uni-forms/validate.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _inherits2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/inherits */ 32));
+var _possibleConstructorReturn2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/possibleConstructorReturn */ 33));
+var _getPrototypeOf2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/getPrototypeOf */ 34));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = (0, _getPrototypeOf2.default)(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = (0, _getPrototypeOf2.default)(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return (0, _possibleConstructorReturn2.default)(this, result); }; }
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Boolean.prototype.valueOf.call(Reflect.construct(Boolean, [], function () {})); return true; } catch (e) { return false; } }
+var pattern = {
+  email: /^\S+?@\S+?\.\S+?$/,
+  idcard: /^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx]$/,
+  url: new RegExp("^(?!mailto:)(?:(?:http|https|ftp)://|//)(?:\\S+(?::\\S*)?@)?(?:(?:(?:[1-9]\\d?|1\\d\\d|2[01]\\d|22[0-3])(?:\\.(?:1?\\d{1,2}|2[0-4]\\d|25[0-5])){2}(?:\\.(?:[0-9]\\d?|1\\d\\d|2[0-4]\\d|25[0-4]))|(?:(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)(?:\\.(?:[a-z\\u00a1-\\uffff0-9]+-*)*[a-z\\u00a1-\\uffff0-9]+)*(?:\\.(?:[a-z\\u00a1-\\uffff]{2,})))|localhost)(?::\\d{2,5})?(?:(/|\\?|#)[^\\s]*)?$", 'i')
+};
+var FORMAT_MAPPING = {
+  "int": 'integer',
+  "bool": 'boolean',
+  "double": 'number',
+  "long": 'number',
+  "password": 'string'
+  // "fileurls": 'array'
+};
+
+function formatMessage(args) {
+  var resources = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var defaultMessage = ['label'];
+  defaultMessage.forEach(function (item) {
+    if (args[item] === undefined) {
+      args[item] = '';
+    }
+  });
+  var str = resources;
+  for (var key in args) {
+    var reg = new RegExp('{' + key + '}');
+    str = str.replace(reg, args[key]);
+  }
+  return str;
+}
+function isEmptyValue(value, type) {
+  if (value === undefined || value === null) {
+    return true;
+  }
+  if (typeof value === 'string' && !value) {
+    return true;
+  }
+  if (Array.isArray(value) && !value.length) {
+    return true;
+  }
+  if (type === 'object' && !Object.keys(value).length) {
+    return true;
+  }
+  return false;
+}
+var types = {
+  integer: function integer(value) {
+    return types.number(value) && parseInt(value, 10) === value;
+  },
+  string: function string(value) {
+    return typeof value === 'string';
+  },
+  number: function number(value) {
+    if (isNaN(value)) {
+      return false;
+    }
+    return typeof value === 'number';
+  },
+  "boolean": function boolean(value) {
+    return typeof value === 'boolean';
+  },
+  "float": function float(value) {
+    return types.number(value) && !types.integer(value);
+  },
+  array: function array(value) {
+    return Array.isArray(value);
+  },
+  object: function object(value) {
+    return (0, _typeof2.default)(value) === 'object' && !types.array(value);
+  },
+  date: function date(value) {
+    return value instanceof Date;
+  },
+  timestamp: function timestamp(value) {
+    if (!this.integer(value) || Math.abs(value).toString().length > 16) {
+      return false;
+    }
+    return true;
+  },
+  file: function file(value) {
+    return typeof value.url === 'string';
+  },
+  email: function email(value) {
+    return typeof value === 'string' && !!value.match(pattern.email) && value.length < 255;
+  },
+  url: function url(value) {
+    return typeof value === 'string' && !!value.match(pattern.url);
+  },
+  pattern: function pattern(reg, value) {
+    try {
+      return new RegExp(reg).test(value);
+    } catch (e) {
+      return false;
+    }
+  },
+  method: function method(value) {
+    return typeof value === 'function';
+  },
+  idcard: function idcard(value) {
+    return typeof value === 'string' && !!value.match(pattern.idcard);
+  },
+  'url-https': function urlHttps(value) {
+    return this.url(value) && value.startsWith('https://');
+  },
+  'url-scheme': function urlScheme(value) {
+    return value.startsWith('://');
+  },
+  'url-web': function urlWeb(value) {
+    return false;
+  }
+};
+var RuleValidator = /*#__PURE__*/function () {
+  function RuleValidator(message) {
+    (0, _classCallCheck2.default)(this, RuleValidator);
+    this._message = message;
+  }
+  (0, _createClass2.default)(RuleValidator, [{
+    key: "validateRule",
+    value: function () {
+      var _validateRule = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(fieldKey, fieldValue, value, data, allData) {
+        var result, rules, hasRequired, message, i, rule, vt, now, resultExpr;
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                result = null;
+                rules = fieldValue.rules;
+                hasRequired = rules.findIndex(function (item) {
+                  return item.required;
+                });
+                if (!(hasRequired < 0)) {
+                  _context.next = 8;
+                  break;
+                }
+                if (!(value === null || value === undefined)) {
+                  _context.next = 6;
+                  break;
+                }
+                return _context.abrupt("return", result);
+              case 6:
+                if (!(typeof value === 'string' && !value.length)) {
+                  _context.next = 8;
+                  break;
+                }
+                return _context.abrupt("return", result);
+              case 8:
+                message = this._message;
+                if (!(rules === undefined)) {
+                  _context.next = 11;
+                  break;
+                }
+                return _context.abrupt("return", message['default']);
+              case 11:
+                i = 0;
+              case 12:
+                if (!(i < rules.length)) {
+                  _context.next = 35;
+                  break;
+                }
+                rule = rules[i];
+                vt = this._getValidateType(rule);
+                Object.assign(rule, {
+                  label: fieldValue.label || "[\"".concat(fieldKey, "\"]")
+                });
+                if (!RuleValidatorHelper[vt]) {
+                  _context.next = 20;
+                  break;
+                }
+                result = RuleValidatorHelper[vt](rule, value, message);
+                if (!(result != null)) {
+                  _context.next = 20;
+                  break;
+                }
+                return _context.abrupt("break", 35);
+              case 20:
+                if (!rule.validateExpr) {
+                  _context.next = 26;
+                  break;
+                }
+                now = Date.now();
+                resultExpr = rule.validateExpr(value, allData, now);
+                if (!(resultExpr === false)) {
+                  _context.next = 26;
+                  break;
+                }
+                result = this._getMessage(rule, rule.errorMessage || this._message['default']);
+                return _context.abrupt("break", 35);
+              case 26:
+                if (!rule.validateFunction) {
+                  _context.next = 32;
+                  break;
+                }
+                _context.next = 29;
+                return this.validateFunction(rule, value, data, allData, vt);
+              case 29:
+                result = _context.sent;
+                if (!(result !== null)) {
+                  _context.next = 32;
+                  break;
+                }
+                return _context.abrupt("break", 35);
+              case 32:
+                i++;
+                _context.next = 12;
+                break;
+              case 35:
+                if (result !== null) {
+                  result = message.TAG + result;
+                }
+                return _context.abrupt("return", result);
+              case 37:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, this);
+      }));
+      function validateRule(_x, _x2, _x3, _x4, _x5) {
+        return _validateRule.apply(this, arguments);
+      }
+      return validateRule;
+    }()
+  }, {
+    key: "validateFunction",
+    value: function () {
+      var _validateFunction = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee2(rule, value, data, allData, vt) {
+        var result, callbackMessage, res;
+        return _regenerator.default.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                result = null;
+                _context2.prev = 1;
+                callbackMessage = null;
+                _context2.next = 5;
+                return rule.validateFunction(rule, value, allData || data, function (message) {
+                  callbackMessage = message;
+                });
+              case 5:
+                res = _context2.sent;
+                if (callbackMessage || typeof res === 'string' && res || res === false) {
+                  result = this._getMessage(rule, callbackMessage || res, vt);
+                }
+                _context2.next = 12;
+                break;
+              case 9:
+                _context2.prev = 9;
+                _context2.t0 = _context2["catch"](1);
+                result = this._getMessage(rule, _context2.t0.message, vt);
+              case 12:
+                return _context2.abrupt("return", result);
+              case 13:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this, [[1, 9]]);
+      }));
+      function validateFunction(_x6, _x7, _x8, _x9, _x10) {
+        return _validateFunction.apply(this, arguments);
+      }
+      return validateFunction;
+    }()
+  }, {
+    key: "_getMessage",
+    value: function _getMessage(rule, message, vt) {
+      return formatMessage(rule, message || rule.errorMessage || this._message[vt] || message['default']);
+    }
+  }, {
+    key: "_getValidateType",
+    value: function _getValidateType(rule) {
+      var result = '';
+      if (rule.required) {
+        result = 'required';
+      } else if (rule.format) {
+        result = 'format';
+      } else if (rule.arrayType) {
+        result = 'arrayTypeFormat';
+      } else if (rule.range) {
+        result = 'range';
+      } else if (rule.maximum !== undefined || rule.minimum !== undefined) {
+        result = 'rangeNumber';
+      } else if (rule.maxLength !== undefined || rule.minLength !== undefined) {
+        result = 'rangeLength';
+      } else if (rule.pattern) {
+        result = 'pattern';
+      } else if (rule.validateFunction) {
+        result = 'validateFunction';
+      }
+      return result;
+    }
+  }]);
+  return RuleValidator;
+}();
+var RuleValidatorHelper = {
+  required: function required(rule, value, message) {
+    if (rule.required && isEmptyValue(value, rule.format || (0, _typeof2.default)(value))) {
+      return formatMessage(rule, rule.errorMessage || message.required);
+    }
+    return null;
+  },
+  range: function range(rule, value, message) {
+    var range = rule.range,
+      errorMessage = rule.errorMessage;
+    var list = new Array(range.length);
+    for (var i = 0; i < range.length; i++) {
+      var item = range[i];
+      if (types.object(item) && item.value !== undefined) {
+        list[i] = item.value;
+      } else {
+        list[i] = item;
+      }
+    }
+    var result = false;
+    if (Array.isArray(value)) {
+      result = new Set(value.concat(list)).size === list.length;
+    } else {
+      if (list.indexOf(value) > -1) {
+        result = true;
+      }
+    }
+    if (!result) {
+      return formatMessage(rule, errorMessage || message['enum']);
+    }
+    return null;
+  },
+  rangeNumber: function rangeNumber(rule, value, message) {
+    if (!types.number(value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    var minimum = rule.minimum,
+      maximum = rule.maximum,
+      exclusiveMinimum = rule.exclusiveMinimum,
+      exclusiveMaximum = rule.exclusiveMaximum;
+    var min = exclusiveMinimum ? value <= minimum : value < minimum;
+    var max = exclusiveMaximum ? value >= maximum : value > maximum;
+    if (minimum !== undefined && min) {
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMinimum ? 'exclusiveMinimum' : 'minimum']);
+    } else if (maximum !== undefined && max) {
+      return formatMessage(rule, rule.errorMessage || message['number'][exclusiveMaximum ? 'exclusiveMaximum' : 'maximum']);
+    } else if (minimum !== undefined && maximum !== undefined && (min || max)) {
+      return formatMessage(rule, rule.errorMessage || message['number'].range);
+    }
+    return null;
+  },
+  rangeLength: function rangeLength(rule, value, message) {
+    if (!types.string(value) && !types.array(value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    var min = rule.minLength;
+    var max = rule.maxLength;
+    var val = value.length;
+    if (min !== undefined && val < min) {
+      return formatMessage(rule, rule.errorMessage || message['length'].minLength);
+    } else if (max !== undefined && val > max) {
+      return formatMessage(rule, rule.errorMessage || message['length'].maxLength);
+    } else if (min !== undefined && max !== undefined && (val < min || val > max)) {
+      return formatMessage(rule, rule.errorMessage || message['length'].range);
+    }
+    return null;
+  },
+  pattern: function pattern(rule, value, message) {
+    if (!types['pattern'](rule.pattern, value)) {
+      return formatMessage(rule, rule.errorMessage || message.pattern.mismatch);
+    }
+    return null;
+  },
+  format: function format(rule, value, message) {
+    var customTypes = Object.keys(types);
+    var format = FORMAT_MAPPING[rule.format] ? FORMAT_MAPPING[rule.format] : rule.format || rule.arrayType;
+    if (customTypes.indexOf(format) > -1) {
+      if (!types[format](value)) {
+        return formatMessage(rule, rule.errorMessage || message.typeError);
+      }
+    }
+    return null;
+  },
+  arrayTypeFormat: function arrayTypeFormat(rule, value, message) {
+    if (!Array.isArray(value)) {
+      return formatMessage(rule, rule.errorMessage || message.typeError);
+    }
+    for (var i = 0; i < value.length; i++) {
+      var element = value[i];
+      var formatResult = this.format(rule, element, message);
+      if (formatResult !== null) {
+        return formatResult;
+      }
+    }
+    return null;
+  }
+};
+var SchemaValidator = /*#__PURE__*/function (_RuleValidator) {
+  (0, _inherits2.default)(SchemaValidator, _RuleValidator);
+  var _super = _createSuper(SchemaValidator);
+  function SchemaValidator(schema, options) {
+    var _this;
+    (0, _classCallCheck2.default)(this, SchemaValidator);
+    _this = _super.call(this, SchemaValidator.message);
+    _this._schema = schema;
+    _this._options = options || null;
+    return _this;
+  }
+  (0, _createClass2.default)(SchemaValidator, [{
+    key: "updateSchema",
+    value: function updateSchema(schema) {
+      this._schema = schema;
+    }
+  }, {
+    key: "validate",
+    value: function () {
+      var _validate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee3(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context3.next = 5;
+                  break;
+                }
+                _context3.next = 4;
+                return this.invokeValidate(data, false, allData);
+              case 4:
+                result = _context3.sent;
+              case 5:
+                return _context3.abrupt("return", result.length ? result[0] : null);
+              case 6:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, this);
+      }));
+      function validate(_x11, _x12) {
+        return _validate.apply(this, arguments);
+      }
+      return validate;
+    }()
+  }, {
+    key: "validateAll",
+    value: function () {
+      var _validateAll = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee4(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context4.next = 5;
+                  break;
+                }
+                _context4.next = 4;
+                return this.invokeValidate(data, true, allData);
+              case 4:
+                result = _context4.sent;
+              case 5:
+                return _context4.abrupt("return", result);
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, this);
+      }));
+      function validateAll(_x13, _x14) {
+        return _validateAll.apply(this, arguments);
+      }
+      return validateAll;
+    }()
+  }, {
+    key: "validateUpdate",
+    value: function () {
+      var _validateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee5(data, allData) {
+        var result;
+        return _regenerator.default.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                result = this._checkFieldInSchema(data);
+                if (result) {
+                  _context5.next = 5;
+                  break;
+                }
+                _context5.next = 4;
+                return this.invokeValidateUpdate(data, false, allData);
+              case 4:
+                result = _context5.sent;
+              case 5:
+                return _context5.abrupt("return", result.length ? result[0] : null);
+              case 6:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, this);
+      }));
+      function validateUpdate(_x15, _x16) {
+        return _validateUpdate.apply(this, arguments);
+      }
+      return validateUpdate;
+    }()
+  }, {
+    key: "invokeValidate",
+    value: function () {
+      var _invokeValidate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee6(data, all, allData) {
+        var result, schema, key, value, errorMessage;
+        return _regenerator.default.wrap(function _callee6$(_context6) {
+          while (1) {
+            switch (_context6.prev = _context6.next) {
+              case 0:
+                result = [];
+                schema = this._schema;
+                _context6.t0 = _regenerator.default.keys(schema);
+              case 3:
+                if ((_context6.t1 = _context6.t0()).done) {
+                  _context6.next = 15;
+                  break;
+                }
+                key = _context6.t1.value;
+                value = schema[key];
+                _context6.next = 8;
+                return this.validateRule(key, value, data[key], data, allData);
+              case 8:
+                errorMessage = _context6.sent;
+                if (!(errorMessage != null)) {
+                  _context6.next = 13;
+                  break;
+                }
+                result.push({
+                  key: key,
+                  errorMessage: errorMessage
+                });
+                if (all) {
+                  _context6.next = 13;
+                  break;
+                }
+                return _context6.abrupt("break", 15);
+              case 13:
+                _context6.next = 3;
+                break;
+              case 15:
+                return _context6.abrupt("return", result);
+              case 16:
+              case "end":
+                return _context6.stop();
+            }
+          }
+        }, _callee6, this);
+      }));
+      function invokeValidate(_x17, _x18, _x19) {
+        return _invokeValidate.apply(this, arguments);
+      }
+      return invokeValidate;
+    }()
+  }, {
+    key: "invokeValidateUpdate",
+    value: function () {
+      var _invokeValidateUpdate = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee7(data, all, allData) {
+        var result, key, errorMessage;
+        return _regenerator.default.wrap(function _callee7$(_context7) {
+          while (1) {
+            switch (_context7.prev = _context7.next) {
+              case 0:
+                result = [];
+                _context7.t0 = _regenerator.default.keys(data);
+              case 2:
+                if ((_context7.t1 = _context7.t0()).done) {
+                  _context7.next = 13;
+                  break;
+                }
+                key = _context7.t1.value;
+                _context7.next = 6;
+                return this.validateRule(key, this._schema[key], data[key], data, allData);
+              case 6:
+                errorMessage = _context7.sent;
+                if (!(errorMessage != null)) {
+                  _context7.next = 11;
+                  break;
+                }
+                result.push({
+                  key: key,
+                  errorMessage: errorMessage
+                });
+                if (all) {
+                  _context7.next = 11;
+                  break;
+                }
+                return _context7.abrupt("break", 13);
+              case 11:
+                _context7.next = 2;
+                break;
+              case 13:
+                return _context7.abrupt("return", result);
+              case 14:
+              case "end":
+                return _context7.stop();
+            }
+          }
+        }, _callee7, this);
+      }));
+      function invokeValidateUpdate(_x20, _x21, _x22) {
+        return _invokeValidateUpdate.apply(this, arguments);
+      }
+      return invokeValidateUpdate;
+    }()
+  }, {
+    key: "_checkFieldInSchema",
+    value: function _checkFieldInSchema(data) {
+      var keys = Object.keys(data);
+      var keys2 = Object.keys(this._schema);
+      if (new Set(keys.concat(keys2)).size === keys2.length) {
+        return '';
+      }
+      var noExistFields = keys.filter(function (key) {
+        return keys2.indexOf(key) < 0;
+      });
+      var errorMessage = formatMessage({
+        field: JSON.stringify(noExistFields)
+      }, SchemaValidator.message.TAG + SchemaValidator.message['defaultInvalid']);
+      return [{
+        key: 'invalid',
+        errorMessage: errorMessage
+      }];
+    }
+  }]);
+  return SchemaValidator;
+}(RuleValidator);
+function Message() {
+  return {
+    TAG: "",
+    default: '验证错误',
+    defaultInvalid: '提交的字段{field}在数据库中并不存在',
+    validateFunction: '验证无效',
+    required: '{label}必填',
+    'enum': '{label}超出范围',
+    timestamp: '{label}格式无效',
+    whitespace: '{label}不能为空',
+    typeError: '{label}类型无效',
+    date: {
+      format: '{label}日期{value}格式无效',
+      parse: '{label}日期无法解析,{value}无效',
+      invalid: '{label}日期{value}无效'
+    },
+    length: {
+      minLength: '{label}长度不能少于{minLength}',
+      maxLength: '{label}长度不能超过{maxLength}',
+      range: '{label}必须介于{minLength}和{maxLength}之间'
+    },
+    number: {
+      minimum: '{label}不能小于{minimum}',
+      maximum: '{label}不能大于{maximum}',
+      exclusiveMinimum: '{label}不能小于等于{minimum}',
+      exclusiveMaximum: '{label}不能大于等于{maximum}',
+      range: '{label}必须介于{minimum}and{maximum}之间'
+    },
+    pattern: {
+      mismatch: '{label}格式不匹配'
+    }
+  };
+}
+SchemaValidator.message = new Message();
+var _default = SchemaValidator;
+exports.default = _default;
+
+/***/ }),
+/* 799 */,
+/* 800 */,
+/* 801 */,
+/* 802 */,
+/* 803 */,
+/* 804 */,
+/* 805 */,
+/* 806 */,
+/* 807 */,
+/* 808 */,
+/* 809 */,
+/* 810 */,
+/* 811 */,
+/* 812 */,
+/* 813 */
+/*!*********************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-file-picker/components/uni-file-picker/choose-and-upload-file.js ***!
+  \*********************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni, wx, uniCloud) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.chooseAndUploadFile = chooseAndUploadFile;
+exports.uploadCloudFiles = uploadCloudFiles;
+var ERR_MSG_OK = 'chooseAndUploadFile:ok';
+var ERR_MSG_FAIL = 'chooseAndUploadFile:fail';
+function chooseImage(opts) {
+  var count = opts.count,
+    _opts$sizeType = opts.sizeType,
+    sizeType = _opts$sizeType === void 0 ? ['original', 'compressed'] : _opts$sizeType,
+    _opts$sourceType = opts.sourceType,
+    sourceType = _opts$sourceType === void 0 ? ['album', 'camera'] : _opts$sourceType,
+    extension = opts.extension;
+  return new Promise(function (resolve, reject) {
+    uni.chooseImage({
+      count: count,
+      sizeType: sizeType,
+      sourceType: sourceType,
+      extension: extension,
+      success: function success(res) {
+        resolve(normalizeChooseAndUploadFileRes(res, 'image'));
+      },
+      fail: function fail(res) {
+        reject({
+          errMsg: res.errMsg.replace('chooseImage:fail', ERR_MSG_FAIL)
+        });
+      }
+    });
+  });
+}
+function chooseVideo(opts) {
+  var camera = opts.camera,
+    compressed = opts.compressed,
+    maxDuration = opts.maxDuration,
+    _opts$sourceType2 = opts.sourceType,
+    sourceType = _opts$sourceType2 === void 0 ? ['album', 'camera'] : _opts$sourceType2,
+    extension = opts.extension;
+  return new Promise(function (resolve, reject) {
+    uni.chooseVideo({
+      camera: camera,
+      compressed: compressed,
+      maxDuration: maxDuration,
+      sourceType: sourceType,
+      extension: extension,
+      success: function success(res) {
+        var tempFilePath = res.tempFilePath,
+          duration = res.duration,
+          size = res.size,
+          height = res.height,
+          width = res.width;
+        resolve(normalizeChooseAndUploadFileRes({
+          errMsg: 'chooseVideo:ok',
+          tempFilePaths: [tempFilePath],
+          tempFiles: [{
+            name: res.tempFile && res.tempFile.name || '',
+            path: tempFilePath,
+            size: size,
+            type: res.tempFile && res.tempFile.type || '',
+            width: width,
+            height: height,
+            duration: duration,
+            fileType: 'video',
+            cloudPath: ''
+          }]
+        }, 'video'));
+      },
+      fail: function fail(res) {
+        reject({
+          errMsg: res.errMsg.replace('chooseVideo:fail', ERR_MSG_FAIL)
+        });
+      }
+    });
+  });
+}
+function chooseAll(opts) {
+  var count = opts.count,
+    extension = opts.extension;
+  return new Promise(function (resolve, reject) {
+    var chooseFile = uni.chooseFile;
+    if (typeof wx !== 'undefined' && typeof wx.chooseMessageFile === 'function') {
+      chooseFile = wx.chooseMessageFile;
+    }
+    if (typeof chooseFile !== 'function') {
+      return reject({
+        errMsg: ERR_MSG_FAIL + ' 请指定 type 类型，该平台仅支持选择 image 或 video。'
+      });
+    }
+    chooseFile({
+      type: 'all',
+      count: count,
+      extension: extension,
+      success: function success(res) {
+        resolve(normalizeChooseAndUploadFileRes(res));
+      },
+      fail: function fail(res) {
+        reject({
+          errMsg: res.errMsg.replace('chooseFile:fail', ERR_MSG_FAIL)
+        });
+      }
+    });
+  });
+}
+function normalizeChooseAndUploadFileRes(res, fileType) {
+  res.tempFiles.forEach(function (item, index) {
+    if (!item.name) {
+      item.name = item.path.substring(item.path.lastIndexOf('/') + 1);
+    }
+    if (fileType) {
+      item.fileType = fileType;
+    }
+    item.cloudPath = Date.now() + '_' + index + item.name.substring(item.name.lastIndexOf('.'));
+  });
+  if (!res.tempFilePaths) {
+    res.tempFilePaths = res.tempFiles.map(function (file) {
+      return file.path;
+    });
+  }
+  return res;
+}
+function uploadCloudFiles(files) {
+  var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
+  var _onUploadProgress = arguments.length > 2 ? arguments[2] : undefined;
+  files = JSON.parse(JSON.stringify(files));
+  var len = files.length;
+  var count = 0;
+  var self = this;
+  return new Promise(function (resolve) {
+    while (count < max) {
+      next();
+    }
+    function next() {
+      var cur = count++;
+      if (cur >= len) {
+        !files.find(function (item) {
+          return !item.url && !item.errMsg;
+        }) && resolve(files);
+        return;
+      }
+      var fileItem = files[cur];
+      var index = self.files.findIndex(function (v) {
+        return v.uuid === fileItem.uuid;
+      });
+      fileItem.url = '';
+      delete fileItem.errMsg;
+      uniCloud.uploadFile({
+        filePath: fileItem.path,
+        cloudPath: fileItem.cloudPath,
+        fileType: fileItem.fileType,
+        onUploadProgress: function onUploadProgress(res) {
+          res.index = index;
+          _onUploadProgress && _onUploadProgress(res);
+        }
+      }).then(function (res) {
+        fileItem.url = res.fileID;
+        fileItem.index = index;
+        if (cur < len) {
+          next();
+        }
+      }).catch(function (res) {
+        fileItem.errMsg = res.errMsg || res.message;
+        fileItem.index = index;
+        if (cur < len) {
+          next();
+        }
+      });
+    }
+  });
+}
+function uploadFiles(choosePromise, _ref) {
+  var onChooseFile = _ref.onChooseFile,
+    onUploadProgress = _ref.onUploadProgress;
+  return choosePromise.then(function (res) {
+    if (onChooseFile) {
+      var customChooseRes = onChooseFile(res);
+      if (typeof customChooseRes !== 'undefined') {
+        return Promise.resolve(customChooseRes).then(function (chooseRes) {
+          return typeof chooseRes === 'undefined' ? res : chooseRes;
+        });
+      }
+    }
+    return res;
+  }).then(function (res) {
+    if (res === false) {
+      return {
+        errMsg: ERR_MSG_OK,
+        tempFilePaths: [],
+        tempFiles: []
+      };
+    }
+    return res;
+  });
+}
+function chooseAndUploadFile() {
+  var opts = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
+    type: 'all'
+  };
+  if (opts.type === 'image') {
+    return uploadFiles(chooseImage(opts), opts);
+  } else if (opts.type === 'video') {
+    return uploadFiles(chooseVideo(opts), opts);
+  }
+  return uploadFiles(chooseAll(opts), opts);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/wx.js */ 1)["default"], __webpack_require__(/*! ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/uni-cloud/dist/index.js */ 27)["default"]))
+
+/***/ }),
+/* 814 */
+/*!****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-file-picker/components/uni-file-picker/utils.js ***!
+  \****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.get_files_and_is_max = exports.get_file_info = exports.get_file_ext = exports.get_file_data = exports.get_extname = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+/**
+ * 获取文件名和后缀
+ * @param {String} name
+ */
+var get_file_ext = function get_file_ext(name) {
+  var last_len = name.lastIndexOf('.');
+  var len = name.length;
+  return {
+    name: name.substring(0, last_len),
+    ext: name.substring(last_len + 1, len)
+  };
+};
+
+/**
+ * 获取扩展名
+ * @param {Array} fileExtname
+ */
+exports.get_file_ext = get_file_ext;
+var get_extname = function get_extname(fileExtname) {
+  if (!Array.isArray(fileExtname)) {
+    var extname = fileExtname.replace(/(\[|\])/g, '');
+    return extname.split(',');
+  } else {
+    return fileExtname;
+  }
+  return [];
+};
+
+/**
+ * 获取文件和检测是否可选
+ */
+exports.get_extname = get_extname;
+var get_files_and_is_max = function get_files_and_is_max(res, _extname) {
+  var filePaths = [];
+  var files = [];
+  if (!_extname || _extname.length === 0) {
+    return {
+      filePaths: filePaths,
+      files: files
+    };
+  }
+  res.tempFiles.forEach(function (v) {
+    var fileFullName = get_file_ext(v.name);
+    var extname = fileFullName.ext.toLowerCase();
+    if (_extname.indexOf(extname) !== -1) {
+      files.push(v);
+      filePaths.push(v.path);
+    }
+  });
+  if (files.length !== res.tempFiles.length) {
+    uni.showToast({
+      title: "\u5F53\u524D\u9009\u62E9\u4E86".concat(res.tempFiles.length, "\u4E2A\u6587\u4EF6 \uFF0C").concat(res.tempFiles.length - files.length, " \u4E2A\u6587\u4EF6\u683C\u5F0F\u4E0D\u6B63\u786E"),
+      icon: 'none',
+      duration: 5000
+    });
+  }
+  return {
+    filePaths: filePaths,
+    files: files
+  };
+};
+
+/**
+ * 获取图片信息
+ * @param {Object} filepath
+ */
+exports.get_files_and_is_max = get_files_and_is_max;
+var get_file_info = function get_file_info(filepath) {
+  return new Promise(function (resolve, reject) {
+    uni.getImageInfo({
+      src: filepath,
+      success: function success(res) {
+        resolve(res);
+      },
+      fail: function fail(err) {
+        reject(err);
+      }
+    });
+  });
+};
+/**
+ * 获取封装数据
+ */
+exports.get_file_info = get_file_info;
+var get_file_data = /*#__PURE__*/function () {
+  var _ref = (0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee(files) {
+    var type,
+      fileFullName,
+      extname,
+      filedata,
+      imageinfo,
+      _args = arguments;
+    return _regenerator.default.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            type = _args.length > 1 && _args[1] !== undefined ? _args[1] : 'image';
+            // 最终需要上传数据库的数据
+            fileFullName = get_file_ext(files.name);
+            extname = fileFullName.ext.toLowerCase();
+            filedata = {
+              name: files.name,
+              uuid: files.uuid,
+              extname: extname || '',
+              cloudPath: files.cloudPath,
+              fileType: files.fileType,
+              url: files.path || files.path,
+              size: files.size,
+              //单位是字节
+              image: {},
+              path: files.path,
+              video: {}
+            };
+            if (!(type === 'image')) {
+              _context.next = 14;
+              break;
+            }
+            _context.next = 7;
+            return get_file_info(files.path);
+          case 7:
+            imageinfo = _context.sent;
+            delete filedata.video;
+            filedata.image.width = imageinfo.width;
+            filedata.image.height = imageinfo.height;
+            filedata.image.location = imageinfo.path;
+            _context.next = 15;
+            break;
+          case 14:
+            delete filedata.image;
+          case 15:
+            return _context.abrupt("return", filedata);
+          case 16:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+  return function get_file_data(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+exports.get_file_data = get_file_data;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 815 */,
+/* 816 */,
+/* 817 */,
+/* 818 */,
+/* 819 */,
+/* 820 */,
+/* 821 */,
+/* 822 */,
+/* 823 */,
+/* 824 */,
+/* 825 */,
+/* 826 */,
+/* 827 */,
+/* 828 */,
+/* 829 */,
+/* 830 */,
+/* 831 */,
+/* 832 */,
+/* 833 */,
+/* 834 */,
+/* 835 */,
+/* 836 */,
+/* 837 */,
+/* 838 */,
+/* 839 */,
+/* 840 */,
+/* 841 */,
+/* 842 */,
+/* 843 */,
+/* 844 */,
+/* 845 */,
+/* 846 */,
+/* 847 */,
+/* 848 */,
+/* 849 */,
+/* 850 */,
+/* 851 */,
+/* 852 */,
+/* 853 */,
+/* 854 */,
+/* 855 */,
+/* 856 */,
+/* 857 */,
+/* 858 */,
+/* 859 */,
+/* 860 */,
+/* 861 */,
+/* 862 */,
+/* 863 */,
+/* 864 */
+/*!*****************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/index.js ***!
+  \*****************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 865));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 866));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 867));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 865 */
+/*!****************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/en.json ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: uni-datetime-picker.selectDate, uni-datetime-picker.selectTime, uni-datetime-picker.selectDateTime, uni-datetime-picker.startDate, uni-datetime-picker.endDate, uni-datetime-picker.startTime, uni-datetime-picker.endTime, uni-datetime-picker.ok, uni-datetime-picker.clear, uni-datetime-picker.cancel, uni-calender.MON, uni-calender.TUE, uni-calender.WED, uni-calender.THU, uni-calender.FRI, uni-calender.SAT, uni-calender.SUN, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"select date\",\"uni-datetime-picker.selectTime\":\"select time\",\"uni-datetime-picker.selectDateTime\":\"select datetime\",\"uni-datetime-picker.startDate\":\"start date\",\"uni-datetime-picker.endDate\":\"end date\",\"uni-datetime-picker.startTime\":\"start time\",\"uni-datetime-picker.endTime\":\"end time\",\"uni-datetime-picker.ok\":\"ok\",\"uni-datetime-picker.clear\":\"clear\",\"uni-datetime-picker.cancel\":\"cancel\",\"uni-calender.MON\":\"MON\",\"uni-calender.TUE\":\"TUE\",\"uni-calender.WED\":\"WED\",\"uni-calender.THU\":\"THU\",\"uni-calender.FRI\":\"FRI\",\"uni-calender.SAT\":\"SAT\",\"uni-calender.SUN\":\"SUN\"}");
+
+/***/ }),
+/* 866 */
+/*!*********************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hans.json ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: uni-datetime-picker.selectDate, uni-datetime-picker.selectTime, uni-datetime-picker.selectDateTime, uni-datetime-picker.startDate, uni-datetime-picker.endDate, uni-datetime-picker.startTime, uni-datetime-picker.endTime, uni-datetime-picker.ok, uni-datetime-picker.clear, uni-datetime-picker.cancel, uni-calender.SUN, uni-calender.MON, uni-calender.TUE, uni-calender.WED, uni-calender.THU, uni-calender.FRI, uni-calender.SAT, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"选择日期\",\"uni-datetime-picker.selectTime\":\"选择时间\",\"uni-datetime-picker.selectDateTime\":\"选择日期时间\",\"uni-datetime-picker.startDate\":\"开始日期\",\"uni-datetime-picker.endDate\":\"结束日期\",\"uni-datetime-picker.startTime\":\"开始时间\",\"uni-datetime-picker.endTime\":\"结束时间\",\"uni-datetime-picker.ok\":\"确定\",\"uni-datetime-picker.clear\":\"清除\",\"uni-datetime-picker.cancel\":\"取消\",\"uni-calender.SUN\":\"日\",\"uni-calender.MON\":\"一\",\"uni-calender.TUE\":\"二\",\"uni-calender.WED\":\"三\",\"uni-calender.THU\":\"四\",\"uni-calender.FRI\":\"五\",\"uni-calender.SAT\":\"六\"}");
+
+/***/ }),
+/* 867 */
+/*!*********************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-datetime-picker/components/uni-datetime-picker/i18n/zh-Hant.json ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: uni-datetime-picker.selectDate, uni-datetime-picker.selectTime, uni-datetime-picker.selectDateTime, uni-datetime-picker.startDate, uni-datetime-picker.endDate, uni-datetime-picker.startTime, uni-datetime-picker.endTime, uni-datetime-picker.ok, uni-datetime-picker.clear, uni-datetime-picker.cancel, uni-calender.SUN, uni-calender.MON, uni-calender.TUE, uni-calender.WED, uni-calender.THU, uni-calender.FRI, uni-calender.SAT, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-datetime-picker.selectDate\":\"選擇日期\",\"uni-datetime-picker.selectTime\":\"選擇時間\",\"uni-datetime-picker.selectDateTime\":\"選擇日期時間\",\"uni-datetime-picker.startDate\":\"開始日期\",\"uni-datetime-picker.endDate\":\"結束日期\",\"uni-datetime-picker.startTime\":\"開始时间\",\"uni-datetime-picker.endTime\":\"結束时间\",\"uni-datetime-picker.ok\":\"確定\",\"uni-datetime-picker.clear\":\"清除\",\"uni-datetime-picker.cancel\":\"取消\",\"uni-calender.SUN\":\"日\",\"uni-calender.MON\":\"一\",\"uni-calender.TUE\":\"二\",\"uni-calender.WED\":\"三\",\"uni-calender.THU\":\"四\",\"uni-calender.FRI\":\"五\",\"uni-calender.SAT\":\"六\"}");
+
+/***/ }),
+/* 868 */,
+/* 869 */,
+/* 870 */,
+/* 871 */,
+/* 872 */,
+/* 873 */,
+/* 874 */,
+/* 875 */
+/*!**************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-badge/props.js ***!
+  \**************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否显示圆点
+    isDot: {
+      type: Boolean,
+      default: uni.$u.props.badge.isDot
+    },
+    // 显示的内容
+    value: {
+      type: [Number, String],
+      default: uni.$u.props.badge.value
+    },
+    // 是否显示
+    show: {
+      type: Boolean,
+      default: uni.$u.props.badge.show
+    },
+    // 最大值，超过最大值会显示 '{max}+'
+    max: {
+      type: [Number, String],
+      default: uni.$u.props.badge.max
+    },
+    // 主题类型，error|warning|success|primary
+    type: {
+      type: String,
+      default: uni.$u.props.badge.type
+    },
+    // 当数值为 0 时，是否展示 Badge
+    showZero: {
+      type: Boolean,
+      default: uni.$u.props.badge.showZero
+    },
+    // 背景颜色，优先级比type高，如设置，type参数会失效
+    bgColor: {
+      type: [String, null],
+      default: uni.$u.props.badge.bgColor
+    },
+    // 字体颜色
+    color: {
+      type: [String, null],
+      default: uni.$u.props.badge.color
+    },
+    // 徽标形状，circle-四角均为圆角，horn-左下角为直角
+    shape: {
+      type: String,
+      default: uni.$u.props.badge.shape
+    },
+    // 设置数字的显示方式，overflow|ellipsis|limit
+    // overflow会根据max字段判断，超出显示`${max}+`
+    // ellipsis会根据max判断，超出显示`${max}...`
+    // limit会依据1000作为判断条件，超出1000，显示`${value/1000}K`，比如2.2k、3.34w，最多保留2位小数
+    numberType: {
+      type: String,
+      default: uni.$u.props.badge.numberType
+    },
+    // 设置badge的位置偏移，格式为 [x, y]，也即设置的为top和right的值，absolute为true时有效
+    offset: {
+      type: Array,
+      default: uni.$u.props.badge.offset
+    },
+    // 是否反转背景和字体颜色
+    inverted: {
+      type: Boolean,
+      default: uni.$u.props.badge.inverted
+    },
+    // 是否绝对定位
+    absolute: {
+      type: Boolean,
+      default: uni.$u.props.badge.absolute
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 876 */,
+/* 877 */,
+/* 878 */,
+/* 879 */,
+/* 880 */,
+/* 881 */,
+/* 882 */,
+/* 883 */
+/*!*******************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-transition/props.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否展示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.transition.show
+    },
+    // 使用的动画模式
+    mode: {
+      type: String,
+      default: uni.$u.props.transition.mode
+    },
+    // 动画的执行时间，单位ms
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.transition.duration
+    },
+    // 使用的动画过渡函数
+    timingFunction: {
+      type: String,
+      default: uni.$u.props.transition.timingFunction
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 884 */
+/*!************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-transition/transition.js ***!
+  \************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _regenerator = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/regenerator */ 28));
+var _asyncToGenerator2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/asyncToGenerator */ 31));
+var _nvueAniMap = _interopRequireDefault(__webpack_require__(/*! ./nvue.ani-map.js */ 885));
+// 定义一个一定时间后自动成功的promise，让调用nextTick方法处，进入下一个then方法
+var nextTick = function nextTick() {
+  return new Promise(function (resolve) {
+    return setTimeout(resolve, 1000 / 50);
+  });
+};
+// nvue动画模块实现细节抽离在外部文件
+
+// 定义类名，通过给元素动态切换类名，赋予元素一定的css动画样式
+var getClassNames = function getClassNames(name) {
+  return {
+    enter: "u-".concat(name, "-enter u-").concat(name, "-enter-active"),
+    'enter-to': "u-".concat(name, "-enter-to u-").concat(name, "-enter-active"),
+    leave: "u-".concat(name, "-leave u-").concat(name, "-leave-active"),
+    'leave-to': "u-".concat(name, "-leave-to u-").concat(name, "-leave-active")
+  };
+};
+var _default = {
+  methods: {
+    // 组件被点击发出事件
+    clickHandler: function clickHandler() {
+      this.$emit('click');
+    },
+    // vue版本的组件进场处理
+    vueEnter: function vueEnter() {
+      var _this = this;
+      // 动画进入时的类名
+      var classNames = getClassNames(this.mode);
+      // 定义状态和发出动画进入前事件
+      this.status = 'enter';
+      this.$emit('beforeEnter');
+      this.inited = true;
+      this.display = true;
+      this.classes = classNames.enter;
+      this.$nextTick( /*#__PURE__*/(0, _asyncToGenerator2.default)( /*#__PURE__*/_regenerator.default.mark(function _callee() {
+        return _regenerator.default.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // 标识动画尚未结束
+                _this.$emit('enter');
+                _this.transitionEnded = false;
+                // 组件动画进入后触发的事件
+                _this.$emit('afterEnter');
+                // 赋予组件enter-to类名
+                _this.classes = classNames['enter-to'];
+              case 4:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      })));
+    },
+    // 动画离场处理
+    vueLeave: function vueLeave() {
+      var _this2 = this;
+      // 如果不是展示状态，无需执行逻辑
+      if (!this.display) return;
+      var classNames = getClassNames(this.mode);
+      // 标记离开状态和发出事件
+      this.status = 'leave';
+      this.$emit('beforeLeave');
+      // 获得类名
+      this.classes = classNames.leave;
+      this.$nextTick(function () {
+        // 动画正在离场的状态
+        _this2.transitionEnded = false;
+        _this2.$emit('leave');
+        // 组件执行动画，到了执行的执行时间后，执行一些额外处理
+        setTimeout(_this2.onTransitionEnd, _this2.duration);
+        _this2.classes = classNames['leave-to'];
+      });
+    },
+    // 完成过渡后触发
+    onTransitionEnd: function onTransitionEnd() {
+      // 如果已经是结束的状态，无需再处理
+      if (this.transitionEnded) return;
+      this.transitionEnded = true;
+      // 发出组件动画执行后的事件
+      this.$emit(this.status === 'leave' ? 'afterLeave' : 'afterEnter');
+      if (!this.show && this.display) {
+        this.display = false;
+        this.inited = false;
+      }
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 885 */
+/*!**************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-transition/nvue.ani-map.js ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  fade: {
+    enter: {
+      opacity: 0
+    },
+    'enter-to': {
+      opacity: 1
+    },
+    leave: {
+      opacity: 1
+    },
+    'leave-to': {
+      opacity: 0
+    }
+  },
+  'fade-up': {
+    enter: {
+      opacity: 0,
+      transform: 'translateY(100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateY(100%)'
+    }
+  },
+  'fade-down': {
+    enter: {
+      opacity: 0,
+      transform: 'translateY(-100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateY(-100%)'
+    }
+  },
+  'fade-left': {
+    enter: {
+      opacity: 0,
+      transform: 'translateX(-100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateX(-100%)'
+    }
+  },
+  'fade-right': {
+    enter: {
+      opacity: 0,
+      transform: 'translateX(100%)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'translateX(100%)'
+    }
+  },
+  'slide-up': {
+    enter: {
+      transform: 'translateY(100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateY(100%)'
+    }
+  },
+  'slide-down': {
+    enter: {
+      transform: 'translateY(-100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateY(-100%)'
+    }
+  },
+  'slide-left': {
+    enter: {
+      transform: 'translateX(-100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateX(-100%)'
+    }
+  },
+  'slide-right': {
+    enter: {
+      transform: 'translateX(100%)'
+    },
+    'enter-to': {
+      transform: 'translateY(0)'
+    },
+    leave: {
+      transform: 'translateY(0)'
+    },
+    'leave-to': {
+      transform: 'translateX(100%)'
+    }
+  },
+  zoom: {
+    enter: {
+      transform: 'scale(0.95)'
+    },
+    'enter-to': {
+      transform: 'scale(1)'
+    },
+    leave: {
+      transform: 'scale(1)'
+    },
+    'leave-to': {
+      transform: 'scale(0.95)'
+    }
+  },
+  'fade-zoom': {
+    enter: {
+      opacity: 0,
+      transform: 'scale(0.95)'
+    },
+    'enter-to': {
+      opacity: 1,
+      transform: 'scale(1)'
+    },
+    leave: {
+      opacity: 1,
+      transform: 'scale(1)'
+    },
+    'leave-to': {
+      opacity: 0,
+      transform: 'scale(0.95)'
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 886 */,
+/* 887 */,
+/* 888 */,
+/* 889 */,
+/* 890 */,
+/* 891 */,
+/* 892 */,
+/* 893 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-icon/icons.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  'uicon-level': "\uE693",
+  'uicon-column-line': "\uE68E",
+  'uicon-checkbox-mark': "\uE807",
+  'uicon-folder': "\uE7F5",
+  'uicon-movie': "\uE7F6",
+  'uicon-star-fill': "\uE669",
+  'uicon-star': "\uE65F",
+  'uicon-phone-fill': "\uE64F",
+  'uicon-phone': "\uE622",
+  'uicon-apple-fill': "\uE881",
+  'uicon-chrome-circle-fill': "\uE885",
+  'uicon-backspace': "\uE67B",
+  'uicon-attach': "\uE632",
+  'uicon-cut': "\uE948",
+  'uicon-empty-car': "\uE602",
+  'uicon-empty-coupon': "\uE682",
+  'uicon-empty-address': "\uE646",
+  'uicon-empty-favor': "\uE67C",
+  'uicon-empty-permission': "\uE686",
+  'uicon-empty-news': "\uE687",
+  'uicon-empty-search': "\uE664",
+  'uicon-github-circle-fill': "\uE887",
+  'uicon-rmb': "\uE608",
+  'uicon-person-delete-fill': "\uE66A",
+  'uicon-reload': "\uE788",
+  'uicon-order': "\uE68F",
+  'uicon-server-man': "\uE6BC",
+  'uicon-search': "\uE62A",
+  'uicon-fingerprint': "\uE955",
+  'uicon-more-dot-fill': "\uE630",
+  'uicon-scan': "\uE662",
+  'uicon-share-square': "\uE60B",
+  'uicon-map': "\uE61D",
+  'uicon-map-fill': "\uE64E",
+  'uicon-tags': "\uE629",
+  'uicon-tags-fill': "\uE651",
+  'uicon-bookmark-fill': "\uE63B",
+  'uicon-bookmark': "\uE60A",
+  'uicon-eye': "\uE613",
+  'uicon-eye-fill': "\uE641",
+  'uicon-mic': "\uE64A",
+  'uicon-mic-off': "\uE649",
+  'uicon-calendar': "\uE66E",
+  'uicon-calendar-fill': "\uE634",
+  'uicon-trash': "\uE623",
+  'uicon-trash-fill': "\uE658",
+  'uicon-play-left': "\uE66D",
+  'uicon-play-right': "\uE610",
+  'uicon-minus': "\uE618",
+  'uicon-plus': "\uE62D",
+  'uicon-info': "\uE653",
+  'uicon-info-circle': "\uE7D2",
+  'uicon-info-circle-fill': "\uE64B",
+  'uicon-question': "\uE715",
+  'uicon-error': "\uE6D3",
+  'uicon-close': "\uE685",
+  'uicon-checkmark': "\uE6A8",
+  'uicon-android-circle-fill': "\uE67E",
+  'uicon-android-fill': "\uE67D",
+  'uicon-ie': "\uE87B",
+  'uicon-IE-circle-fill': "\uE889",
+  'uicon-google': "\uE87A",
+  'uicon-google-circle-fill': "\uE88A",
+  'uicon-setting-fill': "\uE872",
+  'uicon-setting': "\uE61F",
+  'uicon-minus-square-fill': "\uE855",
+  'uicon-plus-square-fill': "\uE856",
+  'uicon-heart': "\uE7DF",
+  'uicon-heart-fill': "\uE851",
+  'uicon-camera': "\uE7D7",
+  'uicon-camera-fill': "\uE870",
+  'uicon-more-circle': "\uE63E",
+  'uicon-more-circle-fill': "\uE645",
+  'uicon-chat': "\uE620",
+  'uicon-chat-fill': "\uE61E",
+  'uicon-bag-fill': "\uE617",
+  'uicon-bag': "\uE619",
+  'uicon-error-circle-fill': "\uE62C",
+  'uicon-error-circle': "\uE624",
+  'uicon-close-circle': "\uE63F",
+  'uicon-close-circle-fill': "\uE637",
+  'uicon-checkmark-circle': "\uE63D",
+  'uicon-checkmark-circle-fill': "\uE635",
+  'uicon-question-circle-fill': "\uE666",
+  'uicon-question-circle': "\uE625",
+  'uicon-share': "\uE631",
+  'uicon-share-fill': "\uE65E",
+  'uicon-shopping-cart': "\uE621",
+  'uicon-shopping-cart-fill': "\uE65D",
+  'uicon-bell': "\uE609",
+  'uicon-bell-fill': "\uE640",
+  'uicon-list': "\uE650",
+  'uicon-list-dot': "\uE616",
+  'uicon-zhihu': "\uE6BA",
+  'uicon-zhihu-circle-fill': "\uE709",
+  'uicon-zhifubao': "\uE6B9",
+  'uicon-zhifubao-circle-fill': "\uE6B8",
+  'uicon-weixin-circle-fill': "\uE6B1",
+  'uicon-weixin-fill': "\uE6B2",
+  'uicon-twitter-circle-fill': "\uE6AB",
+  'uicon-twitter': "\uE6AA",
+  'uicon-taobao-circle-fill': "\uE6A7",
+  'uicon-taobao': "\uE6A6",
+  'uicon-weibo-circle-fill': "\uE6A5",
+  'uicon-weibo': "\uE6A4",
+  'uicon-qq-fill': "\uE6A1",
+  'uicon-qq-circle-fill': "\uE6A0",
+  'uicon-moments-circel-fill': "\uE69A",
+  'uicon-moments': "\uE69B",
+  'uicon-qzone': "\uE695",
+  'uicon-qzone-circle-fill': "\uE696",
+  'uicon-baidu-circle-fill': "\uE680",
+  'uicon-baidu': "\uE681",
+  'uicon-facebook-circle-fill': "\uE68A",
+  'uicon-facebook': "\uE689",
+  'uicon-car': "\uE60C",
+  'uicon-car-fill': "\uE636",
+  'uicon-warning-fill': "\uE64D",
+  'uicon-warning': "\uE694",
+  'uicon-clock-fill': "\uE638",
+  'uicon-clock': "\uE60F",
+  'uicon-edit-pen': "\uE612",
+  'uicon-edit-pen-fill': "\uE66B",
+  'uicon-email': "\uE611",
+  'uicon-email-fill': "\uE642",
+  'uicon-minus-circle': "\uE61B",
+  'uicon-minus-circle-fill': "\uE652",
+  'uicon-plus-circle': "\uE62E",
+  'uicon-plus-circle-fill': "\uE661",
+  'uicon-file-text': "\uE663",
+  'uicon-file-text-fill': "\uE665",
+  'uicon-pushpin': "\uE7E3",
+  'uicon-pushpin-fill': "\uE86E",
+  'uicon-grid': "\uE673",
+  'uicon-grid-fill': "\uE678",
+  'uicon-play-circle': "\uE647",
+  'uicon-play-circle-fill': "\uE655",
+  'uicon-pause-circle-fill': "\uE654",
+  'uicon-pause': "\uE8FA",
+  'uicon-pause-circle': "\uE643",
+  'uicon-eye-off': "\uE648",
+  'uicon-eye-off-outline': "\uE62B",
+  'uicon-gift-fill': "\uE65C",
+  'uicon-gift': "\uE65B",
+  'uicon-rmb-circle-fill': "\uE657",
+  'uicon-rmb-circle': "\uE677",
+  'uicon-kefu-ermai': "\uE656",
+  'uicon-server-fill': "\uE751",
+  'uicon-coupon-fill': "\uE8C4",
+  'uicon-coupon': "\uE8AE",
+  'uicon-integral': "\uE704",
+  'uicon-integral-fill': "\uE703",
+  'uicon-home-fill': "\uE964",
+  'uicon-home': "\uE965",
+  'uicon-hourglass-half-fill': "\uE966",
+  'uicon-hourglass': "\uE967",
+  'uicon-account': "\uE628",
+  'uicon-plus-people-fill': "\uE626",
+  'uicon-minus-people-fill': "\uE615",
+  'uicon-account-fill': "\uE614",
+  'uicon-thumb-down-fill': "\uE726",
+  'uicon-thumb-down': "\uE727",
+  'uicon-thumb-up': "\uE733",
+  'uicon-thumb-up-fill': "\uE72F",
+  'uicon-lock-fill': "\uE979",
+  'uicon-lock-open': "\uE973",
+  'uicon-lock-opened-fill': "\uE974",
+  'uicon-lock': "\uE97A",
+  'uicon-red-packet-fill': "\uE690",
+  'uicon-photo-fill': "\uE98B",
+  'uicon-photo': "\uE98D",
+  'uicon-volume-off-fill': "\uE659",
+  'uicon-volume-off': "\uE644",
+  'uicon-volume-fill': "\uE670",
+  'uicon-volume': "\uE633",
+  'uicon-red-packet': "\uE691",
+  'uicon-download': "\uE63C",
+  'uicon-arrow-up-fill': "\uE6B0",
+  'uicon-arrow-down-fill': "\uE600",
+  'uicon-play-left-fill': "\uE675",
+  'uicon-play-right-fill': "\uE676",
+  'uicon-rewind-left-fill': "\uE679",
+  'uicon-rewind-right-fill': "\uE67A",
+  'uicon-arrow-downward': "\uE604",
+  'uicon-arrow-leftward': "\uE601",
+  'uicon-arrow-rightward': "\uE603",
+  'uicon-arrow-upward': "\uE607",
+  'uicon-arrow-down': "\uE60D",
+  'uicon-arrow-right': "\uE605",
+  'uicon-arrow-left': "\uE60E",
+  'uicon-arrow-up': "\uE606",
+  'uicon-skip-back-left': "\uE674",
+  'uicon-skip-forward-right': "\uE672",
+  'uicon-rewind-right': "\uE66F",
+  'uicon-rewind-left': "\uE671",
+  'uicon-arrow-right-double': "\uE68D",
+  'uicon-arrow-left-double': "\uE68C",
+  'uicon-wifi-off': "\uE668",
+  'uicon-wifi': "\uE667",
+  'uicon-empty-data': "\uE62F",
+  'uicon-empty-history': "\uE684",
+  'uicon-empty-list': "\uE68B",
+  'uicon-empty-page': "\uE627",
+  'uicon-empty-order': "\uE639",
+  'uicon-man': "\uE697",
+  'uicon-woman': "\uE69C",
+  'uicon-man-add': "\uE61C",
+  'uicon-man-add-fill': "\uE64C",
+  'uicon-man-delete': "\uE61A",
+  'uicon-man-delete-fill': "\uE66A",
+  'uicon-zh': "\uE70A",
+  'uicon-en': "\uE692"
+};
+exports.default = _default;
+
+/***/ }),
+/* 894 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-icon/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 图标类名
+    name: {
+      type: String,
+      default: uni.$u.props.icon.name
+    },
+    // 图标颜色，可接受主题色
+    color: {
+      type: String,
+      default: uni.$u.props.icon.color
+    },
+    // 字体大小，单位px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.icon.size
+    },
+    // 是否显示粗体
+    bold: {
+      type: Boolean,
+      default: uni.$u.props.icon.bold
+    },
+    // 点击图标的时候传递事件出去的index（用于区分点击了哪一个）
+    index: {
+      type: [String, Number],
+      default: uni.$u.props.icon.index
+    },
+    // 触摸图标时的类名
+    hoverClass: {
+      type: String,
+      default: uni.$u.props.icon.hoverClass
+    },
+    // 自定义扩展前缀，方便用户扩展自己的图标库
+    customPrefix: {
+      type: String,
+      default: uni.$u.props.icon.customPrefix
+    },
+    // 图标右边或者下面的文字
+    label: {
+      type: [String, Number],
+      default: uni.$u.props.icon.label
+    },
+    // label的位置，只能右边或者下边
+    labelPos: {
+      type: String,
+      default: uni.$u.props.icon.labelPos
+    },
+    // label的大小
+    labelSize: {
+      type: [String, Number],
+      default: uni.$u.props.icon.labelSize
+    },
+    // label的颜色
+    labelColor: {
+      type: String,
+      default: uni.$u.props.icon.labelColor
+    },
+    // label与图标的距离
+    space: {
+      type: [String, Number],
+      default: uni.$u.props.icon.space
+    },
+    // 图片的mode
+    imgMode: {
+      type: String,
+      default: uni.$u.props.icon.imgMode
+    },
+    // 用于显示图片小图标时，图片的宽度
+    width: {
+      type: [String, Number],
+      default: uni.$u.props.icon.width
+    },
+    // 用于显示图片小图标时，图片的高度
+    height: {
+      type: [String, Number],
+      default: uni.$u.props.icon.height
+    },
+    // 用于解决某些情况下，让图标垂直居中的用途
+    top: {
+      type: [String, Number],
+      default: uni.$u.props.icon.top
+    },
+    // 是否阻止事件传播
+    stop: {
+      type: Boolean,
+      default: uni.$u.props.icon.stop
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 895 */,
+/* 896 */,
+/* 897 */,
+/* 898 */,
+/* 899 */,
+/* 900 */,
+/* 901 */,
+/* 902 */
+/*!*********************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-loading-icon/props.js ***!
+  \*********************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 是否显示组件
+    show: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.show
+    },
+    // 颜色
+    color: {
+      type: String,
+      default: uni.$u.props.loadingIcon.color
+    },
+    // 提示文字颜色
+    textColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.textColor
+    },
+    // 文字和图标是否垂直排列
+    vertical: {
+      type: Boolean,
+      default: uni.$u.props.loadingIcon.vertical
+    },
+    // 模式选择，circle-圆形，spinner-花朵形，semicircle-半圆形
+    mode: {
+      type: String,
+      default: uni.$u.props.loadingIcon.mode
+    },
+    // 图标大小，单位默认px
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.size
+    },
+    // 文字大小
+    textSize: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.textSize
+    },
+    // 文字内容
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.text
+    },
+    // 动画模式
+    timingFunction: {
+      type: String,
+      default: uni.$u.props.loadingIcon.timingFunction
+    },
+    // 动画执行周期时间
+    duration: {
+      type: [String, Number],
+      default: uni.$u.props.loadingIcon.duration
+    },
+    // mode=circle时的暗边颜色
+    inactiveColor: {
+      type: String,
+      default: uni.$u.props.loadingIcon.inactiveColor
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 903 */,
+/* 904 */,
+/* 905 */,
+/* 906 */,
+/* 907 */,
+/* 908 */,
+/* 909 */,
+/* 910 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-text/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 主题颜色
+    type: {
+      type: String,
+      default: uni.$u.props.text.type
+    },
+    // 是否显示
+    show: {
+      type: Boolean,
+      default: uni.$u.props.text.show
+    },
+    // 显示的值
+    text: {
+      type: [String, Number],
+      default: uni.$u.props.text.text
+    },
+    // 前置图标
+    prefixIcon: {
+      type: String,
+      default: uni.$u.props.text.prefixIcon
+    },
+    // 后置图标
+    suffixIcon: {
+      type: String,
+      default: uni.$u.props.text.suffixIcon
+    },
+    // 文本处理的匹配模式
+    // text-普通文本，price-价格，phone-手机号，name-姓名，date-日期，link-超链接
+    mode: {
+      type: String,
+      default: uni.$u.props.text.mode
+    },
+    // mode=link下，配置的链接
+    href: {
+      type: String,
+      default: uni.$u.props.text.href
+    },
+    // 格式化规则
+    format: {
+      type: [String, Function],
+      default: uni.$u.props.text.format
+    },
+    // mode=phone时，点击文本是否拨打电话
+    call: {
+      type: Boolean,
+      default: uni.$u.props.text.call
+    },
+    // 小程序的打开方式
+    openType: {
+      type: String,
+      default: uni.$u.props.text.openType
+    },
+    // 是否粗体，默认normal
+    bold: {
+      type: Boolean,
+      default: uni.$u.props.text.bold
+    },
+    // 是否块状
+    block: {
+      type: Boolean,
+      default: uni.$u.props.text.block
+    },
+    // 文本显示的行数，如果设置，超出此行数，将会显示省略号
+    lines: {
+      type: [String, Number],
+      default: uni.$u.props.text.lines
+    },
+    // 文本颜色
+    color: {
+      type: String,
+      default: uni.$u.props.text.color
+    },
+    // 字体大小
+    size: {
+      type: [String, Number],
+      default: uni.$u.props.text.size
+    },
+    // 图标的样式
+    iconStyle: {
+      type: [Object, String],
+      default: uni.$u.props.text.iconStyle
+    },
+    // 文字装饰，下划线，中划线等，可选值 none|underline|line-through
+    decoration: {
+      type: String,
+      default: uni.$u.props.text.decoration
+    },
+    // 外边距，对象、字符串，数值形式均可
+    margin: {
+      type: [Object, String, Number],
+      default: uni.$u.props.text.margin
+    },
+    // 文本行高
+    lineHeight: {
+      type: [String, Number],
+      default: uni.$u.props.text.lineHeight
+    },
+    // 文本对齐方式，可选值left|center|right
+    align: {
+      type: String,
+      default: uni.$u.props.text.align
+    },
+    // 文字换行，可选值break-word|normal|anywhere
+    wordWrap: {
+      type: String,
+      default: uni.$u.props.text.wordWrap
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 911 */,
+/* 912 */,
+/* 913 */,
+/* 914 */,
+/* 915 */,
+/* 916 */,
+/* 917 */,
+/* 918 */,
+/* 919 */,
+/* 920 */,
+/* 921 */,
+/* 922 */,
+/* 923 */
+/*!*****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/index.js ***!
+  \*****************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _en = _interopRequireDefault(__webpack_require__(/*! ./en.json */ 924));
+var _zhHans = _interopRequireDefault(__webpack_require__(/*! ./zh-Hans.json */ 925));
+var _zhHant = _interopRequireDefault(__webpack_require__(/*! ./zh-Hant.json */ 926));
+var _default = {
+  en: _en.default,
+  'zh-Hans': _zhHans.default,
+  'zh-Hant': _zhHant.default
+};
+exports.default = _default;
+
+/***/ }),
+/* 924 */
+/*!****************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/en.json ***!
+  \****************************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"Pull up to show more\",\"uni-load-more.contentrefresh\":\"loading...\",\"uni-load-more.contentnomore\":\"No more data\"}");
+
+/***/ }),
+/* 925 */
+/*!*********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hans.json ***!
+  \*********************************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉显示更多\",\"uni-load-more.contentrefresh\":\"正在加载...\",\"uni-load-more.contentnomore\":\"没有更多数据了\"}");
+
+/***/ }),
+/* 926 */
+/*!*********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-load-more/components/uni-load-more/i18n/zh-Hant.json ***!
+  \*********************************************************************************************************************************************************/
+/*! exports provided: uni-load-more.contentdown, uni-load-more.contentrefresh, uni-load-more.contentnomore, default */
+/***/ (function(module) {
+
+module.exports = JSON.parse("{\"uni-load-more.contentdown\":\"上拉顯示更多\",\"uni-load-more.contentrefresh\":\"正在加載...\",\"uni-load-more.contentnomore\":\"沒有更多數據了\"}");
+
+/***/ }),
+/* 927 */,
+/* 928 */,
+/* 929 */,
+/* 930 */,
+/* 931 */,
+/* 932 */,
+/* 933 */,
+/* 934 */,
+/* 935 */,
+/* 936 */,
+/* 937 */,
+/* 938 */,
+/* 939 */,
+/* 940 */,
+/* 941 */
+/*!************************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-transition/components/uni-transition/createAnimation.js ***!
+  \************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.createAnimation = createAnimation;
+var _defineProperty2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/defineProperty */ 11));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); enumerableOnly && (symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; })), keys.push.apply(keys, symbols); } return keys; }
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = null != arguments[i] ? arguments[i] : {}; i % 2 ? ownKeys(Object(source), !0).forEach(function (key) { (0, _defineProperty2.default)(target, key, source[key]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)) : ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } return target; }
+// const defaultOption = {
+// 	duration: 300,
+// 	timingFunction: 'linear',
+// 	delay: 0,
+// 	transformOrigin: '50% 50% 0'
+// }
+var MPAnimation = /*#__PURE__*/function () {
+  function MPAnimation(options, _this) {
+    (0, _classCallCheck2.default)(this, MPAnimation);
+    this.options = options;
+    this.animation = uni.createAnimation(options);
+    this.currentStepAnimates = {};
+    this.next = 0;
+    this.$ = _this;
+  }
+  (0, _createClass2.default)(MPAnimation, [{
+    key: "_nvuePushAnimates",
+    value: function _nvuePushAnimates(type, args) {
+      var aniObj = this.currentStepAnimates[this.next];
+      var styles = {};
+      if (!aniObj) {
+        styles = {
+          styles: {},
+          config: {}
+        };
+      } else {
+        styles = aniObj;
+      }
+      if (animateTypes1.includes(type)) {
+        if (!styles.styles.transform) {
+          styles.styles.transform = '';
+        }
+        var unit = '';
+        if (type === 'rotate') {
+          unit = 'deg';
+        }
+        styles.styles.transform += "".concat(type, "(").concat(args + unit, ") ");
+      } else {
+        styles.styles[type] = "".concat(args);
+      }
+      this.currentStepAnimates[this.next] = styles;
+    }
+  }, {
+    key: "_animateRun",
+    value: function _animateRun() {
+      var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var config = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      var ref = this.$.$refs['ani'].ref;
+      if (!ref) return;
+      return new Promise(function (resolve, reject) {
+        nvueAnimation.transition(ref, _objectSpread({
+          styles: styles
+        }, config), function (res) {
+          resolve();
+        });
+      });
+    }
+  }, {
+    key: "_nvueNextAnimate",
+    value: function _nvueNextAnimate(animates) {
+      var _this2 = this;
+      var step = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var fn = arguments.length > 2 ? arguments[2] : undefined;
+      var obj = animates[step];
+      if (obj) {
+        var styles = obj.styles,
+          config = obj.config;
+        this._animateRun(styles, config).then(function () {
+          step += 1;
+          _this2._nvueNextAnimate(animates, step, fn);
+        });
+      } else {
+        this.currentStepAnimates = {};
+        typeof fn === 'function' && fn();
+        this.isEnd = true;
+      }
+    }
+  }, {
+    key: "step",
+    value: function step() {
+      var config = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      this.animation.step(config);
+      return this;
+    }
+  }, {
+    key: "run",
+    value: function run(fn) {
+      this.$.animationData = this.animation.export();
+      this.$.timer = setTimeout(function () {
+        typeof fn === 'function' && fn();
+      }, this.$.durationTime);
+    }
+  }]);
+  return MPAnimation;
+}();
+var animateTypes1 = ['matrix', 'matrix3d', 'rotate', 'rotate3d', 'rotateX', 'rotateY', 'rotateZ', 'scale', 'scale3d', 'scaleX', 'scaleY', 'scaleZ', 'skew', 'skewX', 'skewY', 'translate', 'translate3d', 'translateX', 'translateY', 'translateZ'];
+var animateTypes2 = ['opacity', 'backgroundColor'];
+var animateTypes3 = ['width', 'height', 'left', 'right', 'top', 'bottom'];
+animateTypes1.concat(animateTypes2, animateTypes3).forEach(function (type) {
+  MPAnimation.prototype[type] = function () {
+    var _this$animation;
+    (_this$animation = this.animation)[type].apply(_this$animation, arguments);
+    return this;
+  };
+});
+function createAnimation(option, _this) {
+  if (!_this) return;
+  clearTimeout(_this.timer);
+  return new MPAnimation(option, _this);
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 942 */,
+/* 943 */,
+/* 944 */,
+/* 945 */,
+/* 946 */,
+/* 947 */,
+/* 948 */,
+/* 949 */,
+/* 950 */,
+/* 951 */,
+/* 952 */,
+/* 953 */,
+/* 954 */,
+/* 955 */,
+/* 956 */,
+/* 957 */,
+/* 958 */,
+/* 959 */,
+/* 960 */,
+/* 961 */,
+/* 962 */,
+/* 963 */,
+/* 964 */,
+/* 965 */,
+/* 966 */,
+/* 967 */,
+/* 968 */
+/*!***********************************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/uni_modules/uni-datetime-picker/components/uni-datetime-picker/util.js ***!
+  \***********************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _interopRequireDefault = __webpack_require__(/*! @babel/runtime/helpers/interopRequireDefault */ 4);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _typeof2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/typeof */ 13));
+var _classCallCheck2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/classCallCheck */ 23));
+var _createClass2 = _interopRequireDefault(__webpack_require__(/*! @babel/runtime/helpers/createClass */ 24));
+var Calendar = /*#__PURE__*/function () {
+  function Calendar() {
+    var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+      date = _ref.date,
+      selected = _ref.selected,
+      startDate = _ref.startDate,
+      endDate = _ref.endDate,
+      range = _ref.range;
+    (0, _classCallCheck2.default)(this, Calendar);
+    // 当前日期
+    this.date = this.getDate(new Date()); // 当前初入日期
+    // 打点信息
+    this.selected = selected || [];
+    // 范围开始
+    this.startDate = startDate;
+    // 范围结束
+    this.endDate = endDate;
+    this.range = range;
+    // 多选状态
+    this.cleanMultipleStatus();
+    // 每周日期
+    this.weeks = {};
+    // this._getWeek(this.date.fullDate)
+    // this.multipleStatus = multipleStatus
+    this.lastHover = false;
+  }
+  /**
+   * 设置日期
+   * @param {Object} date
+   */
+  (0, _createClass2.default)(Calendar, [{
+    key: "setDate",
+    value: function setDate(date) {
+      this.selectDate = this.getDate(date);
+      this._getWeek(this.selectDate.fullDate);
+    }
+
+    /**
+     * 清理多选状态
+     */
+  }, {
+    key: "cleanMultipleStatus",
+    value: function cleanMultipleStatus() {
+      this.multipleStatus = {
+        before: '',
+        after: '',
+        data: []
+      };
+    }
+
+    /**
+     * 重置开始日期
+     */
+  }, {
+    key: "resetSatrtDate",
+    value: function resetSatrtDate(startDate) {
+      // 范围开始
+      this.startDate = startDate;
+    }
+
+    /**
+     * 重置结束日期
+     */
+  }, {
+    key: "resetEndDate",
+    value: function resetEndDate(endDate) {
+      // 范围结束
+      this.endDate = endDate;
+    }
+
+    /**
+     * 获取任意时间
+     */
+  }, {
+    key: "getDate",
+    value: function getDate(date) {
+      var AddDayCount = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var str = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'day';
+      if (!date) {
+        date = new Date();
+      }
+      if ((0, _typeof2.default)(date) !== 'object') {
+        date = date.replace(/-/g, '/');
+      }
+      var dd = new Date(date);
+      switch (str) {
+        case 'day':
+          dd.setDate(dd.getDate() + AddDayCount); // 获取AddDayCount天后的日期
+          break;
+        case 'month':
+          if (dd.getDate() === 31) {
+            dd.setDate(dd.getDate() + AddDayCount);
+          } else {
+            dd.setMonth(dd.getMonth() + AddDayCount); // 获取AddDayCount天后的日期
+          }
+
+          break;
+        case 'year':
+          dd.setFullYear(dd.getFullYear() + AddDayCount); // 获取AddDayCount天后的日期
+          break;
+      }
+      var y = dd.getFullYear();
+      var m = dd.getMonth() + 1 < 10 ? '0' + (dd.getMonth() + 1) : dd.getMonth() + 1; // 获取当前月份的日期，不足10补0
+      var d = dd.getDate() < 10 ? '0' + dd.getDate() : dd.getDate(); // 获取当前几号，不足10补0
+      return {
+        fullDate: y + '-' + m + '-' + d,
+        year: y,
+        month: m,
+        date: d,
+        day: dd.getDay()
+      };
+    }
+
+    /**
+     * 获取上月剩余天数
+     */
+  }, {
+    key: "_getLastMonthDays",
+    value: function _getLastMonthDays(firstDay, full) {
+      var dateArr = [];
+      for (var i = firstDay; i > 0; i--) {
+        var beforeDate = new Date(full.year, full.month - 1, -i + 1).getDate();
+        dateArr.push({
+          date: beforeDate,
+          month: full.month - 1,
+          disable: true
+        });
+      }
+      return dateArr;
+    }
+    /**
+     * 获取本月天数
+     */
+  }, {
+    key: "_currentMonthDys",
+    value: function _currentMonthDys(dateData, full) {
+      var _this = this;
+      var dateArr = [];
+      var fullDate = this.date.fullDate;
+      var _loop = function _loop(i) {
+        var isinfo = false;
+        var nowDate = full.year + '-' + (full.month < 10 ? full.month : full.month) + '-' + (i < 10 ? '0' + i : i);
+        // 是否今天
+        var isDay = fullDate === nowDate;
+        // 获取打点信息
+        var info = _this.selected && _this.selected.find(function (item) {
+          if (_this.dateEqual(nowDate, item.date)) {
+            return item;
+          }
+        });
+
+        // 日期禁用
+        var disableBefore = true;
+        var disableAfter = true;
+        if (_this.startDate) {
+          // let dateCompBefore = this.dateCompare(this.startDate, fullDate)
+          // disableBefore = this.dateCompare(dateCompBefore ? this.startDate : fullDate, nowDate)
+          disableBefore = _this.dateCompare(_this.startDate, nowDate);
+        }
+        if (_this.endDate) {
+          // let dateCompAfter = this.dateCompare(fullDate, this.endDate)
+          // disableAfter = this.dateCompare(nowDate, dateCompAfter ? this.endDate : fullDate)
+          disableAfter = _this.dateCompare(nowDate, _this.endDate);
+        }
+        var multiples = _this.multipleStatus.data;
+        var checked = false;
+        var multiplesStatus = -1;
+        if (_this.range) {
+          if (multiples) {
+            multiplesStatus = multiples.findIndex(function (item) {
+              return _this.dateEqual(item, nowDate);
+            });
+          }
+          if (multiplesStatus !== -1) {
+            checked = true;
+          }
+        }
+        var data = {
+          fullDate: nowDate,
+          year: full.year,
+          date: i,
+          multiple: _this.range ? checked : false,
+          beforeMultiple: _this.isLogicBefore(nowDate, _this.multipleStatus.before, _this.multipleStatus.after),
+          afterMultiple: _this.isLogicAfter(nowDate, _this.multipleStatus.before, _this.multipleStatus.after),
+          month: full.month,
+          disable: !(disableBefore && disableAfter),
+          isDay: isDay,
+          userChecked: false
+        };
+        if (info) {
+          data.extraInfo = info;
+        }
+        dateArr.push(data);
+      };
+      for (var i = 1; i <= dateData; i++) {
+        _loop(i);
+      }
+      return dateArr;
+    }
+    /**
+     * 获取下月天数
+     */
+  }, {
+    key: "_getNextMonthDays",
+    value: function _getNextMonthDays(surplus, full) {
+      var dateArr = [];
+      for (var i = 1; i < surplus + 1; i++) {
+        dateArr.push({
+          date: i,
+          month: Number(full.month) + 1,
+          disable: true
+        });
+      }
+      return dateArr;
+    }
+
+    /**
+     * 获取当前日期详情
+     * @param {Object} date
+     */
+  }, {
+    key: "getInfo",
+    value: function getInfo(date) {
+      var _this2 = this;
+      if (!date) {
+        date = new Date();
+      }
+      var dateInfo = this.canlender.find(function (item) {
+        return item.fullDate === _this2.getDate(date).fullDate;
+      });
+      return dateInfo;
+    }
+
+    /**
+     * 比较时间大小
+     */
+  }, {
+    key: "dateCompare",
+    value: function dateCompare(startDate, endDate) {
+      // 计算截止时间
+      startDate = new Date(startDate.replace('-', '/').replace('-', '/'));
+      // 计算详细项的截止时间
+      endDate = new Date(endDate.replace('-', '/').replace('-', '/'));
+      if (startDate <= endDate) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    /**
+     * 比较时间是否相等
+     */
+  }, {
+    key: "dateEqual",
+    value: function dateEqual(before, after) {
+      // 计算截止时间
+      before = new Date(before.replace('-', '/').replace('-', '/'));
+      // 计算详细项的截止时间
+      after = new Date(after.replace('-', '/').replace('-', '/'));
+      if (before.getTime() - after.getTime() === 0) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    /**
+     *  比较真实起始日期
+     */
+  }, {
+    key: "isLogicBefore",
+    value: function isLogicBefore(currentDay, before, after) {
+      var logicBefore = before;
+      if (before && after) {
+        logicBefore = this.dateCompare(before, after) ? before : after;
+      }
+      return this.dateEqual(logicBefore, currentDay);
+    }
+  }, {
+    key: "isLogicAfter",
+    value: function isLogicAfter(currentDay, before, after) {
+      var logicAfter = after;
+      if (before && after) {
+        logicAfter = this.dateCompare(before, after) ? after : before;
+      }
+      return this.dateEqual(logicAfter, currentDay);
+    }
+
+    /**
+     * 获取日期范围内所有日期
+     * @param {Object} begin
+     * @param {Object} end
+     */
+  }, {
+    key: "geDateAll",
+    value: function geDateAll(begin, end) {
+      var arr = [];
+      var ab = begin.split('-');
+      var ae = end.split('-');
+      var db = new Date();
+      db.setFullYear(ab[0], ab[1] - 1, ab[2]);
+      var de = new Date();
+      de.setFullYear(ae[0], ae[1] - 1, ae[2]);
+      var unixDb = db.getTime() - 24 * 60 * 60 * 1000;
+      var unixDe = de.getTime() - 24 * 60 * 60 * 1000;
+      for (var k = unixDb; k <= unixDe;) {
+        k = k + 24 * 60 * 60 * 1000;
+        arr.push(this.getDate(new Date(parseInt(k))).fullDate);
+      }
+      return arr;
+    }
+
+    /**
+     *  获取多选状态
+     */
+  }, {
+    key: "setMultiple",
+    value: function setMultiple(fullDate) {
+      var _this$multipleStatus = this.multipleStatus,
+        before = _this$multipleStatus.before,
+        after = _this$multipleStatus.after;
+      if (!this.range) return;
+      if (before && after) {
+        if (!this.lastHover) {
+          this.lastHover = true;
+          return;
+        }
+        this.multipleStatus.before = fullDate;
+        this.multipleStatus.after = '';
+        this.multipleStatus.data = [];
+        this.multipleStatus.fulldate = '';
+        this.lastHover = false;
+      } else {
+        if (!before) {
+          this.multipleStatus.before = fullDate;
+          this.lastHover = false;
+        } else {
+          this.multipleStatus.after = fullDate;
+          if (this.dateCompare(this.multipleStatus.before, this.multipleStatus.after)) {
+            this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus.after);
+          } else {
+            this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus.before);
+          }
+          this.lastHover = true;
+        }
+      }
+      this._getWeek(fullDate);
+    }
+
+    /**
+     *  鼠标 hover 更新多选状态
+     */
+  }, {
+    key: "setHoverMultiple",
+    value: function setHoverMultiple(fullDate) {
+      var _this$multipleStatus2 = this.multipleStatus,
+        before = _this$multipleStatus2.before,
+        after = _this$multipleStatus2.after;
+      if (!this.range) return;
+      if (this.lastHover) return;
+      if (!before) {
+        this.multipleStatus.before = fullDate;
+      } else {
+        this.multipleStatus.after = fullDate;
+        if (this.dateCompare(this.multipleStatus.before, this.multipleStatus.after)) {
+          this.multipleStatus.data = this.geDateAll(this.multipleStatus.before, this.multipleStatus.after);
+        } else {
+          this.multipleStatus.data = this.geDateAll(this.multipleStatus.after, this.multipleStatus.before);
+        }
+      }
+      this._getWeek(fullDate);
+    }
+
+    /**
+     * 更新默认值多选状态
+     */
+  }, {
+    key: "setDefaultMultiple",
+    value: function setDefaultMultiple(before, after) {
+      this.multipleStatus.before = before;
+      this.multipleStatus.after = after;
+      if (before && after) {
+        if (this.dateCompare(before, after)) {
+          this.multipleStatus.data = this.geDateAll(before, after);
+          this._getWeek(after);
+        } else {
+          this.multipleStatus.data = this.geDateAll(after, before);
+          this._getWeek(before);
+        }
+      }
+    }
+
+    /**
+     * 获取每周数据
+     * @param {Object} dateData
+     */
+  }, {
+    key: "_getWeek",
+    value: function _getWeek(dateData) {
+      var _this$getDate = this.getDate(dateData),
+        fullDate = _this$getDate.fullDate,
+        year = _this$getDate.year,
+        month = _this$getDate.month,
+        date = _this$getDate.date,
+        day = _this$getDate.day;
+      var firstDay = new Date(year, month - 1, 1).getDay();
+      var currentDay = new Date(year, month, 0).getDate();
+      var dates = {
+        lastMonthDays: this._getLastMonthDays(firstDay, this.getDate(dateData)),
+        // 上个月末尾几天
+        currentMonthDys: this._currentMonthDys(currentDay, this.getDate(dateData)),
+        // 本月天数
+        nextMonthDays: [],
+        // 下个月开始几天
+        weeks: []
+      };
+      var canlender = [];
+      var surplus = 42 - (dates.lastMonthDays.length + dates.currentMonthDys.length);
+      dates.nextMonthDays = this._getNextMonthDays(surplus, this.getDate(dateData));
+      canlender = canlender.concat(dates.lastMonthDays, dates.currentMonthDys, dates.nextMonthDays);
+      var weeks = {};
+      // 拼接数组  上个月开始几天 + 本月天数+ 下个月开始几天
+      for (var i = 0; i < canlender.length; i++) {
+        if (i % 7 === 0) {
+          weeks[parseInt(i / 7)] = new Array(7);
+        }
+        weeks[parseInt(i / 7)][i % 7] = canlender[i];
+      }
+      this.canlender = canlender;
+      this.weeks = weeks;
+    }
+
+    //静态方法
+    // static init(date) {
+    // 	if (!this.instance) {
+    // 		this.instance = new Calendar(date);
+    // 	}
+    // 	return this.instance;
+    // }
+  }]);
+  return Calendar;
+}();
+var _default = Calendar;
+exports.default = _default;
+
+/***/ }),
+/* 969 */,
+/* 970 */,
+/* 971 */,
+/* 972 */,
+/* 973 */,
+/* 974 */,
+/* 975 */,
+/* 976 */,
+/* 977 */,
+/* 978 */,
+/* 979 */,
+/* 980 */,
+/* 981 */,
+/* 982 */,
+/* 983 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-text/value.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  computed: {
+    // 经处理后需要显示的值
+    value: function value() {
+      var text = this.text,
+        mode = this.mode,
+        format = this.format,
+        href = this.href;
+      // 价格类型
+      if (mode === 'price') {
+        // 如果text不为金额进行提示
+        if (!/^\d+(\.\d+)?$/.test(text)) {
+          uni.$u.error('金额模式下，text参数需要为金额格式');
+        }
+        // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的金额格式化处理
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }
+        // 如果format非正则，非函数，则使用默认的金额格式化方法进行操作
+        return uni.$u.priceFormat(text, 2);
+      }
+      if (mode === 'date') {
+        // 判断是否合法的日期或者时间戳
+        !uni.$u.test.date(text) && uni.$u.error('日期模式下，text参数需要为日期或时间戳格式');
+        // 进行格式化，判断用户传入的format参数为正则，或者函数，如果没有传入format，则使用默认的格式化处理
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }
+        if (format) {
+          // 如果format非正则，非函数，则使用默认的时间格式化方法进行操作
+          return uni.$u.timeFormat(text, format);
+        }
+        // 如果没有设置format，则设置为默认的时间格式化形式
+        return uni.$u.timeFormat(text, 'yyyy-mm-dd');
+      }
+      if (mode === 'phone') {
+        // 判断是否合法的手机号
+        // !uni.$u.test.mobile(text) && uni.$u.error('手机号模式下，text参数需要为手机号码格式')
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }
+        if (format === 'encrypt') {
+          // 如果format为encrypt，则将手机号进行星号加密处理
+          return "".concat(text.substr(0, 3), "****").concat(text.substr(7));
+        }
+        return text;
+      }
+      if (mode === 'name') {
+        // 判断是否合法的字符粗
+        !(typeof text === 'string') && uni.$u.error('姓名模式下，text参数需要为字符串格式');
+        if (uni.$u.test.func(format)) {
+          // 如果用户传入的是函数，使用函数格式化
+          return format(text);
+        }
+        if (format === 'encrypt') {
+          // 如果format为encrypt，则将姓名进行星号加密处理
+          return this.formatName(text);
+        }
+        return text;
+      }
+      if (mode === 'link') {
+        // 判断是否合法的字符粗
+        !uni.$u.test.url(href) && uni.$u.error('超链接模式下，href参数需要为URL格式');
+        return text;
+      }
+      return text;
+    }
+  },
+  methods: {
+    // 默认的姓名脱敏规则
+    formatName: function formatName(name) {
+      var value = '';
+      if (name.length === 2) {
+        value = name.substr(0, 1) + '*';
+      } else if (name.length > 2) {
+        var char = '';
+        for (var i = 0, len = name.length - 2; i < len; i++) {
+          char += '*';
+        }
+        value = name.substr(0, 1) + char + name.substr(-1, 1);
+      } else {
+        value = name;
+      }
+      return value;
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
+
+/***/ }),
+/* 984 */
+/*!*******************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/mixin/button.js ***!
+  \*******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    lang: String,
+    sessionFrom: String,
+    sendMessageTitle: String,
+    sendMessagePath: String,
+    sendMessageImg: String,
+    showMessageCard: Boolean,
+    appParameter: String,
+    formType: String,
+    openType: String
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 985 */
+/*!*********************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/libs/mixin/openType.js ***!
+  \*********************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    openType: String
+  },
+  methods: {
+    onGetUserInfo: function onGetUserInfo(event) {
+      this.$emit('getuserinfo', event.detail);
+    },
+    onContact: function onContact(event) {
+      this.$emit('contact', event.detail);
+    },
+    onGetPhoneNumber: function onGetPhoneNumber(event) {
+      this.$emit('getphonenumber', event.detail);
+    },
+    onError: function onError(event) {
+      this.$emit('error', event.detail);
+    },
+    onLaunchApp: function onLaunchApp(event) {
+      this.$emit('launchapp', event.detail);
+    },
+    onOpenSetting: function onOpenSetting(event) {
+      this.$emit('opensetting', event.detail);
+    }
+  }
+};
+exports.default = _default;
+
+/***/ }),
+/* 986 */,
+/* 987 */,
+/* 988 */,
+/* 989 */,
+/* 990 */,
+/* 991 */,
+/* 992 */,
+/* 993 */,
+/* 994 */,
+/* 995 */,
+/* 996 */,
+/* 997 */,
+/* 998 */,
+/* 999 */,
+/* 1000 */
+/*!*************************************************************************************************************************************!*\
+  !*** D:/360MoveData/Users/hp830/Documents/HBuilderProjects/云端一体集成多端登陆自定义tabar项目模板/node_modules/uview-ui/components/u-link/props.js ***!
+  \*************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+var _default = {
+  props: {
+    // 文字颜色
+    color: {
+      type: String,
+      default: uni.$u.props.link.color
+    },
+    // 字体大小，单位px
+    fontSize: {
+      type: [String, Number],
+      default: uni.$u.props.link.fontSize
+    },
+    // 是否显示下划线
+    underLine: {
+      type: Boolean,
+      default: uni.$u.props.link.underLine
+    },
+    // 要跳转的链接
+    href: {
+      type: String,
+      default: uni.$u.props.link.href
+    },
+    // 小程序中复制到粘贴板的提示语
+    mpTips: {
+      type: String,
+      default: uni.$u.props.link.mpTips
+    },
+    // 下划线颜色
+    lineColor: {
+      type: String,
+      default: uni.$u.props.link.lineColor
+    },
+    // 超链接的问题，不使用slot形式传入，是因为nvue下无法修改颜色
+    text: {
+      type: String,
+      default: uni.$u.props.link.text
+    }
+  }
+};
+exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 2)["default"]))
 
 /***/ })
-
-}]);
+]]);
 //# sourceMappingURL=../../.sourcemap/mp-weixin/common/vendor.js.map
