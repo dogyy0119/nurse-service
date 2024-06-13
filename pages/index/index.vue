@@ -104,14 +104,17 @@
 		},
 		
 		onLoad() {
-			let mylocation = uni.getStorageSync("location")
+			this.getCid()
+			// this.opid()
 			
-			console.log(mylocation)
-			if (mylocation != '') {
-				this.cityName = mylocation
-			} else {
-				console.log("mylocation is null")
-			}
+			// let mylocation = uni.getStorageSync("location")
+			
+			// console.log(mylocation)
+			// if (mylocation != '') {
+			// 	this.cityName = mylocation
+			// } else {
+			// 	console.log("mylocation is null")
+			// }
 			
 			// this.requestData();
 		},
@@ -124,7 +127,56 @@
 				
 		},
 		
-		methods: {
+		methods: {	
+			// async opid() {
+			// 	let self = this
+			// 	wx.login({
+			// 		success(res) {
+			// 			if (res.code) {
+			// 				wx.request({
+			// 					url: `https://api.weixin.qq.com/sns/jscode2session?appid=${self.$wxappid}&secret=${self.$wxsecret}&js_code=${res.code}&grant_type=authorization_code`,
+			// 					success(data) {
+			// 						self.useropenId = data.data.openid
+			// 						self.pushmsg.touser = self.useropenid
+			// 					}
+			// 				})
+			// 			} else {
+			// 				console.log('获取失败！' + res.errMsg)
+			// 			}
+			// 		}
+			// 	})
+			// },
+			
+			getCid() {
+			
+				uni.getPushClientId({
+					success: (res) => {
+						let push_clientid = res.cid
+						console.log('客户端推送标识:',push_clientid)
+					},
+					fail(err) {
+						console.log(err)
+					}
+				})
+				
+				
+				uniCloud.callFunction({
+				    name: "testUniPush",
+				    data: {						
+				    },
+				    success: (res) => {
+						console.log(res)
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				         console.log("请求完成");
+				    }
+				});
+				
+			},
+			
 			selectCity() {
 			      // 处理城市选择逻辑
 			      console.log('选择城市');
@@ -133,10 +185,10 @@
 				  });
 			},
 			getNewsData(id=0){
-				console.log("this.navIndex :" + this.navIndex)
+				// console.log("this.navIndex :" + this.navIndex)
 				let category = this.gridList[this.navIndex].index
 				category = "6646bc558b0da4a4e41e78be"
-				console.log("this.navIndex :" + category)	
+				// console.log("this.navIndex :" + category)	
 				uniCloud.callFunction({
 				    name: "nurse-service-get",
 				    data: {						
@@ -144,9 +196,9 @@
 				    },
 				    success: (res) => {
 						this.loading=2
-						console.log(" getNewsData navIndex :");
+						// console.log(" getNewsData navIndex :");
 						
-						console.log(res.result.data);
+						// console.log(res.result.data);
 						// this.newsArr = res.result.data
 						this.projectList = [];
 						res.result.data.forEach(item => {
@@ -166,7 +218,7 @@
 				        console.error("请求失败: " + err);
 				    },
 				    complete: (res) => {
-				        console.log("请求完成");
+				        // console.log("请求完成");
 				    }
 				});
 				

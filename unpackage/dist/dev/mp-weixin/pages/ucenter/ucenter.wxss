@@ -99,7 +99,7 @@ page.data-v-4883731c {
   background-color: #f8f8f8;
 }
 .userInfo.data-v-4883731c {
-  background-image: linear-gradient(to top, #00aaff, #1cbbb4);
+  background-image: linear-gradient(to top, #1cbbb4, #1cbbb4);
 }
 .userInfo-center.data-v-4883731c {
   padding: 60rpx 40rpx;

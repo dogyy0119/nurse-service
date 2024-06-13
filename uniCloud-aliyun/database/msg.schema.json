@@ -1,0 +1,38 @@
+{
+	"bsonType": "object",
+	"permission": {
+		"read": true, //演示项目，真实项目需要自己设置权限
+		"create": true, //演示项目，真实项目需要自己设置权限
+		"update": true, //演示项目，真实项目需要自己设置权限
+		"delete": true //演示项目，真实项目需要自己设置权限
+	},
+	"required": ["read", "title", "content", "payload", "timestamp"],
+	"properties": {
+		"_id": {
+			"description": "存储文档 ID（用户 ID），系统自动生成"
+		},
+		"read": {
+			"bsonType": "bool",
+			"description": "是否已读"
+		},
+		"title": {
+			"bsonType": "string",
+			"description": "通知标题"
+		},
+		"content": {
+			"bsonType": "string",
+			"description": "通知副标题"
+		},
+		"payload": {
+			"bsonType": "object",
+			"description": "push收到的payload数据,包含开发者自定义的json object数据"
+		},
+		"timestamp": {
+			"bsonType": "timestamp",
+			"description": "消息创建的时间",
+			"forceDefaultValue": {
+				"$env": "now"
+			}
+		}
+	}
+}

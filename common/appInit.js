@@ -257,7 +257,7 @@ export default async function() {
 				})
 			}
 			
-			console.log('e.result.code:' + e.result.code)
+			// console.log('e.result.code:' + e.result.code)
 			 
 			switch (e.result.code) {
 				case 403:

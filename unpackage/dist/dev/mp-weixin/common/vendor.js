@@ -9955,11 +9955,12 @@ var S = "development" === "development",
     "address": [
         "127.0.0.1",
         "169.254.125.142",
-        "10.15.122.28"
+        "10.15.122.28",
+        "192.168.88.28"
     ],
-    "debugPort": 9001,
+    "debugPort": 9000,
     "initialLaunchType": "local",
-    "servePort": 7001,
+    "servePort": 7000,
     "skipFiles": [
         "<node_internals>/**",
         "D:/Program Files/HBuilderX/plugins/unicloud/**/*.js"
@@ -33364,7 +33365,18 @@ var _default = {
   components: {},
   onLoad: function onLoad(options) {
     _self = this;
+    var data = {};
+    if (options.params) {
+      var params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
+      console.log(params);
+      this.money = params.totalFee;
+      // this.data.totalFee = params.totalFee;
+      // this.data.userName = params.userName;
+      // this.data.serviceId = params.serviceId;
+      // this.data.serviceName = params.serviceName;
+    }
 
+    // this.money = this.data.totalFee;
     //检查是否登录参考代码,需要用的时候，可以把注释取掉
     //if(this.checkLogin()==false){
     //	return;
@@ -33444,6 +33456,20 @@ var _default = {
         });
         return;
       }
+      if (this.money <= 0) {
+        uni.showToast({
+          title: '充值不能小于零！',
+          icon: 'none',
+          duration: 2000
+        });
+        return;
+      }
+      uni.showToast({
+        title: '充值成功！',
+        icon: 'none',
+        duration: 2000
+      });
+      return;
     },
     /**
     * input处理函数

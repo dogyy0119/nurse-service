@@ -35,7 +35,7 @@
 				
 				<uni-section title=" 套餐信息:  " type="line">					
 				</uni-section>
-				
+								
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">套餐: {{taocan}}</text></view>
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
@@ -407,6 +407,10 @@
 	    bottom: 0; /* 将按钮定位在页面底部 */
 	    left: 0; /* 将按钮置于页面左侧 */
 	    width: 100%; /* 让按钮占据整个页面宽度 */
+	}
+	
+	.popup-content {
+		font-size: 13px;
 	}
 	
 	.amount {

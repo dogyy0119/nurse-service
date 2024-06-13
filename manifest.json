@@ -2,7 +2,7 @@
     "name" : "云端一体集成多端登陆自定义tabar项目模板",
     "appid" : "__UNI__5000F3E",
     "description" : "",
-    "versionName" : "",
+    "versionName" : "1",
     "versionCode" : "100",
     "transformPx" : false,
     "app-plus" : {
@@ -16,7 +16,8 @@
             "delay" : 0
         },
         "modules" : {
-            "OAuth" : {}
+            "OAuth" : {},
+            "Push" : {}
         },
         "distribute" : {
             "android" : {
@@ -42,6 +43,19 @@
             "sdkConfigs" : {
                 "oauth" : {
                     "univerify" : {}
+                },
+                "push" : {
+                    "unipush" : {
+                        "version" : "2",
+                        "offline" : true,
+                        "hms" : {},
+                        "oppo" : {},
+                        "vivo" : {},
+                        "mi" : {},
+                        "meizu" : {},
+                        "honor" : {},
+                        "fcm" : {}
+                    }
                 }
             }
         }
@@ -57,6 +71,9 @@
             "scope.userLocation" : {
                 "desc" : "用于提供应用算法支持"
             }
+        },
+        "unipush" : {
+            "enable" : true
         }
     },
     "mp-alipay" : {
@@ -79,6 +96,9 @@
                     "key" : "PYIBZ-IMQL3-44634-R54XC-ZWZNJ-DOFHI"
                 }
             }
+        },
+        "unipush" : {
+            "enable" : true
         }
     }
 }

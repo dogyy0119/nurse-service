@@ -1,0 +1,7 @@
+{
+  "name": "uni-getOrderByNurseID",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

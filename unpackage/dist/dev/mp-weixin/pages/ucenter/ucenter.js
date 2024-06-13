@@ -107,9 +107,6 @@ try {
     uniIcons: function () {
       return Promise.all(/*! import() | uni_modules/uni-icons/components/uni-icons/uni-icons */[__webpack_require__.e("common/vendor"), __webpack_require__.e("uni_modules/uni-icons/components/uni-icons/uni-icons")]).then(__webpack_require__.bind(null, /*! @/uni_modules/uni-icons/components/uni-icons/uni-icons.vue */ 521))
     },
-    uLine: function () {
-      return Promise.all(/*! import() | node-modules/uview-ui/components/u-line/u-line */[__webpack_require__.e("common/vendor"), __webpack_require__.e("node-modules/uview-ui/components/u-line/u-line")]).then(__webpack_require__.bind(null, /*! uview-ui/components/u-line/u-line.vue */ 584))
-    },
     uniList: function () {
       return __webpack_require__.e(/*! import() | uni_modules/uni-list/components/uni-list/uni-list */ "uni_modules/uni-list/components/uni-list/uni-list").then(__webpack_require__.bind(null, /*! @/uni_modules/uni-list/components/uni-list/uni-list.vue */ 650))
     },
@@ -232,7 +229,14 @@ var _default = {
         "title": "我的阅读",
         "to": '/pages/ucenter/read-news-log/read-news-log',
         "icon": "flag"
-      }, {
+      },
+      // {
+      // 	"title": "我的订单",
+      // 	"to": '/pages/order/OrderList',
+      // 	"icon": "flag"
+      // },
+
+      {
         "title": "我的积分",
         "to": '',
         "event": 'getScore',
@@ -310,6 +314,7 @@ var _default = {
      * 个人中心项目列表点击事件
      */
     ucenterListClick: function ucenterListClick(item) {
+      console.log(item.to);
       if (!item.to && item.event) {
         this[item.event]();
       }

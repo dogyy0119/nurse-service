@@ -15,6 +15,61 @@
 			this.globalData.$i18n = this.$i18n
 			this.globalData.$t = str => this.$t(str)
 
+			uni.onPushMessage((res) => {
+				console.log("收到推送消息：",res) //监听推送消息
+			})
+			
+			
+			// #ifdef APP-PLUS
+					let timer = false;
+					plus.push.addEventListener("click",(msg)=>{
+						clearTimeout(timer);
+						timer = setTimeout(()=>{
+							console.log(1111,msg);
+						},1500)
+					},false)
+					plus.push.addEventListener("receive",(msg)=>{
+						if("LocalMSG" == msg.payload){
+						}else{
+							if(msg.type=='receive'){
+								var options = {cover:false,title:msg.title};
+								plus.push.createMessage(msg.content, msg.payload, options ); 
+							 }  
+						}
+					},false)
+				// #endif
+			
+			// #ifdef APP-PLUS 
+			const notificationAuthorized = uni.getAppAuthorizeSetting().notificationAuthorized
+			if(notificationAuthorized=='denied'){
+				uni.showModal({
+					title: '提示',
+					content: '是否前往打开通知权限',
+					success: res => {
+						if (res.confirm) {
+							this.openTongZhi()
+						} else if (res.cancel) {
+							console.log('用户点击取消');
+						}
+					}
+				})
+			}
+			// that.getQuanxian()
+			// #endif                  
+			
+			// // uni-app客户端获取push客户端标记
+			// uni.getPushClientId({
+			// 	success: (res) => {
+			// 		let push_clientid = res.cid
+			// 		console.log('客户端推送标识:',push_clientid)
+			// 	},
+			// 	fail(err) {
+			// 		console.log(err)
+			// 	}
+			// }
+			
+			
+			
 			initApp();
 			
 			// #ifdef H5
@@ -45,6 +100,8 @@
 		},
 		onShow: function() {
 			console.log('App Show')
+			
+			
 		},
 		onHide: function() {
 			console.log('App Hide')

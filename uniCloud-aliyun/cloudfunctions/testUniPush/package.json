@@ -1,0 +1,10 @@
+{
+  "name": "unipush",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "消息推送",
+  "extensions": {
+    "uni-cloud-push": {}
+  },
+  "author": "vini123"
+}

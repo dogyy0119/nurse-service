@@ -212,7 +212,9 @@
 				    },
 				    success: (res) => {
 						this.loading=2
+						// console.log(res.result.data[0].service_banner_imgs)
 						console.log(res.result.data);
+						
 						this.detailObj = res.result.data[0]
 						// this.price = this.detailObj.price
 						this.totalPrice = this.customPrice + this.price
