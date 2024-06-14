@@ -1,0 +1,7 @@
+{
+  "name": "mydevice",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-push": {}
+  }
+}

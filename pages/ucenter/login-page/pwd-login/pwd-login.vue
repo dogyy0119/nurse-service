@@ -23,6 +23,7 @@
 		mixins: [mixin],
 		data() {
 			return {
+				"push_clientid": "",
 				"password": "",
 				"username": "",
 				"agree": false,
@@ -53,6 +54,17 @@
 			 * 密码登录
 			 */
 			pwdLogin() {
+				
+				uni.getPushClientId({
+					success: (res) => {
+						this.push_clientid = res.cid
+						console.log('客户端推送标识:',push_clientid)
+					},
+					fail(err) {
+						console.log(err)
+					}
+				})
+				
 				if (!this.agree) {
 					return uni.showToast({
 						title: this.$t('common.noAgree'),
@@ -65,6 +77,7 @@
 					data:{
 						action:'login',
 						params:{
+							"push_clientid": this.push_clientid,
 							"username": this.username,
 							"password": this.password,
 							"captcha":this.captcha

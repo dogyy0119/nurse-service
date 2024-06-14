@@ -9,6 +9,9 @@ const db = uniCloud.database()
 const dbCmd = db.command
 const usersDB = db.collection('uni-id-users')
 const deviceDB = db.collection('uni-id-device')
+
+const mydevice = db.collection('my-device')
+
 exports.main = async (event, context) => {
 	console.log({
 		context
@@ -53,6 +56,7 @@ exports.main = async (event, context) => {
 		'loginByUniverify', 'loginByApple', 'loginBySms', 'resetPwdBySmsCode', 'registerAdmin'
 	]
 	if (!noCheckAction.includes(action)) {
+		
 		if (!uniIdToken) {
 			return {
 				code: 403,
@@ -101,7 +105,7 @@ exports.main = async (event, context) => {
 			create_date: now,
 			action
 		};
-
+		
 		if (res.code === 0) {
 			logData.user_id = res.uid
 			logData.state = 1
@@ -113,13 +117,14 @@ exports.main = async (event, context) => {
 			}
 			if (res.type == 'login') {
 				if (Object.keys(deviceInfo).length) {
-					console.log(context.DEVICEID);
+					console.log(" event.params.push_clientid :" + event.params.push_clientid);
 					//避免重复新增设备信息，先判断是否已存在
 					let getDeviceRes = await deviceDB.where({
 						"device_id": context.DEVICEID
 					}).get()
 					if (getDeviceRes.data.length == 0) {
 						await addDeviceInfo(res)
+						
 					} else {
 						await deviceDB.where({
 							"device_id": context.DEVICEID,
@@ -133,6 +138,30 @@ exports.main = async (event, context) => {
 							"create_date": Date.now(),
 							"last_active_date": Date.now(),
 							"last_active_ip": context.CLIENTIP
+						})				
+					}
+					
+					let getMydeviceRes = await mydevice.where({
+						"user_id": res.uid
+					}).get()
+					
+					console.log(" getMydeviceRes.data.length :" + getMydeviceRes.data.length)
+					console.log(getMydeviceRes.data)
+
+					if (getMydeviceRes.data.length == 0) {
+						console.log(" mydevice.add ")
+						await mydevice.add({
+							"user_id": res.uid,
+							"device_id": context.DEVICEID,
+							"push_clientid": event.params.push_clientid || ''
+						})
+					} else {								
+						console.log(" mydevice.update ")
+						await mydevice.where({
+							"user_id": res.uid,
+						}).update({
+							"device_id": context.DEVICEID,
+							"push_clientid": event.params.push_clientid || ''
 						})
 					}
 				}
@@ -142,7 +171,11 @@ exports.main = async (event, context) => {
 		}
 		return await uniIdLogCollection.add(logData)
 	}
+	
+	// return 
+	
 
+	
 	async function addDeviceInfo({
 		uid,
 		tokenExpired

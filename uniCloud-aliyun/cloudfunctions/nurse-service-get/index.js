@@ -11,12 +11,12 @@ exports.main = async (event, context) => {
 	
 	// Check if status is 1, then include status condition in the query
 	if (event.category_id !== undefined) {
-		console.log( "event.category_id" )
+		// console.log( "event.category_id" )
 	    query.category_id = event.category_id;
 	} 
 	
 	if (event.name !== undefined){
-		console.log( "event.name" )
+		// console.log( "event.name" )
 		query.name  = event.name; 
 	}
 	
