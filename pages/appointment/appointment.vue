@@ -331,11 +331,14 @@
 				    success: (res) => {
 						// 跳转到支付
 						
+						console.log( res)
+						
 						let obj = {
 							totalFee: orderData.total_fee,
 							userName: orderData.userName,
 							serviceId: orderData.service_id,
 							serviceName: orderData.title,
+							orderId: res.result.data
 						};
 						let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
 									

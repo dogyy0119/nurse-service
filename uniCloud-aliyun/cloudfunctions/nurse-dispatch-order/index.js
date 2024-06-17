@@ -6,7 +6,7 @@ exports.main = async (event, context) => {
     //console.log('event : ', event)
     
     const nurse_users = await db.collection('uni-id-users').where('type==1').field('_id, mobile').get();
-    console.log(nurse_users)
+    // console.log(nurse_users)
     
     var min_order_nurse;
     var min_order = 1000;
@@ -24,22 +24,29 @@ exports.main = async (event, context) => {
             
     }
 
-    console.log(min_order_nurse)
-    console.log(min_order_nurse.mobile)
-    console.log(min_order_nurse._id)
+    // console.log(min_order_nurse)
+    // console.log(min_order_nurse.mobile)
+    // console.log(min_order_nurse._id)
 
-     const { _id} = event;  	
+    // const { _id} = event;  	
     
     try {  
         const  collection = db.collection("nurse-order")
         // 使用where条件来定位要更新的记录，并使用update方法更新Flag字段  
         const res = await collection.where({  
-            _id: _id  
+            _id: event.id  
         }).update({
             status:3,
             nurse_phone: min_order_nurse.mobile,
             nurse_id:min_order_nurse._id
-        });  
+        }); 
+		
+		return {
+		    code: 0,  
+		    message: '派单成功',  
+		    updated: res.updated, // 更新的记录数  
+		    data: min_order_nurse._id  
+		};  
  
     } catch (e) {  
         // 错误处理  
@@ -55,10 +62,10 @@ exports.main = async (event, context) => {
     
     
     // 返回更新结果  
-    return {  
-        code: 0,  
-        message: '派单成功',  
-        updated: res.updated, // 更新的记录数  
-        data: null  
-    };  
+	return {
+	    code: 0,  
+	    message: '派单失败',  
+	    updated: 0, // 更新的记录数  
+	    data: null  
+	}; 
 };

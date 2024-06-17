@@ -13,7 +13,8 @@ import app from "../../App.vue"
 				animationData: {},
 				money:'0.00',//充值金额
 				payType:'',//单选框选中值
-			
+				nurse_order_id: '',
+				serviceName: ',',
  
 				page:0,//当前分页页码
 				apiUrl:'https://www.ymznkf.com/wx_server',//后端接口地址
@@ -34,8 +35,8 @@ import app from "../../App.vue"
 				this.money = params.totalFee;
 				// this.data.totalFee = params.totalFee;
 				// this.data.userName = params.userName;
-				// this.data.serviceId = params.serviceId;
-				// this.data.serviceName = params.serviceName;
+				this.nurse_order_id = params.orderId;
+				this.serviceName = params.serviceName;
 			}
 			
 			// this.money = this.data.totalFee;
@@ -99,22 +100,117 @@ import app from "../../App.vue"
 			* 数据取值  var index = e.currentTarget.dataset.index; var cata = this.list_cata_list[index];
 			*/
 			btSubmit_21_click:function(event){
-			  if(this.money==''){
-			      uni.showToast({title: '充值金额不能为空！',icon: 'none',duration: 2000});				  
-			     return; 
-			  }
-			  if(this.payType==''){
-			      uni.showToast({title: '充值方式不能为空！',icon: 'none',duration: 2000});
-			     return; 
-			  }
+				if(this.money==''){
+					uni.showToast({title: '充值金额不能为空！',icon: 'none',duration: 2000});				  
+					return; 
+				}
+				if(this.payType==''){
+					uni.showToast({title: '充值方式不能为空！',icon: 'none',duration: 2000});
+					return; 
+				}
 			  
-			  if(this.money <= 0) {
-				  uni.showToast({title: '充值不能小于零！',icon: 'none',duration: 2000});
-				  return; 
-			  }
+				if(this.money <= 0) {
+					uni.showToast({title: '充值不能小于零！',icon: 'none',duration: 2000});
+					return; 
+				}
 				uni.showToast({title: '充值成功！',icon: 'none',duration: 2000});
+				
+				
+				uniCloud.callFunction({
+				    name: "nurse-order-update",
+				    data: {
+						id: this.nurse_order_id,
+						status: 2
+				    },
+				    success: (res) => {
+						console.error("更新成功 ---" );
+						console.log(res);
+						
+						this.dispatchOrder();
+						
+				    },
+				    fail: (err) => {
+				        console.error("更新失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("更新完成");
+				    }
+				});
+				
+				
+				
 				return;
 			
+			},
+			
+			/**
+			 * 自动派单 
+			 */
+			dispatchOrder(){
+				uniCloud.callFunction({
+				    name: "nurse-dispatch-order",
+				    data: {
+						id: this.nurse_order_id
+				    },
+				    success: (res) => {
+						console.error("派单成功 ---" );
+						
+						console.log(res.result.data);
+						this.getPushClientId(res.result.data)	
+				    },
+				    fail: (err) => {
+				        console.error("派单失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("派单完成");
+				    }
+				});
+				
+			},
+			
+			/**
+			 * 获取push_clientid
+			 */
+			getPushClientId(uid) {
+				uniCloud.callFunction({
+				    name: "mydevice",
+				    data: {
+						uid: uid
+				    },
+				    success: (res) => {
+						console.error("成功 ---" );			
+						console.log(res);
+								
+				    },
+				    fail: (err) => {
+				        console.error("失败: " + err);
+				    },
+				    complete: (res) => {
+				        console.log("完成");
+				    }
+				});
+			},
+			
+			sendMessage(pushId) {
+				uniCloud.callFunction({
+				    name: "testUniPush",
+				    data: {
+						pushId: pushId,
+						title: "您被选中自动派单",
+						content: this.serviceName,
+						text: "价格：" + this.money,
+				    },
+				    success: (res) => {
+						console.log(res)
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				         console.log("请求完成");
+				    }
+				});
+				
 			},
 			
 			/**
@@ -122,7 +218,7 @@ import app from "../../App.vue"
 			*/
 			money_input:function(event){
 			    this.money=event.target.value;
-			    console.log(event.target.value);
+			    // console.log(event.target.value);
 			},
 			
 			/**

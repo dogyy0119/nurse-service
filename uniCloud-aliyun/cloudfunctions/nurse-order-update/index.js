@@ -5,7 +5,11 @@ exports.main = async (event, context) => {
 
     const collection = db.collection("nurse-order")
 
-    let res = await collection.doc(event._id).update(event)
+	console.log( event.id )
+
+    let res = await collection.doc(event.id).update({
+		status: event.status
+	})
 
     // 返回数据给客户端
     return {
