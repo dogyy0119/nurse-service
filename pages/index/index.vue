@@ -103,24 +103,19 @@
 			}
 		},
 		
-		onLoad() {
+		onLoad(event) {
 			this.getCid()
 			// this.opid()
-			
-			// let mylocation = uni.getStorageSync("location")
-			
-			// console.log(mylocation)
-			// if (mylocation != '') {
-			// 	this.cityName = mylocation
-			// } else {
-			// 	console.log("mylocation is null")
-			// }
-			
+						
 			// this.requestData();
 		},
 		
 		onShow() {			
 			this.getNewsData();
+			
+			let mylocation = uni.getStorageSync("location")
+			this.cityName = mylocation || "城市";
+
 		},
 				
 		onNavigationBarButtonTap(e) {
@@ -158,23 +153,7 @@
 						console.log(err)
 					}
 				})
-				
-				
-				uniCloud.callFunction({
-				    name: "testUniPush",
-				    data: {						
-				    },
-				    success: (res) => {
-						console.log(res)
-				    },
-				    fail: (err) => {
-				        console.error("请求失败: " + err);
-				    },
-				    complete: (res) => {
-				         console.log("请求完成");
-				    }
-				});
-				
+								
 			},
 			
 			selectCity() {

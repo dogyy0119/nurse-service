@@ -23,12 +23,13 @@
 		mixins: [mixin],
 		data() {
 			return {
+				"user_id": "",
 				"push_clientid": "",
 				"password": "",
 				"username": "",
 				"agree": false,
 				"captcha":'',
-				"needCaptcha":false
+				"needCaptcha": true
 			}
 		},
 		computed: {
@@ -54,17 +55,17 @@
 			 * 密码登录
 			 */
 			pwdLogin() {
-				
+				console.log("start pwdLogin.")
 				uni.getPushClientId({
 					success: (res) => {
 						this.push_clientid = res.cid
-						console.log('客户端推送标识:',push_clientid)
+						console.log('客户端推送标识:', this.push_clientid)
 					},
 					fail(err) {
 						console.log(err)
 					}
 				})
-				
+				console.log("start pwdLogin.")
 				if (!this.agree) {
 					return uni.showToast({
 						title: this.$t('common.noAgree'),
@@ -84,11 +85,13 @@
 						},
 					},
 					success: ({result}) => {
-						console.log(result);
+						console.log("登陆成功。");
+						
+						console.log(result.uid);
 						if (result.code === 0) {
 							this.loginSuccess(result)							
 							uni.setStorageSync('username', this.username);
-							
+							uni.setStorageSync('user_id', result.uid);						
 						} else {
 							if (result.needCaptcha) {
 								uni.showToast({

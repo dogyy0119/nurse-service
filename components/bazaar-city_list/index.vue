@@ -146,9 +146,9 @@
 				})
 			},
 			// 获取城市
-			selectedCity({city,name}){
-				console.log(city,name);
-				this.getCity&&this.getCity({city,name});
+			selectedCity(city){
+				console.log(city)
+				this.getCity&&this.getCity(city);
 			},
 			// 定位操作
 			location(){
@@ -158,7 +158,7 @@
 						console.log(res);
 						That.locationCity = res && res.address;
 						That.locationName = res && res.name;
-						That.selectedCity({city:That.locationCity,name:That.locationName});
+						That.selectedCity(That.locationCity);
 				    },
 					fail(){
 						That.locationCity = "定位失败，请点击重试";

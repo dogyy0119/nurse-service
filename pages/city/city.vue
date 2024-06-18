@@ -13,11 +13,19 @@
 	        Citylist,
 	    },
 	    methods:{
-	        getCity({city,name}){
+	        getCity(city){
 				console.log(city)
-				console.log(name)
-	            // city 城市名称
-	            // name 定位名称
+				uni.setStorageSync("location",city)
+				
+				uni.switchTab({
+				  url: '/pages/index/index',
+				  success: (res) => {
+				    // Handle success if needed
+				  },
+				  fail: (err) => {
+				    // Handle failure if needed
+				  }
+				});
 	        }
 	    }
 	}
