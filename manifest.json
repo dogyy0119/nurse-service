@@ -64,7 +64,8 @@
     "mp-weixin" : {
         "appid" : "wx6aaa77f8d65f25ef",
         "setting" : {
-            "urlCheck" : false
+            "urlCheck" : false,
+            "minified" : true
         },
         "usingComponents" : true,
         "permission" : {
@@ -74,7 +75,10 @@
         },
         "unipush" : {
             "enable" : true
-        }
+        },
+		"optimization" : {
+			"subPackages" : true
+		}
     },
     "mp-alipay" : {
         "usingComponents" : true

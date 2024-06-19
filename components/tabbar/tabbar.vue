@@ -68,7 +68,7 @@
 						isbulge: false,
 						iconPath: "../../static/tabbar/my.png",
 						selectedIconPath: "../../static/tabbar/myfill.png",
-						pagePath: "/pages/ucenter/ucenter"
+						pagePath: "/pages/home/ucenter"
 					},
 				],
 			};

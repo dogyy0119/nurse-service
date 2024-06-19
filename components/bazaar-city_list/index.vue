@@ -16,7 +16,7 @@
 							{{hotcity.title}}
 						</view> 
 						<view class="city-list city-list-inline">
-							<view class="city-item" v-for="(item,index) in hotcity.lists" :key="`city${index}`" @tap="selectedCity(item)">
+							<view class="city-item" v-for="(item,index) in hotcity.lists" :key="`city${index}`" @tap="selectedCity({city: item, address:''})">
 								{{item}}
 							</view>
 						</view>
@@ -28,7 +28,7 @@
 								{{city.title}}
 							</view>
 							<view class="city-list city-list-block">
-								<view class="city-item" v-for="(item,index) in city.lists" :key="`item${index}`" @tap="selectedCity(item)">
+								<view class="city-item" v-for="(item,index) in city.lists" :key="`item${index}`" @tap="selectedCity({city: item, address:''})">
 									{{item}}
 								</view>
 							</view>
@@ -146,19 +146,21 @@
 				})
 			},
 			// 获取城市
-			selectedCity(city){
+			selectedCity({city,address}){
 				console.log(city)
-				this.getCity&&this.getCity(city);
+				console.log(address)
+				this.getCity&&this.getCity(city,address);
 			},
 			// 定位操作
 			location(){
 				let That = this;
 				uni.chooseLocation({
 				    success(res){
+						console.log("uni.chooseLocation success!!!");
 						console.log(res);
 						That.locationCity = res && res.address;
 						That.locationName = res && res.name;
-						That.selectedCity(That.locationCity);
+						That.selectedCity({city: That.locationName,address: Thar.locationCity});
 				    },
 					fail(){
 						That.locationCity = "定位失败，请点击重试";

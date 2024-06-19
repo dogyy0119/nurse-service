@@ -8,7 +8,7 @@
     "urlCheck": false,
     "es6": false,
     "postcss": false,
-    "minified": false,
+    "minified": true,
     "newFeature": true,
     "bigPackageSizeSupport": true,
     "babelSetting": {
@@ -36,7 +36,7 @@
         },
         {
           "name": "我的",
-          "pathName": "pages/ucenter/ucenter",
+          "pathName": "pages/home/ucenter",
           "query": ""
         }
       ]

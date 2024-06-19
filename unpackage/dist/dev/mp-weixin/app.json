@@ -1,46 +1,48 @@
 {
   "pages": [
     "pages/index/index",
-    "pages/home/home",
     "pages/index/search",
     "pages/order/OrderList",
     "pages/order/OrderEvaluate",
     "pages/order/MoreEvaluate",
-    "pages/index/indexservice/indexservice",
-    "pages/list/list",
-    "pages/ucenter/login-page/index/index",
-    "pages/list/search/search",
-    "pages/list/detail",
-    "pages/ucenter/userinfo/bind-mobile/bind-mobile",
-    "pages/ucenter/ucenter",
-    "pages/ucenter/about/about",
+    "pages/common/webview/webview",
+    "pages/messge/messge",
     "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
     "pages/uni-agree/uni-agree",
-    "pages/ucenter/settings/settings",
-    "pages/ucenter/userinfo/userinfo",
-    "pages/ucenter/userinfo/cropImage",
-    "pages/ucenter/login-page/pwd-login/pwd-login",
-    "pages/ucenter/login-page/pwd-retrieve/pwd-retrieve",
-    "pages/ucenter/login-page/phone-code/phone-code",
-    "pages/common/webview/webview",
-    "pages/ucenter/login-page/register/register",
-    "pages/ucenter/read-news-log/read-news-log",
-    "pages/ucenter/invite/invite",
-    "pages/ucenter/settings/deactivate/deactivate",
     "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
-    "pages/join/join",
-    "pages/messge/messge",
-    "pages/creatService/creatService",
-    "pages/hushizhan/hushizhan",
-    "pages/hospital/hospital",
     "pages/coupon-card/coupon-card",
-    "pages/function/voucher_center_",
-    "pages/hospitalservice/hospitalservice",
-    "pages/city/city",
-    "pages/servicedetails/servicedetails",
-    "pages/appointment/appointment"
+    "pages/home/ucenter"
   ],
-  "subPackages": [],
+  "subPackages": [
+    {
+      "root": "pages/service/",
+      "pages": [
+        "hushizhan/hushizhan",
+        "function/voucher_center_",
+        "city/city",
+        "servicedetails/servicedetails",
+        "appointment/appointment"
+      ]
+    },
+    {
+      "root": "pages/ucenter/",
+      "pages": [
+        "login-page/index/index",
+        "userinfo/bind-mobile/bind-mobile",
+        "about/about",
+        "settings/settings",
+        "userinfo/userinfo",
+        "userinfo/cropImage",
+        "login-page/pwd-login/pwd-login",
+        "login-page/pwd-retrieve/pwd-retrieve",
+        "login-page/phone-code/phone-code",
+        "login-page/register/register",
+        "read-news-log/read-news-log",
+        "invite/invite",
+        "settings/deactivate/deactivate"
+      ]
+    }
+  ],
   "window": {
     "navigationBarTextStyle": "white",
     "navigationBarTitleText": "uni-starter",
@@ -69,7 +71,7 @@
         "text": "订单"
       },
       {
-        "pagePath": "pages/ucenter/ucenter",
+        "pagePath": "pages/home/ucenter",
         "iconPath": "static/tabbar/my.png",
         "selectedIconPath": "static/tabbar/myfill.png",
         "text": "我的"

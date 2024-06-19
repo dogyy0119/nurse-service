@@ -160,7 +160,7 @@
 			      // 处理城市选择逻辑
 			      console.log('选择城市');
 				  uni.navigateTo({
-				    url: '/pages/city/city'	
+				    url: '/pages/service/city/city'	
 				  });
 			},
 			getNewsData(id=0){
@@ -208,7 +208,7 @@
 				// console.log(item.id)
 				// return;
 				uni.navigateTo({
-					 url: `/pages/servicedetails/servicedetails?item=${item.id}`,
+					 url: `/pages/service/servicedetails/servicedetails?item=${item.id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
@@ -218,7 +218,7 @@
 			tapGrid(index) {
 				this.navIndex = index
 				uni.navigateTo({
-					url: `/pages/hushizhan/hushizhan?index=${index}`,
+					url: `/pages/service/hushizhan/hushizhan?index=${index}`,
 					// url: `/pages/index/indexservice/indexservice?index=${index}`,
 					success: res => {},
 					fail: () => {},
