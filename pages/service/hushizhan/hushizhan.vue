@@ -143,10 +143,13 @@
 			},
 			
 			//跳转到详情页
-			goDetail(item){				
+			goDetail(item){
 				// uni.navigateTo({
-				// 	url:`/pages/detail/detail?cid=${item.classid}&id=${item.id}`
-				// })
+				// 	 url: `/pages/service/servicedetails/servicedetails?item=${item.id}`,
+				// 	success: res => {},
+				// 	fail: () => {},
+				// 	complete: () => {}
+				// });
 			},
 						
 			//获取导航列表数据

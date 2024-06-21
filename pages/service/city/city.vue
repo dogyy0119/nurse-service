@@ -1,4 +1,5 @@
 <template>
+	
 	<view>
 		    <Citylist :getCity="getCity"></Citylist>
 	</view>

@@ -1,5 +1,5 @@
 {
-    "name" : "云端一体集成多端登陆自定义tabar项目模板",
+    "name" : "云端一体集成多端登陆自定义tabar项目模板A",
     "appid" : "__UNI__5000F3E",
     "description" : "",
     "versionName" : "1",
@@ -62,7 +62,7 @@
     },
     "quickapp" : {},
     "mp-weixin" : {
-        "appid" : "wx6aaa77f8d65f25ef",
+        "appid" : "wx380cb97cf10457e7",
         "setting" : {
             "urlCheck" : false,
             "minified" : true
@@ -76,9 +76,9 @@
         "unipush" : {
             "enable" : true
         },
-		"optimization" : {
-			"subPackages" : true
-		}
+        "optimization" : {
+            "subPackages" : true
+        }
     },
     "mp-alipay" : {
         "usingComponents" : true

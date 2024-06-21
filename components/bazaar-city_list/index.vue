@@ -23,12 +23,12 @@
 					</view>
 					<!-- 城市列表 -->
 					<view id="citytitle" class="city-list-content">
-						<view class="city_title_wrap" v-for="(city,index) in citylist" :key="`citylist${index}`">
+						<view class="city_title_wrap" v-for="(city,index) in citylist" :key="index">
 							<view class="city-title city-title-letter">
 								{{city.title}}
 							</view>
 							<view class="city-list city-list-block">
-								<view class="city-item" v-for="(item,index) in city.lists" :key="`item${index}`" @tap="selectedCity({city: item, address:''})">
+								<view class="city-item" v-for="(item,index) in city.lists" :key="index" @tap="selectedCity({city: item, address:''})">
 									{{item}}
 								</view>
 							</view>
@@ -45,7 +45,7 @@
 		<view class="navrightcity">
 			<view class="nav-item nav-letter" @tap="scroll_to_city(0)">定</view>
 			<view class="nav-item nav-letter" @tap="scroll_to_city(1)">热</view>
-			<view v-for="(item,index) in citylist" :key="`nav${index}`" class="nav-item nav-letter" @click="scroll_to_city(index+2)">
+			<view v-for="(item,index) in citylist" :key="index" class="nav-item nav-letter" @click="scroll_to_city(index+2)">
 				{{item.title}}
 			</view>
 		</view>

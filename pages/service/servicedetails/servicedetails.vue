@@ -443,7 +443,7 @@
 
 		.reserve-btn {
 			flex: 1; 
-			height: 30px; /* 设置按钮高度为14像素 */
+			height: 40px; /* 设置按钮高度为14像素 */
 		    background-color: #DD524D; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    border: none; /* 移除按钮边框 */
@@ -455,7 +455,7 @@
 		
 		.amount {
 			flex: 1; 
-			 height: 30px; /* 设置按钮高度为14像素 */
+			 height: 40px; /* 设置按钮高度为14像素 */
 		    background-color: #DD524D; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    // border: none; /* 移除按钮边框 */

@@ -45,8 +45,8 @@
 				
 			</uni-forms>
 			<div class="flex-container">
+				<button class="reserve-btn" @click="submit('baseForm')">确定预约</button>
 				<button class="amount">金额：￥{{totalPrice}}</button>
-			    <button class="reserve-btn" @click="submit('baseForm')">确定预约</button>
 			</div>
 		</view>
 
@@ -345,9 +345,13 @@
 							orderId: res.result.data
 						};
 						let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+						
+						uni.showToast({
+						  title: `预约成功`
+						});
 									
 						uni.navigateTo({
-							url: '/pages/function/voucher_center_?params=' + params,
+							url: '/pages/service/function/voucher_center_?params=' + params,
 							success: res => {},
 							fail: () => {},
 							complete: () => {}
@@ -355,6 +359,9 @@
 						
 				    },
 				    fail: (err) => {
+						uni.showToast({
+						  title: `预约失败`
+						});
 				        console.error("请求失败: " + err);
 				    },
 				    complete: (res) => {
@@ -402,14 +409,14 @@
 	
 	.reserve-btn {
 	    flex: 1; 
-	    height: 30px; /* 设置按钮高度为14像素 */
+	    height: 40px; /* 设置按钮高度为14像素 */
 	    background-color: #DD524D; /* 设置背景色为粉色 */
 	    color: #fff; /* 设置字体颜色为白色 */
 	    border: none; /* 移除按钮边框 */
 	    padding: 1px 10px; /* 设置按钮内边距 */
 	    border-radius: 5px; /* 添加圆角 */
 	    cursor: pointer; /* 设置鼠标指针为手型 */
-	    font-size: 12px;
+	    font-size: 16px;
 	    position: fixed; /* 设置按钮的定位方式为固定定位 */
 	    bottom: 0; /* 将按钮定位在页面底部 */
 	    left: 0; /* 将按钮置于页面左侧 */
@@ -422,16 +429,16 @@
 	
 	.amount {
 	    flex: 1; 
-	    height: 30px; /* 设置按钮高度为14像素 */
+	    height: 40px; /* 设置按钮高度为14像素 */
 	    background-color: #1CBBB4; /* 设置背景色为粉色 */
 	    color: #fff; /* 设置字体颜色为白色 */
 	    /* border: none; */ /* 移除按钮边框 */
 	    /* padding: 1px 1px; */ /* 设置按钮内边距 */
 	    // border-radius: 5px; /* 添加圆角 */
 	    cursor: pointer; /* 设置鼠标指针为手型 */
-	    font-size: 12px;    
+	    font-size: 16px;    
 	    position: fixed; /* 设置按钮的定位方式为固定定位 */
-	    bottom: 30px; /* 将按钮定位在页面底部 */
+	    bottom: 40px; /* 将按钮定位在页面底部 */
 	    right: 0; /* 将按钮置于页面右侧 */
 	    margin-right: 0px; /* 设置按钮距离页面右侧的距离 */
 		width: 100%
