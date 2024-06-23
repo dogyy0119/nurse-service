@@ -19,7 +19,7 @@
 			</div>
 		</view> -->
 		<view  class="content" >
-			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
+			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view> 
 <!-- 		<view class="nodata" v-if="!newsArr.length">
 			<image src="/static/images/nodata.png" mode="widthFix"></image>
@@ -122,14 +122,15 @@
 
 		
 		methods: {
-			goProDetail(item) {
-				console.log("goProDetail: goProDetail" )
+			goProDetail(object) {
+								
 				uni.navigateTo({
-					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					 url: `/pages/service/servicedetails/servicedetails?item=${object.id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
 				});
+				
 			},
 			//点击导航切换
 			clickNav(index,id){

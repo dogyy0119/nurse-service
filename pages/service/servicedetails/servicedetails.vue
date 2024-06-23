@@ -117,12 +117,12 @@
 				]
 			};
 		},
-		async onLoad(event) {
+		onLoad(event) {
 			console.log(event.item)
 			console.log(event)
 			
 			this.serviceId = event.item
-		    await this.getDetail(event.item);
+		    this.getDetail(event.item);
 		    // await this.getConsumaList(options);
 				
 		    // this.getPackageList(this.detailObj.package_list);

@@ -160,7 +160,9 @@
 						console.log(res);
 						That.locationCity = res && res.address;
 						That.locationName = res && res.name;
-						That.selectedCity({city: That.locationName,address: Thar.locationCity});
+						// That.selectedCity({city: That.locationName,address: Thar.locationCity});
+						That.selectedCity({city: That.locationCity,address: Thar.locationName});
+						uni.setStorageSync("location",That.locationCity)
 				    },
 					fail(){
 						That.locationCity = "定位失败，请点击重试";

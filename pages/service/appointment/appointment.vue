@@ -215,7 +215,10 @@
 				this.packageList = params.packageList;
 				// this.haocaiId = params.haocaiId;
 				this.haocaiName = params.haocaiName;
-				this.haocaiDetail = params.haocaiDetail;	
+				this.haocaiDetail = params.haocaiDetail;
+				const now = new Date();
+				const timestamp = now.getTime();
+				this.baseFormData.datetimesingle = timestamp;
 		    }
 		},
 		onReady() {
