@@ -16,7 +16,7 @@
 							{{hotcity.title}}
 						</view> 
 						<view class="city-list city-list-inline">
-							<view class="city-item" v-for="(item,index) in hotcity.lists" :key="`city${index}`" @tap="selectedCity({city: item, address:''})">
+							<view class="city-item" v-for="(item,index) in hotcity.lists" :key="index" @tap="selectedCity({city: item, address:''})">
 								{{item}}
 							</view>
 						</view>
@@ -161,8 +161,9 @@
 						That.locationCity = res && res.address;
 						That.locationName = res && res.name;
 						// That.selectedCity({city: That.locationName,address: Thar.locationCity});
-						That.selectedCity({city: That.locationCity,address: Thar.locationName});
-						uni.setStorageSync("location",That.locationCity)
+						That.selectedCity({city: That.locationCity , address: That.locationName});
+						uni.setStorageSync("location",That.locationCity )
+						uni.setStorageSync("address",That.locationCity + That.locationName)
 				    },
 					fail(){
 						That.locationCity = "定位失败，请点击重试";

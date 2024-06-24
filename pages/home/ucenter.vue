@@ -101,28 +101,29 @@
 		data() {
 			return {
 				ucenterList: [
-					[{
-							"title": "每日签到",
-							"event": 'signIn',
-							"icon": "compose"
-						},
-						{
-							"title": "我的阅读",
-							"to": '/pages/ucenter/read-news-log/read-news-log',
-							"icon": "flag"
-						},
+					[
+						// {
+						// 	"title": "每日签到",
+						// 	"event": 'signIn',
+						// 	"icon": "compose"
+						// },
+						// {
+						// 	"title": "我的阅读",
+						// 	"to": '/pages/ucenter/read-news-log/read-news-log',
+						// 	"icon": "flag"
+						// },
 						// {
 						// 	"title": "我的订单",
 						// 	"to": '/pages/order/OrderList',
 						// 	"icon": "flag"
 						// },
 						
-						{
-							"title": "我的积分",
-							"to": '',
-							"event": 'getScore',
-							"icon": "paperplane"
-						},
+						// {
+						// 	"title": "我的积分",
+						// 	"to": '',
+						// 	"event": 'getScore',
+						// 	"icon": "paperplane"
+						// },
 						{
 							"title": "优惠券",
 							"to": '/pages/coupon-card/coupon-card', 
