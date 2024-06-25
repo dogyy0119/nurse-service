@@ -75,7 +75,7 @@
 		data() {
 			return {
 				tabsIndex: 0,
-				userName: "",
+				user_id: "",
 				allList: [
 					{tabId: 0,name: '全部'},
 					{tabId: 1,name: '待支付'},
@@ -96,8 +96,8 @@
 		},
 		onShow() {
 			console.log( "onLoad" );
-			this.userName = uni.getStorageSync('user_id');
-			console.log("user_id :" + this.userName)
+			this.user_id = uni.getStorageSync('user_id');
+			console.log("user_id :" + this.user_id)
 			this.getOrderData(0);
 		},
 
@@ -133,27 +133,23 @@
 			},
 			
 			getOrderData(type) {
-				// console.log( "getOrderData" )
-				
-						
+				console.log("this.user_id :" + this.user_id)		
 				let remoteQuery = {};
 				if ( type !== 0 ) {
 					remoteQuery.status = type,
-					remoteQuery.userId = this.userName
+					remoteQuery.userId = this.user_id
 				} else {
-					remoteQuery.userId = this.userName
+					remoteQuery.userId = this.user_id
 				}
 				
 				uniCloud.callFunction({
 				    name: "nurse-order-list",
 				    data: remoteQuery,
 					// {
-				 //        status: 3,
-				 //        userId: "liyongsheng"
-				 //    },
-				    success: (res) => {					
-
-						
+					//        status: 3,
+					//        userId: "liyongsheng"
+					//    },
+				    success: (res) => {											
 						this.orderList = [];
 						res.result.data.forEach(item => {
 						    
@@ -167,6 +163,8 @@
 						        'odStatus': item.status
 						    });
 						});
+						
+						this.orderList.reverse();
 						
 						// this.orderList.forEach((item) => {
 						//     if (item.odNumber !== undefined) {

@@ -17,7 +17,7 @@ export default {
 	"mp": {
 		"weixin": {
 			//微信小程序原始id，微信小程序分享时
-			"id": "gh_33446d7f7a26"
+			"id": "wx380cb97cf10457e7"
 		}
 	},
 	"router": {

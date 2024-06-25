@@ -90,7 +90,6 @@
 						console.log(result.uid);
 						if (result.code === 0) {
 							this.loginSuccess(result)							
-							uni.setStorageSync('username', this.username);
 							uni.setStorageSync('user_id', result.uid);						
 						} else {
 							if (result.needCaptcha) {

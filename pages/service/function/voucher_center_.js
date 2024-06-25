@@ -136,8 +136,16 @@ import app from "../../../App.vue"
 				        console.log("更新完成");
 				    }
 				});
-				
-				
+								
+				// uni.switchTab({
+				//   url: '/pages/index/index',
+				//   success: (res) => {
+				//     // Handle success if needed
+				//   },
+				//   fail: (err) => {
+				//     // Handle failure if needed
+				//   }
+				// });
 				
 				return;
 			
@@ -180,7 +188,16 @@ import app from "../../../App.vue"
 				    success: (res) => {
 						console.error("成功 ---" );			
 						console.log(res);
-								
+						
+						uni.switchTab({
+						  url: '/pages/index/index',
+						  success: (res) => {
+						    // Handle success if needed
+						  },
+						  fail: (err) => {
+						    // Handle failure if needed
+						  }
+						});		
 				    },
 				    fail: (err) => {
 				        console.error("失败: " + err);

@@ -289,7 +289,9 @@
 					success: async ({
 						result
 					}) => {
+						console.log('event : ' + JSON.stringify(result))
 						console.log("login-result", result);
+						uni.setStorageSync('user_id', result.uid);
 						if (result.code === 0) {
 							delete result.userInfo.token
 							// #ifdef MP-WEIXIN

@@ -43,6 +43,7 @@
 			}
 		},
 		onLoad(e) {
+			console.log("哈哈啥，微信登陆")
 			this.type = e.type
 
 			//是否优先启动一键登录。即：页面一加载就启动一键登录
