@@ -222,7 +222,7 @@
 						}
 					}
 					function closeUniverify(){
-						uni.hideLoading()
+						// uni.hideLoading()
 						univerifyManager.close()
 						// 取消订阅自定义按钮点击事件
 						univerifyManager.offButtonsClick(onButtonsClickFn)
@@ -245,19 +245,19 @@
 						},
 						complete(e){
 							console.log(e);
-							uni.hideLoading()
+							// uni.hideLoading()
 							// 取消订阅自定义按钮点击事件
 							univerifyManager.offButtonsClick(onButtonsClickFn)
 						}
 					})
 				}
-				uni.showLoading({mask: true})
+				// uni.showLoading({mask: true})
 				uni.login({
 					"provider": type,
 					"onlyAuthorize": true, //请勿直接使用前端获取的unionid或openid直接用于登录，前端的数据都是不可靠的
 					complete: (e) => {
 						console.log(e);
-						uni.hideLoading()
+						// uni.hideLoading()
 					},
 					success: async e => {
 						console.log(e);
@@ -316,7 +316,7 @@
 						if (type == 'univerify') {
 							uni.closeAuthView()
 						}
-						uni.hideLoading()
+						// uni.hideLoading()
 					}
 				})
 			},
