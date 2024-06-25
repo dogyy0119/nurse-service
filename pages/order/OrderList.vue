@@ -36,7 +36,7 @@
 									<text class="rate-text1">订单地址：{{item.odAddress}}</text>
 								</view>
 								<view class="item-right-v1 induce">
-									<text class="rate-text1">下单时间：{{item.odTime}}</text>
+									<text class="rate-text1">下单时间：{{formatTime(item.odTime)}}</text>
 								</view>
 								<view class="item-right-v2">
 									<view class="v2-fh">￥<text class="v2-price">{{item.odPrice}}</text></view>
@@ -96,12 +96,42 @@
 		},
 		onShow() {
 			console.log( "onLoad" );
-			this.userName = uni.getStorageSync('username');
-			console.log("username :" + this.userName)
+			this.userName = uni.getStorageSync('user_id');
+			console.log("user_id :" + this.userName)
 			this.getOrderData(0);
 		},
 
-		methods: {		
+		methods: {	
+			formatTime(timestamp) {
+			    const date = new Date(timestamp); // Assuming timestamp is in seconds
+			    const year = date.getFullYear();
+			    const month = String(date.getMonth() + 1).padStart(2, '0');
+			    const day = String(date.getDate()).padStart(2, '0');
+			    const hours = String(date.getHours()).padStart(2, '0');
+			    const minutes = String(date.getMinutes()).padStart(2, '0');
+			    const seconds = String(date.getSeconds()).padStart(2, '0');
+			    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+			},
+			goDetail(item) {
+				console.log("liuhang :"+item)
+				console.log("liuhang odNumber :"+item.odNumber)
+				
+				let obj = {
+					orderId: item.odNumber,	
+				};
+				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
+				
+				
+				uni.navigateTo({
+					 // url: `/pages/order/OrderDetails/OrderDetails?params=${item.odNumber}`,
+					url: '/pages/order/OrderDetails/OrderDetails?params=' + params,
+					success: res => {},
+					fail: () => {},
+					complete: () => {}
+				});
+				
+			},
+			
 			getOrderData(type) {
 				// console.log( "getOrderData" )
 				
@@ -210,11 +240,11 @@
 				
 				console.log("item===支付====",item)
 				
-				let userName = uni.getStorageSync('username');
+				let user_id = uni.getStorageSync('user_id');
 				
 				let obj = {
 					totalFee: item.odPrice,
-					userName: userName,
+					userName: user_id,
 					serviceId: this.odNumber,
 					serviceName: this.odName
 				};

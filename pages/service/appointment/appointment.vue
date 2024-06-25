@@ -220,6 +220,12 @@
 				const timestamp = now.getTime();
 				this.baseFormData.datetimesingle = timestamp;
 		    }
+			
+
+		},
+		onShow() {
+			let mylocation = uni.getStorageSync("address")
+			this.baseFormData.address =  mylocation || "";
 		},
 		onReady() {
 			// 设置自定义表单校验规则，必须在节点渲染完毕后执行

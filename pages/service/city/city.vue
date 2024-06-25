@@ -26,7 +26,7 @@
 				console.log("city:" + city)
 				console.log("address:" + address)
 				uni.setStorageSync("location",city)
-				//uni.setStorageSync("address",address)
+				//uni.setStorageSync("address",city + address)
 				uni.switchTab({
 				  url: '/pages/index/index',
 				  success: (res) => {
