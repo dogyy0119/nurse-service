@@ -36,7 +36,10 @@
 									<text class="rate-text1">订单地址：{{item.odAddress}}</text>
 								</view>
 								<view class="item-right-v1 induce">
-									<text class="rate-text1">下单时间：{{formatTime(item.odTime)}}</text>
+									<text class="rate-text1">付款时间：{{formatDate(item.odPaytime)}}</text>
+								</view>
+								<view class="item-right-v1 induce">
+									<text class="rate-text1">预约时间：{{formatTime(item.odTime)}}</text>
 								</view>
 								<view class="item-right-v2">
 									<view class="v2-fh">￥<text class="v2-price">{{item.odPrice}}</text></view>
@@ -102,6 +105,14 @@
 		},
 
 		methods: {	
+			formatDate(timestamp) {
+			    // 判断 timestamp 是否为有效的时间格式
+				if (!timestamp || isNaN(new Date(timestamp).getTime())) {
+		            return "未付款";
+		        }
+		        // 如果 timestamp 是有效时间格式，则格式化显示
+			    return this.formatTime(timestamp); // 假设你有一个 formatTime 方法来格式化时间
+			},
 			formatTime(timestamp) {
 			    const date = new Date(timestamp); // Assuming timestamp is in seconds
 			    const year = date.getFullYear();
@@ -152,13 +163,14 @@
 				    success: (res) => {											
 						this.orderList = [];
 						res.result.data.forEach(item => {
-						    
+				
 						    this.orderList.push({
 						        'picUrl': '/static/logo.png',
 						        'odNumber': item._id,
 						        'odName': item.title,
 						        'odPrice': item.total_fee,
 						        'odAddress': item.servants_address,
+								'odPaytime': item.paid_time,
 						        'odTime': item.reservation_time,
 						        'odStatus': item.status
 						    });
