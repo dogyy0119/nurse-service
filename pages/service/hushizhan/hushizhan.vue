@@ -29,7 +29,6 @@
 			<view v-if="loading==1">数据加载中...</view>
 			<view v-if="loading==2">没有更多了~~</view>
 		</view>
-		<tabbar index="0"></tabbar>
 	</view>
 </template>
 

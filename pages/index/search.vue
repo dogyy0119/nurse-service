@@ -32,8 +32,6 @@
 		<view  class="content" >
 			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
 		</view>
-		
-		<tabbar index="10"></tabbar>
 	</view>
 </template>
 

@@ -7,7 +7,6 @@
 				<text class="uni-body">{{item.title}}</text>
 			</uni-card>
 		</block>
-		<tabbar index="3"></tabbar>
 	</view>
 </template>
 

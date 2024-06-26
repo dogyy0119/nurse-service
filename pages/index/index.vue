@@ -105,13 +105,13 @@
 		
 		onLoad(event) {
 			this.getCid()
+			this.getNewsData();
 			// this.opid()
 						
 			// this.requestData();
 		},
 		
 		onShow() {			
-			this.getNewsData();
 			
 			let mylocation = uni.getStorageSync("location")
 			// this.cityName = mylocation || "城市";

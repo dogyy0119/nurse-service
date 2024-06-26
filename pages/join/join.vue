@@ -1,7 +1,5 @@
 <template>
 	<view>
-		<!-- <tabbar index="2"></tabbar> -->
-		
 		<form class="row custom-form" @submit="onSubmit">
 			
 			<label for="user_id" class="form-label">用户id：</label>
