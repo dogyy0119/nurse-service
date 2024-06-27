@@ -1,9 +1,6 @@
 <template>
 	<view>
-	<!-- 	<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar left-icon="back" :left-text="cityName"
-				title="服务详情" @clickLeft="backToTop" /> -->
-		<view class="detail">
-			
+		<view class="detail">			
 			<view class="pic">
 				<image :src="detailObj.service_thumb" mode="widthFix"></image>
 			</view>
@@ -27,20 +24,17 @@
 				<view class="time">发布时间：{{detailObj._add_time_str}}</view>
 				<view class="price" >￥：{{price}}</view>
 			</view>
-			
-	
-			
-			<view class="tool">
-				
+					
+			<view class="tool">		
 				<view class="author">选择耗材：</view>
 				<view class="author">类型：{{toolObj.name}}</view>
 				<view class="author">详细：{{toolObj.detail}}</view>
 				<view class="price">￥：{{customPrice}}</view>
 				<!-- <uni-section type="line"> -->
-					<view class="uni-px-5">
+				<view class="uni-px-5">
 						<!-- <view class="text">{{JSON.stringify(haocaiValue)}}</view> -->
-						<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
-					</view>
+					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
+				</view>
 				<!-- </uni-section> -->
 			</view>
 			
@@ -311,13 +305,13 @@
 	
 	.popup-height {
 		// @include height;
-		width: 200px;
+		width: 100px;
 	}
 	.popup-content {
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 50px;
+		height: 40px;
 		padding: 15px;
 		font-size: 10px;
 	}
@@ -347,12 +341,14 @@
 
 	.title{
 		font-size: 40rpx;
+		color: #FF8F91;
 		background: #fff;
 		line-height: 1.6em;
 		.name {
 			
 		}
 		.price {
+			color: #FF8F91;
 			padding:0 10rpx;
 			margin:20rpx 0;
 			background: #f6f6f6;
@@ -361,26 +357,10 @@
 			// line-height: 1.6em;
 		}
 	}
-	
-	// .tool {
-	// 	padding:0 30rpx;
-	// 	margin:50rpx 0;
-	//     display: flex;
-	// 	background: #f6f6f6;
-	//     flex-direction: column; /* 设置flex子项垂直排列 */
-	//     align-items: left; /* 子项在水平方向上居中对齐 */
-	//     justify-content: flex-start; /* 子项在垂直方向上从顶部开始排列 */
-	// 	margin-bottom: 10px;
 		
-	// 	.price {
-	// 		font-size: 30rpx;
-	// 		color: #F5C2C1;
-	// 		line-height: 1.6em;
-	// 	}
-	// }
-	
 	.tool {
 	    display: flex;
+		color: #FF8F91;
 	    flex-direction: column; /* 设置flex子项垂直排列 */
 	    align-items: flex-start; /* 子项在水平方向上从左侧开始对齐 */
 	    justify-content: flex-start; /* 子项在垂直方向上从顶部开始排列 */
@@ -390,14 +370,18 @@
 	    margin-bottom: 20px; /* 添加底部间距 */
 	}
 	
-	.author,
+	.author{
+		color: #FF8F91;
+		margin-bottom: 5px; /* 设置各项之间的垂直间距 */
+		color: #666; /* 设置字体颜色 */
+	}
 	.price {
+		color: #FF8F91;
 	    margin-bottom: 5px; /* 设置各项之间的垂直间距 */
-	    color: #666; /* 设置字体颜色 */
 	}
 	
 	.price {
-	    color: #f00; /* 设置价格文字颜色 */
+		color: #FF8F91;
 	    font-weight: bold; /* 设置价格文字加粗 */
 	}
 	
@@ -422,7 +406,9 @@
 	
 	.text {
 		font-size: 12px;
-		color: #666;
+		// color: #666;
+		color: #FF8F91;
+		
 		margin-top: 5px;
 	}
 	
@@ -443,30 +429,40 @@
 
 		.reserve-btn {
 			flex: 1; 
-			height: 40px; /* 设置按钮高度为14像素 */
-		    background-color: #DD524D; /* 设置背景色为粉色 */
+			height: 34px; /* 设置按钮高度为14像素 */
+		    background-color: #FF8F91; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    border: none; /* 移除按钮边框 */
 		    padding: 1px 10px; /* 设置按钮内边距 */
 		    border-radius: 5px; /* 添加圆角 */
 		    cursor: pointer; /* 设置鼠标指针为手型 */
-			font-size: 12px;		
+			font-size: 14px;		
 		}
 		
 		.amount {
 			flex: 1; 
-			 height: 40px; /* 设置按钮高度为14像素 */
-		    background-color: #DD524D; /* 设置背景色为粉色 */
+			height: 34px; /* 设置按钮高度为14像素 */
+		    background-color: #FF8F91; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    // border: none; /* 移除按钮边框 */
 		    // padding: 1px 1px; /* 设置按钮内边距 */
 		    border-radius: 5px; /* 添加圆角 */
 		    // cursor: pointer; /* 设置鼠标指针为手型 */
-			 font-size: 12px;		    
+			 font-size: 14px;		    
 		}
 	}
 	
-	
+	.amount {
+		flex: 1; 
+		height: 34px; /* 设置按钮高度为14像素 */
+	    background-color: #FF8F91; /* 设置背景色为粉色 */
+	    color: #fff; /* 设置字体颜色为白色 */
+	    // border: none; /* 移除按钮边框 */
+	    // padding: 1px 1px; /* 设置按钮内边距 */
+	    border-radius: 5px; /* 添加圆角 */
+	    // cursor: pointer; /* 设置鼠标指针为手型 */
+		 font-size: 14px;		    
+	}
 
 	
 	

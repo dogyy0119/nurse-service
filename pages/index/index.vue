@@ -28,9 +28,10 @@
 		
 		<view class="tips">
 			<view>{{gridList[this.navIndex].text}}</view>
+			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view>
 		<!--  proList: 条目数组数据  goProDetail:条目点击事件跳转（实现了点击条目数据传值）-->
-		<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
+		<!-- <cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView> -->
 		
 		<tabbar index="0"></tabbar>
 
@@ -105,14 +106,13 @@
 		
 		onLoad(event) {
 			this.getCid()
-			this.getNewsData();
-			// this.opid()
-						
+			
+			// this.opid()					
 			// this.requestData();
 		},
 		
 		onShow() {			
-			
+			this.getNewsData();
 			let mylocation = uni.getStorageSync("location")
 			// this.cityName = mylocation || "城市";
 			const address = mylocation
@@ -176,7 +176,7 @@
 			getNewsData(id=0){
 				// console.log("this.navIndex :" + this.navIndex)
 				let category = this.gridList[this.navIndex].index
-				category = "6646bc558b0da4a4e41e78be"
+				// category = "6646bc558b0da4a4e41e78be"
 				// console.log("this.navIndex :" + category)	
 				uniCloud.callFunction({
 				    name: "nurse-service-get",
