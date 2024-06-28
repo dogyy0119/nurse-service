@@ -7,34 +7,35 @@
 			
 			<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
-					<!-- <view class="price" >￥：{{detailObj.price}}</view> -->
-<!-- 					<uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
-						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" /> -->					
+					<view class="price" >￥：{{detailObj.price}}</view>
+					<!-- <uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
+						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />	 -->				
 				</view>
 			</uni-section>
 <!-- 		<view class="title">
 				<view class="price" >￥：{{detailObj.price}}</view>
 			</view> -->
 			<view class="tool">
-				<view class="author">套餐选择：{{detailObj.service_desc}}</view>
+				<view class="author">套餐选择:</view>
 				<view class="uni-px-5">
 					<!-- <view class="text">选中：{{taocan[taocanValue].text}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="taocanValue" :localdata="taocan" @change="taocanCheckboxChange(taocanValue)"></uni-data-checkbox>
 				</view>
-				<view class="time">发布时间：{{detailObj._add_time_str}}</view>
-				<view class="price" >￥：{{price}}</view>
+				<view class="author">时长：{{detailObj.service_time}}</view>
+				<view class="author">服务详情：{{detailObj.service_desc}}</view>
+				<view class="author">发布时间：{{detailObj._add_time_str}}</view>
 			</view>
 					
 			<view class="tool">		
 				<view class="author">选择耗材：</view>
-				<view class="author">类型：{{toolObj.name}}</view>
-				<view class="author">详细：{{toolObj.detail}}</view>
-				<view class="price">￥：{{customPrice}}</view>
 				<!-- <uni-section type="line"> -->
 				<view class="uni-px-5">
 						<!-- <view class="text">{{JSON.stringify(haocaiValue)}}</view> -->
 					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
 				</view>
+				<view class="price">￥：{{customPrice}}</view>
+				<view class="author">类型：{{toolObj.name}}</view>
+				<view class="author">详细：{{toolObj.detail}}</view>
 				<!-- </uni-section> -->
 			</view>
 			
@@ -54,17 +55,26 @@
 				<button class="amount" @click="toggle('bottom')" >金额:￥{{totalPrice}} 详情...</button>
 			    <button class="reserve-btn" @click="goToAppointment">立即预约</button>
 			</div>
+			
+<!-- 			<view class="goods-carts">
+				<uni-goods-nav :options="options" :fill="true" :button-group="buttonGroup" @click="onClick"
+					@buttonClick="buttonClick" />
+			</view> -->
+			
 		</view>
 		
 		<view>
 			<!-- 普通弹窗 -->
 			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
+				<!-- <view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+						class="author">套餐: {{taocan[taocanValue].text}}</text></view>
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">套餐: {{taocan[taocanValue].text}}</text></view>
+						class="author">耗材类型：{{toolObj.name}}</text></view>
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">耗材类型：{{toolObj.name}}</text></view>
-				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">耗材详细：{{toolObj.detail}}</text></view>
+						class="author">耗材详细：{{toolObj.detail}}</text></view> -->
+				<view class="tan-taocan">套餐：{{taocan[taocanValue].text}}</view>
+				<view class="tan-desc">耗材类型：{{toolObj.name}}</view>
+				<view class="tan-desc">类型：{{toolObj.detail}}</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -212,7 +222,7 @@
 						console.log(res.result.data);
 						
 						this.detailObj = res.result.data[0]
-						// this.price = this.detailObj.price
+						this.price = this.detailObj.price
 						this.totalPrice = this.customPrice + this.price
 						this.taocanType = this.detailObj.category_id
 						this.packageList = this.detailObj.package_list
@@ -298,10 +308,12 @@
 </script>
 
 <style lang="scss">
+	
 .detail{
 	// padding:50rpx 30rpx;
 	
-
+	/* 假设 <uni-section> 的标题有一个名为 .uni-section-title 的类名 */  
+	
 	
 	.popup-height {
 		// @include height;
@@ -371,18 +383,16 @@
 	}
 	
 	.author{
+		font-size: 14px;
+		font-weight: bold;
 		color: #FF8F91;
 		margin-bottom: 5px; /* 设置各项之间的垂直间距 */
-		color: #666; /* 设置字体颜色 */
 	}
 	.price {
+		font-size: 15px;
 		color: #FF8F91;
 	    margin-bottom: 5px; /* 设置各项之间的垂直间距 */
-	}
-	
-	.price {
-		color: #FF8F91;
-	    font-weight: bold; /* 设置价格文字加粗 */
+		font-weight: bold; /* 设置价格文字加粗 */
 	}
 	
 	.info{
@@ -406,9 +416,7 @@
 	
 	.text {
 		font-size: 12px;
-		// color: #666;
 		color: #FF8F91;
-		
 		margin-top: 5px;
 	}
 	
@@ -430,7 +438,7 @@
 		.reserve-btn {
 			flex: 1; 
 			height: 34px; /* 设置按钮高度为14像素 */
-		    background-color: #FF8F91; /* 设置背景色为粉色 */
+		    background-color: #1CBBB4; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    border: none; /* 移除按钮边框 */
 		    padding: 1px 10px; /* 设置按钮内边距 */
@@ -442,7 +450,7 @@
 		.amount {
 			flex: 1; 
 			height: 34px; /* 设置按钮高度为14像素 */
-		    background-color: #FF8F91; /* 设置背景色为粉色 */
+		    background-color: #1CBBB4; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    // border: none; /* 移除按钮边框 */
 		    // padding: 1px 1px; /* 设置按钮内边距 */
@@ -465,6 +473,38 @@
 	}
 
 	
-	
+	  	
 }
+
+
+	.popup-content { 
+	  padding: 20px; /* 添加内边距 */  
+	  text-align: center; /* 让内容居中 */  
+	}  
+	  
+	.tan-taocan {  
+		color: #FF8F91; /* 字体颜色 */  
+		font-size: 16px; /* 字体大小 */  
+		font-weight: bold; /* 字体加粗 */  
+		margin-bottom: 10px; /* 下边距 */  
+		text-align: center; /* 水平居中 */  
+		display: block; /* 确保是块级元素，如果已经是块级元素可以省略 */  
+		padding: 10px 0; /* 上下内边距，用于增加空间感 */  
+		border-bottom: 1px solid #ddd; /* 底部边框，用于分隔内容 */  
+		/* ... 其他样式 ... */
+		background-color: #f8f9fa; /* 淡灰色背景 */  
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 底部阴影效果 */  
+	}  
+  	  
+	.tan-desc { 
+		color: #FF8F91;
+		font-size: 15px;  
+		font-weight: bold;  
+		margin-bottom: 8px;  
+		//text-align: center;  
+		margin-left: 6px; /* 左外边距 */  
+		margin-right: 6px; /* 右外边距 */  
+		padding: 0 12px; /* 上下为0，左右为10px */  
+	}  
+
 </style>

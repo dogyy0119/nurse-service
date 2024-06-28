@@ -143,18 +143,29 @@ export default {
 }
 
 .detail-item h2 {
-  font-size: 30px; /* Adjust heading size */
-  color: #007bff; /* Adjust heading color */
+  font-size: 20px; /* Adjust heading size */
+  // color: #007bff; /* Adjust heading color */
+  color: #1CBBB4;
 }
 
 .detail-item p {
   margin: 5px 0; /* Adjust paragraph margin */
-  font-size: 25px; /* Adjust paragraph text size */
+  font-size: 14px; /* Adjust paragraph text size */
   color: #666; /* Adjust paragraph text color */
 }
 
 .detail-item strong {
-  font-weight: bold; /* Make strong text bold */
-  color: #000; /* Adjust strong text color */
+	color: #1CBBB4;
+  // color: #FF8F91; /* 字体颜色 */
+  font-size: 14px; /* 字体大小 */  
+  font-weight: bold; /* 字体加粗 */  
+  margin-bottom: 2px; /* 下边距 */  
+  // text-align: center; /* 水平居中 */  
+  display: block; /* 确保是块级元素，如果已经是块级元素可以省略 */  
+  padding: 8px 0; /* 上下内边距，用于增加空间感 */  
+  border-bottom: 1px solid #ddd; /* 底部边框，用于分隔内容 */  
+  /* ... 其他样式 ... */
+  background-color: #f8f9fa; /* 淡灰色背景 */  
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 底部阴影效果 */ 
 }
 </style>

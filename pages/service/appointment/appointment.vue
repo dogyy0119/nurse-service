@@ -33,20 +33,27 @@
 					</uni-data-picker>
 				</uni-forms-item> -->
 				
-				<uni-section title=" 套餐信息:  " type="line">					
-				</uni-section>
+		
+			<uni-section title=" 套餐信息:  " type="line">		
+				<view class="example-body">
+					<view class="price" >￥：{{totalPrice}}</view>
+				</view>
+			</uni-section>
 								
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">套餐: {{taocan}}</text></view>
+						class="text">套餐: {{taocan}}</text>
+						</view>
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">耗材类型：{{haocaiName}}</text></view>
+						class="text">耗材类型：{{haocaiName}}</text>
+						</view>
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="text">耗材详细：{{haocaiDetail}}</text></view>
+						class="text">耗材详细：{{haocaiDetail}}</text>
+						</view>
 				
 			</uni-forms>
 			<div class="flex-container">
 				<button class="reserve-btn" @click="submit('baseForm')">确定预约</button>
-				<button class="amount">金额：￥{{totalPrice}}</button>
+				<!-- <button class="amount">金额：￥{{totalPrice}}</button> -->
 			</div>
 		</view>
 
@@ -419,7 +426,7 @@
 	.reserve-btn {
 	    flex: 1; 
 	    height: 40px; /* 设置按钮高度为14像素 */
-	    background-color: #DD524D; /* 设置背景色为粉色 */
+	    background-color: #1CBBB4;; /* 设置背景色为粉色 */
 	    color: #fff; /* 设置字体颜色为白色 */
 	    border: none; /* 移除按钮边框 */
 	    padding: 1px 10px; /* 设置按钮内边距 */
@@ -433,7 +440,14 @@
 	}
 	
 	.popup-content {
+		color: #FF8F91;
+		font-weight: bold;  
+		margin-bottom: 2px;  
+		//text-align: center;  
+		margin-left: 6px; /* 左外边距 */  
+		margin-right: 6px; /* 右外边距 */  
 		font-size: 13px;
+		padding: 4px; /* 添加内边距 */	
 	}
 	
 	.amount {
@@ -452,4 +466,12 @@
 	    margin-right: 0px; /* 设置按钮距离页面右侧的距离 */
 		width: 100%
 	}
+	
+	.price {
+		font-size: 15px;
+		color: #FF8F91;
+	    margin-bottom: 5px; /* 设置各项之间的垂直间距 */
+		font-weight: bold; /* 设置价格文字加粗 */
+	}
+	
 </style>
