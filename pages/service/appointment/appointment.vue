@@ -217,12 +217,19 @@
 				this.totalPrice = params.totalPrice;
 				this.taocan = params.taocan;
 				this.taocanId = params.taocanId;
-				this.taocanType = params.taocanType;
+				this.taocanType = params.category_id;
 				this.consumableId = params.consumableId;
 				this.packageId = params.packageId;
 				// this.haocaiId = params.haocaiId;
 				this.haocaiName = params.haocaiName;
-				this.haocaiDetail = params.haocaiDetail;
+				this.haocaiDetail = params.haocaiDetail.trim();
+				// if (params && params.haocaiDetail) {
+				//     this.haocaiDetail = params.haocaiDetail.trim();
+				//     console.log(this.haocaiDetail);  // 输出处理后的 haocaiDetail
+				// } else {
+				//     console.error("params.haocaiDetail 不存在或未定义。");
+				// }
+				console.log(this.haocaiDetail);
 				const now = new Date();
 				const timestamp = now.getTime();
 				this.baseFormData.datetimesingle = timestamp;

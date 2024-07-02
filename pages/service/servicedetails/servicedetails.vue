@@ -7,7 +7,7 @@
 			
 			<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
-					<view class="price" >总价￥：{{detailObj.price}}</view>
+					<view class="price" >总价￥：{{price}}</view>
 					<!-- <uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
 						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />	 -->				
 				</view>
@@ -21,10 +21,10 @@
 				<view class="author">发布时间：{{detailObj._add_time_str}}</view>
 				<view class="author">套餐选择:</view>
 				<view class="uni-px-5">
-					<!-- <view class="text">选中：{{taocan[taocanValue].text}}</view> -->
-					<uni-data-checkbox mode="tag" v-model="taocanValue" :localdata="taocan" @change="taocanCheckboxChange(taocanValue)"></uni-data-checkbox>
+					<!-- <view class="text">选中：{{taocan[taocanIndex].text}}</view> -->
+					<uni-data-checkbox mode="tag" v-model="taocanIndex" :localdata="taocan" @change="taocanCheckboxChange(taocanIndex)"></uni-data-checkbox>
 				</view>
-				<view class="author">￥：{{detailObj.price}}</view>
+				<view class="author">￥：{{taocan[taocanIndex].price}}</view>
 
 			</view>
 					
@@ -33,9 +33,13 @@
 				<!-- <uni-section type="line"> -->
 				<view class="uni-px-5">
 						<!-- <view class="text">{{JSON.stringify(haocaiValue)}}</view> -->
-					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
+					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="haocai" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
 				</view>
-				<view class="price">￥：{{customPrice}}</view>
+				<view class="uni-px-5">
+					<!-- <view class="text">选中：{{taocan[toolIndex].name}}</view> -->
+					<uni-data-checkbox mode="tag" v-model="toolIndex" :localdata="toolObj" @change="toolCheckboxChange(toolIndex)"></uni-data-checkbox>
+				</view>
+				<view class="price">￥：{{toolObj[toolIndex].price}}</view>
 				<view class="author">类型：{{toolObj[toolIndex].name}}</view>
 				<view class="author">详细：{{toolObj[toolIndex].detail}}</view>
 				<!-- </uni-section> -->
@@ -54,7 +58,7 @@
 			</view>
 			
 			<div class="flex-container">
-				<button class="amount" @click="toggle('bottom')" >金额:￥{{totalPrice}} 详情...</button>
+				<button class="amount" @click="toggle('bottom')" >金额:￥{{price}} 详情...</button>
 			    <button class="reserve-btn" @click="goToAppointment">立即预约</button>
 			</div>
 			
@@ -68,15 +72,11 @@
 		<view>
 			<!-- 普通弹窗 -->
 			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
-				<!-- <view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="author">套餐: {{taocan[taocanValue].text}}</text></view>
-				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="author">耗材类型：{{toolObj.name}}</text></view>
-				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
-						class="author">耗材详细：{{toolObj.detail}}</text></view> -->
-				<view class="tan-taocan">套餐：{{taocan[taocanValue].text}}</view>
-				<view class="tan-desc">耗材类型：{{toolObj[toolIndex].name}}</view>
-				<view class="tan-desc">类型：{{toolObj[toolIndex].detail}}</view>
+				<view class="tan-taocan">套餐：{{taocan[taocanIndex].text}}</view>
+				<view class="tan-desc">套餐价格：{{taocan[taocanIndex].price}}</view>
+				<view class="tan-desc">耗材价格：{{toolObj[toolIndex].price}}</view>
+				<view class="tan-desc">耗材类型：{{toolObj[toolIndex].text}}</view>
+				<view class="tan-desc">耗材详情：{{toolObj[toolIndex].detail}}</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -93,6 +93,21 @@
 				cityName: "",
 				checkList: [false, false, false, false, false, false],
 				detailObj:{},
+				category_id: '',
+				serviceId: '',
+				packageList: [],
+				consumableList: [],
+				price: 0,
+				customPrice: 0,
+				haocai: [{
+					text: '购买耗材',
+					value: 0
+				}, {
+					text: '自带耗材',
+					value: 1
+				}],
+				haocaiValue: 0,  //  0 代表购买耗材  1 自带耗材
+				
 				toolObj: [
 					{
 						_id: '',
@@ -108,49 +123,48 @@
 						detail: ''
 					}
 				],
-				toolIndex: 1,
-				taocanValue: 0,
-				taocanType: '',
-				serviceId: '',
-				packageList: [],
-				consumableList: [],
-				price: 0,
-				customPrice: 0,
-				totalPrice: 0,
-				sex: [{
-					text: '购买耗材',
-					value: 0
-				}, {
-					text: '自带耗材',
-					value: 1
-				}],
-				haocaiValue: 0,
+				toolIndex: 0,
 				taocan: [
 					{
+						_id: '',
 						text: '套餐1',
 						value: 0,
 						price: 100
 					}, {
+						_id: '',
 						text: '套餐2',
 						value: 1,
 						price: 200
 					}
-				]
+				],
+				taocanIndex: 0
 			};
 		},
 		onLoad(event) {
-
+			
+			uni.showLoading({
+				mask: true
+			})
+			
+			console.log("*******   onLoad  ********")
+			
 			console.log(event.item)
 			console.log(event)
 			
 			this.serviceId = event.item
 		    this.getDetail(event.item);
-		    // await this.getConsumaList(options);
-				
+			
+		    // await this.getConsumaList(options);			
 		    // this.getPackageList(this.detailObj.package_list);
 		},
+		
+		onShow(){
+			
+			console.log("*******   onShow  ********")
+		},
 		mounted() {
-			    this.calculateTotalPrice();
+			console.log("*******   mounted  ********")
+			
 		},
 		methods:{
 			toggle(type) {
@@ -164,14 +178,14 @@
 				let obj = { 
 					serviceName: this.detailObj.name,
 					categoryId: this.detailObj.category_id,
-					totalPrice: this.totalPrice,
-					taocan: this.taocan[this.taocanValue].text,
+					totalPrice: this.price,
+					taocan: this.taocan[this.taocanIndex].text,
 					taocanId: this.serviceId ,
-					taocanType: this.taocanType,
+					category_id: this.category_id,
 					consumableId: this.toolObj[this.toolIndex]._id,
-					packageId: this.packageList,
-					haocaiName: this.toolObj[this.toolIndex].name,
-					haocaiDetals: this.toolObj[this.toolIndex].detail,	
+					packageId: this.taocan[this.taocanIndex]._id,
+					haocaiName: this.toolObj[this.toolIndex].text,
+					haocaiDetail: this.toolObj[this.toolIndex].detail,	
 				};
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
 				
@@ -188,33 +202,33 @@
 				});
 			},
 			calculateTotalPrice() {
-				 this.price = this.taocan[0].price
 			    if(this.haocaiValue === 0) {
-			        this.totalPrice = this.price + this.customPrice;
+			        this.price = this.taocan[this.taocanIndex].price + this.toolObj[this.toolIndex].price;
 			    } else if (this.haocaiValue === 1) {
-			        this.totalPrice = this.price;
+			        this.price = this.taocan[this.taocanIndex].price;
 			    }
 			},
-			taocanCheckboxChange(value) {
-				 console.log('选中的值：', value);
-				 console.log(this.taocan[value].price)
-				 if(this.haocaiValue==0) {
-					this.price = this.taocan[value].price
-				 	this.totalPrice = this.price + this.customPrice
-				 } else if (this.haocaiValue==1) {
-					this.price = this.taocan[value].price 
-				 	this.totalPrice = this.price
-				 }
+			taocanCheckboxChange(value) {	
+				this.taocanIndex = value;
+				// console.log('选中的值：', this.taocanIndex);
+				// console.log(this.taocan[this.taocanIndex].price)
+				this.calculateTotalPrice();
+
 			},
+			
+			toolCheckboxChange(value) {
+				this.toolIndex = value;
+				 // console.log('选中的值：', this.toolIndex);
+				 // console.log(this.toolObj[this.toolIndex].price)
+				 this.calculateTotalPrice();
+
+			},
+			
 			haochaiCheckboxChange(value) {
-			        // 处理点击事件，value 是选中的值
-			        console.log('选中的值：', value);
-			        // 在这里执行你想要的逻辑
-					if(this.haocaiValue==0) {
-						this.totalPrice = this.price + this.customPrice
-					} else if (this.haocaiValue==1) {
-						this.totalPrice = this.price
-					}
+				this.haocaiValue = value;
+			    // console.log('选中的值：', this.haocaiValue);
+				this.calculateTotalPrice();
+				
 			},
 			backToTop() {
 				uni.switchTab({
@@ -237,23 +251,21 @@
 				    success: (res) => {
 						this.loading=2
 						// console.log(res.result.data[0].service_banner_imgs)
-						console.log(res.result.data);
+						// console.log(res.result.data);
 						
 						this.detailObj = res.result.data[0]
-						this.price = this.detailObj.price
-						this.totalPrice = this.customPrice + this.price
-						this.taocanType = this.detailObj.category_id
+						// this.price = this.detailObj.price
+						// this.totalPrice = this.customPrice + this.price
+						this.category_id = this.detailObj.category_id
 						this.packageList = this.detailObj.package_list
 						this.consumableList = this.detailObj.consumable_list
 						
 						//
 						this.getPackageList(this.detailObj.package_list);
 						
-						console.log("-------------------------------------------")
-						console.log(this.consumableList)
+						// console.log("-------------------------------------------")
 						// 获取耗材
 						this.getConsumaList(this.consumableList)
-						
 						
 					},
 				    fail: (err) => {
@@ -267,9 +279,6 @@
 			
 			// 获取耗材
 			getConsumaList(consumableList){
-				console.log(consumableList)
-				// let consumableid = "66496ec0ee97ef5896909378"
-				// consumableid = options || "66496ec0ee97ef5896909378"
 				uniCloud.callFunction({
 				    name: "nurse-service-consumable-ids",
 				    data: {						
@@ -277,28 +286,24 @@
 				    },
 				    success: (res) => {
 						this.loading=2
-						console.log(consumableList)
-						console.log(res.result.data);
-						
+						//console.log(res.result.data);
 						this.toolObj = [];
 						let i = 0;
 						res.result.data.forEach(item => {
 							this.toolObj.push({
 								'_id' : item._id,
-								'name': item.name,
+								'text': item.name,
 								'value': i,
 								'price': item.price,
 								'detail': item.detail
 							});
-							console.log("i:" + i)
+							// console.log("i:" + i)
 							i = i+1;
 						});
-						console.log(this.toolObj);
-						
-						// this.toolObj = res.result.data
-						// this.customPrice = this.toolObj[this.toolIndex].price
-						// this.totalPrice = this.customPrice + this.price
-
+						this.calculateTotalPrice();
+						// uni.hideLoading({
+						// 	mask: true
+						// })
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -311,8 +316,6 @@
 			
 			//
 			getPackageList(packageIds){
-				
-				// console.log( "packageIds:" + packageIds)
 				console.log( "packageList:" + this.packageList)
 				uniCloud.callFunction({
 				    name: "nurse-service-package-getids",
@@ -328,13 +331,19 @@
 						let i = 0;
 						res.result.data.forEach(item => {
 							this.taocan.push({
+								'_id' : item._id,
 								'text': item.name,
 								'value': i,
 								'price': item.price,
 							});
-							console.log("i:" + i)
+							// console.log("i:" + i)
 							i = i+1;
 						});
+						
+						this.calculateTotalPrice();
+						uni.hideLoading({
+							mask: true
+						})
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
