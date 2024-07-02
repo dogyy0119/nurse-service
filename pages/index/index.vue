@@ -111,7 +111,8 @@
 			// this.requestData();
 		},
 		
-		onShow() {			
+		onShow() {		
+			this.navIndex = 0;
 			this.getNewsData();
 			let mylocation = uni.getStorageSync("location")
 			// this.cityName = mylocation || "城市";

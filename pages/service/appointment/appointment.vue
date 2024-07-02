@@ -70,8 +70,8 @@
 				taocan: '',
 				taocanId: '',
 				taocanType: '',
-				packageList: [],
-				consumableList: [],
+				packageId: '',
+				consumableId: '',
 				// haocaiId: [],
 				haocaiName: '',
 				haocaiDetail: '',
@@ -218,8 +218,8 @@
 				this.taocan = params.taocan;
 				this.taocanId = params.taocanId;
 				this.taocanType = params.taocanType;
-				this.consumableList = params.consumableList;
-				this.packageList = params.packageList;
+				this.consumableId = params.consumableId;
+				this.packageId = params.packageId;
 				// this.haocaiId = params.haocaiId;
 				this.haocaiName = params.haocaiName;
 				this.haocaiDetail = params.haocaiDetail;
@@ -320,8 +320,8 @@
 				    orderData.transaction_id = "",
 				    orderData.paid_time = "",
 				    orderData.info = "",
-				    orderData.consumable_id = this.consumableList,
-				    orderData.package_id = this.packageList
+				    orderData.consumable_id = this.consumableId,
+				    orderData.package_id = this.packageId
 				}
 				
 				this.addOrder(orderData)

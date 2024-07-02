@@ -7,7 +7,7 @@
 			
 			<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
-					<view class="price" >￥：{{detailObj.price}}</view>
+					<view class="price" >总价￥：{{detailObj.price}}</view>
 					<!-- <uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
 						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />	 -->				
 				</view>
@@ -16,14 +16,16 @@
 				<view class="price" >￥：{{detailObj.price}}</view>
 			</view> -->
 			<view class="tool">
+				<view class="author">时长：{{detailObj.service_time}}</view>
+				<view class="author">服务详情：{{detailObj.service_desc}}</view>
+				<view class="author">发布时间：{{detailObj._add_time_str}}</view>
 				<view class="author">套餐选择:</view>
 				<view class="uni-px-5">
 					<!-- <view class="text">选中：{{taocan[taocanValue].text}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="taocanValue" :localdata="taocan" @change="taocanCheckboxChange(taocanValue)"></uni-data-checkbox>
 				</view>
-				<view class="author">时长：{{detailObj.service_time}}</view>
-				<view class="author">服务详情：{{detailObj.service_desc}}</view>
-				<view class="author">发布时间：{{detailObj._add_time_str}}</view>
+				<view class="author">￥：{{detailObj.price}}</view>
+
 			</view>
 					
 			<view class="tool">		
@@ -34,8 +36,8 @@
 					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="sex" @change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
 				</view>
 				<view class="price">￥：{{customPrice}}</view>
-				<view class="author">类型：{{toolObj.name}}</view>
-				<view class="author">详细：{{toolObj.detail}}</view>
+				<view class="author">类型：{{toolObj[toolIndex].name}}</view>
+				<view class="author">详细：{{toolObj[toolIndex].detail}}</view>
 				<!-- </uni-section> -->
 			</view>
 			
@@ -73,8 +75,8 @@
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="author">耗材详细：{{toolObj.detail}}</text></view> -->
 				<view class="tan-taocan">套餐：{{taocan[taocanValue].text}}</view>
-				<view class="tan-desc">耗材类型：{{toolObj.name}}</view>
-				<view class="tan-desc">类型：{{toolObj.detail}}</view>
+				<view class="tan-desc">耗材类型：{{toolObj[toolIndex].name}}</view>
+				<view class="tan-desc">类型：{{toolObj[toolIndex].detail}}</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -91,7 +93,22 @@
 				cityName: "",
 				checkList: [false, false, false, false, false, false],
 				detailObj:{},
-				toolObj:{},
+				toolObj: [
+					{
+						_id: '',
+						name: '耗材1',
+						value: 0,
+						price: 100,
+						detail: ''
+					}, {
+						_id: '',
+						name: '耗材2',
+						value: 1,
+						price: 200,
+						detail: ''
+					}
+				],
+				toolIndex: 1,
 				taocanValue: 0,
 				taocanType: '',
 				serviceId: '',
@@ -122,6 +139,7 @@
 			};
 		},
 		onLoad(event) {
+
 			console.log(event.item)
 			console.log(event)
 			
@@ -150,10 +168,10 @@
 					taocan: this.taocan[this.taocanValue].text,
 					taocanId: this.serviceId ,
 					taocanType: this.taocanType,
-					consumableList: this.consumableList,
-					packageList: this.packageList,
-					haocaiName: this.toolObj.name,
-					haocaiDetals: this.toolObj.detail,	
+					consumableId: this.toolObj[this.toolIndex]._id,
+					packageId: this.packageList,
+					haocaiName: this.toolObj[this.toolIndex].name,
+					haocaiDetals: this.toolObj[this.toolIndex].detail,	
 				};
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
 				
@@ -228,11 +246,15 @@
 						this.packageList = this.detailObj.package_list
 						this.consumableList = this.detailObj.consumable_list
 						
-						// 获取耗材
-						this.getConsumaList(this.consumableList[0])
+						//
+						this.getPackageList(this.detailObj.package_list);
 						
-						// 
-						this.getPackageList(this.detailObj.package_list);						
+						console.log("-------------------------------------------")
+						console.log(this.consumableList)
+						// 获取耗材
+						this.getConsumaList(this.consumableList)
+						
+						
 					},
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -244,20 +266,38 @@
 			},
 			
 			// 获取耗材
-			getConsumaList(options){
+			getConsumaList(consumableList){
+				console.log(consumableList)
 				// let consumableid = "66496ec0ee97ef5896909378"
 				// consumableid = options || "66496ec0ee97ef5896909378"
 				uniCloud.callFunction({
-				    name: "nurse-service-consumable-getid",
+				    name: "nurse-service-consumable-ids",
 				    data: {						
-				        id: options 
+				        ids: consumableList 
 				    },
 				    success: (res) => {
 						this.loading=2
+						console.log(consumableList)
 						console.log(res.result.data);
-						this.toolObj = res.result.data[0]
-						this.customPrice = this.toolObj.price
-						this.totalPrice = this.customPrice + this.price
+						
+						this.toolObj = [];
+						let i = 0;
+						res.result.data.forEach(item => {
+							this.toolObj.push({
+								'_id' : item._id,
+								'name': item.name,
+								'value': i,
+								'price': item.price,
+								'detail': item.detail
+							});
+							console.log("i:" + i)
+							i = i+1;
+						});
+						console.log(this.toolObj);
+						
+						// this.toolObj = res.result.data
+						// this.customPrice = this.toolObj[this.toolIndex].price
+						// this.totalPrice = this.customPrice + this.price
 
 				    },
 				    fail: (err) => {
@@ -281,7 +321,8 @@
 				    },
 				    success: (res) => {
 						this.loading=2
-						console.log(res.result.data);
+						
+						// console.log(res.result.data);
 						
 						this.taocan = [];
 						let i = 0;
