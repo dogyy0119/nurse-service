@@ -124,7 +124,7 @@
 			    this.cityName = address.substring(address.lastIndexOf("省") + 1, cityIndex + 1) || "城市";
 			    // console.log(this.cityName); // 输出 "沈阳市"
 			} else {
-				this.cityName = "城市";
+				this.cityName = mylocation || "城市";
 			    // console.log("未找到市");
 			}
 		},

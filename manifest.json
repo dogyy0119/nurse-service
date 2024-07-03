@@ -71,7 +71,7 @@
         "usingComponents" : true,
         "permission" : {
             "scope.userLocation" : {
-                "desc" : "用于提供应用算法支持"
+                "desc" : "小程序请求使用定位功能"
             }
         },
         "unipush" : {

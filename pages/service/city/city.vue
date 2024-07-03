@@ -21,7 +21,25 @@
 	    components:{
 	        Citylist,
 	    },
+		
+		onLoad() {
+			this.getdad();
+		},
 	    methods:{
+			
+			getdad() {
+				uni.authorize({
+				    scope:'scope.userLocation',
+				    success:function(){
+				        console.log("授权地理位置：成功");
+				    },
+				    fail:function(){
+				        console.log("授权地理位置：失败");
+				        _self.openSetting("地理位置");
+				    }
+				});
+			},
+			
 	        getCity(city,address){
 				console.log("city:" + city)
 				console.log("address:" + address)

@@ -435,7 +435,8 @@ exports.main = async (event, context) => {
 						await uniID.updateUser({
 							uid: loginRes.uid,
 							nickname,
-							avatar_file: headimgurlFile
+							avatar_file: headimgurlFile,
+							type: 2
 						})
 						loginRes.userInfo.nickname = nickname;
 						loginRes.userInfo.avatar_file = headimgurlFile;
@@ -446,7 +447,8 @@ exports.main = async (event, context) => {
 				if (context.PLATFORM == "mp-weixin") {
 					let resUpdateUser = await uniID.updateUser({
 						uid: loginRes.uid,
-						sessionKey: loginRes.sessionKey
+						sessionKey: loginRes.sessionKey,
+						type: 2,
 					})
 					console.log(resUpdateUser);
 				}
