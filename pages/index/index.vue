@@ -106,7 +106,7 @@
 		
 		onLoad(event) {
 			this.getCid()
-			
+			this.getdad()
 			// this.opid()					
 			// this.requestData();
 		},
@@ -134,6 +134,18 @@
 		},
 		
 		methods: {	
+			getdad() {
+				uni.authorize({
+				    scope:'scope.userLocation',
+				    success:function(){
+				        console.log("授权地理位置：成功");
+				    },
+				    fail:function(){
+				        console.log("授权地理位置：失败");
+				    }
+				});
+			},
+			
 			// async opid() {
 			// 	let self = this
 			// 	wx.login({

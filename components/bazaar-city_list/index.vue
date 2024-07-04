@@ -1,6 +1,6 @@
 <template>
 	<view class="citylist">
-		<scroll-view :style="{'height':windowH}" scroll-y="true" :scroll-top="scrollTop"  show-scrollbar="false" @scroll="scroll" >
+		<scroll-view :style="{'height':windowH}" scroll-y="true" :scroll-top="scrollTop"  show-scrollbar="false" @scroll="scroll" :scroll-into-view="scrollIntoId" >
 			<view>
 				<view class="city-list-container">
 					<!-- 定位城市 -->
@@ -23,9 +23,9 @@
 					</view>
 					<!-- 城市列表 -->
 					<view id="citytitle" class="city-list-content">
-						<view class="city_title_wrap" v-for="(city,index) in citylist" :key="index">
+						<view class="city_title_wrap" v-for="(city,index) in citylist " :id="getId(index)" :key="index">
 							<view class="city-title city-title-letter">
-								{{city.title}}
+								{{ getId(index) }}
 							</view>
 							<view class="city-list city-list-block">
 								<view class="city-item" v-for="(item,index) in city.lists" :key="index" @tap="selectedCity({city: item, address:''})">
@@ -43,11 +43,15 @@
 		</view>
 		<!-- 侧边栏导航 -->
 		<view class="navrightcity">
-			<view class="nav-item nav-letter" @tap="scroll_to_city(0)">定</view>
-			<view class="nav-item nav-letter" @tap="scroll_to_city(1)">热</view>
-			<view v-for="(item,index) in citylist" :key="index" class="nav-item nav-letter" @click="scroll_to_city(index+2)">
+			<view class="nav-item nav-letter" @tap="scroll_to_city('定',0)">定</view>
+			<view class="nav-item nav-letter" @tap="scroll_to_city('热',1)">热</view>
+			<view v-for="(item,index) in citylist" :key="index" class="nav-item nav-letter" @click="scroll_to_city(item.title,index+2)">
 				{{item.title}}
 			</view>
+		</view>
+		
+		<view class="mask" v-if="showMask">
+			<view class="mask-r">{{selectLetter}}</view>
 		</view>
 	</view>
 </template>
@@ -89,6 +93,10 @@
 		},
 		data(){
 			return{
+				selectLetter: '',
+				showMask: false,
+				letter: [],
+				scrollIntoId: '',
 				scrollY:-1,//滚动记录
 				tops:[],//每一个.city-title 距离顶部的距离
 				diff:-1, // 
@@ -100,10 +108,14 @@
 				scrollTop:0,
 				fixedStyle:"translate3d(0,0,0)",
 				fixedTop:0,
-				locationCity:"定位中...."
+				locationCity:"开始定位    ...."
 			}
 		},
 		methods:{
+			getId(index) {
+				
+				return this.letter[index];
+			},
 			// 初始化数据列表
 			initCityList(){
 				let title = [];
@@ -113,6 +125,8 @@
 				title.push(this.hotcity.title);
 				for(let i in this.citylist){
 					title.push(this.citylist[i].title)
+					// console.log(this.citylist[i].title)
+					this.letter.push(this.citylist[i].title);
 				}
 				this.title = title;
 				let sysInfo = uni.getSystemInfoSync();
@@ -147,8 +161,6 @@
 			},
 			// 获取城市
 			selectedCity({city,address}){
-				console.log(city)
-				console.log(address)
 				this.getCity&&this.getCity(city,address);
 			},
 			// 定位操作
@@ -176,18 +188,44 @@
 				this.scrollY = e.detail && e.detail.scrollTop;
 			},
 			// 滚动到指定位置
-			scroll_to_city(index){
+			scroll_to_city(title , index){
 				this.scrollTop = this.tops[index]
-				this.scrollY = scrollY
-				this.cityScroll.scrollTo(0, -scrollY, 300)
-			}
+				this.scrollY = index
+				this.scrollTo(title , index)
+			},
+			
+			
+			scrollTo(title, index) {
+				
+				this.showMask = true
+				
+				if( index == '0' ) {
+					this.selectLetter =  '定' 
+					this.scrollIntoId = 'location_city'
+				} else if( index == '1') {
+					this.selectLetter = '热'
+					this.scrollIntoId = 'hotcity'
+
+				} else {
+					this.selectLetter =  title
+					this.scrollIntoId = title;	
+				}
+				// this.selectLetter = index == '0' ? '最' : title
+				setTimeout(() => {
+					this.showMask = false
+				}, 300);
+				
+				
+			},
 		},
+		
+		
 		// 页面挂载后进行异步操作
 		created(){
 			this.initCityList();
 		},
 		mounted(){
-			this.location();
+			// this.location();
 			this.initTop();
 		}
 	}
@@ -294,5 +332,30 @@
 			color: #333;
 			background-color: #ebebeb;
 		}
+	}
+	
+	.mask {
+		position: absolute;
+		bottom: 0upx;
+		top: 83upx;
+		left: 0upx;
+		right: 0upx;
+		width: 750upx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		background: rgba(0, 0, 0, 0);
+	}
+	
+	.mask-r {
+		height: 120upx;
+		width: 120upx;
+		border-radius: 60upx;
+		display: flex;
+		background: rgba(0, 0, 0, 0.5);
+		justify-content: center;
+		align-items: center;
+		font-size: 40upx;
+		color: #FFFFFF
 	}
 </style>
