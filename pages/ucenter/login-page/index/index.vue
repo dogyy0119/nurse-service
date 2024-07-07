@@ -18,6 +18,8 @@
 
 		<!-- 快捷登录按钮弹窗 -->
 		<uni-quick-login :agree="agree" ref="uniQuickLogin"></uni-quick-login>
+		
+		<uni-bindMobileByMpWeixin ref="uni-bindMobileByMpWeixin"></uni-bindMobileByMpWeixin>
 	</view>
 </template>
 
@@ -86,8 +88,19 @@
 			//#endif
 		},
 		methods: {
-			quickLogin() {
-				this.$refs.uniQuickLogin.login_before(this.type)
+			async quickLogin() {
+				try {  
+				    // 等待 login_before 方法完成  
+				    await this.$refs.uniQuickLogin.login_before(this.type);  
+				  
+				    // #ifdef MP-WEIXIN  
+				    // 如果是在微信小程序环境下，则执行绑定手机号的操作  
+				    this.$refs['uni-bindMobileByMpWeixin'].open();  
+				    // #endif  
+				} catch (error) {  
+				    // 处理 login_before 方法中可能抛出的错误  
+				    console.error('Login before failed:', error);  
+				}  
 			},
 			sendShortMsg() {
 				if (!this.agree) {
