@@ -80,6 +80,7 @@
 			queryOrder(){
 				let url = this.options.return_url + `?out_trade_no=${this.options.out_trade_no}&order_no=${this.options.order_no}`;
 				if (url.indexOf("/") !== 0) url = `/${url}`;
+				console.log( url )
 				uni.navigateTo({
 					url,
 				});

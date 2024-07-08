@@ -124,13 +124,18 @@ class service {
 				}
 				if (typeof orderPaySuccess === "function") {
 					console.log('用户自己的回调逻辑 - 开始执行');
-					userOrderSuccess = await orderPaySuccess({
-						verifyResult,
-						data: payOrderInfo,
-						clientInfo,
-						cloudInfo
-					});
-					console.log('用户自己的回调逻辑 - 执行完成');
+					try {
+						userOrderSuccess = await orderPaySuccess({
+							verifyResult,
+							data: payOrderInfo,
+							clientInfo,
+							cloudInfo
+						});
+						console.log('用户自己的回调逻辑 - 执行完成');
+					} catch(err){
+						userOrderSuccess = false;
+						console.log('用户自己的回调逻辑 - 执行异常', err);
+					}
 				}
 				console.log('userOrderSuccess', userOrderSuccess);
 				// 用户自己的逻辑处理 结束-----------------------------------------------------------
@@ -874,7 +879,19 @@ class service {
 		let userOrderSuccess = false;
 		let pay_date;
 		if (verifyReceiptRes.tradeState !== "SUCCESS") {
-			throw { errCode: ERROR[54002] };
+			// 尝试使用相反的环境再次验证
+			let uniPayConifg = await this.getUniPayConfig({ provider: "appleiap", provider_pay_type: "app" });
+			uniPayInstance = uniPay.initAppleIapPayment({
+				...uniPayConifg,
+				sandbox: !uniPayConifg.sandbox,
+			});
+			verifyReceiptRes = await uniPayInstance.verifyReceipt({
+				receiptData: transaction_receipt
+			});
+			if (verifyReceiptRes.tradeState !== "SUCCESS") {
+				// 如果还是不成功，则校验不通过
+				throw { errCode: ERROR[54002] };
+			} 
 		}
 		// 支付成功
 		pay_date = Number(verifyReceiptRes.receipt.receipt_creation_date_ms);

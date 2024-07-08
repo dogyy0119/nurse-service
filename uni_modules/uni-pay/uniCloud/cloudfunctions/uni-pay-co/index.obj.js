@@ -23,6 +23,10 @@ module.exports = {
 		} else {
 			clientInfo = this.getClientInfo();
 		}
+		
+		if (['zh-Hans','en'].indexOf(clientInfo.locale) === -1) {
+			clientInfo.locale = 'zh-Hans';
+		}
 
 		// 挂载uni-id实例到this上，方便后续调用
 		this.uniIdCommon = uniIdCommon.createInstance({

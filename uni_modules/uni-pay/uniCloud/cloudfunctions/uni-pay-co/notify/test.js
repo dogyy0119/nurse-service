@@ -16,7 +16,62 @@ module.exports = async (obj) => {
 		total_fee
 	} = data; // uni-pay-orders 表内的数据均可获取到
 	
-	console.log("type：test");
+	console.log("------------type：test--------------");
+	
+	
+	uniCloud.callFunction({
+	    name: "nurse-order-update",
+	    data: {
+			id: order_no,
+			status: 2
+	    },
+	    success: (res) => {
+			console.error("更新成功 ---" );			
+	    },
+	    fail: (err) => {
+	        console.error("更新失败: " + err);
+	    },
+	    complete: (res) => {
+	        console.log("更新完成");
+	    }
+	});
+	
+	
+	// uniCloud.callFunction({
+	//     name: "nurse-dispatch-order",
+	//     data: {
+	// 		id: order_no
+	//     },
+	//     success: (res) => {
+	// 		console.error("派单成功 ---" );
+			
+	// 		uniCloud.callFunction({
+	// 		    name: "mydevice",
+	// 		    data: {
+	// 				uid: res.result.data
+	// 		    },
+	// 		    success: (res) => {
+	// 				console.error("成功 ---" );			
+	// 				console.log(res);
+						
+	// 		    },
+	// 		    fail: (err) => {
+	// 		        console.error("失败: " + err);
+	// 		    },
+	// 		    complete: (res) => {
+	// 		        console.log("完成");
+	// 		    }
+	// 		});
+	// 		// this.getPushClientId(res.result.data)	
+	//     },
+	//     fail: (err) => {
+	//         console.error("派单失败: " + err);
+	//     },
+	//     complete: (res) => {
+	//         console.log("派单完成");
+	//     }
+	// });
+	
 	
 	// 此处写你自己的支付成功逻辑开始-----------------------------------------------------------
 	// 有三种方式

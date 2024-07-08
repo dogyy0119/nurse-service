@@ -8,6 +8,16 @@ import app from "../../../App.vue"
 	export default {
 		data() {
 			return {
+				total_fee: 1, // 支付金额，单位分 100 = 1元
+				order_no: "", // 业务系统订单号（即你自己业务系统的订单表的订单号）
+				out_trade_no: "", // 插件支付单号
+				description: "测试订单", // 支付描述
+				type: "goods", // 支付回调类型 如 recharge 代表余额充值 goods 代表商品订单（可自定义，任意英文单词都可以，只要你在 uni-pay-co/notify/目录下创建对应的 xxx.js文件进行编写对应的回调逻辑即可）
+				custom:{
+					a: "a",
+					b: 1
+				},
+				
 				loadingText: '',
 				animation: '',
 				animationData: {},
@@ -55,14 +65,14 @@ import app from "../../../App.vue"
 			}  
 			
 			// 初始化一个动画
-			var animation = uni.createAnimation({
-				transformOrigin: "50% 0 50%",
-				duration: 1000, //动画持续1秒
-				timingFunction: 'linear', //linear 全程匀速运动
-				delay: 200 //延迟两秒执行动画
-			})
-			this.animation = animation;
-			this.scaleAndScale();
+			// var animation = uni.createAnimation({
+			// 	transformOrigin: "50% 0 50%",
+			// 	duration: 1000, //动画持续1秒
+			// 	timingFunction: 'linear', //linear 全程匀速运动
+			// 	delay: 200 //延迟两秒执行动画
+			// })
+			// this.animation = animation;
+			// this.scaleAndScale();
 
 			//执行初始化,需要用的时候，可以把注释取掉
 			//this.Refresh("init");
@@ -82,6 +92,20 @@ import app from "../../../App.vue"
 			this.Refresh();
 		},
 		methods: {
+			open() {
+				// this.order_no = `test`+Date.now(); // 模拟生成订单号
+				this.out_trade_no = `${this.order_no}-1`; // 模拟生成插件支付单号
+				// 打开支付收银台
+				this.$refs.pay.open({
+					total_fee: this.money, // 支付金额，单位分 100 = 1元（注意：因为是前端传的，此参数可能会被伪造，回调时需要再校验下是否和自己业务订单金额一致）
+					order_no: this.order_no, // 业务系统订单号（即你自己业务系统的订单表的订单号）
+					out_trade_no: this.out_trade_no, // 插件支付单号
+					description: this.description, // 支付描述
+					type: this.type, // 支付回调类型
+					custom: this.custom, // 自定义数据（此参数不推荐使用，因为是前端传的，此参数可能会被伪造，建议通过order_no查询自己业务订单表来获取自定义业务数据）
+				});
+			},
+			
 			// 定义动画内容
 			scaleAndScale() {
 				// 定义动画内容
@@ -116,6 +140,14 @@ import app from "../../../App.vue"
 				uni.showToast({title: '充值成功！',icon: 'none',duration: 2000});
 				
 				
+				this.money = 1;
+				this.order_no = this.nurse_order_id;
+				
+				
+				this.open();
+				
+				
+				return;
 				uniCloud.callFunction({
 				    name: "nurse-order-update",
 				    data: {
@@ -264,8 +296,6 @@ import app from "../../../App.vue"
 			
 			},
 			
-			
-
 			//刷新数据
 			Refresh:function(_action) {
 			
@@ -305,16 +335,12 @@ payType: that.payType,
 
 					//初始化，对页面上的控件进行赋值操作
 					if(_action=="init"){
-		that.payType_array= tmp.payType_array;
+						that.payType_array= tmp.payType_array;
 
 					}
 
-
-
 					that.money=tmp.money;
 					
-
-
 					//如果后端有返回消息，则弹出消息提示
 					if (tmp.message != null && tmp.message != "") {
 						uni.showToast({
@@ -323,8 +349,6 @@ payType: that.payType,
 						duration: 2000
 						})
 					}
-
-
 
 					//如果后端有返回页码，则更改当前页码
 					if(tmp.page!=null && tmp.page!=""){

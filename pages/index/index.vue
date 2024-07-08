@@ -171,6 +171,7 @@
 					success: (res) => {
 						let push_clientid = res.cid
 						console.log('客户端推送标识:',push_clientid)
+						uni.setStorageSync("push_client_id", push_clientid)
 					},
 					fail(err) {
 						console.log(err)

@@ -49,7 +49,7 @@ var alipay = {
 		} else {
 			return {
 				errCode: -1,
-				errMsg: result.error_response.sub_msg
+				errMsg: result.error_response ? result.error_response.sub_msg : "alipay获取openid失败："+JSON.stringify(result)
 			}
 		}
 	},

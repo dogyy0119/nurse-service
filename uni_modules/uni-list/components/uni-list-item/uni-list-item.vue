@@ -1,21 +1,21 @@
 <template>
 	<!-- #ifdef APP-NVUE -->
-	<cell>
+	<cell :keep-scroll-position="keepScrollPosition">
 		<!-- #endif -->
-
-		<view :class="{ 'uni-list-item--disabled': disabled }"
+		<view :class="{ 'uni-list-item--disabled': disabled }" :style="{'background-color':customStyle.backgroundColor}"
 			:hover-class="(!clickable && !link) || disabled || showSwitch ? '' : 'uni-list-item--hover'"
 			class="uni-list-item" @click="onClick">
 			<view v-if="!isFirstChild" class="border--left" :class="{ 'uni-list--border': border }"></view>
 			<view class="uni-list-item__container"
-				:class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column' }">
+				:class="{ 'container--right': showArrow || link, 'flex--direction': direction === 'column'}"
+				:style="{paddingTop:padding.top,paddingLeft:padding.left,paddingRight:padding.right,paddingBottom:padding.bottom}">
 				<slot name="header">
 					<view class="uni-list-item__header">
 						<view v-if="thumb" class="uni-list-item__icon">
 							<image :src="thumb" class="uni-list-item__icon-img" :class="['uni-list--' + thumbSize]" />
 						</view>
 						<view v-else-if="showExtraIcon" class="uni-list-item__icon">
-							<uni-icons :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" />
+							<uni-icons :customPrefix="extraIcon.customPrefix" :color="extraIcon.color" :size="extraIcon.size" :type="extraIcon.type" />
 						</view>
 					</view>
 				</slot>
@@ -31,7 +31,7 @@
 					<view v-if="rightText || showBadge || showSwitch" class="uni-list-item__extra"
 						:class="{ 'flex--justify': direction === 'column' }">
 						<text v-if="rightText" class="uni-list-item__extra-text">{{ rightText }}</text>
-						<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" />
+						<uni-badge v-if="showBadge" :type="badgeType" :text="badgeText" :custom-style="badgeStyle" />
 						<switch v-if="showSwitch" :disabled="disabled" :checked="switchChecked"
 							@change="onSwitchChange" />
 					</view>
@@ -58,6 +58,7 @@
 	 * 	@value 	 sm			小图
 	 * @property {String} 	badgeText						数字角标内容
 	 * @property {String} 	badgeType 						数字角标类型，参考[uni-icons](https://ext.dcloud.net.cn/plugin?id=21)
+	 * @property {Object}   badgeStyle           数字角标样式
 	 * @property {String} 	rightText 						右侧文字内容
 	 * @property {Boolean} 	disabled = [true|false]			是否禁用
 	 * @property {Boolean} 	clickable = [true|false] 		是否开启点击反馈
@@ -95,7 +96,7 @@
 				default: ''
 			},
 			ellipsis: {
-				type: [Number,String],
+				type: [Number, String],
 				default: 0
 			},
 			disabled: {
@@ -138,6 +139,12 @@
 				type: String,
 				default: 'success'
 			},
+			badgeStyle: {
+				type: Object,
+				default () {
+					return {}
+				}
+			},
 			rightText: {
 				type: String,
 				default: ''
@@ -158,21 +165,77 @@
 				type: Object,
 				default () {
 					return {
-						type: 'contact',
+						type: '',
 						color: '#000000',
-						size: 20
+						size: 20,
+						customPrefix: ''
 					};
 				}
 			},
 			border: {
 				type: Boolean,
 				default: true
+			},
+			customStyle: {
+				type: Object,
+				default () {
+					return {
+						padding: '',
+						backgroundColor: '#FFFFFF'
+					}
+				}
+			},
+			keepScrollPosition: {
+				type: Boolean,
+				default: false
+			}
+		},
+		watch: {
+			'customStyle.padding': {
+				handler(padding) {
+					if(typeof padding == 'number'){
+						padding += ''
+					}
+					let paddingArr = padding.split(' ')
+					if (paddingArr.length === 1) {
+						const allPadding = paddingArr[0]
+						this.padding = {
+							"top": allPadding,
+							"right": allPadding,
+							"bottom": allPadding,
+							"left": allPadding
+						}
+					} else if (paddingArr.length === 2) {
+						const [verticalPadding, horizontalPadding] = paddingArr;
+						this.padding = {
+							"top": verticalPadding,
+							"right": horizontalPadding,
+							"bottom": verticalPadding,
+							"left": horizontalPadding
+						}
+					} else if (paddingArr.length === 4) {
+							const [topPadding, rightPadding, bottomPadding, leftPadding] = paddingArr;
+							this.padding = {
+								"top": topPadding,
+								"right": rightPadding,
+								"bottom": bottomPadding,
+								"left": leftPadding
+							}
+					}
+				},
+				immediate: true
 			}
 		},
 		// inject: ['list'],
 		data() {
 			return {
-				isFirstChild: false
+				isFirstChild: false,
+				padding: {
+					top: "",
+					right: "",
+					bottom: "",
+					left: ""
+				}
 			};
 		},
 		mounted() {
@@ -248,7 +311,7 @@
 						uni.switchTab(callback)
 						break
 					default:
-					uni.navigateTo(callback)
+						uni.navigateTo(callback)
 				}
 			}
 		}
@@ -289,7 +352,7 @@
 	}
 
 	.uni-list-item--hover {
-		background-color: $uni-bg-color-hover;
+		background-color: $uni-bg-color-hover !important;
 	}
 
 	.uni-list-item__container {
@@ -312,7 +375,6 @@
 	// .border--left {
 	// 	margin-left: $uni-spacing-row-lg;
 	// }
-
 	.uni-list--border {
 		position: absolute;
 		top: 0;
@@ -339,7 +401,6 @@
 	}
 
 	/* #endif */
-
 	.uni-list-item__content {
 		/* #ifndef APP-NVUE */
 		display: flex;
@@ -453,7 +514,7 @@
 		/* #endif */
 		/* #ifdef APP-NVUE */
 		lines: 1;
-		text-overflow:ellipsis;
+		text-overflow: ellipsis;
 		/* #endif */
 	}
 
@@ -465,10 +526,9 @@
 		-webkit-line-clamp: 2;
 		-webkit-box-orient: vertical;
 		/* #endif */
-
 		/* #ifdef APP-NVUE */
 		lines: 2;
-		text-overflow:ellipsis;
+		text-overflow: ellipsis;
 		/* #endif */
 	}
 </style>

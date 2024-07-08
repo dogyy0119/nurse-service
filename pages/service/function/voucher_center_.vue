@@ -28,6 +28,11 @@
 
 		<view class="loading">{{loadingText}}</view>
 		<view class="ymBbottom"></view>
+		
+		<view>
+			<!-- <button @click="open">唤起收银台支付</button> -->
+			<uni-pay ref="pay"></uni-pay>
+		</view>
 	</view>
 </template>
 

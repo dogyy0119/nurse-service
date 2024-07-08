@@ -1,3 +1,6 @@
+## 2.2.1（2024-06-06）
+- 【优化】ios内购验证凭据失败时尝试使用相反的环境配置再次验证
+- 【优化】支付宝小程序获取openid报错的提示
 ## 2.2.0（2024-03-11）
 - 【重要】新增微信小程序虚拟支付 [配置参数](https://doc.dcloud.net.cn/uniCloud/uni-pay/uni-app.html#config-wxpay-virtual-mp) 、[代币充值](https://doc.dcloud.net.cn/uniCloud/uni-pay/uni-app.html#short-series-coin) 、[道具直购](https://doc.dcloud.net.cn/uniCloud/uni-pay/uni-app.html#short-series-goods)
 ## 2.1.5（2024-01-13）
