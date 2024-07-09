@@ -95,7 +95,7 @@
 				  
 				    // #ifdef MP-WEIXIN  
 				    // 如果是在微信小程序环境下，则执行绑定手机号的操作  
-				    this.$refs['uni-bindMobileByMpWeixin'].open();  
+				    // this.$refs['uni-bindMobileByMpWeixin'].open();  
 				    // #endif  
 				} catch (error) {  
 				    // 处理 login_before 方法中可能抛出的错误  

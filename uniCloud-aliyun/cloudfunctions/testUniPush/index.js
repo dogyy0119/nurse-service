@@ -1,6 +1,9 @@
 //简单的使用示例
 'use strict';
 const uniPush = uniCloud.getPushManager({appId:"__UNI__5000F3E"}) //注意这里需要传入你的应用appId，用于指定接收消息的客户端
+
+//const uniPush = uniCloud.getPushManager({appId:"__UNI__D96DA3E"}) //注意这里需要传入你的应用appId，用于指定接收消息的客户端
+
 exports.main = async (event, context) => {
 	let res = await uniPush.sendMessage({
 		"push_clientid": event.pushId, 	//填写上一步在uni-app客户端获取到的客户端推送标识push_clientid
