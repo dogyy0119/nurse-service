@@ -23,7 +23,7 @@ module.exports = async (obj) => {
 	    name: "nurse-order-update",
 	    data: {
 			id: order_no,
-			status: 3
+			status: 2
 	    },
 	    success: (res) => {
 	    },
@@ -105,6 +105,6 @@ module.exports = async (obj) => {
 			user_order_success = true;
 	    }
 	});
-	
+	user_order_success = true;
 	return user_order_success;
 };

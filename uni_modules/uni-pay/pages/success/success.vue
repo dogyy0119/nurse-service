@@ -67,6 +67,18 @@
 		// 监听 - 页面每次【加载时】执行(如：前进)
 		onLoad(options = {}) {
 			this.options = options;
+			
+			setTimeout(() => {
+			  uni.switchTab({
+			    url: '/pages/index/index',
+			    success: (res) => {
+			      // 处理成功的情况，如果需要的话
+			    },
+			    fail: (err) => {
+			      // 处理失败的情况，如果需要的话
+			    }
+			  });
+			}, 3000); // 3000 毫秒 = 3 秒
 		},
 		// 监听 - 页面【首次渲染完成时】执行。注意如果渲染速度快，会在页面进入动画完成前触发
 		onReady(){},

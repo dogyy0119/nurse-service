@@ -12,7 +12,7 @@ import app from "../../../App.vue"
 				order_no: "", // 业务系统订单号（即你自己业务系统的订单表的订单号）
 				out_trade_no: "", // 插件支付单号
 				description: "测试订单", // 支付描述
-				type: "goods", // 支付回调类型 如 recharge 代表余额充值 goods 代表商品订单（可自定义，任意英文单词都可以，只要你在 uni-pay-co/notify/目录下创建对应的 xxx.js文件进行编写对应的回调逻辑即可）
+				type: "goodssss", // 支付回调类型 如 recharge 代表余额充值 goods 代表商品订单（可自定义，任意英文单词都可以，只要你在 uni-pay-co/notify/目录下创建对应的 xxx.js文件进行编写对应的回调逻辑即可）
 				custom:{
 					a: "a",
 					b: 1
@@ -102,7 +102,7 @@ import app from "../../../App.vue"
 					out_trade_no: this.out_trade_no, // 插件支付单号
 					description: this.description, // 支付描述
 					type: this.type, // 支付回调类型
-					custom: this.custom, // 自定义数据（此参数不推荐使用，因为是前端传的，此参数可能会被伪造，建议通过order_no查询自己业务订单表来获取自定义业务数据）
+					// custom: this.custom, // 自定义数据（此参数不推荐使用，因为是前端传的，此参数可能会被伪造，建议通过order_no查询自己业务订单表来获取自定义业务数据）
 				});
 			},
 			
@@ -148,26 +148,26 @@ import app from "../../../App.vue"
 				
 				
 				return;
-				uniCloud.callFunction({
-				    name: "nurse-order-update",
-				    data: {
-						id: this.nurse_order_id,
-						status: 2
-				    },
-				    success: (res) => {
-						console.error("更新成功 ---" );
-						console.log(res);
+				// uniCloud.callFunction({
+				//     name: "nurse-order-update",
+				//     data: {
+				// 		id: this.nurse_order_id,
+				// 		status: 2
+				//     },
+				//     success: (res) => {
+				// 		console.error("更新成功 ---" );
+				// 		console.log(res);
 						
-						this.dispatchOrder();
+				// 		this.dispatchOrder();
 						
-				    },
-				    fail: (err) => {
-				        console.error("更新失败: " + err);
-				    },
-				    complete: (res) => {
-				        console.log("更新完成");
-				    }
-				});
+				//     },
+				//     fail: (err) => {
+				//         console.error("更新失败: " + err);
+				//     },
+				//     complete: (res) => {
+				//         console.log("更新完成");
+				//     }
+				// });
 								
 				// uni.switchTab({
 				//   url: '/pages/index/index',
@@ -313,7 +313,7 @@ import app from "../../../App.vue"
 					//上传页面中的变量
 					//定义变量---start
 					money: that.money,
-payType: that.payType,
+					payType: that.payType,
 
 					//定义变量---end
 					id: that.id,//上传id值，后端可以根据此值来操作当前id

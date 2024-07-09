@@ -187,7 +187,7 @@
 				    url: '/pages/service/city/city'	
 				  });
 			},
-			getNewsData(id=0){
+			getNewsData(){
 				// console.log("this.navIndex :" + this.navIndex)
 				let category = this.gridList[this.navIndex].index
 				// category = "6646bc558b0da4a4e41e78be"
