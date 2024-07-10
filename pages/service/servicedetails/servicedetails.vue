@@ -301,12 +301,12 @@
 							i = i+1;
 						});
 						this.calculateTotalPrice();
-						// uni.hideLoading({
-						// 	mask: true
-						// })
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
+						uni.hideLoading({
+							mask: true
+						})
 				    },
 				    complete: (res) => {
 				        console.log("请求完成");
@@ -341,15 +341,19 @@
 						});
 						
 						this.calculateTotalPrice();
+						
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
 						uni.hideLoading({
 							mask: true
 						})
 				    },
-				    fail: (err) => {
-				        console.error("请求失败: " + err);
-				    },
 				    complete: (res) => {
 				        console.log("请求完成");
+						uni.hideLoading({
+							mask: true
+						})
 				    }
 				});
 			}

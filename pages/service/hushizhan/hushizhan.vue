@@ -97,6 +97,10 @@
 			}
 		},
 		onLoad(query) {
+			uni.showLoading({
+			    mask: true
+			}) 
+			
 			this.navIndex = query.index;
 			// console.log("onload query:" + query.index)
 			this.getNavData();
@@ -167,6 +171,9 @@
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
+						uni.hideLoading({
+							mask: true
+						})
 				    },
 				    complete: (res) => {
 				        // console.log("请求完成");
@@ -211,9 +218,15 @@
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
+						uni.hideLoading({
+							mask: true
+						})
 				    },
 				    complete: (res) => {
 				        // console.log("请求完成");
+						uni.hideLoading({
+							mask: true
+						})
 				    }
 				});	
 				

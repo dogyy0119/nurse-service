@@ -68,6 +68,31 @@
 		onLoad(options = {}) {
 			this.options = options;
 			
+			
+			// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
+			
+			let pushId = '11422b93b0dc478fbdfb18aae26eb327';
+			
+			uniCloud.callFunction({
+			    name: "testUniPush",
+			    data: {
+					pushId: pushId,
+					title: "您被选中自动派单",
+					content: this.options.order_no,
+					text: "价格：" + this.options.total_fee + "分",
+			    },
+			    success: (res) => {
+					console.log(res)
+			    },
+			    fail: (err) => {
+			        console.error("请求失败: " + err);
+			    },
+			    complete: (res) => {
+			         console.log("请求完成");
+			    }
+			});
+			
+			
 			setTimeout(() => {
 			  uni.switchTab({
 			    url: '/pages/index/index',

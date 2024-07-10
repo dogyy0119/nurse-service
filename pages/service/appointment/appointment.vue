@@ -209,6 +209,10 @@
 		},
 		onLoad(options) {
 			
+			uni.showLoading({
+			    mask: true
+			}) 
+			   
 		    if (options.params) {
 		        let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
 		        console.log(params);
@@ -235,6 +239,9 @@
 				this.baseFormData.datetimesingle = timestamp;
 		    }
 			
+			uni.hideLoading({
+			 mask: true
+			})
 
 		},
 		onShow() {

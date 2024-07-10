@@ -178,8 +178,6 @@ import app from "../../../App.vue"
 				//     // Handle failure if needed
 				//   }
 				// });
-				
-				return;
 			
 			},
 			
