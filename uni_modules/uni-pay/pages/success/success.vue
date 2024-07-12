@@ -80,7 +80,7 @@
 			      // 处理失败的情况，如果需要的话
 			    }
 			  });
-			}, 3000); // 3000 毫秒 = 3 秒
+			}, 4000); // 3000 毫秒 = 3 秒
 		},
 		// 监听 - 页面【首次渲染完成时】执行。注意如果渲染速度快，会在页面进入动画完成前触发
 		onReady(){},
@@ -95,18 +95,20 @@
 				
 				
 				let nurse_id = '';
+				console.log("options.order_no :" + options.order_no)
 				
 				uniCloud.callFunction({
 				    name: "nurse-dispatch-order",
 				    data: {
-						id: options.order_no
+						_id: options.order_no
 				    },
 				    success: (res) => {
 						console.log("liuhang ++")
-						console.log("options.order_no :" + options.order_no)
 						console.log(res )
+						
 						nurse_id = res.result.data
 						console .log("nurse_id :" + nurse_id)
+						
 						uniCloud.callFunction({
 						    name: "mydevice",
 						    data: {
@@ -115,8 +117,8 @@
 						    success: (rest) => {
 								
 								console.log(rest);
-								console.log(rest.result.data.push_clientid);
-								this.psuh_order(options, rest.result.data.push_clientid);
+								console.log(rest.result.data[0].push_clientid);
+								this.psuh_order(options, rest.result.data[0].push_clientid);
 						    },
 						    fail: (err) => {
 						        console.error("请求失败2: " + err);
@@ -136,13 +138,12 @@
 			},
 			psuh_order( options, push_clientid ) {
 				// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
-				
-				let pushId = '11422b93b0dc478fbdfb18aae26eb327';
+				// let pushId = '11422b93b0dc478fbdfb18aae26eb327';
 				
 				uniCloud.callFunction({
 				    name: "testUniPush",
 				    data: {
-						pushId: pushId,
+						pushId: push_clientid,
 						title: "您被选中自动派单",
 						content: this.options.order_no,
 						text: "价格：" + this.options.total_fee + "分",
