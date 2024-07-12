@@ -17,6 +17,12 @@
 
 			uni.onPushMessage((res) => {
 				console.log("收到推送消息：",res) //监听推送消息
+				
+				uni.showModal({
+			        title: '新消息',
+			        content: res.content, // 假设消息内容存储在 message.content 中
+			        showCancel: false // 不显示取消按钮
+				});
 			})
 			
 			

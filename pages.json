@@ -138,7 +138,6 @@
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
-					"tabBar": {},
 					"navigationBarTitleText": "个人中心"
 				}
 			}
