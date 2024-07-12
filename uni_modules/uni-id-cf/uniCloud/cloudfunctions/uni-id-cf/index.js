@@ -117,7 +117,7 @@ exports.main = async (event, context) => {
 			}
 			if (res.type == 'login') {
 				if (Object.keys(deviceInfo).length) {
-					console.log(" event.params.push_clientid :" + event.params.push_clientid);
+					console.log(" event.push_clientid :" + event.push_clientid);
 					//避免重复新增设备信息，先判断是否已存在
 					let getDeviceRes = await deviceDB.where({
 						"device_id": context.DEVICEID
@@ -153,7 +153,7 @@ exports.main = async (event, context) => {
 						await mydevice.add({
 							"user_id": res.uid,
 							"device_id": context.DEVICEID,
-							"push_clientid": event.params.push_clientid || ''
+							"push_clientid": event.push_clientid || ''
 						})
 					} else {								
 						console.log(" mydevice.update ")
@@ -161,7 +161,7 @@ exports.main = async (event, context) => {
 							"user_id": res.uid,
 						}).update({
 							"device_id": context.DEVICEID,
-							"push_clientid": event.params.push_clientid || ''
+							"push_clientid": event.push_clientid || ''
 						})
 					}
 				}
@@ -219,7 +219,7 @@ exports.main = async (event, context) => {
 				"device_id": context.DEVICEID
 			}).update({
 				"user_id": params.uid,
-				"push_clientid": params.push_clientid,
+				// "push_clientid": params.push_clientid,
 				tokenExpired
 			})
 			break;

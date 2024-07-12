@@ -156,7 +156,7 @@
 		mounted() {
 			
 			this.push_clientid = uni.getStorageSync("push_client_id")
-			console.log( " get push_clientid .... " + this.push_clientid)
+			console.log( " get push_clientid 1.... " + this.push_clientid)
 			// uni.getPushClientId({
 			// 	success: (res) => {
 			// 		this.push_clientid = res.cid
@@ -167,6 +167,10 @@
 			// 	}
 			// })
 			
+		},
+		onShow() {
+			this.push_clientid = uni.getStorageSync("push_client_id")
+			console.log( " get push_clientid 2.... " + this.push_clientid)
 		},
 		methods: {
 			...mapMutations({
@@ -294,12 +298,15 @@
 				})
 			},
 			login(params, type) { //联网验证登录
+				console.log( " send push_clientid .... " + this.push_clientid)
+			
+
 				console.log({
 					params,
 					type
 				});
 				
-				console.log( " send push_clientid .... " + this.push_clientid)
+				
 				
 				let action = 'loginBy' + type.trim().toLowerCase().replace(type[0], type[0].toUpperCase())
 				uniCloud.callFunction({

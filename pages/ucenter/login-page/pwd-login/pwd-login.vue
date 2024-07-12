@@ -76,9 +76,9 @@
 				uniCloud.callFunction({
 					name:'uni-id-cf',
 					data:{
+						"push_clientid": this.push_clientid,
 						action:'login',
 						params:{
-							"push_clientid": this.push_clientid,
 							"username": this.username,
 							"password": this.password,
 							"captcha":this.captcha
