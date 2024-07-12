@@ -23,7 +23,7 @@ module.exports = async (obj) => {
 	    name: "nurse-order-update",
 	    data: {
 			id: order_no,
-			status: 2
+			status: 23
 	    },
 	    success: (res) => {
 	    },
@@ -35,5 +35,76 @@ module.exports = async (obj) => {
 	    }
 	});
 
+
+	// let nurse_id = '';
+	
+	// uniCloud.callFunction({
+	//     name: "nurse-dispatch-order",
+	//     data: {
+	// 		id: order_no
+	//     },
+	//     success: (res) => {
+	// 		nurse_id = res.result.data
+			
+	// 		uniCloud.callFunction({
+	// 		    name: "mydevice",
+	// 		    data: {
+	// 				uid: res.result.data
+	// 		    },
+	// 		    success: (res) => {
+	// 				console.log(res);
+	// 				uniCloud.callFunction({
+	// 				    name: "nurse-order-update",
+	// 				    data: {
+	// 						id: order_no,
+	// 						status: nurse_id
+	// 				    },
+	// 				    success: (res) => {
+	// 				    },
+	// 				    fail: (err) => {
+	// 						user_order_success = false;
+	// 				    },
+	// 				    complete: (res) => {
+	// 						user_order_success = true;
+	// 				    }
+	// 				});
+	// 		    },
+	// 		    fail: (err) => {
+	// 		    },
+	// 		    complete: (res) => {
+	// 		    }
+	// 		});
+	//     },
+	//     fail: (err) => {
+	//     },
+	//     complete: (res) => {
+	//     }
+	// });
+	
+	
+	// let push_clientid = "0eb40275629a13867b7fe787cc530a65"
+	
+	// uniCloud.callFunction({
+	//     name: "testUniPush",
+	//     data: {
+	// 		pushId: push_clientid,
+	// 		title: "您被选中自动派单",
+	// 		content: order_no,
+	// 		text: "价格：" + total_fee,
+	//     },
+	//     success: (res) => {
+	// 		console.log(res)
+	//     },
+	//     fail: (err) => {
+	//         console.error("请求失败: " + err);
+	//     },
+	//     complete: (res) => {
+	//          console.log("请求完成");
+	//     }
+	// });
+	
+	
+
+	user_order_success = true;
 	return user_order_success;
 };

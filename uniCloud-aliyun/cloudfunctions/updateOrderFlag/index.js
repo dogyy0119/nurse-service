@@ -1,17 +1,17 @@
 'use strict';
 const db = uniCloud.database();  
-const collection = db.collection('orderlist');  
+const collection = db.collection('nurse-order');  
   
 exports.main = async (event, context) => {  
     // 获取传入的OrderID和新的Flag值  
-    const { OrderID, Flag } = event;  
+    const { _id, status } = event;  
   
     try {  
         // 使用where条件来定位要更新的记录，并使用update方法更新Flag字段  
         const res = await collection.where({  
-            OrderID: OrderID  
+            _id: _id  
         }).update({  
-            Flag: Flag  
+            status: status  
         });  
   
         // 返回更新结果  

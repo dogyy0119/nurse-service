@@ -1,0 +1,8 @@
+{
+  "name": "uni-sendtouser",
+  "dependencies": {},
+  "extensions": {
+	"uni-cloud-jql": {},
+    "uni-cloud-push": {}
+  }
+}

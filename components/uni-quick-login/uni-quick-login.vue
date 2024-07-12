@@ -40,6 +40,7 @@
 		},
 		data() {
 			return {
+				push_clientid: '1234567',
 				servicesList: [{
 						"id": "username",
 						"text": t('accountLogin'),
@@ -152,7 +153,21 @@
 			})
 			console.log('servicesList', servicesList, this.servicesList);
 		},
-		mounted() {},
+		mounted() {
+			
+			this.push_clientid = uni.getStorageSync("push_client_id")
+			console.log( " get push_clientid .... " + this.push_clientid)
+			// uni.getPushClientId({
+			// 	success: (res) => {
+			// 		this.push_clientid = res.cid
+			// 		console.log('客户端推送标识 1:', this.push_clientid)
+			// 	},
+			// 	fail(err) {
+			// 		console.log(err)
+			// 	}
+			// })
+			
+		},
 		methods: {
 			...mapMutations({
 				setUserInfo: 'user/login'
@@ -191,7 +206,9 @@
 						icon: 'none'
 					});
 				}
-				console.log("login_before aaa agree:" + this.agree)
+				console.log("login_before aaa agree:" + this.agree )
+				console.log("login_before aaa type:" + type )
+				
 				if (type == 'univerify') {
 					let univerifyManager = uni.getUniverifyManager()
 					let onButtonsClickFn =	async res =>{
@@ -281,10 +298,14 @@
 					params,
 					type
 				});
+				
+				console.log( " send push_clientid .... " + this.push_clientid)
+				
 				let action = 'loginBy' + type.trim().toLowerCase().replace(type[0], type[0].toUpperCase())
 				uniCloud.callFunction({
 					name: 'uni-id-cf',
 					data: {
+						"push_clientid": this.push_clientid,
 						action,
 						params
 					},

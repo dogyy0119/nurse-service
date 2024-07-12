@@ -1,12 +1,17 @@
 'use strict';
-const db = uniCloud.databaseForJQL();  
+const db = uniCloud.database();
+const dbCmd = db.command;
   
 exports.main = async (event, context) => {  
     // 获取传入的OrderID和新的Flag值  
     //console.log('event : ', event)
     
-    const nurse_users = await db.collection('uni-id-users').where('type==1').field('_id, mobile').get();
+    //const nurse_users = await db.collection('uni-id-users').where('type==1').field('_id, mobile').get();
     // console.log(nurse_users)
+    const nurse_users = await db.collection('uni-id-users').where(
+    {
+        type: 1  
+    }).get();
     
     var min_order_nurse;
     var min_order = 1000;
@@ -15,26 +20,38 @@ exports.main = async (event, context) => {
         var user_id = nurse_users.data[i]._id
         console.log(i + "   " + user_id)
         
-        const nurse_orders = await db.collection('nurse-order').where('and(nurse_id == ' +'"'  + user_id + '"' + ', status >= 3)').field('nurse_id').count(); 
+        //const nurse_orders = await db.collection('nurse-order').where('and(nurse_id == ' +'"'  + user_id + '"' + ', status >= 3)').field('nurse_id').count(); 
+        const nurse_orders = await db.collection('nurse-order').where(      
+        {
+            nurse_id: user_id,
+            status: dbCmd.gt(2)
+        }
+        
+        ).count(); 
+        
         console.log(nurse_orders)
+              
         if(nurse_orders.total<min_order){
            min_order =  nurse_orders.total;
            min_order_nurse = nurse_users.data[i];
         }
-            
     }
 
-    // console.log(min_order_nurse)
-    // console.log(min_order_nurse.mobile)
-    // console.log(min_order_nurse._id)
+    //console.log(min_order_nurse)
+    //console.log(min_order_nurse.mobile)
+    //console.log(min_order_nurse._id)
 
     // const { _id} = event;  	
     
     try {  
         const  collection = db.collection("nurse-order")
         // 使用where条件来定位要更新的记录，并使用update方法更新Flag字段  
+        
+        
+        //console.log("event.id = " + event._id)
+        
         const res = await collection.where({  
-            _id: event.id  
+            _id: event._id  
         }).update({
             status:3,
             nurse_phone: min_order_nurse.mobile,

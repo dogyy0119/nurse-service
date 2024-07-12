@@ -135,6 +135,7 @@
 		
 		methods: {	
 			getdad() {
+				// #ifdef MP-WEIXIN
 				uni.authorize({
 				    scope:'scope.userLocation',
 				    success:function(){
@@ -144,6 +145,7 @@
 				        console.log("授权地理位置：失败");
 				    }
 				});
+				// #endif
 			},
 			
 			// async opid() {

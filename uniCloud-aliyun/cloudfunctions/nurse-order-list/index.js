@@ -15,7 +15,7 @@ exports.main = async (event, context) => {
 			console.log("event.status:" + event.status)
             query.status = event.status;
         } else {
-			console.log("event.status: undefined - ")		
+			console.log("event.status: undefined - " + event.status)		
 		}
 
         let res = await collection.where(query).get();

@@ -1,0 +1,7 @@
+{
+  "name": "refund",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -68,30 +68,7 @@
 		onLoad(options = {}) {
 			this.options = options;
 			
-			
-			// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
-			
-			let pushId = '11422b93b0dc478fbdfb18aae26eb327';
-			
-			uniCloud.callFunction({
-			    name: "testUniPush",
-			    data: {
-					pushId: pushId,
-					title: "您被选中自动派单",
-					content: this.options.order_no,
-					text: "价格：" + this.options.total_fee + "分",
-			    },
-			    success: (res) => {
-					console.log(res)
-			    },
-			    fail: (err) => {
-			        console.error("请求失败: " + err);
-			    },
-			    complete: (res) => {
-			         console.log("请求完成");
-			    }
-			});
-			
+			this.dispach(options)
 			
 			setTimeout(() => {
 			  uni.switchTab({
@@ -113,6 +90,77 @@
 		onHide() {},
 		// 函数
 		methods: {
+			
+			dispach( options ) {
+				
+				
+				let nurse_id = '';
+				
+				uniCloud.callFunction({
+				    name: "nurse-dispatch-order",
+				    data: {
+						id: options.order_no
+				    },
+				    success: (res) => {
+						console.log("liuhang ++")
+						console.log("options.order_no :" + options.order_no)
+						console.log(res )
+						nurse_id = res.result.data
+						console .log("nurse_id :" + nurse_id)
+						uniCloud.callFunction({
+						    name: "mydevice",
+						    data: {
+								uid: nurse_id
+						    },
+						    success: (rest) => {
+								
+								console.log(rest);
+								console.log(rest.result.data.push_clientid);
+								this.psuh_order(options, rest.result.data.push_clientid);
+						    },
+						    fail: (err) => {
+						        console.error("请求失败2: " + err);
+						    },
+						    complete: (res) => {
+						         console.log("请求完成2");
+						    }
+						});
+				    },
+				    fail: (err) => {
+				        console.error("请求失败1: " + err);
+				    },
+				    complete: (res) => {
+				         console.log("请求完成1");
+				    }
+				});
+			},
+			psuh_order( options, push_clientid ) {
+				// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
+				
+				let pushId = '11422b93b0dc478fbdfb18aae26eb327';
+				
+				uniCloud.callFunction({
+				    name: "testUniPush",
+				    data: {
+						pushId: pushId,
+						title: "您被选中自动派单",
+						content: this.options.order_no,
+						text: "价格：" + this.options.total_fee + "分",
+				    },
+				    success: (res) => {
+						console.log("发送pushid 成功！")
+						console.log(res)
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				         console.log("请求完成");
+				    }
+				});
+			},
+			
+			
 			timeFormat: jsSdk.timeFormat,
 			queryOrder(){
 				let url = this.options.return_url + `?out_trade_no=${this.options.out_trade_no}&order_no=${this.options.order_no}`;
