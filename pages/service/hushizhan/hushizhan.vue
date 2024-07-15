@@ -96,11 +96,7 @@
 				],
 			}
 		},
-		onLoad(query) {
-			uni.showLoading({
-			    mask: true
-			}) 
-			
+		onLoad(query) {			
 			this.navIndex = query.index;
 			// console.log("onload query:" + query.index)
 			this.getNavData();
@@ -157,7 +153,10 @@
 			},
 						
 			//获取导航列表数据
-			getNavData() {				
+			getNavData() {
+				uni.showLoading({
+				    mask: true
+				}) 
 				uniCloud.callFunction({
 				    name: "hospital-service-item",
 				    data: {
@@ -176,6 +175,9 @@
 						})
 				    },
 				    complete: (res) => {
+						uni.hideLoading({
+							mask: true
+						})
 				        // console.log("请求完成");
 				    }
 				});
@@ -218,15 +220,9 @@
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
-						uni.hideLoading({
-							mask: true
-						})
 				    },
 				    complete: (res) => {
 				        // console.log("请求完成");
-						uni.hideLoading({
-							mask: true
-						})
 				    }
 				});	
 				

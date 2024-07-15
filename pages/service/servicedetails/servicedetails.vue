@@ -141,13 +141,7 @@
 			};
 		},
 		onLoad(event) {
-			
-			uni.showLoading({
-				mask: true
-			})
-			
-			console.log("*******   onLoad  ********")
-			
+							
 			console.log(event.item)
 			console.log(event)
 			
@@ -160,10 +154,8 @@
 		
 		onShow(){
 			
-			console.log("*******   onShow  ********")
 		},
 		mounted() {
-			console.log("*******   mounted  ********")
 			
 		},
 		methods:{
@@ -243,6 +235,11 @@
 			
 			//获取详情
 			getDetail(serviceid){
+				
+				uni.showLoading({
+					mask: true
+				})
+				
 				uniCloud.callFunction({
 				    name: "nurse-service-getid",
 				    data: {						
@@ -270,9 +267,15 @@
 					},
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
+						uni.hideLoading({
+							mask: true
+						})
 				    },
 				    complete: (res) => {
 				        console.log("请求完成");
+						uni.hideLoading({
+							mask: true
+						})
 				    }
 				});								
 			},
@@ -304,9 +307,7 @@
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
-						uni.hideLoading({
-							mask: true
-						})
+						
 				    },
 				    complete: (res) => {
 				        console.log("请求完成");
@@ -345,15 +346,10 @@
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
-						uni.hideLoading({
-							mask: true
-						})
+
 				    },
 				    complete: (res) => {
 				        console.log("请求完成");
-						uni.hideLoading({
-							mask: true
-						})
 				    }
 				});
 			}

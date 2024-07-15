@@ -51,6 +51,11 @@ export default {
 	},
 	methods: {
 		async fetchServiceDetails() {
+			
+			uni.showLoading({
+			    mask: true
+			})
+			
 			try {
 			// Replace this with your actual UniCloud API call to fetch service details
 			uniCloud.callFunction({
@@ -64,10 +69,16 @@ export default {
 					this.service = res.result.data[0];
 				},
 				fail: (err) => {
+					uni.hideLoading({
+						mask: true
+					})
 					console.error("请求失败: " + err);
 				},
 				complete: (res) => {
-		        console.log("请求完成");
+					uni.hideLoading({
+						mask: true
+					})
+					console.log("请求完成");
 				}
 			});
         

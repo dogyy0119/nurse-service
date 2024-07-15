@@ -1,4 +1,4 @@
-<template>
+s<template>
 	<view class="content">
 		<view class="me-head">
 			<u-sticky bgColor="#fff">
@@ -144,6 +144,9 @@
 			},
 			
 			getOrderData(type) {
+				uni.showLoading({
+				    mask: true
+				}) 
 				console.log("this.user_id :" + this.user_id)		
 				let remoteQuery = {};
 				if ( type !== 0 ) {
@@ -189,9 +192,15 @@
 						// console.log(this.orderList)						
 				    },
 				    fail: (err) => {
+						uni.hideLoading({
+							mask: true
+						})
 				        console.error("请求失败: " + err);
 				    },
 				    complete: (res) => {
+						uni.hideLoading({
+							mask: true
+						})
 				        console.log("请求完成");
 				    }
 				});

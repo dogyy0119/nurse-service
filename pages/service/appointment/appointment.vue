@@ -240,7 +240,7 @@
 		    }
 			
 			uni.hideLoading({
-			 mask: true
+				mask: true
 			})
 
 		},

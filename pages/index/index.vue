@@ -139,10 +139,10 @@
 				uni.authorize({
 				    scope:'scope.userLocation',
 				    success:function(){
-				        console.log("授权地理位置：成功");
+				        // console.log("授权地理位置：成功");
 				    },
 				    fail:function(){
-				        console.log("授权地理位置：失败");
+				        // console.log("授权地理位置：失败");
 				    }
 				});
 				// #endif
@@ -190,6 +190,10 @@
 				  });
 			},
 			getNewsData(){
+				uni.showLoading({
+				    mask: true
+				}) 
+				
 				// console.log("this.navIndex :" + this.navIndex)
 				let category = this.gridList[this.navIndex].index
 				// category = "6646bc558b0da4a4e41e78be"
@@ -220,9 +224,15 @@
 						// this.newsArr=[...this.newsArr,...res.result.data]
 				    },
 				    fail: (err) => {
+						uni.hideLoading({
+						 mask: true
+						})
 				        console.error("请求失败: " + err);
 				    },
 				    complete: (res) => {
+						uni.hideLoading({
+						 mask: true
+						})
 				        // console.log("请求完成");
 				    }
 				});

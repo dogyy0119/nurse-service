@@ -364,7 +364,7 @@
 		flex-shrink: 0;
 		font-size: 24upx;
 		color: #fff;
-		background: linear-gradient(to right, #4492EB, #3F92EE);
+		background: linear-gradient(to right, #1cbbb4, #1cbbb4);
 		border-radius: 60upx;
 	}
 
