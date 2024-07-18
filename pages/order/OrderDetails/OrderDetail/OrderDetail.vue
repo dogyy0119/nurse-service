@@ -47,11 +47,13 @@
 					</view>
 					<view class="orderItem-min">
 						<view class="orderItem-1">下单时间：</view>
-						<view class="orderItem-2">{{ service.paid_time }}</view>
+						<!-- <view class="orderItem-2">{{ formatTime(service.paid_time) }}</view> -->
+						<view class="orderItem-2">{{ formatTime(service.update_time) }}</view>
+						
 					</view>
 					<view class="orderItem-min">
 						<view class="orderItem-1">护士名称：</view>
-						<view class="orderItem-2">{{ service.murse_nickname }}</view>
+						<view class="orderItem-2">{{ service.nurse_nickname }}</view>
 					</view>
 					<view class="orderItem-min">
 						<view class="orderItem-1">护士电话：</view>
@@ -188,25 +190,25 @@
 						complete: () => {}
 					})
 				} else {
-					var currentDate = new Date(); // 创建一个新的 Date 对象，表示当前时间
-					console.log("currentDate："+ currentDate)
-					uniCloud.callFunction({
-						name: "nurse-order-update",
-						data: 
-						{
-							id: this.orderId,
-							status: 1,
-						},
-						success: (res) => {	
-							console.log(res)
-						},
-						fail: (err) => {					
-							console.error("请求失败: " + err);
-						},
-						complete: (res) => {
-							console.log("请求完成");
-						}
-					});
+					// var currentDate = new Date(); // 创建一个新的 Date 对象，表示当前时间
+					// console.log("currentDate："+ currentDate)
+					// uniCloud.callFunction({
+					// 	name: "nurse-order-update",
+					// 	data: 
+					// 	{
+					// 		id: this.orderId,
+					// 		status: 1,
+					// 	},
+					// 	success: (res) => {	
+					// 		console.log(res)
+					// 	},
+					// 	fail: (err) => {					
+					// 		console.error("请求失败: " + err);
+					// 	},
+					// 	complete: (res) => {
+					// 		console.log("请求完成");
+					// 	}
+					// });
 				}
 			},
 			btn2Click() {
