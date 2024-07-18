@@ -7,7 +7,7 @@
 			
 			<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
-					<view class="price" >总价￥：{{price}}</view>
+					<view class="price" >总价￥：{{price/100}}</view>
 					<!-- <uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
 						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />	 -->				
 				</view>
@@ -24,7 +24,7 @@
 					<!-- <view class="text">选中：{{taocan[taocanIndex].text}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="taocanIndex" :localdata="taocan" @change="taocanCheckboxChange(taocanIndex)"></uni-data-checkbox>
 				</view>
-				<view class="author">￥：{{taocan[taocanIndex].price}}</view>
+				<view class="author">￥：{{taocan[taocanIndex].price/100}}</view>
 
 			</view>
 					
@@ -39,7 +39,7 @@
 					<!-- <view class="text">选中：{{taocan[toolIndex].name}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="toolIndex" :localdata="toolObj" @change="toolCheckboxChange(toolIndex)"></uni-data-checkbox>
 				</view>
-				<view class="price">￥：{{toolObj[toolIndex].price}}</view>
+				<view class="price">￥：{{toolObj[toolIndex].price/100}}</view>
 				<view class="author">类型：{{toolObj[toolIndex].name}}</view>
 				<view class="author">详细：{{toolObj[toolIndex].detail}}</view>
 				<!-- </uni-section> -->
@@ -58,7 +58,7 @@
 			</view>
 			
 			<div class="flex-container">
-				<button class="amount" @click="toggle('bottom')" >金额:￥{{price}} 详情...</button>
+				<button class="amount" @click="toggle('bottom')" >金额:￥{{price/100}} 详情...</button>
 			    <button class="reserve-btn" @click="goToAppointment">立即预约</button>
 			</div>
 			
@@ -73,8 +73,8 @@
 			<!-- 普通弹窗 -->
 			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
 				<view class="tan-taocan">套餐：{{taocan[taocanIndex].text}}</view>
-				<view class="tan-desc">套餐价格：{{taocan[taocanIndex].price}}</view>
-				<view class="tan-desc">耗材价格：{{toolObj[toolIndex].price}}</view>
+				<view class="tan-desc">套餐价格：{{taocan[taocanIndex].price/100}}</view>
+				<view class="tan-desc">耗材价格：{{toolObj[toolIndex].price/100}}</view>
 				<view class="tan-desc">耗材类型：{{toolObj[toolIndex].text}}</view>
 				<view class="tan-desc">耗材详情：{{toolObj[toolIndex].detail}}</view>
 			</uni-popup>

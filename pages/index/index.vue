@@ -215,7 +215,7 @@
 								'proImg': item.service_thumb,
 								'proName': item.name,
 								'proDetail': item.service_desc,
-								'proPrice': item.price,
+								'proPrice': item.price/100,
 								// 'status': item.consumable == 1? "可退款":"不可退款",
 								'id': item._id
 							});

@@ -6,9 +6,11 @@ exports.main = async (event, context) => {
     const collection = db.collection("nurse-order")
 
 	console.log( event.id )
+	var timestamp1 = new Date().getTime();
 
     let res = await collection.doc(event.id).update({
-		status: event.status
+		status: event.status,
+		update_time: timestamp1
 	})
 
     // 返回数据给客户端

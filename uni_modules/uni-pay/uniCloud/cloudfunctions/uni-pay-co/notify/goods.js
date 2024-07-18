@@ -18,12 +18,27 @@ module.exports = async (obj) => {
 
 	console.log("------------type：test-------------- order_no");
 	
+	var currentDate = new Date(); // 创建一个新的 Date 对象，表示当前时间
+	var timestamp1 = new Date().getTime();
+	// 获取当前时间的各个部分
+	var year = currentDate.getFullYear();       // 获取年份
+	var month = currentDate.getMonth() + 1;     // 获取月份（注意月份是从0开始的，所以要加1）
+	var day = currentDate.getDate();            // 获取日期
+	var hours = currentDate.getHours();         // 获取小时
+	var minutes = currentDate.getMinutes();     // 获取分钟
+	var seconds = currentDate.getSeconds();     // 获取秒钟
+	
+	// 构建特定格式的日期时间字符串
+	var formattedDateTime = `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 	
 	uniCloud.callFunction({
 	    name: "nurse-order-update",
 	    data: {
 			id: order_no,
-			status: 23
+			status: 2,
+			pay_type: 'wxpay',
+			paid_time: timestamp1,
+			update_time: timestamp1,
 	    },
 	    success: (res) => {
 	    },

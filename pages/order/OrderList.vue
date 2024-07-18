@@ -42,7 +42,7 @@ s<template>
 									<text class="rate-text1">预约时间：{{formatTime(item.odTime)}}</text>
 								</view>
 								<view class="item-right-v2">
-									<view class="v2-fh">￥<text class="v2-price">{{item.odPrice}}</text></view>
+									<view class="v2-fh">￥<text class="v2-price">{{item.odPrice/100}}</text></view>
 								</view>
 							</view>
 						</view>
@@ -135,7 +135,8 @@ s<template>
 				
 				uni.navigateTo({
 					 // url: `/pages/order/OrderDetails/OrderDetails?params=${item.odNumber}`,
-					url: '/pages/order/OrderDetails/OrderDetails?params=' + params,
+					//url: '/pages/order/OrderDetails/OrderDetails?params=' + params,
+					url: '/pages/order/OrderDetails/OrderDetail/OrderDetail?params=' + params,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
@@ -264,18 +265,18 @@ s<template>
 				let obj = {
 					totalFee: item.odPrice,
 					userName: user_id,
-					serviceId: this.odNumber,
-					serviceName: this.odName
+					// serviceId: this.odNumber,
+					serviceName: item.odName,
+					orderId: item.odNumber
 				};
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
-							
+																			
 				uni.navigateTo({
-					url: '/pages/function/voucher_center_?params=' + params,
+					url: '/pages/service/function/voucher_center_?params=' + params,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
 				});
-				
 			},
 			// 评价
 			evaluateClick(item){

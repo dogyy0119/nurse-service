@@ -36,7 +36,7 @@
 		
 			<uni-section title=" 套餐信息:  " type="line">		
 				<view class="example-body">
-					<view class="price" >￥：{{totalPrice}}</view>
+					<view class="price" >￥：{{totalPrice/100}}</view>
 				</view>
 			</uni-section>
 								
@@ -53,7 +53,7 @@
 			</uni-forms>
 			<div class="flex-container">
 				<button class="reserve-btn" @click="submit('baseForm')">确定预约</button>
-				<!-- <button class="amount">金额：￥{{totalPrice}}</button> -->
+				<!-- <button class="amount">金额：￥{{totalPrice/100}}</button> -->
 			</div>
 		</view>
 

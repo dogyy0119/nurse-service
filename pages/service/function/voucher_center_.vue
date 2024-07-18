@@ -5,17 +5,17 @@
 				<text decode="true" class="voucher_center__47">支付金额</text>
 				<view class="voucher_center__48">
 					<text decode="true" class="voucher_center__49">￥</text>
-					    <input :value="money" disabled class="money" />
+					    <input :value="money/100" disabled class="money" />
 				</view>
 				<radio-group @change="payType_change" class="payType">
 					<image v-on:click="voucher_center__55_55_click()"  src="/static/voucher_center_/images/voucher_center__55_55.jpg" mode="scaleToFill" border="0"    class="voucher_center__55"></image>
 					<text decode="true" class="voucher_center__56">微信</text>
 					<radio value="wx"  class="voucher_center__57">
 					</radio>
-					<image v-on:click="voucher_center__58_58_click()"  src="/static/voucher_center_/images/voucher_center__58_58.jpg" mode="scaleToFill" border="0"    class="voucher_center__58"></image>
+<!-- 					<image v-on:click="voucher_center__58_58_click()"  src="/static/voucher_center_/images/voucher_center__58_58.jpg" mode="scaleToFill" border="0"    class="voucher_center__58"></image>
 					<text decode="true" class="voucher_center__59">支付宝</text>
 					<radio value="zfb"  class="voucher_center__60">
-					</radio>
+					</radio> -->
 				</radio-group>
 				<button v-on:click="btSubmit_21_click()" class="btSubmit">确认支付
 				</button>
