@@ -373,7 +373,7 @@
 		width: 100%;
 		height: 700rpx;
 		position: relative;
-		background: linear-gradient(to top, #ffffff, #1cbbb4);
+		background: linear-gradient(to top, #ffffff, #8CDDD9);
 	}
 
 	.tang-feng-block {

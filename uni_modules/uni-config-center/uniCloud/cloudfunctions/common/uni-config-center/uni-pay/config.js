@@ -4,7 +4,6 @@ module.exports = {
 	// 统一 - 支付回调地址,格式为 "服务空间ID":"URL化地址"
 	"notifyUrl": {
 		// 测试环境服务空间-支付回调地址
-		// "mp-509ed65b-9462-4152-b5a5-3255bdaf075e": "https://fc-mp-509ed65b-9462-4152-b5a5-3255bdaf075e.next.bspapp.com/uni-pay-co",
 		"mp-1ee3378d-eecd-4061-9be4-b198b081a0fe": "https://fc-mp-1ee3378d-eecd-4061-9be4-b198b081a0fe.next.bspapp.com/uni-pay-co",
 		// 线上环境服务空间-支付回调地址（如果只有一个服务空间，则只需要配置线上环境服务空间即可）
 		// "mp-499e2a37-0c77-418a-82aa-3e5820ecb057": "https://fc-mp-499e2a37-0c77-418a-82aa-3e5820ecb057.next.bspapp.com/uni-pay-co",
@@ -39,15 +38,15 @@ module.exports = {
 		},
 		// 微信 - 扫码支付
 		"native": {
-			"appId": "", // 可以是小程序或公众号或app开放平台下的应用的任意一个appid
-			"secret": "", // secret
-			"mchId": "", // 商户id
+			"appId": "wx380cb97cf10457e7", // 小程序的appid
+			"secret": "6ff5745f78d0f7983813a64353cb4284", // 小程序的secret
+			"mchId": "1680814677", // 商户id
 			"key": "", // v2的api key
 			"pfx": fs.readFileSync(__dirname + '/wxpay/apiclient_cert.p12'), // v2需要用到的证书
-			"v3Key": "", // v3的api key
+			"v3Key": "YcGsjry0R0WEFExHTXnieiACMKJM1Hm7", // v3的api key
 			"appCertPath": path.join(__dirname, 'wxpay/apiclient_cert.pem'), // v3需要用到的证书
 			"appPrivateKeyPath": path.join(__dirname, 'wxpay/apiclient_key.pem'), // v3需要用到的证书
-			"version": 2, // 启用支付的版本 2代表v2版本 3 代表v3版本
+			"version": 3, // 启用支付的版本 2代表v2版本 3 代表v3版本
 		},
 		// 微信 - 公众号支付
 		"jsapi": {

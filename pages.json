@@ -46,24 +46,29 @@
 					"navigationBarTitleText": "订单列表"
 				}
 			}, 
-			{
-				"path": "pages/order/OrderDetails/OrderDetails",
-				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
-					"navigationBarTextStyle": "white",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "订单详情"
-				}
-			},
+			// {
+			// 	"path": "pages/order/OrderDetails/OrderDetails",
+			// 	"style": {
+			// 		"navigationBarBackgroundColor": "#1cbbb4",
+			// 		"navigationBarTextStyle": "white",
+			// 		"enablePullDownRefresh": false,
+			// 		"navigationStyle": "default",
+			// 		"navigationBarTitleText": "订单详情"
+			// 	}
+			// },
 			{
 				"path": "pages/order/OrderDetails/OrderDetail/OrderDetail",
+				// "style": {
+				// 	"navigationBarBackgroundColor": "#1cbbb4",
+				// 	"navigationBarTextStyle": "white",
+				// 	"enablePullDownRefresh": false,
+				// 	"navigationStyle": "default",
+				// 	"navigationBarTitleText": "订单详情"
+				// },
 				"style": {
 					"navigationBarBackgroundColor": "#1cbbb4",
-					"navigationBarTextStyle": "white",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "订单详情"
+					"navigationBarTitleText": "订单详情",
+					"navigationStyle": "default"
 				}
 			},
 			{
