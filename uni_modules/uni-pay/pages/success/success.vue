@@ -140,6 +140,24 @@
 				// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
 				// let pushId = '11422b93b0dc478fbdfb18aae26eb327';
 				
+				var timestamp1 = new Date().getTime();
+				uniCloud.callFunction({
+				    name: "nurse-order-update",
+				    data: {
+						id: this.options.order_no,
+						status: 2,
+						pay_type: 'wxpay',
+						paid_time: timestamp1,
+						update_time: timestamp1,
+				    },
+				    success: (res) => {
+				    },
+				    fail: (err) => {
+				    },
+				    complete: (res) => {
+				    }
+				});
+				
 				uniCloud.callFunction({
 				    name: "testUniPush",
 				    data: {
@@ -159,6 +177,9 @@
 				         console.log("请求完成");
 				    }
 				});
+				
+				
+				
 			},
 			
 			

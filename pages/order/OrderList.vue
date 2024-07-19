@@ -106,6 +106,8 @@ s<template>
 
 		methods: {	
 			formatDate(timestamp) {
+				console.log("formatDate")
+				console.log(timestamp)
 			    // 判断 timestamp 是否为有效的时间格式
 				if (!timestamp || isNaN(new Date(timestamp).getTime())) {
 		            return "未付款";

@@ -141,6 +141,26 @@
 			};
 		},
 		onLoad(event) {
+			
+			uniCloud.callFunction({
+			    name: "testUniPush",
+			    data: {
+					pushId: "",
+					title: "您被选中自动派单",
+					content: " 订单号",
+					text: "价格：" + "11000" + "分",
+			    },
+			    success: (res) => {
+					console.log("发送pushid 成功！")
+					console.log(res)
+			    },
+			    fail: (err) => {
+			        console.error("请求失败: " + err);
+			    },
+			    complete: (res) => {
+			         console.log("请求完成");
+			    }
+			});
 							
 			console.log(event.item)
 			console.log(event)

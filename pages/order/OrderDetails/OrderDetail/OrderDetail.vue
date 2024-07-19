@@ -87,7 +87,7 @@
 			<view class="gnBox">
 				<view class="item zhun" @click="btn1Click( )" > {{ btn1name }}</view>
 				<!-- <view class="item jie">支付</view> -->
-				<view class="item lianxi" @click="btn2Click( )" >{{ btn2name }}</view>
+				<!-- <view class="item lianxi" @click="btn2Click( )" >{{ btn2name }}</view> -->
 			</view>
 		</view>
 
