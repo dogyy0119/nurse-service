@@ -113,20 +113,20 @@
 		},
 		// 导航栏渐变
 		onPageScroll(e) {
-			this.nav_opacity = `rgba(255,255,255,${(e.scrollTop > 255 ? 255 : e.scrollTop) / 255})`;
-			if (e.scrollTop > 20) {
-				this.fontColor = '#000000'
-				uni.setNavigationBarColor({
-					frontColor: '#000000',
-					backgroundColor: '#ffffff',
-				})
-			} else {
-				uni.setNavigationBarColor({
-					frontColor: '#ffffff',
-					backgroundColor: '#ffffff'
-				})
-				this.fontColor = '#ffffff'
-			}
+			// this.nav_opacity = `rgba(255,255,255,${(e.scrollTop > 255 ? 255 : e.scrollTop) / 255})`;
+			// if (e.scrollTop > 20) {
+			// 	this.fontColor = '#000000'
+			// 	uni.setNavigationBarColor({
+			// 		frontColor: '#000000',
+			// 		backgroundColor: '#ffffff',
+			// 	})
+			// } else {
+			// 	uni.setNavigationBarColor({
+			// 		frontColor: '#ffffff',
+			// 		backgroundColor: '#ffffff'
+			// 	})
+			// 	this.fontColor = '#ffffff'
+			// }
 		},
 		onLoad(options) {
 			if (options.params) {

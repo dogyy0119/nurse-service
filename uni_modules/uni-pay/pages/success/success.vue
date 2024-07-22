@@ -67,7 +67,7 @@
 		// 监听 - 页面每次【加载时】执行(如：前进)
 		onLoad(options = {}) {
 			this.options = options;
-			
+			//this.updateOrder(),
 			this.dispach(options)
 			
 			setTimeout(() => {
@@ -90,7 +90,26 @@
 		onHide() {},
 		// 函数
 		methods: {
-			
+			updateOrder() {
+				var timestamp1 = new Date().getTime();
+				console.log("timestamp1 :" + timestamp1);
+				uniCloud.callFunction({
+				    name: "nurse-order-update",
+				    data: {
+						id: this.options.order_no,
+						status: 2,
+						pay_type: 'wxpay',
+						paid_time: timestamp1,
+						update_time: timestamp1,
+				    },
+				    success: (res) => {
+				    },
+				    fail: (err) => {
+				    },
+				    complete: (res) => {
+				    }
+				});
+			},
 			dispach( options ) {
 				
 				
@@ -118,7 +137,7 @@
 								
 								console.log(rest);
 								console.log(rest.result.data[0].push_clientid);
-								this.psuh_order(options, rest.result.data[0].push_clientid);
+								this.push_order(options, rest.result.data[0].push_clientid);
 						    },
 						    fail: (err) => {
 						        console.error("请求失败2: " + err);
@@ -136,27 +155,9 @@
 				    }
 				});
 			},
-			psuh_order( options, push_clientid ) {
+			push_order( options, push_clientid ) {
 				// let pushId = 'ff3aca3df30ab207fe07b783390d7c71';
 				// let pushId = '11422b93b0dc478fbdfb18aae26eb327';
-				
-				var timestamp1 = new Date().getTime();
-				uniCloud.callFunction({
-				    name: "nurse-order-update",
-				    data: {
-						id: this.options.order_no,
-						status: 2,
-						pay_type: 'wxpay',
-						paid_time: timestamp1,
-						update_time: timestamp1,
-				    },
-				    success: (res) => {
-				    },
-				    fail: (err) => {
-				    },
-				    complete: (res) => {
-				    }
-				});
 				
 				uniCloud.callFunction({
 				    name: "testUniPush",

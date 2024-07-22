@@ -92,7 +92,7 @@ import app from "../../../App.vue"
 			this.Refresh();
 		},
 		methods: {
-			open() {
+			openPay() {
 				// this.order_no = `test`+Date.now(); // 模拟生成订单号
 				this.out_trade_no = `${this.order_no}`; // 模拟生成插件支付单号
 				// 打开支付收银台
@@ -128,10 +128,10 @@ import app from "../../../App.vue"
 					uni.showToast({title: '充值金额不能为空！',icon: 'none',duration: 2000});				  
 					return; 
 				}
-				if(this.payType==''){
-					uni.showToast({title: '充值方式不能为空！',icon: 'none',duration: 2000});
-					return; 
-				}
+				// if(this.payType==''){
+				// 	uni.showToast({title: '充值方式不能为空！',icon: 'none',duration: 2000});
+				// 	return; 
+				// }
 			  
 				if(this.money <= 0) {
 					uni.showToast({title: '充值不能小于零！',icon: 'none',duration: 2000});
@@ -144,7 +144,7 @@ import app from "../../../App.vue"
 				this.order_no = this.nurse_order_id;
 				
 				
-				this.open();
+				this.openPay();
 				
 				
 				return;

@@ -134,7 +134,7 @@
 			//点击导航切换
 			clickNav(index,id){
 				console.log("index:" + index)
-				this.navIndex=id;	
+				this.navIndex= index;	
 				this.currentPage=1;	
 				this.currentId=id;			
 				this.newsArr=[]
@@ -163,8 +163,8 @@
 				        
 				    },
 				    success: (res) => {					
-						// console.log("getNavData")
-						// console.log(res.result.data)
+						console.log("getNavData")
+						console.log(res.result.data)
 						this.navArr = res.result.data
 						this.getNewsData();
 				    },

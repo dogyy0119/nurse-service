@@ -10,6 +10,7 @@ exports.main = async (event, context) => {
 
     let res = await collection.doc(event.id).update({
 		status: event.status,
+		paid_time: event.paid_time,
 		update_time: timestamp1
 	})
 

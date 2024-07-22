@@ -10,7 +10,7 @@
 				<radio-group @change="payType_change" class="payType">
 					<image v-on:click="voucher_center__55_55_click()"  src="/static/voucher_center_/images/voucher_center__55_55.jpg" mode="scaleToFill" border="0"    class="voucher_center__55"></image>
 					<text decode="true" class="voucher_center__56">微信</text>
-					<radio value="wx"  class="voucher_center__57">
+					<!-- <radio value="wx"  class="voucher_center__57"> -->
 					</radio>
 <!-- 					<image v-on:click="voucher_center__58_58_click()"  src="/static/voucher_center_/images/voucher_center__58_58.jpg" mode="scaleToFill" border="0"    class="voucher_center__58"></image>
 					<text decode="true" class="voucher_center__59">支付宝</text>
