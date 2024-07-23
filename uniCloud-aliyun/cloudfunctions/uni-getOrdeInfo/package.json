@@ -1,0 +1,7 @@
+{
+  "name": "uni-getOrdeInfo",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

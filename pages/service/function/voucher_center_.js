@@ -22,7 +22,7 @@ import app from "../../../App.vue"
 				animation: '',
 				animationData: {},
 				money:'0.00',//充值金额
-				payType:'',//单选框选中值
+				payType:'wxpay',//单选框选中值
 				nurse_order_id: '',
 				serviceName: ',',
  
@@ -92,7 +92,7 @@ import app from "../../../App.vue"
 			this.Refresh();
 		},
 		methods: {
-			openPay() {
+			open() {
 				// this.order_no = `test`+Date.now(); // 模拟生成订单号
 				this.out_trade_no = `${this.order_no}`; // 模拟生成插件支付单号
 				// 打开支付收银台
@@ -140,11 +140,11 @@ import app from "../../../App.vue"
 				uni.showToast({title: '充值成功！',icon: 'none',duration: 2000});
 				
 				
-				this.money = 1;
+				// this.money = 1;
 				this.order_no = this.nurse_order_id;
 				
 				
-				this.openPay();
+				this.open();
 				
 				
 				return;

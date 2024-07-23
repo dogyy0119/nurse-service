@@ -63,6 +63,7 @@
     "quickapp" : {},
     "mp-weixin" : {
         "appid" : "wx380cb97cf10457e7",
+        "__usePrivacyCheck__" : true,
         "setting" : {
             "urlCheck" : false,
             "minified" : true,
@@ -74,6 +75,7 @@
                 "desc" : "小程序请求使用定位功能"
             }
         },
+        "requiredPrivateInfos" : [ "getLocation", "chooseLocation", "chooseAddress" ],
         "unipush" : {
             "enable" : true
         },

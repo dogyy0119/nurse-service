@@ -28,7 +28,7 @@
 
 			</view>
 					
-			<view class="tool">		
+			<view class="tool" v-if="toolObj.length">		
 				<view class="author">选择耗材：</view>
 				<!-- <uni-section type="line"> -->
 				<view class="uni-px-5">
@@ -40,7 +40,7 @@
 					<uni-data-checkbox mode="tag" v-model="toolIndex" :localdata="toolObj" @change="toolCheckboxChange(toolIndex)"></uni-data-checkbox>
 				</view>
 				<view class="price">￥：{{toolObj[toolIndex].price/100}}</view>
-				<view class="author">类型：{{toolObj[toolIndex].name}}</view>
+				<view class="author">类型：{{toolObj[toolIndex].text}}</view>
 				<view class="author">详细：{{toolObj[toolIndex].detail}}</view>
 				<!-- </uni-section> -->
 			</view>
@@ -74,9 +74,9 @@
 			<uni-popup ref="popup" background-color="#fff" @change="change" border-radius="10px 10px 0 0">
 				<view class="tan-taocan">套餐：{{taocan[taocanIndex].text}}</view>
 				<view class="tan-desc">套餐价格：{{taocan[taocanIndex].price/100}}</view>
-				<view class="tan-desc">耗材价格：{{toolObj[toolIndex].price/100}}</view>
-				<view class="tan-desc">耗材类型：{{toolObj[toolIndex].text}}</view>
-				<view class="tan-desc">耗材详情：{{toolObj[toolIndex].detail}}</view>
+				<view class="tan-desc" v-if="toolObj.length">耗材价格：{{toolObj[toolIndex].price/100}}</view>
+				<view class="tan-desc" v-if="toolObj.length">耗材类型：{{toolObj[toolIndex].text}}</view>
+				<view class="tan-desc" v-if="toolObj.length">耗材详情：{{toolObj[toolIndex].detail}}</view>
 			</uni-popup>
 		</view>
 	</view>
@@ -186,19 +186,32 @@
 				this.$refs.popup.open(type)
 			},
 			goToAppointment() {
-				
-				let obj = { 
-					serviceName: this.detailObj.name,
-					categoryId: this.detailObj.category_id,
-					totalPrice: this.price,
-					taocan: this.taocan[this.taocanIndex].text,
-					taocanId: this.serviceId ,
-					category_id: this.category_id,
-					consumableId: this.toolObj[this.toolIndex]._id,
-					packageId: this.taocan[this.taocanIndex]._id,
-					haocaiName: this.toolObj[this.toolIndex].text,
-					haocaiDetail: this.toolObj[this.toolIndex].detail,	
-				};
+				let obj;
+				if( this.toolObj.length > 0 )
+					obj = { 
+						serviceName: this.detailObj.name,
+						categoryId: this.detailObj.category_id,
+						totalPrice: this.price,
+						taocan: this.taocan[this.taocanIndex].text,
+						taocanId: this.serviceId ,
+						category_id: this.category_id,
+						packageId: this.taocan[this.taocanIndex]._id,
+						
+						consumableId: this.toolObj[this.toolIndex]._id,
+						haocaiName: this.toolObj[this.toolIndex].text,
+						haocaiDetail: this.toolObj[this.toolIndex].detail,	
+					};
+				else {
+					obj = {
+						serviceName: this.detailObj.name,
+						categoryId: this.detailObj.category_id,
+						totalPrice: this.price,
+						taocan: this.taocan[this.taocanIndex].text,
+						taocanId: this.serviceId ,
+						category_id: this.category_id,
+						packageId: this.taocan[this.taocanIndex]._id,	
+					};
+				}
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
 				
 				// uni.navigateTo({
@@ -215,7 +228,11 @@
 			},
 			calculateTotalPrice() {
 			    if(this.haocaiValue === 0) {
-			        this.price = this.taocan[this.taocanIndex].price + this.toolObj[this.toolIndex].price;
+					if(this.toolObj.length > 0) {
+						this.price = this.taocan[this.taocanIndex].price + this.toolObj[this.toolIndex].price;
+					} else {
+						this.price = this.taocan[this.taocanIndex].price
+					}	
 			    } else if (this.haocaiValue === 1) {
 			        this.price = this.taocan[this.taocanIndex].price;
 			    }
@@ -251,6 +268,10 @@
 				this.checkList[index] = !this.checkList[index]
 				console.log(this.checkList[index]);
 				this.$forceUpdate()
+			},
+			
+			change() {
+				
 			},
 			
 			//获取详情
@@ -501,6 +522,8 @@
 	
 	.flex-container {
 	    display: flex;
+		position: fixed;
+        bottom: 0; /* 固定在页面底部 */
 	    justify-content: space-between; /* 将元素分别放在行的两端 */
 	    align-items: center; /* 垂直居中对齐 */
 		width: 100%; /* 让.flex-container占据其父元素的整个宽度 */

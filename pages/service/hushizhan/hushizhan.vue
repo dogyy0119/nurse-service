@@ -7,27 +7,20 @@
 							
 		<scroll-view scroll-x class="navscroll">
 			<view class="item" 
-			:class="index==navIndex ? 'active' : ''" v-for="(item,index) in navArr" 
-			@click="clickNav(index,item.id)"
-			:key="item.id"
-			>{{item.type}}</view>			
+			:class="index==kindIndex ? 'active' : ''" v-for="(item,index) in serviceKinds" 
+			@click="clickKind(index,item._id)"
+			:key="item._id"
+			>{{item.name}}</view>			
 		</scroll-view>
 		
-<!-- 		<view class="content" >
-			<div class="row" v-for="item in newsArr" :key="item._id">
-				<newsbox :item="item" @click.native="goDetail(item)"></newsbox>
-			</div>
-		</view> -->
+
 		<view  class="content" >
-			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
+			<cc-waterListView :proList="serviceDatas" @click="goProDetail"></cc-waterListView>
 		</view> 
-<!-- 		<view class="nodata" v-if="!newsArr.length">
-			<image src="/static/images/nodata.png" mode="widthFix"></image>
-		</view> -->
 		
-		<view class="loading" v-if="newsArr.length">			
-			<view v-if="loading==1">数据加载中...</view>
-			<view v-if="loading==2">没有更多了~~</view>
+		<view class="loading" v-if="serviceDatas.length">			
+<!-- 			<view v-if="loading==1">数据加载中...</view>
+			<view v-if="loading==2">没有更多了~~</view> -->
 		</view>
 	</view>
 </template>
@@ -35,96 +28,32 @@
 <script>
 	// const gps = new Gps(),
 	const db = uniCloud.database();
-	// import NewsBox from '@/components/newsbox/newsbox.vue';
 	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
 	
 	export default {
 		components: {
-			// NewsBox,
 			CcWaterListView
 		},
 		data() {
 			return {
-				type: '',
-				projectList: [],
-				navIndex:0,
-				navArr:[],
-				newsArr:[],
-				currentPage:1,
-				currentId:50,
-				loading:0,       //0默认  1加载中  2没有更多了	
-				gridList: [{
-						"text": "推荐服务",
-						"icon": "staff",
-						"index": "6646b0b49755e32830aab169"
-					},
-					{
-						"text": "专业护理",
-						"icon": "wallet",
-						"index": "6646b41699c6244dcf963a53"
-					},
-					{
-						"text": "尊享套餐",
-						"icon": "map",
-						"index": "6646b8cc9755e32830ac1290"
-					},
-					{
-						"text": "母婴护理",
-						"icon": "compose",
-						"index": "6646ba84466d41f58522bb33"
-					},
-					{
-						"text": "陪诊服务",
-						"icon": "staff",
-						"index": "6646bc558b0da4a4e41e78be"
-					},
-					{
-						"text": "居家康复",
-						"icon": "wallet",
-						"index": "6646bbae21821b6d2bf66d62"
-					},
-					{
-						"text": "医美拆线",
-						"icon": "map",
-						"index": "6646bc830d2b315faffe729a"
-					},
-					{
-						"text": "居家照护",
-						"icon": "compose",
-						"index": "6646bc24b9fb2360b007f42a"
-					},
-				],
+				kindIndex:0,
+				serviceKinds:[],
+				serviceDatas:[],
 			}
 		},
 		onLoad(query) {			
-			this.navIndex = query.index;
-			// console.log("onload query:" + query.index)
-			this.getNavData();
-			// this.getNewsData();
+			this.kindIndex = query.index;
+			this.getServiceKind();
 		},
 		
 		onShow() {
-			// console.log("onShow")
 			
 		},
-		
-		onReachBottom(){
-			console.log("到底部了")
-			if(this.loading==2){
-				return;
-			}
-			this.currentPage++;
-			this.loading=1;
-			this.getNewsData();
-		},
-		
-
-		
+			
 		methods: {
-			goProDetail(object) {
-								
+			goProDetail(object) {							
 				uni.navigateTo({
-					 url: `/pages/service/servicedetails/servicedetails?item=${object.id}`,
+					 url: `/pages/service/servicedetails/servicedetails?item=${object._id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
@@ -132,41 +61,26 @@
 				
 			},
 			//点击导航切换
-			clickNav(index,id){
+			clickKind(index,id){
 				console.log("index:" + index)
-				this.navIndex= index;	
-				this.currentPage=1;	
+				this.kindIndex= index;	
 				this.currentId=id;			
-				this.newsArr=[]
-				this.loading=0;
-				this.getNewsData(id);
+
+				this.getServiceData(index);
 			},
 			
-			//跳转到详情页
-			goDetail(item){
-				// uni.navigateTo({
-				// 	 url: `/pages/service/servicedetails/servicedetails?item=${item.id}`,
-				// 	success: res => {},
-				// 	fail: () => {},
-				// 	complete: () => {}
-				// });
-			},
-						
-			//获取导航列表数据
-			getNavData() {
+			getServiceKind() {
 				uni.showLoading({
 				    mask: true
 				}) 
 				uniCloud.callFunction({
-				    name: "hospital-service-item",
-				    data: {
-				        
+				    name: "nurse-service-categories-get",
+				    data: {        
 				    },
 				    success: (res) => {					
-						console.log("getNavData")
-						console.log(res.result.data)
-						this.navArr = res.result.data
-						this.getNewsData();
+						this.serviceKinds = res.result.data
+						this.serviceKinds.sort((a, b) => a.sort - b.sort);
+						this.getServiceData( this.kindIndex ); 
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);
@@ -175,38 +89,27 @@
 						})
 				    },
 				    complete: (res) => {
+				        // console.log("请求完成");
 						uni.hideLoading({
 							mask: true
 						})
-				        // console.log("请求完成");
 				    }
 				});
-				
 			},
 			
 			//获取新闻列表数据
-			getNewsData(id=0){
-				
-				// console.log("this.navIndex :" + this.navIndex)
-				// console.log("this.navArr length: :" + this.navArr.length)
-				let servicetype = this.navArr[this.navIndex].type;
-				let category = this.gridList.find(item => item.text === servicetype)?.index;
-
-				// category = "6646bc558b0da4a4e41e78be"
-				// console.log("this.navIndex :" + category)	
+			getServiceData(index=0){
+				let category = this.serviceKinds[index]._id
+			
 				uniCloud.callFunction({
 				    name: "nurse-service-get",
 				    data: {						
 				        category_id: category 
 				    },
 				    success: (res) => {
-						this.loading=2
-						// console.log(" getNewsData navIndex :");						
-						// console.log(res.result.data);
-						// this.newsArr = res.result.data
-						this.projectList = [];
+						this.serviceDatas = [];
 						res.result.data.forEach(item => {
-							this.projectList.push({
+							this.serviceDatas.push({
 								'proImg': item.service_thumb,
 								'proName': item.name,
 								'proDetail': item.service_desc,
@@ -216,7 +119,7 @@
 							});
 						});
 						
-						// this.newsArr=[...this.newsArr,...res.result.data]
+
 				    },
 				    fail: (err) => {
 				        console.error("请求失败: " + err);

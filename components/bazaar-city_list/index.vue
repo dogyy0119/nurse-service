@@ -177,7 +177,9 @@
 						uni.setStorageSync("location",That.locationCity )
 						uni.setStorageSync("address",That.locationCity + That.locationName)
 				    },
-					fail(){
+					fail(err){
+						console.log("uni.chooseLocation failed !!! ");
+						console.log( err )
 						That.locationCity = "定位失败，请点击重试";
 						That.locationName = "";
 					}

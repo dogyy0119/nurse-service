@@ -6,13 +6,6 @@
 	<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar left-icon="location" :left-text="cityName"
 			title="首页" @clickLeft="selectCity" />
 	
-<!-- 	<uni-nav-bar>
-	    <view>标题栏</view>
-	    <view v-slot:left>left</view>
-	    <view v-slot:right>right</view>
-	</uni-nav-bar> -->
-
-	
 	<!-- 	<uni-icons name="heart"></uni-icons> -->
 
 		<!-- icon: 右侧菜单图标 @searchClick：搜索点击  @rigIconClick：右侧菜单点击 -->
@@ -20,18 +13,16 @@
 			@rigIconClick="rigIconClick"></cc-headerSearch>
 
 		<uni-grid class="grid" :column="4" :showBorder="false" :square="true">
-			<uni-grid-item class="item" v-for="(item,index) in gridList" @click.native="tapGrid(index)" :key="index">
-				<uni-icons class="icon" color="#1cbbb4" :type="item.icon" size="34"></uni-icons>
-				<text style="color:#1cbbb4;font-size: 22rpx;">{{item.text}}</text>
+			<uni-grid-item class="item" v-for="(item,index) in serviceKinds" @click.native="tapGrid(index)" :key="index">
+				<uni-icons class="icon" color="#1cbbb4" :type=iconName[index%4] size="34"></uni-icons>
+				<text style="color:#1cbbb4;font-size: 22rpx;">{{item.name}}</text>
 			</uni-grid-item>
 		</uni-grid>
 		
 		<view class="tips">
-			<view>{{gridList[this.navIndex].text}}</view>
+			<!-- <view>{{gridList[this.navIndex].text}}</view> -->
 			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view>
-		<!--  proList: 条目数组数据  goProDetail:条目点击事件跳转（实现了点击条目数据传值）-->
-		<!-- <cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView> -->
 		
 		<tabbar index="0"></tabbar>
 
@@ -39,10 +30,6 @@
 </template>
 
 <script>
-	
-	// import CcHeaderSearch from 'cc-header-search';
-	// import vk from 'uni_modules/vk-unicloud';
-	// Vue.use(vk);
 
 	import CcHeaderSearch from '@/node_modules/cc-headerSearch/components/cc-headerSearch/cc-headerSearch.vue';
     import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
@@ -60,72 +47,67 @@
 				projectList: [],
 				navIndex: 0,
 				loading:0, //0默认  1加载中  2没有更多了
-				gridList: [{
-						"text": "推荐服务",
-						"icon": "staff",
-						"index": "6646b0b49755e32830aab169"
-					},
-					{
-						"text": "专业护理",
-						"icon": "wallet",
-						"index": "6646b41699c6244dcf963a53"
-					},
-					{
-						"text": "尊享套餐",
-						"icon": "map",
-						"index": "6646b8cc9755e32830ac1290"
-					},
-					{
-						"text": "母婴护理",
-						"icon": "compose",
-						"index": "6646ba84466d41f58522bb33"
-					},
-					{
-						"text": "陪诊服务",
-						"icon": "staff",
-						"index": "6646bc558b0da4a4e41e78be"
-					},
-					{
-						"text": "居家康复",
-						"icon": "wallet",
-						"index": "6646bbae21821b6d2bf66d62"
-					},
-					{
-						"text": "医美拆线",
-						"icon": "map",
-						"index": "6646bc830d2b315faffe729a"
-					},
-					{
-						"text": "居家照护",
-						"icon": "compose",
-						"index": "6646bc24b9fb2360b007f42a"
-					},
-				],
+				iconName: [ "staff","wallet","map","compose",],
+				serviceKinds:[],
+				// gridList: [{
+				// 		"text": "推荐服务",
+				// 		"icon": "staff",
+				// 		"index": "6646b0b49755e32830aab169"
+				// 	},
+				// 	{
+				// 		"text": "专业护理",
+				// 		"icon": "wallet",
+				// 		"index": "6646b41699c6244dcf963a53"
+				// 	},
+				// 	{
+				// 		"text": "尊享套餐",
+				// 		"icon": "map",
+				// 		"index": "6646b8cc9755e32830ac1290"
+				// 	},
+				// 	{
+				// 		"text": "母婴护理",
+				// 		"icon": "compose",
+				// 		"index": "6646ba84466d41f58522bb33"
+				// 	},
+				// 	{
+				// 		"text": "陪诊服务",
+				// 		"icon": "staff",
+				// 		"index": "6646bc558b0da4a4e41e78be"
+				// 	},
+				// 	{
+				// 		"text": "居家康复",
+				// 		"icon": "wallet",
+				// 		"index": "6646bbae21821b6d2bf66d62"
+				// 	},
+				// 	{
+				// 		"text": "医美拆线",
+				// 		"icon": "map",
+				// 		"index": "6646bc830d2b315faffe729a"
+				// 	},
+				// 	{
+				// 		"text": "居家照护",
+				// 		"icon": "compose",
+				// 		"index": "6646bc24b9fb2360b007f42a"
+				// 	},
+				// ],
 			}
 		},
 		
 		onLoad(event) {
 			this.getCid()
-			this.getdad()
-			// this.opid()					
-			// this.requestData();
+			//this.checkLocationPermission()
+			this.getServiceKind()
 		},
 		
 		onShow() {		
 			this.navIndex = 0;
-			this.getNewsData();
 			let mylocation = uni.getStorageSync("location")
-			// this.cityName = mylocation || "城市";
 			const address = mylocation
-			// 找到"市"的位置
 			const cityIndex = address.indexOf("市");
 			if (cityIndex !== -1) {
-			    // 截取"市"之前的部分（包括"市"）
 			    this.cityName = address.substring(address.lastIndexOf("省") + 1, cityIndex + 1) || "城市";
-			    // console.log(this.cityName); // 输出 "沈阳市"
 			} else {
 				this.cityName = mylocation || "城市";
-			    // console.log("未找到市");
 			}
 		},
 				
@@ -134,38 +116,43 @@
 		},
 		
 		methods: {	
-			getdad() {
-				// #ifdef MP-WEIXIN
-				uni.authorize({
-				    scope:'scope.userLocation',
-				    success:function(){
-				        // console.log("授权地理位置：成功");
-				    },
-				    fail:function(){
-				        // console.log("授权地理位置：失败");
-				    }
-				});
-				// #endif
+			checkLocationPermission() {
+			    uni.getSetting({  
+			        success: (res) => {  
+			          // 检查是否授权了位置信息  
+			          if (res.authSetting['scope.userLocation']) {  
+			            // 用户已授权  
+			            console.log('已授权定位权限');  
+			            // 在这里可以调用需要定位权限的 API，如 uni.getLocation  
+			          } else {  
+			            // 用户未授权  
+			            console.log('未授权定位权限');  
+			            // 你可以在这里调用 uni.openSetting 来引导用户去设置页面授权  
+			            uni.showModal({  
+			              title: '提示',  
+			              content: '需要您授权定位信息才能正常使用功能，请前往设置页面授权',  
+			              showCancel: false,  
+			              success: (modalRes) => {  
+							if (modalRes.confirm) {  
+			                  uni.openSetting({
+			                      success: function (res) {  
+										console.log('设置页面已打开'); 
+			                      },  
+			                      fail: function (err) {  
+										console.error('打开设置页面失败', err); 
+			                      }  
+			                  });  
+			                }  
+			              }  
+			            });  
+			          }  
+			        },  
+			        fail: (err) => {  
+						console.error('获取设置失败', err); 
+						this.shouldHidePositionButton = false;
+			        }  
+			    });  
 			},
-			
-			// async opid() {
-			// 	let self = this
-			// 	wx.login({
-			// 		success(res) {
-			// 			if (res.code) {
-			// 				wx.request({
-			// 					url: `https://api.weixin.qq.com/sns/jscode2session?appid=${self.$wxappid}&secret=${self.$wxsecret}&js_code=${res.code}&grant_type=authorization_code`,
-			// 					success(data) {
-			// 						self.useropenId = data.data.openid
-			// 						self.pushmsg.touser = self.useropenid
-			// 					}
-			// 				})
-			// 			} else {
-			// 				console.log('获取失败！' + res.errMsg)
-			// 			}
-			// 		}
-			// 	})
-			// },
 			
 			getCid() {
 			
@@ -189,15 +176,33 @@
 				    url: '/pages/service/city/city'	
 				  });
 			},
-			getNewsData(){
+			
+			getServiceKind() {
+				uniCloud.callFunction({
+				    name: "nurse-service-categories-get",
+				    data: {        
+				    },
+				    success: (res) => {					
+						this.serviceKinds = res.result.data
+						this.serviceKinds.sort((a, b) => a.sort - b.sort);
+						this.getServiceData();
+				    },
+				    fail: (err) => {
+				        console.error("请求失败: " + err);
+				    },
+				    complete: (res) => {
+				        // console.log("请求完成");
+				    }
+				});
+			},
+			
+			getServiceData(){
 				uni.showLoading({
 				    mask: true
 				}) 
 				
-				// console.log("this.navIndex :" + this.navIndex)
-				let category = this.gridList[this.navIndex].index
-				// category = "6646bc558b0da4a4e41e78be"
-				// console.log("this.navIndex :" + category)	
+				// let category = this.gridList[this.navIndex].index
+				let category = this.serviceKinds[this.navIndex]._id
 				uniCloud.callFunction({
 				    name: "nurse-service-get",
 				    data: {						
@@ -205,9 +210,7 @@
 				    },
 				    success: (res) => {
 						this.loading=2
-						// console.log(" getNewsData navIndex :");
 						
-						// console.log(res.result.data);
 						// this.newsArr = res.result.data
 						this.projectList = [];
 						res.result.data.forEach(item => {
@@ -215,7 +218,7 @@
 								'proImg': item.service_thumb,
 								'proName': item.name,
 								'proDetail': item.service_desc,
-								'proPrice': item.price/100,
+								'proPrice': item.price,
 								// 'status': item.consumable == 1? "可退款":"不可退款",
 								'id': item._id
 							});

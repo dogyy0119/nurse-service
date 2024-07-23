@@ -5,7 +5,7 @@
 		<!-- 登录框 -->
 		<view v-if="['apple','weixin'].includes(type)" class="quickLogin">
 			<image @click="quickLogin" :src="imgSrc" mode="widthFix" class="quickLoginBtn"></image>
-			<uni-agreements @setAgree="agree = $event"></uni-agreements>
+			<!-- <uni-agreements @setAgree="agree = $event"></uni-agreements> -->
 		</view>
 		<template v-else>
 			<input type="number" class="input-box" :inputBorder="false" v-model="phone" maxlength="11"
@@ -20,6 +20,13 @@
 		<uni-quick-login :agree="agree" ref="uniQuickLogin"></uni-quick-login>
 		
 		<uni-bindMobileByMpWeixin ref="uni-bindMobileByMpWeixin"></uni-bindMobileByMpWeixin>
+		
+		<!-- 隐私协议 -->
+		<!-- <g-privacy></g-privacy> -->
+		<!-- #ifdef MP-WEIXIN -->
+		<jade-mp-privacy initiative isCover  @updateParams="handleParamsUpdate" v-if="showPrivacy"></jade-mp-privacy>
+		<!-- #endif -->
+		
 	</view>
 </template>
 
@@ -28,9 +35,12 @@
 	export default {
 		data() {
 			return {
+				initiative: true,
+				isCover: false,
 				type: "",
 				phone: "",
-				agree: false
+				agree: true,
+				showPrivacy: true,
 			}
 		},
 		computed: {
@@ -45,7 +55,7 @@
 			}
 		},
 		onLoad(e) {
-			console.log("哈哈啥，微信登陆")
+			this.showPrivacy = true;
 			this.type = e.type
 
 			//是否优先启动一键登录。即：页面一加载就启动一键登录
@@ -61,6 +71,7 @@
 			uni.$on('setLoginType',type=>{
 				this.type = type
 			})
+			
 		},
 		onUnload() {
 			uni.$off('setLoginType')
@@ -88,8 +99,58 @@
 			//#endif
 		},
 		methods: {
+			handleParamsUpdate(newParams) {
+				console.log("handleParamsUpdate:" + newParams)
+				this.agree = newParams;
+				this.getLocation()
+			},
+			
+			getLocation() {
+				// #ifdef MP-WEIXIN	
+				uni.getSetting({
+				    success(res) {
+				        if (!res.authSetting['scope.userLocation']) {
+				            // 如果用户没有授权，尝试授权
+				            uni.authorize({
+				                scope: 'scope.userLocation',
+				                success() {
+				                    console.log('授权地理位置：成功');
+				                },
+				                fail() {
+				                    console.log('授权地理位置：失败');
+				                }
+				            });
+				        } else {
+				            console.log('用户已经授权地理位置');
+				        }
+				    }
+				});
+				// #endif
+			},
+			
 			async quickLogin() {
+				
+				// uni.showModal({
+				//   title: '隐私政策',
+				//   content: '请阅读我们的隐私政策...',
+				//   confirmText: '同意',
+				//   cancelText: '不同意',
+				//   success: function (res) {
+				//     if (res.confirm) {
+				// 		this.agree = true;
+				// 		console.log('用户同意隐私政策' + this.agree);
+				//       // 处理用户同意的逻辑
+				//     } else if (res.cancel) {
+				// 		this.agree = false;
+				// 		console.log('用户不同意隐私政策' + this.agree);
+				// 		// 处理用户不同意的逻辑
+				//     }
+				//   }
+				// });
+				
 				try {  
+					
+					console.log(" quickLogin : " + this.agree )
 				    // 等待 login_before 方法完成  
 				    await this.$refs.uniQuickLogin.login_before(this.type);  
 				  
@@ -111,18 +172,18 @@
 				}
 				// 发送验证吗
 				uni.showLoading();
-				uni.navigateTo({
-					url: '/pages/ucenter/login-page/phone-code/phone-code?phoneNumber=' + this.phone,
-					complete: () => {
-						uni.hideLoading();
-					}
-				});
+				// uni.navigateTo({
+				// 	url: '/pages/ucenter/login-page/phone-code/phone-code?phoneNumber=' + this.phone,
+				// 	complete: () => {
+				// 		uni.hideLoading();
+				// 	}
+				// });
 			},
 			//去密码登录页
 			toPwdLogin() {
-				uni.navigateTo({
-					url: '../pwd-login/pwd-login'
-				})
+				// uni.navigateTo({
+				// 	url: '../pwd-login/pwd-login'
+				// })
 			}
 		}
 	}

@@ -38,15 +38,15 @@
 				<view class="example-body">
 					<view class="price" >￥：{{totalPrice/100}}</view>
 				</view>
-			</uni-section>
+			</uni-section >
 								
 				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">套餐: {{taocan}}</text>
 						</view>
-				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+				<view v-if="haocaiName" class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">耗材类型：{{haocaiName}}</text>
 						</view>
-				<view class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
+				<view v-if="haocaiDetail" class="popup-content" :class="{ 'popup-height': type === 'left' || type === 'right' }"><text
 						class="text">耗材详细：{{haocaiDetail}}</text>
 						</view>
 				
@@ -72,7 +72,6 @@
 				taocanType: '',
 				packageId: '',
 				consumableId: '',
-				// haocaiId: [],
 				haocaiName: '',
 				haocaiDetail: '',
 				totalPrice: 0,
@@ -222,18 +221,27 @@
 				this.taocan = params.taocan;
 				this.taocanId = params.taocanId;
 				this.taocanType = params.category_id;
-				this.consumableId = params.consumableId;
+				
+				if (params.hasOwnProperty('consumableId')) {
+				    this.consumableId = params.consumableId;
+				} else {
+				    console.log('params 中不包含 consumableId');
+				}
+				
 				this.packageId = params.packageId;
-				// this.haocaiId = params.haocaiId;
-				this.haocaiName = params.haocaiName;
-				this.haocaiDetail = params.haocaiDetail.trim();
-				// if (params && params.haocaiDetail) {
-				//     this.haocaiDetail = params.haocaiDetail.trim();
-				//     console.log(this.haocaiDetail);  // 输出处理后的 haocaiDetail
-				// } else {
-				//     console.error("params.haocaiDetail 不存在或未定义。");
-				// }
-				console.log(this.haocaiDetail);
+
+				if (params.hasOwnProperty('haocaiName')) {
+				    this.haocaiName = params.haocaiName;
+				} else {
+				    console.log('params 中不包含 haocaiName');
+				}
+				
+				if (params.hasOwnProperty('haocaiDetail')) {
+				    this.haocaiDetail = params.haocaiDetail.trim();
+				} else {
+				    console.log('params 中不包含 haocaiDetail');
+				}
+				
 				const now = new Date();
 				const timestamp = now.getTime();
 				this.baseFormData.datetimesingle = timestamp;
