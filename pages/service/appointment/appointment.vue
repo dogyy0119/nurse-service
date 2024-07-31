@@ -35,7 +35,7 @@
 						style="width: 100%; height: auto;"></image> -->
 					<!-- 					<uni-file-picker limit="1" title="选择1张图片" :source-type="sourceType" @change="onFilePickerChange">
 					</uni-file-picker> -->
-					<uni-file-picker :accept="'image/jpeg,image/png'" v-model="imageValue" fileMediatype="image" mode="grid" @select="select"
+					<uni-file-picker :accept="'image/jpeg,image/png'" v-model="imageUrl" fileMediatype="image" mode="grid" @select="select"
 						@progress="progress" @success="success" @fail="fail" @delete="deleteImage"/>
 					</uni-file-picker>
 
@@ -81,10 +81,7 @@
 	export default {
 		data() {
 			return {
-				data: {
-				    imageUrl: [],  // 在这里声明响应式属性
-				},
-				// imageUrl: [],
+				imageUrl: [],
 				sourceType: ['camera', 'album'], // 设置来源类型，拍照或相册
 				selectedFiles: [], // 用于存储选择的文件信息
 				filePath: '', // 存储选择的文件路径
@@ -302,8 +299,8 @@
 				// console.log('上传成功', res)
 				
 				console.log('上传成功', res.tempFilePaths[0])
-				this.data.imageUrl.push(res.tempFilePaths[0])
-				console.log("this.imageUrl：",this.data.imageUrl)
+				this.imageUrl.push(res.tempFilePaths[0])
+				console.log("this.imageUrl：",this.imageUrl)
 			},
 
 			// 上传失败
@@ -313,8 +310,8 @@
 
 			deleteImage(e){
 				console.log('删除：', e.tempFilePath)
-				this.data.imageUrl.unshift(e.tempFilePath)
-				console.log("this.imageUrl：",this.data.imageUrl)
+				this.imageUrl.unshift(e.tempFilePath)
+				console.log("this.imageUrl：",this.imageUrl)
 			},
 
 			onFilePickerChange(e) {
