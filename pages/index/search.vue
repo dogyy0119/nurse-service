@@ -1,6 +1,6 @@
 <template>
 	<view class="content">
-		
+
 		<view class="search-box">
 			<view class="input-box">
 				<input type="text" adjust-position="true" v-model="keyword" :placeholder="defaultKeyword"
@@ -10,7 +10,7 @@
 			</view>
 			<view class="search-btn" @tap="doSearch" data-key="false" :style="'background:' + colors">搜索</view>
 		</view>
-		
+
 		<!-- <view class="search-keyword">
 		
 			<scroll-view class="keyword-box"  scroll-y>
@@ -28,8 +28,8 @@
 				</view>
 			</scroll-view>
 		</view> -->
-		
-		<view  class="content" >
+
+		<view class="content">
 			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
 		</view>
 	</view>
@@ -39,7 +39,7 @@
 <script>
 	// 不同的业务功能历史记录设置不同存储key
 	const kStorageKey = "storageKey"
-	
+
 	import Vue from 'vue'
 
 	Vue.mixin({
@@ -100,7 +100,7 @@
 
 	const db = uniCloud.database();
 	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
-	
+
 	export default {
 		components: {
 			CcWaterListView
@@ -114,7 +114,7 @@
 				hotKeywordList: [],
 				keywordList: [],
 				forbid: '',
-				
+
 				shows: false,
 				colors: ''
 			};
@@ -133,7 +133,7 @@
 			this.init();
 		},
 
-		
+
 		methods: {
 			init() {
 				this.loadDefaultKeyword();
@@ -179,16 +179,16 @@
 				this.setData({
 					keywordList: []
 				});
-				
-				
+
+
 				uni.hideLoading()
 				// uni.showModal({
 				// 	title:"温馨提示",
 				// 	content:'搜索的内容 = ' + this.keyword
 				// })
-				
+
 				this.getNewsData(this.keyword)
-				
+
 				// uni.showToast({
 				// 	title: '暂无结果',
 				// 	icon: 'none'
@@ -260,8 +260,8 @@
 					}
 				});
 			},
-			
-			
+
+
 			clears() {
 				this.setData({
 					keyword: '',
@@ -269,7 +269,7 @@
 				});
 			},
 			//点击历史记录搜索
-			doHisSearch(item) { 
+			doHisSearch(item) {
 				console.log(item)
 				this.getNewsData(item)
 				uni.showModal({
@@ -278,48 +278,50 @@
 				})
 			},
 
-			getNewsData(key){
-				
+			getNewsData(key) {
+
 				console.log("this.key :" + key);
-	
+
 				uniCloud.callFunction({
-				    name: "nurse-service-get",
-				    data: {						
-				        name: key 
-				    },
-				    success: (res) => {
-						this.loading=2
-					
+					name: "nurse-service-get",
+					data: {
+						name: key
+					},
+					success: (res) => {
+						this.loading = 2
+
 						console.log(res.result.data);
 						// this.newsArr = res.result.data
 						this.projectList = [];
 						res.result.data.forEach(item => {
-							this.projectList.push({
-								'proImg': item.service_thumb,
-								'proName': item.name,
-								'proDetail': item.service_desc,
-								'proPrice': item.price,
-								// 'status': item.consumable == 1? "可退款":"不可退款",
-								'id': item._id
-							});
+							if (item.is_on_sale == true) {
+								this.projectList.push({
+									'proImg': item.service_thumb,
+									'proName': item.name,
+									'proDetail': item.service_desc,
+									'proPrice': item.price,
+									// 'status': item.consumable == 1? "可退款":"不可退款",
+									'id': item._id
+								});
+							}
 						});
-						
-				    },
-				    fail: (err) => {
-				        console.error("请求失败: " + err);
-				    },
-				    complete: (res) => {
-				        console.log("请求完成");
-				    }
-				});	
+
+					},
+					fail: (err) => {
+						console.error("请求失败: " + err);
+					},
+					complete: (res) => {
+						console.log("请求完成");
+					}
+				});
 				console.log("this.projectList")
 				console.log(this.projectList)
 			},
-			
+
 			goProDetail(item) {
-				console.log("goProDetail: goProDetail" )
+				console.log("goProDetail: goProDetail")
 				uni.navigateTo({
-					 url: `/pages/servicedetails/servicedetails?item=${item}`,
+					url: `/pages/servicedetails/servicedetails?item=${item}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}

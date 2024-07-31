@@ -95,6 +95,7 @@
 				detailObj:{},
 				category_id: '',
 				serviceId: '',
+				isNeedReport: false,
 				packageList: [],
 				consumableList: [],
 				price: 0,
@@ -196,6 +197,7 @@
 						taocanId: this.serviceId ,
 						category_id: this.category_id,
 						packageId: this.taocan[this.taocanIndex]._id,
+						isNeedReport: this.isNeedReport,
 						
 						consumableId: this.toolObj[this.toolIndex]._id,
 						haocaiName: this.toolObj[this.toolIndex].text,
@@ -209,7 +211,8 @@
 						taocan: this.taocan[this.taocanIndex].text,
 						taocanId: this.serviceId ,
 						category_id: this.category_id,
-						packageId: this.taocan[this.taocanIndex]._id,	
+						packageId: this.taocan[this.taocanIndex]._id,
+						isNeedReport: this.isNeedReport,
 					};
 				}
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
@@ -297,7 +300,7 @@
 						this.category_id = this.detailObj.category_id
 						this.packageList = this.detailObj.package_list
 						this.consumableList = this.detailObj.consumable_list
-						
+						this.isNeedReport = this.detailObj.is_need_report
 						//
 						this.getPackageList(this.detailObj.package_list);
 						
