@@ -50,7 +50,7 @@
 		methods: {
 			goProDetail(object) {
 				uni.navigateTo({
-					url: `/pages/service/servicedetails/servicedetails?item=${object._id}`,
+					url: `/pages/service/servicedetails/servicedetails?item=${object.id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}

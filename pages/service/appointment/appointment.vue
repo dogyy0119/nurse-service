@@ -29,25 +29,16 @@
 				</uni-forms-item>
 
 				<uni-forms-item label="病例报告">
-					<!-- <button @click="chooseImage">选择图片</button>
-					<button @click="uploadImage" v-if="filePath">上传图片</button>
-					<image v-if="uploadedFileUrl" :src="uploadedFileUrl" mode="aspectFit"
-						style="width: 100%; height: auto;"></image> -->
-					<!-- 					<uni-file-picker limit="1" title="选择1张图片" :source-type="sourceType" @change="onFilePickerChange">
-					</uni-file-picker> -->
+
 					<uni-file-picker :accept="'image/jpeg,image/png'" v-model="imageUrl" fileMediatype="image" mode="grid" @select="select"
 						@progress="progress" @success="success" @fail="fail" @delete="deleteImage"/>
 					</uni-file-picker>
-
-					<!-- <button @click="uploadImage">上传图片</button> -->
 				</uni-forms-item>
-
 
 				<!-- 				<uni-forms-item label="选择城市">
 					<uni-data-picker v-model="baseFormData.city" :localdata="cityData" popup-title="选择城市">
 					</uni-data-picker>
 				</uni-forms-item> -->
-
 
 				<uni-section title=" 套餐信息:  " type="line">
 					<view class="example-body">
@@ -287,31 +278,27 @@
 		},
 		methods: {
 			select(e) {
-				console.log('选择文件：', e)
+				// console.log('选择文件：', e)
 			},
 			// 获取上传进度
 			progress(e) {
-				console.log('上传进度：', e)
+				// console.log('上传进度：', e)
 			},
 
 			// 上传成功
 			success(res) {
 				// console.log('上传成功', res)
-				
-				console.log('上传成功', res.tempFilePaths[0])
-				this.imageUrl.push(res.tempFilePaths[0])
-				console.log("this.imageUrl：",this.imageUrl)
 			},
 
 			// 上传失败
 			fail(e) {
-				console.log('上传失败：', e)
+				// console.log('上传失败：', e)
 			},
 
 			deleteImage(e){
 				console.log('删除：', e.tempFilePath)
-				this.imageUrl.unshift(e.tempFilePath)
-				console.log("this.imageUrl：",this.imageUrl)
+				// this.imageUrl.unshift(e.tempFilePath)
+				// console.log("this.imageUrl：",this.imageUrl)
 			},
 
 			onFilePickerChange(e) {
@@ -482,25 +469,12 @@
 						orderData.info = "",
 						orderData.consumable_id = this.consumableId,
 						orderData.package_id = this.packageId,
-						orderData.laboratory_report = this.imageUrl
+						
+						orderData.laboratory_report = this.imageUrl.map(item => item.url);						
 				}
-
+				// console.log("this.imageUrl:", this.imageUrl)
+				// console.log("this.imageUrl:", orderData.laboratory_report)
 				this.addOrder(orderData)
-
-				// let obj = {
-				// 	totalFee: this.totalPrice,
-				// 	userName: userName,
-				// 	serviceId: this.taocanId,
-				// 	serviceName: this.taocan
-				// };
-				// let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
-
-				// uni.navigateTo({
-				// 	url: '/pages/function/voucher_center_?params=' + params,
-				// 	success: res => {},
-				// 	fail: () => {},
-				// 	complete: () => {}
-				// });
 			},
 
 			addOrder(orderData) {

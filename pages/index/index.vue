@@ -12,16 +12,15 @@
 		<cc-headerSearch icon="../../static/scan_icon.png" @searchClick="searchClick"
 			@rigIconClick="rigIconClick"></cc-headerSearch>
 
-		<uni-grid class="grid" :column="4" :showBorder="false" :square="true">
-			<uni-grid-item class="item" v-for="(item,index) in serviceKinds" @click.native="tapGrid(index)"
-				:key="index">
+		<uni-grid class="grid" :column="4" :highlight="true" :showBorder="false" :square="true" custom-style="opacity:1">
+			<uni-grid-item class="item" v-for="(item,index) in serviceKinds" :class="{ active: activeIndex === index }"
+				@click.native="tapGrid(index)" :key="index">
 				<uni-icons class="icon" color="#1cbbb4" :type=iconName[index%4] size="34"></uni-icons>
 				<text style="color:#1cbbb4;font-size: 22rpx;">{{item.name}}</text>
 			</uni-grid-item>
 		</uni-grid>
-
 		<view class="tips">
-			<!-- <view>{{gridList[this.navIndex].text}}</view> -->
+			<view class="title" v-if="serviceKinds">{{serviceKinds[navIndex].name}}</view>
 			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view>
 
@@ -41,6 +40,7 @@
 		},
 		data() {
 			return {
+				activeIndex: 0, // 保存当前被点击的索引
 				cityName: '城市',
 				pageTitle: '自定义导航栏',
 				// 列表数组
@@ -109,6 +109,7 @@
 			} else {
 				this.cityName = mylocation || "城市";
 			}
+			console.log("serviceKinds[this.navIndex].name:", this.serviceKinds)
 		},
 
 		onNavigationBarButtonTap(e) {
@@ -185,6 +186,7 @@
 						this.serviceKinds = res.result.data
 						this.serviceKinds.sort((a, b) => a.sort - b.sort);
 						this.getServiceData();
+						console.log("serviceKinds[this.navIndex].name:", this.serviceKinds[this.navIndex].name)
 					},
 					fail: (err) => {
 						console.error("请求失败: " + err);
@@ -256,14 +258,16 @@
 			},
 
 			tapGrid(index) {
-				this.navIndex = index
-				uni.navigateTo({
-					url: `/pages/service/hushizhan/hushizhan?index=${index}`,
-					// url: `/pages/index/indexservice/indexservice?index=${index}`,
-					success: res => {},
-					fail: () => {},
-					complete: () => {}
-				});
+				this.activeIndex = index;
+				this.navIndex = index;
+				this.getServiceData();
+				// uni.navigateTo({
+				// 	url: `/pages/service/hushizhan/hushizhan?index=${index}`,
+				// 	// url: `/pages/index/indexservice/indexservice?index=${index}`,
+				// 	success: res => {},
+				// 	fail: () => {},
+				// 	complete: () => {}
+				// });
 
 			},
 			requestData() {
@@ -325,9 +329,42 @@
 		color: #817f82;
 	}
 
+	.uni-grid-item {
+		transition: background-color 0.3s;
+	}
+
+	.uni-grid-item:active {
+		background-color: #f0f0f0;
+	}
+
 	.uni-grid .item ::v-deep .uni-grid-item__box {
 		justify-content: center;
 		align-items: center;
+	}
+
+	.title {
+		text-align: center;
+		/* 居中文本 */
+		color: #1CBBB4;
+		/* 蓝色文字，可以根据需求调整 */
+		font-family: 'Arial', sans-serif;
+		/* 使用 Arial 字体 */
+		font-size: 16px;
+		/* 字体大小 */
+		font-weight: bold;
+		/* 粗体字 */
+		padding: 5px;
+		/* 内边距 */
+		margin: 2px;
+		/* 外边距 */
+		/* border-bottom: 2px solid #007bff; */
+		/* 下边框颜色与文字颜色相同 */
+		border-radius: 0px;
+		/* 圆角边框 */
+		background-color: #f0f8ff;
+		/* 背景色 */
+		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		/* 轻微阴影效果 */
 	}
 
 	.tips {
