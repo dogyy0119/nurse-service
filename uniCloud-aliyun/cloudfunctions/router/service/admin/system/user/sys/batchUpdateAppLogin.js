@@ -18,7 +18,8 @@ module.exports = {
 			allow_login_background = false,
 			dcloud_appid,
 			login_appid_type,
-			mode
+			mode,
+            type
 		} = data;
 		if(vk.pubfn.isNullOne(user_ids, login_appid_type, mode)){
 			return { code: -1, msg: "参数错误" };

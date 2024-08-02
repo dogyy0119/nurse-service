@@ -167,9 +167,15 @@ s<template>
 				    success: (res) => {											
 						this.orderList = [];
 						res.result.data.forEach(item => {
-				
+							
+							console.log("item.order_thumb:", item.order_thumb)
+							
+							let orderThumb = item.order_thumb;
+							
+							// 使用三元运算符来判断 orderThumb 是否为空或为空字符串
+							let variable = (orderThumb && orderThumb.trim() !== "") ? orderThumb : "/static/logo.png";
 						    this.orderList.push({
-						        'picUrl': '/static/logo.png',
+						        'picUrl': variable,
 						        'odNumber': item._id,
 						        'odName': item.title,
 						        'odPrice': item.total_fee,

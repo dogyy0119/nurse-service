@@ -16,7 +16,9 @@ module.exports = {
 		// 获取前端传过来的参数
 		let {
 			name,
+			city,
 			address,
+			avatar,
 			start_time = {"$env":"now"},
 			end_time = {"$env":"now"}
 		} = data;
@@ -30,7 +32,9 @@ module.exports = {
 			dbName,
 			dataJson: {
 				name,
+				city,
 				address,
+				avatar,
 				start_time,
 				end_time
 			}

@@ -13,6 +13,7 @@ exports.main = async (event, context) => {
 				total_fee: true,  
                 reservation_time: true,
 				servants_address:true,
+				status:true,
             }  
         });  
         return {  

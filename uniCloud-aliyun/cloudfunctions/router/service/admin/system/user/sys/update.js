@@ -27,6 +27,8 @@ module.exports = {
 			gender,
 			mobile,
 			email,
+            type,           
+            report_permission,
 			comment,
 			allow_login_background,
 			dcloud_appid = [],
@@ -73,6 +75,8 @@ module.exports = {
 			mobile,
 			mobile_confirmed,
 			email,
+            type,
+            report_permission,
 			email_confirmed,
 			comment,
 			allow_login_background

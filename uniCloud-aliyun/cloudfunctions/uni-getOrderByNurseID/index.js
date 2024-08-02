@@ -10,7 +10,7 @@ exports.main = async (event, context) => {
 		try {  
 		  const res = await collection.where({  
 		    nurse_id: nurse_id  
-		  }).get();  
+		  }).orderBy('reservation_time', 'desc').get();  
 		
 		  return {  
 		    code: 0,  

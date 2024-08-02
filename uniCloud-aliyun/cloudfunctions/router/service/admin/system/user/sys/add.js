@@ -27,6 +27,7 @@ module.exports = {
 			nickname,
 			gender,
 			mobile,
+            type,
 			email,
 			comment,
 			allow_login_background,
@@ -82,6 +83,8 @@ module.exports = {
 			nickname,
 			gender,
 			comment,
+            type,
+            report_permission,
 			allow_login_background,
 			status: 0,
 		};

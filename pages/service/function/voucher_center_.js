@@ -8,6 +8,7 @@ import app from "../../../App.vue"
 	export default {
 		data() {
 			return {
+				isNeedReport: false,
 				total_fee: 1, // 支付金额，单位分 100 = 1元
 				order_no: "", // 业务系统订单号（即你自己业务系统的订单表的订单号）
 				out_trade_no: "", // 插件支付单号
@@ -47,8 +48,9 @@ import app from "../../../App.vue"
 				// this.data.userName = params.userName;
 				this.nurse_order_id = params.orderId;
 				this.serviceName = params.serviceName;
+				this.isNeedReport = params.isNeedReport;
 			}
-			
+			console.log("this.isNeedReport :::", this.isNeedReport)
 			// this.money = this.data.totalFee;
 			//检查是否登录参考代码,需要用的时候，可以把注释取掉
 			//if(this.checkLogin()==false){
@@ -93,6 +95,7 @@ import app from "../../../App.vue"
 		},
 		methods: {
 			open() {
+				uni.setStorageSync("isNeedReport", this.isNeedReport)
 				// this.order_no = `test`+Date.now(); // 模拟生成订单号
 				this.out_trade_no = `${this.order_no}`; // 模拟生成插件支付单号
 				// 打开支付收银台

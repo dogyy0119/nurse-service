@@ -124,12 +124,12 @@
 						// 	"event": 'getScore',
 						// 	"icon": "paperplane"
 						// },
-						{
-							"title": "优惠券",
-							"to": '/pages/coupon-card/coupon-card', 
-							"event": 'getScore',
-							"icon": "paperplane"
-						}
+						// {
+						// 	"title": "优惠券",
+						// 	"to": '/pages/coupon-card/coupon-card', 
+						// 	"event": 'getScore',
+						// 	"icon": "paperplane"
+						// }
 						// #ifdef APP-PLUS
 						, {
 							"title": "在线分享",
@@ -147,11 +147,11 @@
 						"to": '/pages/ucenter/settings/settings',
 						"icon": "gear"
 					}],
-					[{
-						"title": "关于APP",
-						"to": '/pages/ucenter/about/about',
-						"icon": "info"
-					}]
+					// [{
+					// 	"title": "订单详情",
+					// 	"to": '/pages/service/OrderList',
+					// 	"icon": "info"
+					// }]
 				],
 				listStyles: {
 					"height": "150rpx", // 边框高度

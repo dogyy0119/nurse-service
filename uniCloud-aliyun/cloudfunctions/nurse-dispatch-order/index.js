@@ -4,14 +4,22 @@ const dbCmd = db.command;
   
 exports.main = async (event, context) => {  
     // 获取传入的OrderID和新的Flag值  
-    //console.log('event : ', event)
+    console.log('event : ', event)
     
     //const nurse_users = await db.collection('uni-id-users').where('type==1').field('_id, mobile').get();
     // console.log(nurse_users)
-    const nurse_users = await db.collection('uni-id-users').where(
-    {
-        type: 1  
-    }).get();
+    var data;
+    if(event.is_need_report){
+        data = {
+                report_permission: true,
+                type: 1  
+            }
+    }else{
+        data = {
+                type: 1  
+            }        
+    }
+    const nurse_users = await db.collection('uni-id-users').where(data).get();
     
     var min_order_nurse;
     var min_order = 1000;
@@ -54,6 +62,7 @@ exports.main = async (event, context) => {
             _id: event._id  
         }).update({
             status:3,
+            nurse_nickname: min_order_nurse.nickname,
             nurse_phone: min_order_nurse.mobile,
             nurse_id:min_order_nurse._id
         }); 

@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
 		<!-- :backgroundColor="backgroundColor" -->
-<!-- 		<uni-nav-bar title="订单详情" :fixed="true" :color="fontColor" :statusBar="true" :border="false"
+		<!-- 		<uni-nav-bar title="订单详情" :fixed="true" :color="fontColor" :statusBar="true" :border="false"
 			:backgroundColor="nav_opacity" left-icon="left" leftText="返回" :placeholder="false" @clickLeft="clickLeft">
 		</uni-nav-bar> -->
 
@@ -29,7 +29,7 @@
 				<!-- 商品信息 -->
 				<view class="detailitem shopBox">
 					<view class="item" v-for="(item,index) in 1" :key="index">
-						<image mode="aspectFill" :src="(nurseSrvice.service_thumb)" ></image>
+						<image mode="aspectFill" :src="(nurseSrvice.service_thumb)"></image>
 						<view class="conBox">
 							<view class="conBox-1">商品名称： {{ nurseSrvice.name }}</view>
 							<view class="conBox-2">服务时间：{{ nurseSrvice.service_time}}</view>
@@ -42,14 +42,15 @@
 				<view class="detailitem orderItem">
 					<view class="orderItem-min">
 						<view class="orderItem-1">订单编号：</view>
-						<view class="orderItem-2">{{ service._id }}</view>
-						<view class="orderItem-3" @click="copyText( service._id )">复制</view>
+						<view class="orderItem-2" @touchstart="startPress" @touchend="endPress" @touchcancel="endPress">
+							{{ service._id }}</view>
+						<!-- <view class="orderItem-3" @click="copyText( service._id )">复制</view> -->
 					</view>
 					<view class="orderItem-min">
 						<view class="orderItem-1">下单时间：</view>
 						<!-- <view class="orderItem-2">{{ formatTime(service.paid_time) }}</view> -->
 						<view class="orderItem-2">{{ formatTime(service.update_time) }}</view>
-						
+
 					</view>
 					<view class="orderItem-min">
 						<view class="orderItem-1">护士名称：</view>
@@ -76,16 +77,18 @@
 					</view>
 					<view class="orderItem-min orderInfo" style="border-bottom: 2rpx solid rgba(0,0,0,0)">
 						<view class="orderItem-1"></view>
-						<view class="orderItem-2">实付款：<text style="color: red;"> ¥ {{ service.total_fee/100 }}</text></view>
+						<view class="orderItem-2">实付款：<text style="color: red;"> ¥ {{ service.total_fee/100 }}</text>
+						</view>
 					</view>
 				</view>
 			</view>
 		</view>
 		<!-- 底部按钮 -->
 		<view class="bottomBox">
-			<view class="leftTxt">¥<text style="font-size: 46rpx;margin-left: 15rpx;">{{ service.total_fee/100 }}</text> </view>
+			<view class="leftTxt">¥<text style="font-size: 46rpx;margin-left: 15rpx;">{{ service.total_fee/100 }}</text>
+			</view>
 			<view class="gnBox">
-				<view class="item zhun" @click="btn1Click( )" > {{ btn1name }}</view>
+				<view class="item zhun" @click="btn1Click( )"> {{ btn1name }}</view>
 				<!-- <view class="item jie">支付</view> -->
 				<!-- <view class="item lianxi" @click="btn2Click( )" >{{ btn2name }}</view> -->
 			</view>
@@ -99,6 +102,7 @@
 	export default {
 		data() {
 			return {
+				pressTimer: null,
 				backgroundColor: 0,
 				nav_opacity: 'rgba(255,255,255,0)',
 				fontColor: '#ffffff',
@@ -130,51 +134,83 @@
 		},
 		onLoad(options) {
 			if (options.params) {
-			    let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
-			    console.log(params);
-				this.orderId = params.orderId;	
-			}	
+				let params = JSON.parse(decodeURIComponent(options.params)); // 将URL解码后解析为对象
+				console.log(params);
+				this.orderId = params.orderId;
+			}
 			console.log("this.orderId :" + this.orderId)
 			this.fetchServiceDetails();
 		},
 		methods: {
+			startPress() {
+				// 开始计时
+				console.log("startPress：", this.service._id)
+				this.pressTimer = setTimeout(() => {
+					//this.copyText(this.service._id)
+					console.log("this.service._id：", this.service._id)
+					this.copyToClipboard(this.service._id);
+				}, 500); // 500ms 为长按时间，可以根据需要调整
+			},
+			endPress() {
+				// 取消计时
+				console.log("endPress：", this.service._id)
+				clearTimeout(this.pressTimer);
+			},
+			copyToClipboard(text) {
+				console.log("copyToClipboard：", text)
+				uni.setClipboardData({
+					data: text,
+					success: () => {
+						uni.showToast({
+							title: '复制成功',
+							icon: 'success'
+						});
+					},
+					fail: (e) => {
+						console.log(e)
+						uni.showToast({
+							title: '复制失败',
+							icon: 'none'
+						});
+					}
+				});
+			},
 			clickLeft() {
 				uni.navigateBack({
 					delta: 1
 				})
 			},
-			
+
 			btn1Click() {
-				if ( this.service.status == 2 ) {
+				if (this.service.status == 2) {
 					var currentDate = new Date(); // 创建一个新的 Date 对象，表示当前时间
-					console.log("currentDate："+ currentDate)
+					console.log("currentDate：" + currentDate)
 					uniCloud.callFunction({
 						name: "nurse-order-update",
-						data: 
-						{
+						data: {
 							id: this.orderId,
 							status: 7,
 						},
-						success: (res) => {	
+						success: (res) => {
 							console.log(res.result.data)
 						},
-						fail: (err) => {					
+						fail: (err) => {
 							console.error("请求失败: " + err);
 						},
 						complete: (res) => {
 							console.log("请求完成");
 						}
 					});
-					
+
 					uni.showToast({
-					  title: `退款已申请`
+						title: `退款已申请`
 					});
-					
-				} else if ( this.service.status == 1) {
+
+				} else if (this.service.status == 1) {
 					console.log("item===支付====")
-					
+
 					//let user_id = uni.getStorageSync('user_id');
-					
+
 					let obj = {
 						totalFee: this.service.total_fee,
 						//userName: user_id,
@@ -182,7 +218,7 @@
 						orderId: this.orderId
 					};
 					let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
-																				
+
 					uni.navigateTo({
 						url: '/pages/service/function/voucher_center_?params=' + params,
 						success: res => {},
@@ -223,7 +259,7 @@
 				});
 
 			},
-			
+
 			/**
 			 * @function 复制功能
 			 */
@@ -239,90 +275,88 @@
 				});
 
 			},
-			
-			
+
+
 			async fetchServiceDetails() {
-					
+
 				uni.showLoading({
 					mask: true
 				})
-					
+
 				try {
-				// Replace this with your actual UniCloud API call to fetch service details
-				uniCloud.callFunction({
-					name: "nurse-order-get",
-					data: 
-					{
-						id: this.orderId,
-					},
-					success: (res) => {	
-						console.log(res.result.data)
-						this.service = res.result.data[0];
-						//this.btn1name = this.service.status == 2 ? "退款" : "支付";
-						if ( this.service.status == 2 ) {
-							this.btn1name = "退款";
-						} else if ( this.service.status == 1) {
-							this.btn1name = "支付"
-						} else {
-							this.btn1name = this.getStatusText(this.service.status)
+					// Replace this with your actual UniCloud API call to fetch service details
+					uniCloud.callFunction({
+						name: "nurse-order-get",
+						data: {
+							id: this.orderId,
+						},
+						success: (res) => {
+							console.log(res.result.data)
+							this.service = res.result.data[0];
+							//this.btn1name = this.service.status == 2 ? "退款" : "支付";
+							if (this.service.status == 2) {
+								this.btn1name = "退款";
+							} else if (this.service.status == 1) {
+								this.btn1name = "支付"
+							} else {
+								this.btn1name = this.getStatusText(this.service.status)
+							}
+
+							this.fetchNurseServiceDetails(this.service.service_id);
+						},
+						fail: (err) => {
+							uni.hideLoading({
+								mask: true
+							})
+							console.error("请求失败: " + err);
+						},
+						complete: (res) => {
+							uni.hideLoading({
+								mask: true
+							})
+							console.log("请求完成");
 						}
-						
-						this.fetchNurseServiceDetails(this.service.service_id);
-					},
-					fail: (err) => {
-						uni.hideLoading({
-							mask: true
-						})
-						console.error("请求失败: " + err);
-					},
-					complete: (res) => {
-						uni.hideLoading({
-							mask: true
-						})
-						console.log("请求完成");
-					}
-				});
-			    
-				// Assuming response.data contains the JSON data you provided
-			    
+					});
+
+					// Assuming response.data contains the JSON data you provided
+
 				} catch (error) {
 					console.error('Error fetching service details:', error);
 				}
 			},
-			
+
 			async fetchNurseServiceDetails(id) {
-					
+
 				try {
-				// Replace this with your actual UniCloud API call to fetch service details
-				uniCloud.callFunction({
-					name: "nurse-service-getid",
-					data: 
-					{
-						id: id,
-					},
-					success: (res) => {	
-						console.log(res.result.data)
-						this.nurseSrvice = res.result.data[0];
-					},
-					fail: (err) => {
+					// Replace this with your actual UniCloud API call to fetch service details
+					uniCloud.callFunction({
+						name: "nurse-service-getid",
+						data: {
+							id: id,
+						},
+						success: (res) => {
+							console.log(res.result.data)
+							this.nurseSrvice = res.result.data[0];
+						},
+						fail: (err) => {
 
-						console.error("请求失败: " + err);
-					},
-					complete: (res) => {
+							console.error("请求失败: " + err);
+						},
+						complete: (res) => {
 
-						console.log("请求完成");
-					}
-				});
-				
-				// Assuming response.data contains the JSON data you provided
-				
+							console.log("请求完成");
+						}
+					});
+
+					// Assuming response.data contains the JSON data you provided
+
 				} catch (error) {
 					console.error('Error fetching service details:', error);
 				}
 			},
-			
+
 			formatTime(timestamp) {
-				
+
 				const date = new Date(timestamp);
 				if (!(date instanceof Date) || isNaN(date.getTime())) {
 					return ''; // or throw an error if you prefer
@@ -336,30 +370,30 @@
 				return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 			},
 			getStatusText(status) {
-			  switch (status) {
-			    case 1:
-			      return '待支付';
-			    case 2:
-			      return '已支付';
-			    case 3:
-			      return '已派单';
-			    case 4:
-			      return '已接受';
-			    case 5:
-			      return '已拒绝';
-			    case 6:
-			      return '已完成';
-			    case 7:
-			      return '退款审核中';
-			    case 8:
-			      return '退款中';
-			    case 9:
-			      return '已退款';
-			    default:
-			      return '未知状态';
-			  }
+				switch (status) {
+					case 1:
+						return '待支付';
+					case 2:
+						return '已支付';
+					case 3:
+						return '已派单';
+					case 4:
+						return '已接受';
+					case 5:
+						return '已拒绝';
+					case 6:
+						return '已完成';
+					case 7:
+						return '退款审核中';
+					case 8:
+						return '退款中';
+					case 9:
+						return '已退款';
+					default:
+						return '未知状态';
+				}
 			}
-			
+
 		}
 	}
 </script>
@@ -517,6 +551,7 @@
 						box-sizing: border-box;
 						border-radius: 10rpx;
 						background-color: #eeeeee;
+						font-size: 16rpx;
 					}
 				}
 

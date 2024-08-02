@@ -191,6 +191,9 @@
 				this.$refs.popup.open(type)
 			},
 			goToAppointment() {
+				
+				console.log("this.detailObj.service_thumb:", this.detailObj.service_thumb)
+				
 				let obj;
 				if (this.toolObj.length > 0)
 					obj = {
@@ -202,7 +205,8 @@
 						category_id: this.category_id,
 						packageId: this.taocan[this.taocanIndex]._id,
 						isNeedReport: this.isNeedReport,
-
+						service_thumb: this.detailObj.service_thumb,
+						
 						consumableId: this.toolObj[this.toolIndex]._id,
 						haocaiName: this.toolObj[this.toolIndex].text,
 						haocaiDetail: this.toolObj[this.toolIndex].detail,
@@ -217,6 +221,7 @@
 						category_id: this.category_id,
 						packageId: this.taocan[this.taocanIndex]._id,
 						isNeedReport: this.isNeedReport,
+						service_thumb: this.detailObj.service_thumb,
 					};
 				}
 				let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码

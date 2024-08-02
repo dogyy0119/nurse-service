@@ -73,7 +73,8 @@
         "permission" : {
             "scope.userLocation" : {
                 "desc" : "小程序请求使用定位功能"
-            }
+            },
+            "scope.writeClipboard" : true
         },
         "requiredPrivateInfos" : [ "getLocation", "chooseLocation", "chooseAddress" ],
         "unipush" : {

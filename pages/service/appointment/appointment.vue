@@ -28,7 +28,7 @@
 						v-model="baseFormData.datetimesingle" />
 				</uni-forms-item>
 
-				<uni-forms-item label="病例报告">
+				<uni-forms-item label="病例报告" v-if="isNeedReport">
 
 					<uni-file-picker :accept="'image/jpeg,image/png'" v-model="imageUrl" fileMediatype="image" mode="grid" @select="select"
 						@progress="progress" @success="success" @fail="fail" @delete="deleteImage"/>
@@ -72,6 +72,7 @@
 	export default {
 		data() {
 			return {
+				service_thumb: "",
 				imageUrl: [],
 				sourceType: ['camera', 'album'], // 设置来源类型，拍照或相册
 				selectedFiles: [], // 用于存储选择的文件信息
@@ -236,7 +237,7 @@
 				this.taocanId = params.taocanId;
 				this.taocanType = params.category_id;
 				this.isNeedReport = params.isNeedReport;
-
+				this.service_thumb = params.service_thumb;
 				if (params.hasOwnProperty('consumableId')) {
 					this.consumableId = params.consumableId;
 				} else {
@@ -265,11 +266,12 @@
 			uni.hideLoading({
 				mask: true
 			})
-
-		},
-		onShow() {
+			
 			let mylocation = uni.getStorageSync("address")
 			this.baseFormData.address = mylocation || "";
+		},
+		onShow() {
+			
 
 		},
 		onReady() {
@@ -435,22 +437,7 @@
 
 				let user_id = uni.getStorageSync('user_id');
 
-				// uniCloud.callFunction({
-				//     name: "nurse-order-get",
-				//     data: orderData,
-				//     success: (res) => {
-
-				//     },
-				//     fail: (err) => {
-				//         console.error("请求失败: " + err);
-				//     },
-				//     complete: (res) => {
-				//         console.log("请求完成");
-				//     }
-				// });	
-
 				let orderData = {};
-
 				{
 						orderData.title = this.taocan,
 						orderData.type = this.categoryId,
@@ -469,11 +456,11 @@
 						orderData.info = "",
 						orderData.consumable_id = this.consumableId,
 						orderData.package_id = this.packageId,
-						
+						orderData.order_thumb = this.service_thumb,
+						orderData.is_need_report = this.isNeedReport,
 						orderData.laboratory_report = this.imageUrl.map(item => item.url);						
 				}
-				// console.log("this.imageUrl:", this.imageUrl)
-				// console.log("this.imageUrl:", orderData.laboratory_report)
+
 				this.addOrder(orderData)
 			},
 
@@ -487,13 +474,14 @@
 						// 跳转到支付
 
 						console.log(res)
-
+						console.log("orderData.is_need_report :", orderData.is_need_report)
 						let obj = {
 							totalFee: orderData.total_fee,
 							userName: orderData.userName,
 							serviceId: orderData.service_id,
 							serviceName: orderData.title,
-							orderId: res.result.data
+							orderId: res.result.data,
+							isNeedReport: orderData.is_need_report,
 						};
 						let params = encodeURIComponent(JSON.stringify(obj)); // 将对象转换为字符串并进行URL编码
 
