@@ -5,19 +5,37 @@
 				<template v-slot:body>
 					<view class="item">
 						<text>{{$t('userinfo.ProfilePhoto')}}</text>
-						<cloud-image @click="uploadAvatarImg" v-if="avatar_file" :src="avatar_file.url" width="50px" height="50px"></cloud-image>
-						<uni-icons @click="uploadAvatarImg" v-else class="chooseAvatar" type="plusempty" size="30" color="#dddddd"></uni-icons>
+						<button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
+							<cloud-image v-if="avatarUrl" :src="avatarUrl" width="50px" height="50px"></cloud-image>
+						</button>
+
+						<!-- 						<cloud-image @click="uploadAvatarImg" v-if="avatar_file" :src="avatar_file.url" width="50px" height="50px"></cloud-image>
+						<uni-icons @click="uploadAvatarImg" v-else class="chooseAvatar" type="plusempty" size="30" color="#dddddd"></uni-icons> -->
 					</view>
 				</template>
 			</uni-list-item>
-			<uni-list-item class="item" @click="setNickname('')" :title="$t('userinfo.nickname')" :rightText="userInfo.nickname||$t('userinfo.notSet')" link>
+
+			<!-- <input type="nickname" class="weui-input" placeholder="请输入昵称" /> -->
+
+
+			<!-- 			<uni-list-item class="item" @click="setNickname('')" :title="$t('userinfo.nickname')"
+				:rightText="userInfo.nickname||$t('userinfo.notSet')" link> -->
+
+			<uni-list-item type="nickname" class="weui-input" @click="setNickname('')" :title="$t('userinfo.nickname')"
+				:rightText="userInfo.nickname||$t('userinfo.notSet')" link>
+
 			</uni-list-item>
-			<uni-list-item class="item" @click="bindMobile" :title="$t('userinfo.phoneNumber')" :rightText="userInfo.mobile||$t('userinfo.notSpecified')" link>
+			<uni-list-item class="item" @click="bindMobile" :title="$t('userinfo.phoneNumber')"
+				:rightText="userInfo.mobile||$t('userinfo.notSpecified')" link>
 			</uni-list-item>
 		</uni-list>
+
+
 		<uni-popup ref="dialog" type="dialog">
-			<uni-popup-dialog mode="input" :value="userInfo.nickname" @confirm="setNickname" :title="$t('userinfo.setNickname')"
-				:placeholder="$t('userinfo.setNicknamePlaceholder')">
+			<uni-popup-dialog mode="input" :value="userInfo.nickname" @confirm="setNickname"
+				:title="$t('userinfo.setNickname')" :placeholder="$t('userinfo.setNicknamePlaceholder')">
+				<input v-model="userInfo.nickname" type="nickname" class="weui-input" placeholder="请输入昵称"
+					@blur="bindblur" @input="bindinput" />
 			</uni-popup-dialog>
 		</uni-popup>
 		<uni-bindMobileByMpWeixin ref="uni-bindMobileByMpWeixin"></uni-bindMobileByMpWeixin>
@@ -30,9 +48,16 @@
 	} from 'vuex';
 	const db = uniCloud.database();
 	const usersTable = db.collection('uni-id-users')
+
+	const defaultAvatarUrl =
+		'https://mmbiz.qpic.cn/mmbiz/icTdbqWNOwNRna42FI242Lcia07jQodd2FJGIYQfG0LAJGFxM4FbnQP6yfMxBgJ0F3YRqJCJ1aPAK2dQagdusBZg/0'
+
+
 	export default {
 		data() {
 			return {
+				avatarUrl: defaultAvatarUrl,
+				nickName: "可",
 				univerifyStyle: {
 					authButton: {
 						"title": "本机号码一键绑定", // 授权按钮文案
@@ -44,6 +69,8 @@
 			}
 		},
 		onLoad() {
+			this.avatarUrl = this.avatar_file.url;
+			// console.log("avatarUrl:", this.avatarUrl)
 			this.univerifyStyle.authButton.title = this.$t('userinfo.bindPhoneNumber')
 			this.univerifyStyle.otherLoginButton.title = this.$t('userinfo.bindOtherLogin')
 			uni.setNavigationBarTitle({
@@ -62,9 +89,51 @@
 			}
 		},
 		methods: {
+			bindblur(e) {
+				this.nickName = e.detail.value; // 获取微信昵称
+				console.log( e.detail.value );
+				// this.setNickname(e.detail.value)
+			},
+			bindinput(e) {
+				// this.nickName = e.detail.value; //这里要注意如果只用blur方法的话用户在输入玩昵称后直接点击保存按钮，会出现修改不成功的情况。
+				console.log( e.detail.value );
+			},
+
 			...mapMutations({
 				setUserInfo: 'user/login'
 			}),
+
+			async onChooseAvatar(e) {
+				try {
+					// console.log("onChooseAvatar avatarUrl:", this.avatarUrl);
+					this.avatarUrl = e.detail.avatarUrl;
+					const cloudPath = `${this.userInfo._id}_${Date.now()}`; // 使用模板字符串更清晰
+					// console.log("onChooseAvatar cloudPath:", cloudPath);
+
+					// 设定 cloudPath 和 filePath
+					const {
+						fileID
+					} = await uniCloud.uploadFile({
+						cloudPath: cloudPath,
+						filePath: e.detail.avatarUrl, // 这里是文件路径
+						fileType: 'image'
+					});
+
+					// 更新 avatar_file 的属性
+					let avatar_file = {
+						extname: '',
+						name: cloudPath,
+						url: fileID
+					};
+
+					this.setAvatarFile(avatar_file)
+
+					// console.log("onChooseAvatar avatarUrl2:", this.avatarUrl);
+
+				} catch (error) {
+					console.error("Failed to upload avatar:", error);
+				}
+			},
 			bindMobile() {
 				// #ifdef APP-PLUS
 				uni.preLogin({
@@ -77,13 +146,13 @@
 					}
 				})
 				// #endif
-				
+
 				// #ifdef MP-WEIXIN
 				this.$refs['uni-bindMobileByMpWeixin'].open()
 				// #endif
-				
+
 				// #ifdef H5
-					//...去用验证码绑定
+				//...去用验证码绑定
 				this.bindMobileBySmsCode()
 				// #endif
 			},
@@ -134,15 +203,17 @@
 				})
 			},
 			setNickname(nickname) {
-				console.log(nickname);
+				console.log(nickname);				
 				if (nickname) {
+					nickname = this.nickName;
+					console.log("userInfo.nickname：", nickname);
 					usersTable.where('_id==$env.uid').update({
 						nickname
 					}).then(e => {
 						console.log(e);
 						if (e.result.updated) {
 							uni.showToast({
-								title:this.$t('common.updateSucceeded'),
+								title: this.$t('common.updateSucceeded'),
 								icon: 'none'
 							});
 							this.setUserInfo({
@@ -186,7 +257,7 @@
 					});
 				}).catch((err) => {
 					uni.showModal({
-						content: err.message ||this.$t('userinfo.requestFail'),
+						content: err.message || this.$t('userinfo.requestFail'),
 						showCancel: false
 					})
 				}).finally(() => {
@@ -234,7 +305,7 @@
 						let cloudPath = this.userInfo._id + '' + Date.now()
 						avatar_file.name = cloudPath
 						uni.showLoading({
-							title:this.$t('userinfo.uploading'),
+							title: this.$t('userinfo.uploading'),
 							mask: true
 						});
 						let {
@@ -244,13 +315,12 @@
 							cloudPath,
 							fileType: "image"
 						});
-						// console.log(result)
+						console.log(result)
 						avatar_file.url = fileID
 						console.log({
 							avatar_file
 						});
 						uni.hideLoading()
-
 						this.setAvatarFile(avatar_file)
 					}
 				})
@@ -265,6 +335,7 @@
 		box-sizing: border-box;
 		flex-direction: column;
 	}
+
 	/* #endif */
 	.item {
 		width: 750rpx;
@@ -281,4 +352,22 @@
 		height: 50px;
 		line-height: 50px;
 	}
+
+	// .popup-content {
+	//   padding: 20px;
+	// }
+	// .weui-input {
+	//   width: 100%;
+	//   padding: 10px;
+	//   border: 1px solid #ccc;
+	//   border-radius: 4px;
+	// }
+	// .popup-footer {
+	//   margin-top: 10px;
+	//   display: flex;
+	//   justify-content: flex-end;
+	// }
+	// .popup-footer button {
+	//   margin-left: 10px;
+	// }
 </style>

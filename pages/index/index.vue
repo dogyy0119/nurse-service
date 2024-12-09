@@ -3,20 +3,86 @@
 	<view class="content">
 		<!-- <uni-nav-bar left-text="返回" right-text="设置" title="标题" /> -->
 		<!-- <uni-nav-bar left-icon="left" height="120rpx" right-icon="cart" title="标题" /> -->
-		<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar left-icon="location"
-			:left-text="cityName" title="首页" @clickLeft="selectCity" />
+		<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar title="首页" @clickLeft="selectCity"
+			left-text-style="font-size: 120rpx;" title-style="font-size: 120rpx;" />
 
-		<!-- 	<uni-icons name="heart"></uni-icons> -->
+		<view class="col-posi">
+			<uni-row class="demo-uni-row">
+				<uni-col :span="2">
+					<view class="icon-item">
+						<view class="position" @click="handleClick">
+						<!-- 	<uni-icons @click="showDrawer('showRight')" customPrefix="customicons" type="location"
+								color="#1CBBB4" :size="38" /> -->
+						<uni-icons @click="pickCity" customPrefix="customicons" type="location"
+							color="#1CBBB4" :size="38" />		
+								
+							<!-- <uni-drawer ref="showRight" mode="right" :mask-click="false"
+								@change="change($event,'showRight')">
+								<view class="scroll-view">
+									<scroll-view class="scroll-view-box" scroll-y="true">
+										<view class="my-info">
+										</view>
+										<view class="info">
+											<text class="info-text">请选择您所在城市 ：</text>
+										</view>
+										<view class="container">
+
+											<view class="info-content"  @click="chooseCity(item)" v-for="item in array" :key="item">
+												<text class="info-content-text" >
+													{{item.name}}</text>
+											</view>
+										</view>
+										<view class="close">
+											<button class="word-btn-white"
+												@click="closeDrawer('showRight')"><text>关闭</text></button>
+										</view>
+									</scroll-view>
+								</view>
+							</uni-drawer> -->
+						</view>
+					</view>
+				</uni-col>
+
+				<uni-col :span="10">
+					<!-- <view @click="showDrawer('showRight')" class="icon-item"> -->
+					<view @click="pickCity" class="icon-item">
+						<label class="readonly-label">{{ cityName || '城市' }}</label>
+
+					</view>
+				</uni-col>
+
+				<uni-col :span="12">
+					<view class="icon-item">
+						<cc-headerSearch icon="../../static/scan_icon.png" @searchClick="searchClick"
+							@rigIconClick="rigIconClick"></cc-headerSearch>
+					</view>
+				</uni-col>
+
+			</uni-row>
+		</view>
+
+		<!-- 		<picker @change="bindPickerChange" :value="indexItem" :range="array">
+			<label class="readonly-label">{{array[indexItem]}}</label>
+		</picker>
+
+		<picker v-if="isPickerVisible" @change="bindPickerChange" :value="indexItem" :range="array">
+			<view class="uni-input">{{array[indexItem]}}</view>
+		</picker> -->
+
+
+		<!-- 
+		<cc-headerSearch icon="../../static/scan_icon.png" @searchClick="searchClick"
+			@rigIconClick="rigIconClick"></cc-headerSearch> -->
 
 		<!-- icon: 右侧菜单图标 @searchClick：搜索点击  @rigIconClick：右侧菜单点击 -->
-		<cc-headerSearch icon="../../static/scan_icon.png" @searchClick="searchClick"
-			@rigIconClick="rigIconClick"></cc-headerSearch>
 
-		<uni-grid class="grid" :column="4" :highlight="true" :showBorder="false" :square="true" custom-style="opacity:1">
-			<uni-grid-item class="item" v-for="(item,index) in serviceKinds" :class="{ active: activeIndex === index }"
-				@click.native="tapGrid(index)" :key="index">
-				<uni-icons class="icon" color="#1cbbb4" :type=iconName[index%4] size="34"></uni-icons>
-				<text style="color:#1cbbb4;font-size: 22rpx;">{{item.name}}</text>
+
+		<uni-grid class="grid" :column="4" :highlight="true" :showBorder="false" :square="true"
+			custom-style="opacity:1">
+			<uni-grid-item class="item" v-for="(item,indexItem) in serviceKinds"
+				:class="{ active: activeIndex === indexItem }" @click.native="tapGrid(indexItem)" :key="indexItem">
+				<uni-icons class="icon" color="#1cbbb4" :type=iconName[indexItem%4] size="34"></uni-icons>
+				<text style="color:#1cbbb4;font-size: 18px;">{{item.name}}</text>
 			</uni-grid-item>
 		</uni-grid>
 		<view class="tips">
@@ -32,16 +98,22 @@
 <script>
 	import CcHeaderSearch from '@/node_modules/cc-headerSearch/components/cc-headerSearch/cc-headerSearch.vue';
 	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
+	import amap from '../../components/amap-wx.130.js';
 
 	export default {
 		components: {
 			CcHeaderSearch,
-			CcWaterListView
+			CcWaterListView,
 		},
 		data() {
 			return {
+				array: '', // ['沈阳市', '丹东市', '抚顺市', '鞍山市'],
+				cityCode: '110100',
+				indexItem: 0,
+				// isPickerVisible: false, // 控制 picker 是否显示
+				key: '6609bbd1a913ad2c3f5e2e604491790f', //22460069778e1b73885d69dd7aa23de6
 				activeIndex: 0, // 保存当前被点击的索引
-				cityName: '城市',
+				cityName: '定位城市',
 				pageTitle: '自定义导航栏',
 				// 列表数组
 				projectList: [],
@@ -49,74 +121,202 @@
 				loading: 0, //0默认  1加载中  2没有更多了
 				iconName: ["staff", "wallet", "map", "compose", ],
 				serviceKinds: [],
-				// gridList: [{
-				// 		"text": "推荐服务",
-				// 		"icon": "staff",
-				// 		"index": "6646b0b49755e32830aab169"
-				// 	},
-				// 	{
-				// 		"text": "专业护理",
-				// 		"icon": "wallet",
-				// 		"index": "6646b41699c6244dcf963a53"
-				// 	},
-				// 	{
-				// 		"text": "尊享套餐",
-				// 		"icon": "map",
-				// 		"index": "6646b8cc9755e32830ac1290"
-				// 	},
-				// 	{
-				// 		"text": "母婴护理",
-				// 		"icon": "compose",
-				// 		"index": "6646ba84466d41f58522bb33"
-				// 	},
-				// 	{
-				// 		"text": "陪诊服务",
-				// 		"icon": "staff",
-				// 		"index": "6646bc558b0da4a4e41e78be"
-				// 	},
-				// 	{
-				// 		"text": "居家康复",
-				// 		"icon": "wallet",
-				// 		"index": "6646bbae21821b6d2bf66d62"
-				// 	},
-				// 	{
-				// 		"text": "医美拆线",
-				// 		"icon": "map",
-				// 		"index": "6646bc830d2b315faffe729a"
-				// 	},
-				// 	{
-				// 		"text": "居家照护",
-				// 		"icon": "compose",
-				// 		"index": "6646bc24b9fb2360b007f42a"
-				// 	},
-				// ],
+				hasLocate: false,
 			}
 		},
 
 		onLoad(event) {
+			this.getCitylist()
+			this.checkLocationPermission()
+			
 			this.getCid()
-			//this.checkLocationPermission()
-			this.getServiceKind()
+		
 		},
 
 		onShow() {
-			this.navIndex = 0;
-			let mylocation = uni.getStorageSync("location")
-			const address = mylocation
-			const cityIndex = address.indexOf("市");
-			if (cityIndex !== -1) {
-				this.cityName = address.substring(address.lastIndexOf("省") + 1, cityIndex + 1) || "城市";
-			} else {
-				this.cityName = mylocation || "城市";
+			if(!this.hasLocate) {
+				console.log("onShow ready to autoGetLoaction ...")
+				this.autoGetLocation();
+				this.hasLocate = true;
 			}
-			console.log("serviceKinds[this.navIndex].name:", this.serviceKinds)
+			this.cityName = uni.getStorageSync('cityName');
+			this.cityCode = uni.getStorageSync('cityCode');
+			
+			console.log("onShow getStorageSync:", this.cityName);
+			console.log("onShow getStorageSync:", this.cityCode);
+			
+			this.navIndex = 0;			
+			this.getServiceKind()
+			
 		},
+
 
 		onNavigationBarButtonTap(e) {
 
 		},
 
 		methods: {
+			pickCity() {
+				console.log("pickCity:");
+				uni.navigateTo({
+					url: '/pages/index/front'
+				});
+			},
+			
+			chooseCity(item) {
+				console.log("choosecity:", item.name);
+				console.log("cityCode:", item.code);
+				this.cityName = item.name;
+				this.cityCode = item.code;
+				this.closeDrawer("showRight");
+				
+				this.getServiceKind() 
+			},
+
+			// 打开窗口
+			showDrawer(e) {
+				console.log("showDrawer")
+
+				this.$refs[e].open()
+			},
+			// 关闭窗口
+			closeDrawer(e) {
+				console.log("closeDrawer")
+
+				this.$refs[e].close()
+			},
+			// 抽屉状态发生变化触发
+			change(e, type) {
+				console.log((type === 'showLeft' ? '左窗口' : '右窗口') + (e ? '打开' : '关闭'));
+				this[type] = e
+			},
+
+			handleClick() {
+				this.isPickerVisible = true; // 显示 picker
+			},
+			bindPickerChange: function(e) {
+				this.index = e.detail.value; // 更新选中的索引
+				this.isPickerVisible = false; // 选择后隐藏 picker
+			},
+
+			showPosition() {
+				let mylocation = uni.getStorageSync("location")
+				const address = mylocation
+				// const cityIndex = address.indexOf("市");
+				// if (cityIndex !== -1) {
+				// this.cityName = address.substring(address.lastIndexOf("省") + 1, cityIndex + 1) || "城市";
+				this.cityName = this.truncateAddress(address);
+				// } else {
+				// this.cityName = mylocation || "城市";
+				// }
+				console.log("this.cityName:", this.cityName)
+				//console.log("serviceKinds[this.navIndex].name:", this.serviceKinds)
+			},
+			
+			truncateAddress(address) {
+				if (address.length > 3) {
+					// 截取前五个字符
+					const firstFive = address.substring(0, 3);
+					// 拼接省略号和截取后的字符串
+					return firstFive + '...'; //+ address.substring(address.length - 3, address.length);
+				} else {
+					// 如果字符串长度小于或等于5，直接返回原字符串
+					return address;
+				}
+			},
+
+			matchCityCode(cityCode) {
+				console.log("matchCityCode:", cityCode);
+				var findCityCode = false;
+				
+				for (let i = 0; i < this.array.length; i++) {
+				    if(this.array[i].code === cityCode) {
+						findCityCode = true;
+						this.cityCode = this.array[i].code
+						this.cityName = this.array[i].name
+					}
+				}					
+				if (!findCityCode) {
+					console.log("matchCityCode: navigateTo");
+					uni.navigateTo({
+						url: '/pages/index/front'
+					});
+				} else {
+					uni.setStorageSync("cityName", this.cityName);
+					uni.setStorageSync("cityCode", this.cityCode);
+				}
+			},
+
+			autoGetLocation() {
+				
+				console.log("autoGetLocation start...")
+				
+				this.amapPlugin = new amap.AMapWX({
+					key: this.key
+				});
+
+				uni.showLoading({
+					title: '获取位置信息中'
+				});
+
+				this.amapPlugin.getRegeo({
+					success: (data) => {
+						console.log(data)
+						// const addressDesc = data[0].desc;
+						//const address = data[0].name;
+						const validCitycodes = ['021', '010', '022', '023']; // 注意 citycode 应该是字符串类型
+						const citycode = data[0].regeocodeData.addressComponent.citycode;
+
+						if (validCitycodes.includes(citycode)) {
+							// citycode 在 validCitycodes 数组中
+							const addressDesc = data[0].regeocodeData.addressComponent.province || '定位城市';
+							uni.setStorageSync("location", addressDesc);
+						} else {
+							// citycode 不在 validCitycodes 数组中
+							const addressDesc = data[0].regeocodeData.addressComponent.city || '定位城市';
+							uni.setStorageSync("location", addressDesc);							
+						}						
+						var mycityCode = data[0].regeocodeData.addressComponent.adcode || '';
+		
+						let prefix = mycityCode.substring(0, 4);
+						
+						// 默认使用 '00' 补充后两位
+						let suffix = '00';
+						
+						console.log("prefix: ", prefix);
+						
+						// 拼接前四位和后两位
+						var cityCode = prefix + suffix;
+						
+						console.log("this.cityCode: ", cityCode)
+						// uni.setStorageSync("cityCode", this.cityCode);
+						
+						this.matchCityCode(cityCode);
+						uni.hideLoading();
+						
+						//this.showPosition();
+					},
+					fail: (err) => {
+						
+						console.log("autoGetLocation fail... : ", err)
+						
+					      // 处理失败情况
+					      uni.showToast({
+					        title: '获取位置信息失败，请稍后重试',
+					        icon: 'none'
+					      });
+						  
+						  console.log("autoGetLocation  fail: navigateTo ")
+						  uni.navigateTo({
+						  	url: '/pages/index/front'
+						  });
+						  
+					      uni.hideLoading();
+					}
+				});
+
+			},
+
 			checkLocationPermission() {
 				uni.getSetting({
 					success: (res) => {
@@ -124,6 +324,13 @@
 						if (res.authSetting['scope.userLocation']) {
 							// 用户已授权  
 							console.log('已授权定位权限');
+							
+							// this.hasLocate = true;
+							// this.autoGetLocation();
+
+							// uni.navigateTo({
+							// 	url: '/pages/service/city/city'
+							// });
 							// 在这里可以调用需要定位权限的 API，如 uni.getLocation  
 						} else {
 							// 用户未授权  
@@ -146,9 +353,20 @@
 									}
 								}
 							});
+							
+							console.log('checkLocationPermission: navigateTo');
+							
+							uni.navigateTo({
+								url: '/pages/index/front'
+							});
 						}
 					},
 					fail: (err) => {
+						// console.log('checkLocationPermission fail: navigateTo');
+						// uni.navigateTo({
+						// 	url: '/pages/index/front'
+						// });
+						
 						console.error('获取设置失败', err);
 						this.shouldHidePositionButton = false;
 					}
@@ -169,10 +387,30 @@
 				})
 
 			},
+			
+			getCitylist() {
+			
+				uniCloud.callFunction({
+					name: "nurse-open-city-list-get",
+					data: {},
+					success: (res) => {
+						this.array = res.result.data
+						console.log(" getCitylist  res.result.data:", this.array)
+					},
+					fail: (err) => {
+						console.error("请求失败: " + err);
+					},
+					complete: (res) => {
+						// console.log("请求完成");
+					}
+				});
+			
+			},
 
 			selectCity() {
 				// 处理城市选择逻辑
 				console.log('选择城市');
+				return;
 				uni.navigateTo({
 					url: '/pages/service/city/city'
 				});
@@ -183,7 +421,15 @@
 					name: "nurse-service-categories-get",
 					data: {},
 					success: (res) => {
-						this.serviceKinds = res.result.data
+						// this.serviceKinds = res.result.data
+						
+						this.serviceKinds = [];
+						res.result.data.forEach(item => {
+							if ((item?.is_index_show ?? false) === true) {
+								this.serviceKinds.push(item);
+							}
+						});
+
 						this.serviceKinds.sort((a, b) => a.sort - b.sort);
 						this.getServiceData();
 						console.log("serviceKinds[this.navIndex].name:", this.serviceKinds[this.navIndex].name)
@@ -207,7 +453,8 @@
 				uniCloud.callFunction({
 					name: "nurse-service-get",
 					data: {
-						category_id: category
+						category_id: category,
+						cityCode: this.cityCode
 					},
 					success: (res) => {
 						this.loading = 2
@@ -307,8 +554,22 @@
 
 <style>
 	page {
-
+		/* background-color: green; */
 		background-color: #f2f2f2;
+	}
+
+	/* 修改 uni-nav-bar 的字体大小 */
+	uni-nav-bar {
+		font-size: 20px;
+		/* 你可以根据需要调整字体大小 */
+	}
+
+	.custom-nav-bar .uni-nav-bar-title {
+		font-size: 20px;
+	}
+
+	.custom-nav-bar .uni-nav-bar-left-text {
+		font-size: 20px;
 	}
 
 	.content {
@@ -318,12 +579,13 @@
 	}
 
 	.grid {
+		/* margin-top: 1px; */
 		background-color: #FFFFFF;
 		margin-bottom: 6px;
 	}
 
 	.uni-grid .text {
-		font-size: 16px;
+		font-size: 20px;
 		height: 25px;
 		line-height: 25px;
 		color: #817f82;
@@ -345,15 +607,15 @@
 	.title {
 		text-align: center;
 		/* 居中文本 */
-		color: #1CBBB4;
+		color: #1cbbb4;
 		/* 蓝色文字，可以根据需求调整 */
 		font-family: 'Arial', sans-serif;
 		/* 使用 Arial 字体 */
-		font-size: 16px;
+		font-size: 20px;
 		/* 字体大小 */
 		font-weight: bold;
 		/* 粗体字 */
-		padding: 5px;
+		padding: 1px;
 		/* 内边距 */
 		margin: 2px;
 		/* 外边距 */
@@ -363,12 +625,12 @@
 		/* 圆角边框 */
 		background-color: #f0f8ff;
 		/* 背景色 */
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+		box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
 		/* 轻微阴影效果 */
 	}
 
 	.tips {
-		font-size: 32rpx;
+		font-size: 20px;
 		/* 设置文字大小 */
 		color: #40C6C0;
 		/* 设置文字颜色 */
@@ -379,5 +641,238 @@
 		text-transform: uppercase;
 		/* 将文字转换为大写 */
 		/* 添加其他样式属性以满足您的需求 */
+	}
+
+	.demo-uni-row {
+		background-color: white;
+		top: 5px;
+		/* margin-bottom: 10px; */
+		height: 24px;
+		// 组件在小程序端display为inline
+		// QQ、字节小程序文档写有 :host，但实测不生效
+		// 百度小程序没有 :host
+		/* #ifdef MP-TOUTIAO || MP-QQ || MP-BAIDU */
+		display: block;
+		/* #endif */
+	}
+
+	// 支付宝小程序没有 demo-uni-row 层级
+	// 微信小程序使用了虚拟化节点，没有 demo-uni-row 层级
+	/* #ifdef MP-ALIPAY || MP-WEIXIN */
+	::v-deep .uni-row {
+		/* margin-bottom: 10px; */
+	}
+
+	/* #endif */
+
+	.icon-item {
+		/* padding: 20px 0% 0px 0%; */
+
+		background-color: white;
+		height: 130upx;
+		/* 设置固定高度 */
+		display: flex;
+		align-items: center;
+		/* 垂直居中对齐内容 */
+		/* background-color: green; */
+	}
+
+	.demo-uni-col {
+		height: 36px;
+		border-radius: 5px;
+	}
+
+	.dark_deep {
+		background-color: #99a9bf;
+	}
+
+	.dark {
+		background-color: #d3dce6;
+	}
+
+	.light {
+		background-color: #e5e9f2;
+	}
+
+	.readonly-label {
+		display: block;
+		padding: 7px;
+		/* 根据需求调整内边距 */
+		/* border: 1px solid #ccc; */
+		/* 添加边框，模拟输入框的外观 */
+		border-radius: 14px;
+		/* 添加圆角样式*/
+		background-color: #F5F5F5;
+		/* 背景色设置为淡灰色，显示为只读状态 */
+		color: #333;
+		/* 文本颜色 */
+		font-size: 18px;
+		/* 字体大小 */
+		width: 90%;
+		/* 确保宽度填满父容器 */
+		box-sizing: border-box;
+		/* 包括内边距和边框在内 */
+		margin-top: 8px;
+		height: 70upx;
+	}
+
+
+	.col-posi {
+		background-color: white;
+	}
+
+	.position {
+		margin-top: 8px;
+	}
+
+	example-body {
+		padding: 10px;
+	}
+
+	.scroll-view {
+		/* #ifndef APP-NVUE */
+		width: 100%;
+		height: 100%;
+		/* #endif */
+		flex: 1
+	}
+
+	// 处理抽屉内容滚动
+	.scroll-view-box {
+		display: flex;
+		flex-direction: column;
+		/* justify-content: flex-start; */
+		/* flex: 1;
+		position: absolute; */
+/* 		top: 0;
+		right: 0;
+		bottom: 0;
+		left: 0; */
+	}
+
+	.my-info {
+
+		padding: 20px;
+		/* margin-top: 60px; */
+		margin-bottom: 60px;	 
+		
+		/* 增加内边距 */
+		margin: 10px 0;
+		/* 增加上下边距 */
+		background-color: #f9f9f9;
+		/* 背景颜色 */
+		border-radius: 8px;
+		/* 圆角 */
+		/* border: 1px solid #ddd; */
+		/* 边框 */
+		/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
+		/* 阴影效果 */
+	}
+
+	.info {
+
+		padding: 15px;
+		/* margin-top: 60px; */
+		margin-bottom: 60px;	 
+		
+		/* 增加内边距 */
+		margin: 10px 0;
+		/* 增加上下边距 */
+		background-color: #f9f9f9;
+		/* 背景颜色 */
+		border-radius: 8px;
+		/* 圆角 */
+		border: 1px solid #ddd;
+		/* 边框 */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		/* 阴影效果 */
+	}
+
+	.info-text {
+		/* margin-top: 60px; */
+		/* margin-bottom: 60px;	 */
+		
+		font-size: 18px;
+		/* 字体大小 */
+		font-weight: bold;
+		/* 字体加粗 */
+		color: #333;
+		/* 字体颜色 */
+		text-align: center;
+		/* 文本居中对齐 */
+		display: block;
+		/* 确保文本占满块级空间 */
+	}
+
+	.container {
+		padding: 10px;
+		background-color: #f5f5f5;
+		/* 背景颜色 */
+		border-radius: 8px;
+		/* 圆角 */
+	}
+
+	.info-content {
+		display: flex;
+		/* 使用 Flexbox 布局 */
+		align-items: center;
+		/* 垂直居中对齐 */
+		justify-content: center;
+		/* 水平居中对齐 */
+		padding: 15px;
+		/* 增加内边距 */
+		margin: 10px 0;
+		/* 上下边距 */
+		background-color: #fff;
+		/* 背景颜色 */
+		border: 1px solid #ddd;
+		/* 边框 */
+		border-radius: 8px;
+		/* 圆角 */
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+		/* 阴影效果 */
+		cursor: pointer;
+		/* 鼠标悬停时显示手形光标 */
+		transition: background-color 0.3s, transform 0.3s;
+		/* 过渡效果 */
+	}
+
+	.info-content:hover {
+		background-color: #f0f0f0;
+		/* 鼠标悬停时背景颜色变化 */
+		transform: scale(1.02);
+		/* 鼠标悬停时放大 */
+	}
+
+	.info-content-text {
+		font-size: 16px;
+		/* 字体大小 */
+		color: #333;
+		/* 字体颜色 */
+		position: relative; /* 确保层叠上下文不会影响事件 */
+		z-index: 1;
+	}
+
+	.city-item {
+		font-size: 16px;
+		/* 字体大小 */
+		color: #333;
+		/* 字体颜色 */
+	}
+
+	.city-item:hover {
+		color: #007bff;
+		/* 悬停时字体颜色 */
+		cursor: pointer;
+		/* 鼠标样式 */
+	}
+
+	.close {
+		padding: 10px;
+	}
+
+	.word-btn-white {
+		background-color: #1cbbb4;
+
 	}
 </style>

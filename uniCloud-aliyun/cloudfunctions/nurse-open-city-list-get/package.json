@@ -1,0 +1,7 @@
+{
+  "name": "nurse-open-city-list-get",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

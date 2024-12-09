@@ -4,7 +4,7 @@
 	 ==================== */
 		body {
 			background-color: #f1f1f1;
-			font-size: 28upx;
+			font-size: 20px;
 			color: #333333;
 			font-family: Helvetica Neue, Helvetica, sans-serif;
 		}
@@ -159,7 +159,7 @@
 			z-index: 0;
 			text-align: right;
 			font-weight: 900;
-			font-size: 36upx;
+			font-size: 20px;
 		}
 	
 		.cu-bar.justify-center .action.border-title text:last-child,
@@ -172,7 +172,7 @@
 	
 		.cu-bar .action:first-child {
 			margin-left: 30upx;
-			font-size: 30upx;
+			font-size: 20px;
 		}
 	
 		.cu-bar .action text.text-cut {
@@ -195,7 +195,7 @@
 	
 		.cu-bar .action>text[class*="cuIcon-"],
 		.cu-bar .action>view[class*="cuIcon-"] {
-			font-size: 36upx;
+			font-size: 20px;
 		}
 	
 		.cu-bar .action>text[class*="cuIcon-"]+text[class*="cuIcon-"] {
@@ -212,7 +212,7 @@
 			top: 0;
 			margin: auto;
 			height: 60upx;
-			font-size: 32upx;
+			font-size: 20px;
 			line-height: 60upx;
 			cursor: none;
 			pointer-events: none;
@@ -224,7 +224,7 @@
 		.cu-bar.ios .content {
 			bottom: 7px;
 			height: 30px;
-			font-size: 32upx;
+			font-size: 20px;
 			line-height: 30px;
 		}
 	
@@ -246,7 +246,7 @@
 			background-color: #f5f5f5;
 			line-height: 64upx;
 			height: 64upx;
-			font-size: 24upx;
+			font-size: 20px;
 			color: #333333;
 			flex: 1;
 			display: flex;
@@ -263,7 +263,7 @@
 			padding-right: 30upx;
 			height: 64upx;
 			line-height: 64upx;
-			font-size: 26upx;
+			font-size: 20px;
 			background-color: transparent;
 		}
 	
@@ -308,7 +308,7 @@
 		}
 	
 		.cu-bar.tabbar .action {
-			font-size: 22upx;
+			font-size: 20px;
 			position: relative;
 			flex: 1;
 			text-align: center;
@@ -394,7 +394,7 @@
 			height: auto;
 			margin: 0 auto 10upx;
 			text-align: center;
-			font-size: 40upx;
+			font-size: 20px;
 		}
 	
 		.cu-bar.tabbar .action .cuIcon-cu-image {
@@ -453,7 +453,7 @@
 			height: 64upx;
 			min-height: 64upx;
 			flex: 1;
-			font-size: 30upx;
+			font-size: 20px;
 			margin: 0 20upx;
 		}
 	
@@ -462,7 +462,7 @@
 		}
 	
 		.cu-bar.input .action [class*="cuIcon-"] {
-			font-size: 48upx;
+			font-size: 20px;
 		}
 	
 		.cu-bar.input input+.action {

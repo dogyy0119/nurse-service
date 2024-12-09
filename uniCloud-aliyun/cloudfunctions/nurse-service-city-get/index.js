@@ -14,15 +14,10 @@ exports.main = async (event, context) => {
 		// console.log( "event.category_id" )
 	    query.category_id = event.category_id;
 	} 
-
-	if (event.cityCode !== undefined) {
-		// console.log( "event.category_id" )
-	    query.cityCode = event.cityCode;
-	} 
 	
-	if (event.name !== undefined){
+	if (event.citycode !== undefined){
 		// console.log( "event.name" )
-		query.name  = event.name; 
+		query.citycode  = event.citycode; 
 	}
 	
 	let res = await collection.where(query).get()

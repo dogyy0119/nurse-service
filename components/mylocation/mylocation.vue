@@ -7,11 +7,11 @@
 			
 			<view class="searchBg">
 				<view class="input-box" @tap="jumpSearch">
-					<input placeholder="  搜索内容" class="inputs" disabled
-						placeholder-style="color:#c0c0c0;font-size:18px;"></input>
 					<view class="icon searchBg">
-						<image src="../../../../static/search.png" class="search_img"></image>
+						<image src="../../static/tupian/location.png" class="search_img"></image>
 					</view>
+					<input placeholder="搜索内容" class="inputs" disabled
+						placeholder-style="color:#c0c0c0;font-size:24upx;"></input>
 				</view>
 			</view>
 		</view>
@@ -74,7 +74,7 @@
 
 	.hierarchy {
 		width: 10%;
-		height: 70upx;
+		height: 60upx;
 		font-size: 32upx;
 		text-align: right;
 	}
@@ -95,7 +95,7 @@
 
 	.input-box {
 		width: 100%;
-		height: 70upx;
+		height: 60upx;
 		background-color: #f5f5f5;
 		position: relative;
 		display: flex;
@@ -124,8 +124,8 @@
 	}
 
 	.input-box .inputs {
-		// padding-left: 28upx;
-		// height: 28upx;
-		// font-size: 28upx;
+		padding-left: 28upx;
+		height: 28upx;
+		font-size: 28upx;
 	}
 </style>

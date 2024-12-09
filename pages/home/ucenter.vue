@@ -51,12 +51,12 @@
 			<uni-list-item v-for="(item,i) in sublist" :title="item.title" link :rightText="item.rightText" :key="i"
 				:clickable="true" :to="item.to" @click="ucenterListClick(item)" :show-extra-icon="true"
 				:extraIcon="{type:item.icon,color:'#999'}">
-				<template v-slot:footer>
+			<!-- 	<template v-slot:footer>
 					<view v-if="item.showBadge" class="item-footer">
 						<text class="item-footer-text">{{item.rightText}}</text>
 						<view class="item-footer-badge"></view>
 					</view>
-				</template>
+				</template> -->
 			</uni-list-item>
 		</uni-list>
 	</view>
@@ -381,6 +381,10 @@
 	  flex-direction: row;
 	}
 	
+	.uni-list-item-title {
+	    font-size: 20px !important; /* 使用 !important 确保样式应用 */
+	}
+	
 	.chat-custom-right {
 		flex: 1;
 		/* #ifndef APP-NVUE */
@@ -407,12 +411,12 @@
 			.recharge-info {
 				.info-title {
 					color: #333;
-					font-size: 28rpx;
+					font-size: 20px;
 					font-weight: bold;
 				}
 				.info-content {
 					color: #999;
-					font-size: 24rpx;
+					font-size: 20px;
 				}
 			}
 		
@@ -433,22 +437,22 @@
 			align-items: center;
 			justify-content: space-between;
 			margin-top: 20rpx;
-			font-size: 26rpx;
+			font-size: 20px;
 			color: #333;
 			
 			.recharge-money{
 				font-weight: bold;
-				font-size: 30rpx;
+				font-size: 20px;
 			}
 			
 			.recharge-money::first-letter{
-				font-size: 22rpx;
+				font-size: 20px;
 			}
 		}
 	}
 
 	.chat-custom-text {
-		font-size: 12px;
+		font-size: 20px;
 		color: #999;
 	}
 
@@ -508,12 +512,12 @@
 	.uer-name {
 		height: 80rpx;
 		line-height: 80rpx;
-		font-size: 38rpx;
+		font-size: 20px;
 		color: #FFFFFF;
 	}
 
 	.cmp-name {
-		font-size: 24rpx;
+		font-size: 20px;
 		color: #dadada;
 	}
 
@@ -550,7 +554,7 @@
 
 	.item-footer-text {
 		color: #999;
-		font-size: 24rpx;
+		font-size: 18px;
 		padding-right: 10rpx;
 	}
 
@@ -571,7 +575,7 @@
 		 padding: 50rpx;
 		 margin-top: 30rpx;
 		/* #endif */
-		font-size: 32rpx;
+		font-size: 20px;
 		color: #FFFFFF;
 		padding-bottom: 0;
 		align-items: center;

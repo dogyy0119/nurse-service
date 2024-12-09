@@ -293,10 +293,13 @@
 					mask: true
 				})
 				console.log("serviceid:", serviceid)
+				let cityCode = uni.getStorageSync("cityCode");
+				
 				uniCloud.callFunction({
 					name: "nurse-service-getid",
 					data: {
-						id: serviceid
+						id: serviceid,
+						cityCode: cityCode
 					},
 					success: (res) => {
 						this.loading = 2
@@ -566,7 +569,7 @@
 				flex: 1;
 				height: 34px;
 				/* 设置按钮高度为14像素 */
-				background-color: #1CBBB4;
+				background-color: #1cbbb4;
 				/* 设置背景色为粉色 */
 				color: #fff;
 				/* 设置字体颜色为白色 */
@@ -585,7 +588,7 @@
 				flex: 1;
 				height: 34px;
 				/* 设置按钮高度为14像素 */
-				background-color: #1CBBB4;
+				background-color: #1cbbb4;
 				/* 设置背景色为粉色 */
 				color: #fff;
 				/* 设置字体颜色为白色 */

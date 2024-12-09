@@ -156,7 +156,7 @@ export default {
 .detail-item h2 {
   font-size: 20px; /* Adjust heading size */
   // color: #007bff; /* Adjust heading color */
-  color: #1CBBB4;
+  color: #1cbbb4;
 }
 
 .detail-item p {
@@ -166,7 +166,7 @@ export default {
 }
 
 .detail-item strong {
-	color: #1CBBB4;
+	color: #1cbbb4;
   // color: #FF8F91; /* 字体颜色 */
   font-size: 14px; /* 字体大小 */  
   font-weight: bold; /* 字体加粗 */  

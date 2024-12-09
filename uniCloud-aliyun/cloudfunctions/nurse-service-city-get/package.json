@@ -1,0 +1,7 @@
+{
+  "name": "nurse-service-city-get",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

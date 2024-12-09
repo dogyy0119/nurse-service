@@ -244,7 +244,7 @@
 		width: 100%;
 		height: 100%;
 		background-color: #ebebeb;
-		font-size: 14px;
+		font-size: 20px;
 		color: #333;
 		.city-list-content{
 			margin-right: 25px;
@@ -311,7 +311,7 @@
 		width: 35px;
 		z-index: 10;
 		text-align: center;
-		font-size: 12px;
+		font-size: 18px;
 		.nav-item {
 			height: 16px;
 			height: 2.8vh;
@@ -330,7 +330,7 @@
 		.city-title{
 			padding-left: 15px;
 			line-height: 30px;
-			font-size: 14px;
+			font-size: 20px;
 			color: #333;
 			background-color: #ebebeb;
 		}
@@ -357,7 +357,7 @@
 		background: rgba(0, 0, 0, 0.5);
 		justify-content: center;
 		align-items: center;
-		font-size: 40upx;
+		font-size: 50upx;
 		color: #FFFFFF
 	}
 </style>

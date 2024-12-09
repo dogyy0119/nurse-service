@@ -18,15 +18,15 @@
 
 		<!-- 快捷登录按钮弹窗 -->
 		<uni-quick-login :agree="agree" ref="uniQuickLogin"></uni-quick-login>
-		
+
 		<uni-bindMobileByMpWeixin ref="uni-bindMobileByMpWeixin"></uni-bindMobileByMpWeixin>
-		
+
 		<!-- 隐私协议 -->
 		<!-- <g-privacy></g-privacy> -->
 		<!-- #ifdef MP-WEIXIN -->
-		<jade-mp-privacy initiative isCover  @updateParams="handleParamsUpdate" v-if="showPrivacy"></jade-mp-privacy>
+		<jade-mp-privacy initiative isCover @updateParams="handleParamsUpdate" v-if="showPrivacy"></jade-mp-privacy>
 		<!-- #endif -->
-		
+
 	</view>
 </template>
 
@@ -68,10 +68,10 @@
 				})
 			}
 			//#endif
-			uni.$on('setLoginType',type=>{
+			uni.$on('setLoginType', type => {
 				this.type = type
 			})
-			
+
 		},
 		onUnload() {
 			uni.$off('setLoginType')
@@ -104,32 +104,32 @@
 				this.agree = newParams;
 				this.getLocation()
 			},
-			
+
 			getLocation() {
 				// #ifdef MP-WEIXIN	
 				uni.getSetting({
-				    success(res) {
-				        if (!res.authSetting['scope.userLocation']) {
-				            // 如果用户没有授权，尝试授权
-				            uni.authorize({
-				                scope: 'scope.userLocation',
-				                success() {
-				                    console.log('授权地理位置：成功');
-				                },
-				                fail() {
-				                    console.log('授权地理位置：失败');
-				                }
-				            });
-				        } else {
-				            console.log('用户已经授权地理位置');
-				        }
-				    }
+					success(res) {
+						if (!res.authSetting['scope.userLocation']) {
+							// 如果用户没有授权，尝试授权
+							uni.authorize({
+								scope: 'scope.userLocation',
+								success() {
+									console.log('授权地理位置：成功');
+								},
+								fail() {
+									console.log('授权地理位置：失败');
+								}
+							});
+						} else {
+							console.log('用户已经授权地理位置');
+						}
+					}
 				});
 				// #endif
 			},
-			
+
 			async quickLogin() {
-				
+
 				// uni.showModal({
 				//   title: '隐私政策',
 				//   content: '请阅读我们的隐私政策...',
@@ -147,21 +147,64 @@
 				//     }
 				//   }
 				// });
-				
-				try {  
-					
-					console.log(" quickLogin : " + this.agree )
-				    // 等待 login_before 方法完成  
-				    await this.$refs.uniQuickLogin.login_before(this.type);  
-				  
-				    // #ifdef MP-WEIXIN  
-				    // 如果是在微信小程序环境下，则执行绑定手机号的操作  
-				    // this.$refs['uni-bindMobileByMpWeixin'].open();  
-				    // #endif  
-				} catch (error) {  
-				    // 处理 login_before 方法中可能抛出的错误  
-				    console.error('Login before failed:', error);  
-				}  
+
+				uni.getUserProfile({
+					desc: "获取你的昵称、头像、地区及性别",
+					success: (res) => {
+						console.log("res:", res)
+						// let user = {
+						// 	avatar: res.userInfo.avatarUrl,
+						// 	name: res.userInfo.nickName,
+						// 	wxOpenid: this.wxid.openId,
+						// 	level: res.level,
+						// 	gender: res.userInfo.gender,
+						// 	clientName: res.clientName,
+						// 	roleDesc: res.roleDesc,
+						// 	id: res.id,
+						// 	clientId: res.clientId
+						// }
+						// this.setUser(user);
+						// paramuser = {
+						// 	gender: res.userInfo.gender,
+						// 	avatar: res.userInfo.avatarUrl,
+						// 	name: res.userInfo.nickName,
+						// 	country: res.userInfo.country,
+						// 	province: res.userInfo.province,
+						// 	city: res.userInfo.city,
+						// 	wxOpenid: this.wxid.openId
+						// }
+						// this.getUserInfoCallBack(paramuser)
+					},
+					fail() {
+						// console.log("err ": err)
+					}
+				})
+
+				uni.getUserInfo({
+					provider: 'weixin',
+					success: function(infoRes) {
+						console.log(infoRes.userInfo); // 打印用户信息
+						console.log('用户昵称为: ' + infoRes.userInfo.nickName); // 打印用户昵称
+						// 在这里，你可以将用户的头像和昵称保存到本地或者发送到后端进行处理
+						// infoRes.userInfo.avatarUrl是用户的头像链接
+						// infoRes.userInfo.nickName是用户的昵称
+					}
+				});
+
+				try {
+
+					console.log(" quickLogin : " + this.agree)
+					// 等待 login_before 方法完成  
+					await this.$refs.uniQuickLogin.login_before(this.type);
+
+					// #ifdef MP-WEIXIN  
+					// 如果是在微信小程序环境下，则执行绑定手机号的操作  
+					//this.$refs['uni-bindMobileByMpWeixin'].open();
+					// #endif  
+				} catch (error) {
+					// 处理 login_before 方法中可能抛出的错误  
+					console.error('Login before failed:', error);
+				}
 			},
 			sendShortMsg() {
 				if (!this.agree) {
@@ -196,8 +239,9 @@
 		box-sizing: border-box;
 		flex-direction: column;
 	}
+
 	/* #endif */
-	
+
 	@import url("../common/login-page.css");
 
 	.quickLogin {

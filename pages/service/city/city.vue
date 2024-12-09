@@ -168,19 +168,19 @@
 		    padding: 1px 10px; /* 设置按钮内边距 */
 		    border-radius: 5px; /* 添加圆角 */
 		    cursor: pointer; /* 设置鼠标指针为手型 */
-			font-size: 12px;		
+			font-size: 20px;		
 		}
 		
 		.ok-btn {
 			flex: 1; 
-			 height: 40px; /* 设置按钮高度为14像素 */
+			height: 40px; /* 设置按钮高度为14像素 */
 		    background-color: #ff69b4;; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    // border: none; /* 移除按钮边框 */
 		    // padding: 1px 1px; /* 设置按钮内边距 */
 		    border-radius: 5px; /* 添加圆角 */
 		    // cursor: pointer; /* 设置鼠标指针为手型 */
-			 font-size: 12px;		    
+			font-size: 20px;		    
 		}
 		
 		.ok-btn-hidden {  
@@ -189,14 +189,14 @@
 		
 		.position-btn {
 			flex: 1; 
-			 height: 40px; /* 设置按钮高度为14像素 */
+			height: 40px; /* 设置按钮高度为14像素 */
 		    background-color: #1cbbb4;; /* 设置背景色为粉色 */
 		    color: #fff; /* 设置字体颜色为白色 */
 		    // border: none; /* 移除按钮边框 */
 		    // padding: 1px 1px; /* 设置按钮内边距 */
 		    border-radius: 5px; /* 添加圆角 */
 		    // cursor: pointer; /* 设置鼠标指针为手型 */
-			font-size: 12px;		    
+			font-size: 20px;		    
 		}
 		
 		.position-btn-hidden{

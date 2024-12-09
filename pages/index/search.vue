@@ -281,11 +281,13 @@
 			getNewsData(key) {
 
 				console.log("this.key :" + key);
-
+				let cityCode = uni.getStorageSync("cityCode");
+				
 				uniCloud.callFunction({
 					name: "nurse-service-get",
 					data: {
-						name: key
+						name: key,
+						cityCode: cityCode
 					},
 					success: (res) => {
 						this.loading = 2

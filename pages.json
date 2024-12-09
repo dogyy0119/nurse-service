@@ -27,6 +27,17 @@
 				}
 			},
 			{
+				"path": "pages/index/front",
+				"style": {
+					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarTitleText": "位置选择",
+					"navigationBarTextStyle": "white",
+					"enablePullDownRefresh": false,
+					"navigationStyle": "default"
+				}
+			},
+			
+			{
 				"path": "pages/index/search",
 				"style": {
 					"navigationBarBackgroundColor": "#1cbbb4",

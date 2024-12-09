@@ -74,7 +74,11 @@
 					name: "nurse-service-categories-get",
 					data: {},
 					success: (res) => {
-						this.serviceKinds = res.result.data
+						res.result.data.forEach(item => {
+							if ((item?.is_index_show ?? false) === true) {
+								this.serviceKinds.push( item );
+							}
+						});
 						this.serviceKinds.sort((a, b) => a.sort - b.sort);
 						this.getServiceData(this.kindIndex);
 					},
@@ -96,11 +100,13 @@
 			//获取新闻列表数据
 			getServiceData(index = 0) {
 				let category = this.serviceKinds[index]._id
-
+				let cityCode = uni.getStorageSync("cityCode");
+				
 				uniCloud.callFunction({
 					name: "nurse-service-get",
 					data: {
-						category_id: category
+						category_id: category,
+						cityCode: cityCode
 					},
 					success: (res) => {
 						this.serviceDatas = [];

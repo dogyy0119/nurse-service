@@ -551,7 +551,7 @@
 		flex: 1;
 		height: 40px;
 		/* 设置按钮高度为14像素 */
-		background-color: #1CBBB4;
+		background-color: #1cbbb4;
 		;
 		/* 设置背景色为粉色 */
 		color: #fff;
@@ -593,7 +593,7 @@
 		flex: 1;
 		height: 40px;
 		/* 设置按钮高度为14像素 */
-		background-color: #1CBBB4;
+		background-color: #1cbbb4;
 		/* 设置背景色为粉色 */
 		color: #fff;
 		/* 设置字体颜色为白色 */
