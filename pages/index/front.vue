@@ -43,7 +43,10 @@ import cityVue from '../service/city/city.vue';
 		},
 		
 		onLoad(event) {
+			console.log("in the front onLoad...")
 			this.getCitylist()
+			// uni.setStorageSync('cityName', "城市");
+			uni.setStorageSync('cityCode', "110100");
 		},
 		
 		methods: {
@@ -53,13 +56,13 @@ import cityVue from '../service/city/city.vue';
 				uni.setStorageSync('cityName', this.cityArray[index].name);
 				uni.setStorageSync('cityCode', this.cityArray[index].code);
 				
-				wx.switchTab({
-				  url: '/pages/index/index', // 这里是你的 tabBar 页面的路径
-				  success: function(res) {
-				    console.log("跳转成功");
+				uni.switchTab({
+				  url: '/pages/index/index',
+				  success: (res) => {
+				    // Handle success if needed
 				  },
-				  fail: function(err) {
-				    console.error("跳转失败", err);
+				  fail: (err) => {
+				    // Handle failure if needed
 				  }
 				});
 				

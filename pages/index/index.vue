@@ -91,7 +91,6 @@
 		</view>
 
 		<tabbar index="0"></tabbar>
-
 	</view>
 </template>
 
@@ -125,15 +124,24 @@
 			}
 		},
 
-		onLoad(event) {
-			this.getCitylist()
-			this.checkLocationPermission()
+		async onLoad(event) {
+			try {
+			    await Promise.all([
+			        this.getCitylist(),
+			        this.checkLocationPermission(),
+			        this.getCid()
+			    ]);
 			
-			this.getCid()
-		
+			    // uni.navigateTo({
+			    //     url: '/pages/index/front'
+			    // });
+			} catch (error) {
+			    console.error('Error during initialization:', error);
+			    // Handle error, possibly show a message to the user
+			}
 		},
 
-		onShow() {
+		async onShow() {
 			if(!this.hasLocate) {
 				console.log("onShow ready to autoGetLoaction ...")
 				this.autoGetLocation();
@@ -145,8 +153,21 @@
 			console.log("onShow getStorageSync:", this.cityName);
 			console.log("onShow getStorageSync:", this.cityCode);
 			
+
+			
 			this.navIndex = 0;			
 			this.getServiceKind()
+			
+			if ( this.cityCode === null || this.cityCode === '') {
+				console.log("onShow cityCode is null navigateTo /pages/index/front");
+				
+				uni.navigateTo({
+				    url: '/pages/index/front'
+				});
+			} else {
+				console.log("onShow cityCode is not null ", this.cityCode);
+				
+			}
 			
 		},
 
@@ -235,12 +256,13 @@
 						this.cityCode = this.array[i].code
 						this.cityName = this.array[i].name
 					}
-				}					
+				}
+									
 				if (!findCityCode) {
-					console.log("matchCityCode: navigateTo");
-					uni.navigateTo({
-						url: '/pages/index/front'
-					});
+					// console.log("matchCityCode: navigateTo");
+					// uni.navigateTo({
+					// 	url: '/pages/index/front'
+					// });
 				} else {
 					uni.setStorageSync("cityName", this.cityName);
 					uni.setStorageSync("cityCode", this.cityCode);
@@ -306,10 +328,10 @@
 					        icon: 'none'
 					      });
 						  
-						  console.log("autoGetLocation  fail: navigateTo ")
-						  uni.navigateTo({
-						  	url: '/pages/index/front'
-						  });
+						  // console.log("autoGetLocation  fail: navigateTo ")
+						  // uni.navigateTo({
+						  // 	url: '/pages/index/front'
+						  // });
 						  
 					      uni.hideLoading();
 					}
@@ -354,11 +376,11 @@
 								}
 							});
 							
-							console.log('checkLocationPermission: navigateTo');
+							// console.log('checkLocationPermission: navigateTo');
 							
-							uni.navigateTo({
-								url: '/pages/index/front'
-							});
+							// uni.navigateTo({
+							// 	url: '/pages/index/front'
+							// });
 						}
 					},
 					fail: (err) => {
