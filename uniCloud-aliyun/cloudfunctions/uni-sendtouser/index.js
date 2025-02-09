@@ -1,6 +1,6 @@
 'use strict'; 
  
-const uniPush = uniCloud.getPushManager({appId:"__UNI__5000F3E"}); //注意这里需要传入你的应用appId  
+const uniPush = uniCloud.getPushManager({appId:"__UNI__EF91A34"}); //注意这里需要传入你的应用appId  
 //"_UNI_5088F3E”__UNI__D96DA3E__UNI__D96DA3E__UNI__D96DA3E
 exports.main = async (event, context) => {  
 	//const { push_clientid } = event;
