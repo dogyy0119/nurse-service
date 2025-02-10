@@ -2,7 +2,7 @@
 'use strict';
 // const uniPush = uniCloud.getPushManager({appId:"__UNI__5000F3E"}) //注意这里需要传入你的应用appId，用于指定接收消息的客户端
 
-const uniPush = uniCloud.getPushManager({appId:"__UNI__EFAF239"}) //注意这里需要传入你的应用appId，用于指定接收消息的客户端
+const uniPush = uniCloud.getPushManager({appId:"_UNI__D96DA3E"}) //注意这里需要传入你的应用appId，用于指定接收消息的客户端 ‘e家医护商户版’
 
 exports.main = async (event, context) => {
 	let res = await uniPush.sendMessage({

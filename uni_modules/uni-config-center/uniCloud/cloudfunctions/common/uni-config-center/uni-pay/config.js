@@ -4,7 +4,7 @@ module.exports = {
 	// 统一 - 支付回调地址,格式为 "服务空间ID":"URL化地址"
 	"notifyUrl": {
 		// 测试环境服务空间-支付回调地址
-		"mp-1ee3378d-eecd-4061-9be4-b198b081a0fe": "https://fc-mp-1ee3378d-eecd-4061-9be4-b198b081a0fe.next.bspapp.com/uni-pay-co",
+		"mp-7ae7dd3f-b484-405a-86e8-2a5836b1bf6c": "https://fc-mp-7ae7dd3f-b484-405a-86e8-2a5836b1bf6c.next.bspapp.com/uni-pay-co",
 		// 线上环境服务空间-支付回调地址（如果只有一个服务空间，则只需要配置线上环境服务空间即可）
 		// "mp-499e2a37-0c77-418a-82aa-3e5820ecb057": "https://fc-mp-499e2a37-0c77-418a-82aa-3e5820ecb057.next.bspapp.com/uni-pay-co",
 	},
