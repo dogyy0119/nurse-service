@@ -6,7 +6,7 @@
 			{
 				"path": "pages/index/index",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTitleText": "首页",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
@@ -29,9 +29,9 @@
 			{
 				"path": "pages/index/front",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTitleText": "位置选择",
-					"navigationBarTextStyle": "white",
+					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default"
 				}
@@ -40,7 +40,7 @@
 			{
 				"path": "pages/index/search",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -50,8 +50,8 @@
 			{
 				"path": "pages/order/OrderList",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
-					"navigationBarTextStyle": "white",
+					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
 					"navigationBarTitleText": "订单列表"
@@ -77,7 +77,7 @@
 				// 	"navigationBarTitleText": "订单详情"
 				// },
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTitleText": "订单详情",
 					"navigationStyle": "default"
 				}
@@ -85,7 +85,7 @@
 			{
 				"path": "pages/order/OrderEvaluate",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -95,7 +95,7 @@
 			{
 				"path": "pages/order/MoreEvaluate",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -113,7 +113,7 @@
 				"path": "pages/messge/messge",
 				"style": {
 					"navigationBarTitleText": "消息中心",
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTextStyle": "white"
 				}
 			},
@@ -152,7 +152,7 @@
 			{
 				"path": "pages/coupon-card/coupon-card",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTitleText": "优惠券"
 				}
 			},
@@ -160,7 +160,7 @@
 			{
 				"path": "pages/home/ucenter",
 				"style": {
-					"navigationBarBackgroundColor": "#1cbbb4",
+					"navigationBarBackgroundColor": "#f7f8fa",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -196,21 +196,21 @@
 					{
 						"path": "hushizhan/hushizhan",
 						"style": {
-							"navigationBarBackgroundColor": "#1cbbb4",
+							"navigationBarBackgroundColor": "#f7f8fa",
 							"navigationBarTitleText": "服务"
 						}
 					},
 					{
 						"path": "function/voucher_center_",
 						"style": {
-							"navigationBarBackgroundColor": "#1cbbb4",
+							"navigationBarBackgroundColor": "#f7f8fa",
 							"navigationBarTitleText": "支付中心"
 						}
 					},
 					{
 						"path": "city/city",
 						"style": {
-							"navigationBarBackgroundColor": "#1cbbb4",
+							"navigationBarBackgroundColor": "#f7f8fa",
 							"navigationBarTextStyle": "white",
 							"enablePullDownRefresh": false,
 							"navigationStyle": "default",
@@ -220,7 +220,7 @@
 					{
 						"path": "servicedetails/servicedetails",
 						"style": {
-							"navigationBarBackgroundColor": "#1cbbb4",
+							"navigationBarBackgroundColor": "#f7f8fa",
 							"navigationBarTitleText": "服务详情",
 							"navigationStyle": "default"
 						}
@@ -228,7 +228,7 @@
 					{
 						"path": "appointment/appointment",
 						"style": {
-							"navigationBarBackgroundColor": "#1cbbb4",
+							"navigationBarBackgroundColor": "#f7f8fa",
 							"navigationBarTitleText": "预约",
 							"navigationStyle": "default"
 						}
@@ -350,7 +350,7 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#1cbbb4",
+		"selectedColor": "#f7f8fa",
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
 		"list": [{

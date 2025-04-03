@@ -1,9 +1,9 @@
 s<template>
 	<view class="content">
 		<view class="me-head">
-		    <u-sticky bgColor="#fff">
-		        <u-tabs class="custom-tabs" :list="allList" lineColor="#1cbbb4"
-		            :activeStyle="{color: '#1cbbb4', fontWeight: 'bold', transform: 'scale(1.05)', fontSize: '20px'}"
+		    <u-sticky bgColor="#f7f8fa">
+		        <u-tabs class="custom-tabs" :list="allList" lineColor="white"
+		            :activeStyle="{color: 'balck',  transform: 'scale(1)', fontSize: '20px'}"
 		            @click="tabClick"
 		            style="font-size: 20px;"> <!-- 修改这里来设置默认字体大小 -->
 		        </u-tabs>
@@ -14,54 +14,65 @@ s<template>
 				<ul class="item-ul" v-for="(item, index) in orderList" :key="index">
 					<li v-if="item.odStatus == tabsIndex || tabsIndex == 0">
 						<view class="item-top">
-							<view>
-								<text>订单编号：</text>
-								<text>{{item.odNumber}}</text>
+							<view class="item-my-order">
+								<text  style="color: #476581;">订单编号：</text>
+								<text class="item-number" style="color: black;">{{ item.odNumber }}</text>
 							</view>
-							<!-- 	<view class="pay-type" :class="getStatusClass(item.odStatus)">
+													
+							<view class="pay-type" :style="{ backgroundColor: allList[item.odStatus].bgColor }">
+							  <text :style="{ color: allList[item.odStatus].color }">{{allList[item.odStatus].name}}</text>
+							</view>
+							<!-- <view class="pay-type">
 								<text>{{allList[item.odStatus].name}}</text>
 							</view> -->
-							<view class="pay-type">
-								<text>{{allList[item.odStatus].name}}</text>
-							</view>
 						</view>
 						<u-line dashed></u-line>
+						<view class="item-odName">
+							<text class="item-title">{{item.odName}}</text>
+						</view>
 						<view class="item-content">
+							
 							<view class="item-left">
 								<u-image :src="item.picUrl" :fade="true" radius="5" width="70" height="70"
 									duration="450"></u-image>
 							</view>
 							<view class="item-right" @click="goDetail(item)">
-								<view class="item-right-v1">
+<!-- 								<view class="item-right-v1">
 									<text class="item-title">{{item.odName}}</text>
+								</view> -->
+								<view class="item-right-v1 induce">
+								  <text class="rate-text1" style="color: #476581;">订单地址：</text>
+								  <text class="rate-text1" style="color: black;">{{item.odAddress}}</text>
 								</view>
 								<view class="item-right-v1 induce">
-									<text class="rate-text1">订单地址：{{item.odAddress}}</text>
+								  <text class="rate-text1" style="color: #476581;">付款时间：</text>
+								  <text class="rate-text1" style="color: black;">{{formatDate(item.odPaytime)}}</text>
 								</view>
 								<view class="item-right-v1 induce">
-									<text class="rate-text1">付款时间：{{formatDate(item.odPaytime)}}</text>
+								  <text class="rate-text1" style="color: #476581;">预约时间：</text>
+								  <text class="rate-text1" style="color: black;">{{formatTime(item.odTime)}}</text>
 								</view>
-								<view class="item-right-v1 induce">
-									<text class="rate-text1">预约时间：{{formatTime(item.odTime)}}</text>
-								</view>
-								<view class="item-right-v2">
-									<view class="v2-fh">￥<text class="v2-price">{{item.odPrice/100}}</text></view>
-								</view>
+								<!-- <view class="item-right-v2">
+									<view class="v2-fh">金额：<text class="v2-price">{{item.odPrice/100}}</text></view>
+								</view> -->
 							</view>
 						</view>
-
 						<u-line dashed></u-line>
-						<view class="item-btom" v-if="item.odStatus == 1">
-							<view @click="cancelClick(item)">
-								<view class="item-btom-btn">取消</view>
-							</view>
-							<view @click="payClick(item)">
-								<view class="item-btom-btn pay">支付</view>
-							</view>
-						</view>
-
-						<view class="item-btom" v-if="item.odStatus == 3">
-							<view class="item-btom-btn" @click="evaluateClick(item)">评价</view>
+						<view class="item-right-v2" style="display: flex; align-items: center;">
+						  <view class="v2-fh" style="margin-right: 20px;">金额：<text class="v2-price">{{item.odPrice/100}}</text></view>
+						  
+						  <view class="item-btom" v-if="item.odStatus == 1" style="display: flex; align-items: center;">
+						    <view @click="cancelClick(item)" style="margin-right: 10px;">
+						      <view class="item-btom-btn">取消</view>
+						    </view>
+						    <view @click="payClick(item)">
+						      <view class="item-btom-btn pay">支付</view>
+						    </view>
+						  </view>
+						  
+						  <view class="item-btom" v-if="item.odStatus == 3" style="margin-left: 20px;">
+						    <view class="item-btom-btn" @click="evaluateClick(item)">评价</view>
+						  </view>
 						</view>
 					</li>
 				</ul>
@@ -81,47 +92,18 @@ s<template>
 			return {
 				tabsIndex: 0,
 				user_id: "",
-				allList: [{
-						tabId: 0,
-						name: '全部'
-					},
-					{
-						tabId: 1,
-						name: '待支付'
-					},
-					{
-						tabId: 2,
-						name: '已支付'
-					},
-					{
-						tabId: 3,
-						name: '已派单'
-					},
-					{
-						tabId: 4,
-						name: '已接受'
-					},
-					{
-						tabId: 5,
-						name: '已拒绝'
-					},
-					{
-						tabId: 6,
-						name: '已完成'
-					},
-					{
-						tabId: 7,
-						name: '退款审核中'
-					},
-					{
-						tabId: 8,
-						name: '退款中'
-					},
-					{
-						tabId: 8,
-						name: '已退款'
-					},
-				],
+				allList: [
+				      { tabId: 0, name: '全部', color: '#000000', bgColor: 'rgba(200, 200, 200, 0.5)' },
+				      { tabId: 1, name: '待支付', color: '#FF0000', bgColor: 'rgba(255, 200, 200, 0.5)' },
+				      { tabId: 2, name: '已支付', color: '#008000', bgColor: 'rgba(200, 255, 200, 0.5)' },
+				      { tabId: 3, name: '已派单', color: '#0000FF', bgColor: 'rgba(200, 200, 255, 0.5)' },
+				      { tabId: 4, name: '已接受', color: '#FFA500', bgColor: 'rgba(255, 255, 200, 0.5)' },
+				      { tabId: 5, name: '已拒绝', color: '#800080', bgColor: 'rgba(255, 200, 255, 0.5)' },
+				      { tabId: 6, name: '已完成', color: '#000000', bgColor: 'rgba(200, 200, 200, 0.5)' },
+				      { tabId: 7, name: '退款审核中', color: '#FF4500', bgColor: 'rgba(255, 200, 200, 0.5)' },
+				      { tabId: 8, name: '退款中', color: '#FF6347', bgColor: 'rgba(255, 200, 200, 0.5)' },
+				      { tabId: 9, name: '已退款', color: '#808080', bgColor: 'rgba(200, 200, 200, 0.5)' },
+				    ],
 				// "订单状态，1：待付款，2：已付款，3：已派单，4：已接受，5：已拒绝，6：已完成，7：退款审核中，8：退款中，9：已退款，-1：已取消付款/退款，-2：退款拒绝，-3：退款失败"
 
 				orderList: [],
@@ -327,7 +309,7 @@ s<template>
 <style scoped lang="scss">
 	page {
 		text-align: center;
-		background-color: #F7F8FA;
+		background-color: #f7f8fa;
 	}
 
 	.content {
@@ -343,7 +325,7 @@ s<template>
 		padding-bottom: 20upx;
 
 		.custom-tabs .u-tabs__item {
-			font-size: 26px;
+			font-size: 20px;
 			/* 设置文字大小 */
 		}
 	}
@@ -376,11 +358,22 @@ s<template>
 			.item-top {
 				display: flex;
 				justify-content: space-between;
-				padding: 20rpx;
-				font-size: 15px;
-
+				padding: 10rpx;
+				font-size: 14px;
+				.item-my-order{
+					padding-top: 14rpx;
+					padding-left: 10rpx;
+					.item-number {
+						font-weight: bold;
+					}
+				}
+				
 				.pay-type {
 					font-weight: bold;
+					border: 1rpx solid #ccc; /* 设置边框颜色和宽度 */
+					border-radius: 5px; /* 设置圆角 */
+					padding: 10rpx; /* 内边距，增加边框与内容的距离 */
+					// margin: 5rpx 0; /* 外边距，增加上下间距 */
 				}
 
 				.status-red {
@@ -394,6 +387,14 @@ s<template>
 				.status-green {
 					color: #00d500;
 				}
+			}
+			
+			.item-odName {
+				font-weight: bold;
+				display: -webkit-box;
+				font-size: 16px;
+				padding-left: 20rpx;
+				padding-top: 15rpx;
 			}
 
 			.item-content {
@@ -411,53 +412,61 @@ s<template>
 					width: 100%;
 					padding: 8rpx 0;
 
-					.item-title {
-						font-weight: bold;
-						display: -webkit-box;
-						font-size: 18px;
-					}
+					// .item-title {
+					// 	font-weight: bold;
+					// 	display: -webkit-box;
+					// 	font-size: 18px;
+					// }
 				}
 
 				.induce {
+					
 					display: flex;
 					align-items: center;
 
 					.rate-text1 {
-						font-size: 17px;
+						// color: #476581;
+						font-size: 14px;
 					}
 
 					.rate-text2 {
 						margin-left: 20rpx;
-						font-size: 17px;
+						font-size: 14px;
 						color: #B9B9B9;
 					}
 				}
 
-				.item-right-v2 {
-					padding: 8rpx 0;
-					display: flex;
-					justify-content: space-between;
-					color: #a3a3a3;
-					font-size: 17px;
+				
+			}
 
-					.v2-fh {
-						color: #ff5500;
-						font-size: 17px;
-					}
+			.item-right-v2 {
+				padding-top: 10rpx;
+				padding-bottom: 10rpx;
+				padding-left: 20rpx;
+				display: flex;
+				justify-content: space-between;
+				color: #a3a3a3;
+				font-size: 17px;
 
-					.v2-price {
-						color: #ff5500;
-						font-weight: bold;
-						font-size: 17px;
-					}
+				.v2-fh {
+					// padding-left: 20rpx;
+					// style="color: #476581;"
+					color: #476581;
+					font-size: 14px;
+				}
+
+				.v2-price {
+					color: #0764d2;
+					font-weight: bold;
+					font-size: 20px;
 				}
 			}
 
 			.item-btom {
 				display: flex;
 				justify-content: flex-end;
-				padding: 20rpx 10upx;
-				font-size: 16px;
+				padding: 10rpx 10upx;
+				font-size: 15px;
 				;
 
 				.item-btom-btn {

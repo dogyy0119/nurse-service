@@ -577,7 +577,7 @@
 <style>
 	page {
 		/* background-color: green; */
-		background-color: #f2f2f2;
+		background-color: #f7f8fa;
 	}
 
 	/* 修改 uni-nav-bar 的字体大小 */
