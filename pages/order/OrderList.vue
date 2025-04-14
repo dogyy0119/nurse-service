@@ -1,7 +1,7 @@
 s<template>
 	<view class="content">
 		<view class="me-head">
-		    <u-sticky bgColor="#f7f8fa">
+		    <u-sticky bgColor="#DBE9FA">
 		        <u-tabs class="custom-tabs" :list="allList" lineColor="white"
 		            :activeStyle="{color: 'balck',  transform: 'scale(1)', fontSize: '20px'}"
 		            @click="tabClick"
@@ -309,7 +309,7 @@ s<template>
 <style scoped lang="scss">
 	page {
 		text-align: center;
-		background-color: #f7f8fa;
+		background-color: #DBE9FA;
 	}
 
 	.content {
@@ -334,7 +334,7 @@ s<template>
 		flex: 1;
 		overflow-y: auto;
 		width: 100%;
-		margin-top: 20upx;
+		background-color: #DBE9FA;
 
 		.pullScrollView {
 			display: flex;
@@ -344,13 +344,16 @@ s<template>
 		.list-tab {
 			width: 93%;
 			margin: 0 auto;
-
+			background-color: #D5E6F9;
+			
 			.item-ul {
 				margin-bottom: 20upx;
+				background-color: #D5E6F9;
+				
 			}
 
 			.item-ul li {
-				background-color: #ffffff;
+				background-color: #F7F8FA;
 				border-radius: 15upx;
 				box-shadow: 0 0upx 6upx 0upx rgba(0, 0, 150, .2);
 			}

@@ -3,7 +3,7 @@
 	<view class="content">
 		<!-- <uni-nav-bar left-text="返回" right-text="设置" title="标题" /> -->
 		<!-- <uni-nav-bar left-icon="left" height="120rpx" right-icon="cart" title="标题" /> -->
-		<uni-nav-bar dark :fixed="true" shadow background-color="#1cbbb4" status-bar title="首页" @clickLeft="selectCity"
+		<uni-nav-bar dark :fixed="true" shadow background-color="#f7f8fa" status-bar title="首页" color="black" @clickLeft="selectCity"
 			left-text-style="font-size: 120rpx;" title-style="font-size: 120rpx;" />
 
 		<view class="col-posi">

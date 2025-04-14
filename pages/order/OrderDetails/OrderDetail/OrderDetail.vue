@@ -1,11 +1,6 @@
 <template>
 	<view class="content">
-		<!-- :backgroundColor="backgroundColor" -->
-		<!-- 		<uni-nav-bar title="订单详情" :fixed="true" :color="fontColor" :statusBar="true" :border="false"
-			:backgroundColor="nav_opacity" left-icon="left" leftText="返回" :placeholder="false" @clickLeft="clickLeft">
-		</uni-nav-bar> -->
 
-		<!-- 顶部背景 -->
 		<view class="tang-feng-bg"></view>
 		<!--内容区 -->
 		<view class="tang-feng-block">
@@ -77,7 +72,7 @@
 					</view>
 					<view class="orderItem-min orderInfo" style="border-bottom: 2rpx solid rgba(0,0,0,0)">
 						<view class="orderItem-1"></view>
-						<view class="orderItem-2">实付款：<text style="color: red;"> ¥ {{ service.total_fee/100 }}</text>
+						<view class="orderItem-2">实付款：<text style="color: royalblue;"> ¥ {{ service.total_fee/100 }}</text>
 						</view>
 					</view>
 				</view>
@@ -402,14 +397,14 @@
 	.content {
 		color: #1cbbb4;
 		font: normal 14px/2.2 Arial, Verdana, Tahoma, sans-serif;
-		background-color: #F5F5F5;
+		background-color: #DBE9FA;
 	}
 
 	.tang-feng-bg {
 		width: 100%;
 		height: 700rpx;
 		position: relative;
-		background: linear-gradient(to top, #ffffff, #8CDDD9);
+		background: linear-gradient(to top, #DBE9FA, #DBE9FA);
 	}
 
 	.tang-feng-block {
@@ -428,7 +423,7 @@
 				margin-bottom: 20rpx;
 
 				.detail-top-1 {
-					color: #ffffff;
+					color: royalblue;
 					font-weight: bold;
 					font-size: 46rpx;
 					display: flex;
@@ -443,7 +438,7 @@
 				}
 
 				.detail-top-2 {
-					color: #ffffff;
+					color: royalblue;
 					font-size: 32rpx;
 					text-align: center;
 					letter-spacing: 3rpx;
@@ -466,7 +461,8 @@
 					font-size: 32rpx;
 					display: flex;
 					align-items: center;
-
+					color: royalblue;
+					
 					image {
 						width: 40rpx;
 						height: 40rpx;
@@ -475,7 +471,7 @@
 				}
 
 				.address {
-					color: rgba(0, 0, 0, .7);
+					color: royalblue;
 				}
 			}
 
@@ -504,24 +500,26 @@
 						.conBox-1 {
 							font-size: 28rpx;
 							font-weight: bold;
+							color: royalblue;
 						}
 
 						.conBox-2 {
-							font-size: 22rpx;
+							font-size: 28rpx;
 							font-weight: bold;
-							color: rgba(0, 0, 0, .7);
+							color: royalblue;
 						}
 
 						.conBox-3 {
 							font-size: 34rpx;
 							font-weight: bold;
-							color: red;
+							color: royalblue;
 						}
 					}
 
 					.number {
 						width: 70rpx;
 						text-align: center;
+						color: royalblue;
 					}
 				}
 			}
@@ -563,7 +561,7 @@
 	}
 
 	.bottomBox {
-		background-color: #ffffff;
+		background-color: #DBE9FA;
 		border: 1px solid #cccccc;
 		/* 设置边框 */
 		box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
@@ -581,7 +579,7 @@
 		letter-spacing: 5rpx;
 
 		.leftTxt {
-			color: #e55239;
+			color: royalblue;
 			font-size: 40rpx;
 			font-weight: bold;
 		}

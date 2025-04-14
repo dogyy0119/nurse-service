@@ -5,64 +5,70 @@
 				<image :src="detailObj.service_thumb" mode="widthFix"></image>
 			</view>
 
-			<uni-section :title="detailObj.name" type="line">
+			<view class="section_1 flex-col">
+
+				<view class="text-wrapper_1">
+					<text class="text_3">￥：</text>
+					<text class="text_4">{{price/100}}</text>
+				</view>
+			</view>
+			<view class="section_2 ">
+				<text class="text_5">{{detailObj.name}}</text>
+				<text class="text_6" v-if="detailObj.service_desc">
+				    {{ detailObj.service_desc }}
+				</text>
+			</view>
+
+	        <view class="group_2 flex-col"></view>
+
+			<!-- 		<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
 					<view class="price">总价￥：{{price/100}}</view>
-					<!-- <uni-fav :checked="checkList[0]" class="favBtn" :circle="true" bg-color="#dd524d"
-						bg-color-checked="#007aff" fg-color="#ffffff" fg-color-checked="#ffffff" @click="favClick(0)" />	 -->
 				</view>
-			</uni-section>
+			</uni-section> -->
 			<!-- 		<view class="title">
 				<view class="price" >￥：{{detailObj.price}}</view>
 			</view> -->
-			<view class="tool">
+			<!-- <view class="tool">
 				<view class="author">时长：{{detailObj.service_time}}</view>
 				<view class="author">服务详情：{{detailObj.service_desc}}</view>
 				<view class="author">发布时间：{{detailObj._add_time_str}}</view>
 				<view class="author">套餐选择:</view>
 				<view class="uni-px-5">
-					<!-- <view class="text">选中：{{taocan[taocanIndex].text}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="taocanIndex" :localdata="taocan"
 						@change="taocanCheckboxChange(taocanIndex)"></uni-data-checkbox>
 				</view>
 				<view class="author">￥：{{taocan[taocanIndex].price/100}}</view>
 
-			</view>
+			</view> -->
 
-			<view class="tool" v-if="toolObj.length">
+<!-- 			<view class="tool" v-if="toolObj.length">
 				<view class="author">选择耗材：</view>
-				<!-- <uni-section type="line"> -->
 				<view class="uni-px-5">
-					<!-- <view class="text">{{JSON.stringify(haocaiValue)}}</view> -->
 					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="haocai"
 						@change="haochaiCheckboxChange(haocaiValue)"></uni-data-checkbox>
 				</view>
 				<view class="uni-px-5">
-					<!-- <view class="text">选中：{{taocan[toolIndex].name}}</view> -->
 					<uni-data-checkbox mode="tag" v-model="toolIndex" :localdata="toolObj"
 						@change="toolCheckboxChange(toolIndex)"></uni-data-checkbox>
 				</view>
 				<view class="price">￥：{{toolObj[toolIndex].price/100}}</view>
 				<view class="author">类型：{{toolObj[toolIndex].text}}</view>
 				<view class="author">详细：{{toolObj[toolIndex].detail}}</view>
-				<!-- </uni-section> -->
-			</view>
-
-			<!-- <view class="info">
-				<view class="author">套餐选择：{{detailObj.service_desc}}</view>
-				<view class="time">发布时间：{{detailObj._add_time_str}}</view>
 			</view> -->
 
-			<view class="content">
+
+			<!-- <view class="content">
 				<rich-text :nodes="detailObj.service_banner_imgs"></rich-text>
-			</view>
+			</view> -->
 			<view class="pic">
 				<image v-for="(item, index) in detailObj.service_banner_imgs" :key="index" :src="item" mode="widthFix">
 				</image>
+				<view class="group_3 flex-col"></view>
 			</view>
 
 			<div class="flex-container">
-				<button class="amount" @click="toggle('bottom')">金额:￥{{price/100}} 详情...</button>
+				<!-- <button class="amount" @click="toggle('bottom')">金额:￥{{price/100}} 详情...</button> -->
 				<button class="reserve-btn" @click="goToAppointment">立即预约</button>
 			</div>
 
@@ -116,19 +122,19 @@
 				haocaiValue: 0, //  0 代表购买耗材  1 自带耗材
 
 				toolObj: [
-				// 	{
-				// 	_id: '',
-				// 	name: '耗材1',
-				// 	value: 0,
-				// 	price: 100,
-				// 	detail: ''
-				// }, {
-				// 	_id: '',
-				// 	name: '耗材2',
-				// 	value: 1,
-				// 	price: 200,
-				// 	detail: ''
-				// },
+					// 	{
+					// 	_id: '',
+					// 	name: '耗材1',
+					// 	value: 0,
+					// 	price: 100,
+					// 	detail: ''
+					// }, {
+					// 	_id: '',
+					// 	name: '耗材2',
+					// 	value: 1,
+					// 	price: 200,
+					// 	detail: ''
+					// },
 				],
 				toolIndex: 0,
 				taocan: [{
@@ -191,9 +197,9 @@
 				this.$refs.popup.open(type)
 			},
 			goToAppointment() {
-				
+
 				console.log("this.detailObj.service_thumb:", this.detailObj.service_thumb)
-				
+
 				let obj;
 				if (this.toolObj.length > 0)
 					obj = {
@@ -206,7 +212,7 @@
 						packageId: this.taocan[this.taocanIndex]._id,
 						isNeedReport: this.isNeedReport,
 						service_thumb: this.detailObj.service_thumb,
-						
+
 						consumableId: this.toolObj[this.toolIndex]._id,
 						haocaiName: this.toolObj[this.toolIndex].text,
 						haocaiDetail: this.toolObj[this.toolIndex].detail,
@@ -294,7 +300,7 @@
 				})
 				console.log("serviceid:", serviceid)
 				let cityCode = uni.getStorageSync("cityCode");
-				
+
 				uniCloud.callFunction({
 					name: "nurse-service-getid",
 					data: {
@@ -311,19 +317,22 @@
 							this.category_id = this.detailObj.category_id;
 						}
 
-						if (this.detailObj.package_list !== undefined && this.detailObj.package_list !== null) {
+						if (this.detailObj.package_list !== undefined && this.detailObj.package_list !==
+							null) {
 							this.packageList = this.detailObj.package_list;
 							this.getPackageList(this.detailObj.package_list);
 						}
-						
-						if (this.detailObj.consumable_list !== undefined && this.detailObj.consumable_list !== null) {
+
+						if (this.detailObj.consumable_list !== undefined && this.detailObj.consumable_list !==
+							null) {
 							this.consumableList = this.detailObj.consumable_list;
 							this.getConsumaList(this.consumableList)
 						}
-						
-						if (this.detailObj.is_need_report !== undefined && this.detailObj.is_need_report !== null) {
+
+						if (this.detailObj.is_need_report !== undefined && this.detailObj.is_need_report !==
+							null) {
 							this.isNeedReport = this.detailObj.is_need_report;
-						}					
+						}
 
 					},
 					fail: (err) => {
@@ -424,7 +433,95 @@
 
 		/* 假设 <uni-section> 的标题有一个名为 .uni-section-title 的类名 */
 
+		.section_1 {
+			position: relative;
+			width: auto;
+			height: auto;
+		}
 
+		.section_2 {
+			display: flex;
+			flex-direction: column; /* 或使用 class "flex-col" */
+			position: relative;
+			width: auto;
+			height: auto;
+			margin-bottom: 30rpx;
+		}
+
+		.group_2 {
+		  background-color: rgba(242, 244, 247, 1);
+		  width: 750rpx;
+		  height: 16rpx;
+		  margin-top: 26rpx;
+		}
+		
+		.text-wrapper_1 {
+			width: auto;
+			height: auto;
+			overflow-wrap: break-word;
+			font-size: 0;
+			font-family: MiSans-Medium;
+			font-weight: 500;
+			text-align: left;
+			white-space: nowrap;
+			line-height: 41rpx;
+			margin: 30rpx 0 0 30rpx;
+		}
+
+		.text_3 {
+			width: 104rpx;
+			height: 39rpx;
+			overflow-wrap: break-word;
+			color: rgba(255, 64, 60, 1);
+			font-size: 28rpx;
+			font-family: MiSans-Medium;
+			font-weight: 500;
+			text-align: left;
+			white-space: nowrap;
+			line-height: 41rpx;
+		}
+
+		.text_4 {
+			width: 104rpx;
+			height: 39rpx;
+			overflow-wrap: break-word;
+			color: rgba(255, 64, 60, 1);
+			font-size: 48rpx;
+			font-family: MiSans-Demibold;
+			font-weight: normal;
+			text-align: left;
+			white-space: nowrap;
+			line-height: 41rpx;
+		}
+
+		.text_5 {
+			width: 127rpx;
+			height: 31rpx;
+			overflow-wrap: break-word;
+			color: rgba(0, 0, 0, 1);
+			font-size: 32rpx;
+			font-weight: bold;
+			font-family: MiSans-Demibold;
+			font-weight: normal;
+			text-align: left;
+			white-space: nowrap;
+			line-height: 41rpx;
+			margin: 20rpx 0 20rpx 30rpx;
+		}
+
+		.text_6 {
+			width: 671rpx;
+			height: auto;
+			overflow-wrap: break-word;
+			color: rgba(102, 102, 102, 1);
+			font-size: 24rpx;
+			font-family: MiSans-Regular;
+			font-weight: normal;
+			text-align: left;
+			line-height: 36rpx;
+			margin: 24rpx 0 0 31rpx;
+
+		}
 		.popup-height {
 			// @include height;
 			width: 100px;
@@ -452,6 +549,14 @@
 				width: 100%;
 				height: 100%;
 			}
+			
+			.group_3 {
+			  background-color: rgba(242, 244, 247, 1);
+			  width: 750rpx;
+			  height: 16rpx;
+			  margin-top: 26rpx;
+			}
+			
 		}
 
 		.example-body {
@@ -569,7 +674,7 @@
 				flex: 1;
 				height: 34px;
 				/* 设置按钮高度为14像素 */
-				background-color: #1cbbb4;
+				background-color: rgba(28, 105, 237, 1);
 				/* 设置背景色为粉色 */
 				color: #fff;
 				/* 设置字体颜色为白色 */
@@ -582,6 +687,9 @@
 				cursor: pointer;
 				/* 设置鼠标指针为手型 */
 				font-size: 14px;
+				margin-bottom: 50rpx;
+				margin-left: 20rpx;
+				margin-right: 20rpx;
 			}
 
 			.amount {

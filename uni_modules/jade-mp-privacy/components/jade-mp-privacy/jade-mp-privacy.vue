@@ -128,8 +128,9 @@
 		left: 0;
 		top: 0;
 		z-index: 999;
+		border-radius: 40rpx;
 		.dialog-content {
-			padding: 60rpx 40rpx;
+			padding: 60rpx 20rpx;
 			font-size: 32rpx;
 			color: #2D3038;
 			border-top-left-radius: 20rpx;
@@ -142,7 +143,7 @@
 			box-sizing: border-box;
 			.dialog-title{
 				text-align: center;
-				font-size: 36rpx;
+				font-size: 40rpx;
 				font-weight: 600;
 			}
 			.dialog-text {
@@ -154,7 +155,7 @@
 			.dialog-tip{
 				padding: 40rpx;
 				padding-top: 0;
-				font-size: 26rpx;
+				font-size: 29rpx;
 				color: #848484;
 			}
 			.dialog-button-box {
@@ -162,6 +163,7 @@
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
+				border-radius: 20rpx;
 			}
 			.dialog-button {
 				margin: 0;
@@ -169,12 +171,14 @@
 				height: 80rpx;
 				line-height: 80rpx;
 				font-size: 28rpx;
+			    border-radius: 20rpx;  /* 添加圆角 */
+
 				&.primary {
 					color: #ffffff;
-					background-color: #00d354;
+					background-color: rgba(28, 105, 237, 1);
 				}
 				&.hover-class{
-					background-color: #00b344;
+					background-color: rgba(28, 105, 237, 1);
 				}
 			}
 		}

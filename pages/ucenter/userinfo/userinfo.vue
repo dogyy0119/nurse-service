@@ -1,25 +1,17 @@
 <template>
-	<view>
+	<view class="content">
 		<uni-list>
 			<uni-list-item class="item">
 				<template v-slot:body>
 					<view class="item">
 						<text>{{$t('userinfo.ProfilePhoto')}}</text>
 						<button class="avatar-wrapper" open-type="chooseAvatar" @chooseavatar="onChooseAvatar">
-							<cloud-image v-if="avatarUrl" :src="avatarUrl" width="50px" height="50px"></cloud-image>
+							<image class="avatar-wrapper-1" v-if="avatarUrl" :src="avatarUrl"></image>
 						</button>
 
-						<!-- 						<cloud-image @click="uploadAvatarImg" v-if="avatar_file" :src="avatar_file.url" width="50px" height="50px"></cloud-image>
-						<uni-icons @click="uploadAvatarImg" v-else class="chooseAvatar" type="plusempty" size="30" color="#dddddd"></uni-icons> -->
 					</view>
 				</template>
 			</uni-list-item>
-
-			<!-- <input type="nickname" class="weui-input" placeholder="请输入昵称" /> -->
-
-
-			<!-- 			<uni-list-item class="item" @click="setNickname('')" :title="$t('userinfo.nickname')"
-				:rightText="userInfo.nickname||$t('userinfo.notSet')" link> -->
 
 			<uni-list-item type="nickname" class="weui-input" @click="setNickname('')" :title="$t('userinfo.nickname')"
 				:rightText="userInfo.nickname||$t('userinfo.notSet')" link>
@@ -91,12 +83,12 @@
 		methods: {
 			bindblur(e) {
 				this.nickName = e.detail.value; // 获取微信昵称
-				console.log( e.detail.value );
+				console.log(e.detail.value);
 				// this.setNickname(e.detail.value)
 			},
 			bindinput(e) {
 				// this.nickName = e.detail.value; //这里要注意如果只用blur方法的话用户在输入玩昵称后直接点击保存按钮，会出现修改不成功的情况。
-				console.log( e.detail.value );
+				console.log(e.detail.value);
 			},
 
 			...mapMutations({
@@ -203,7 +195,7 @@
 				})
 			},
 			setNickname(nickname) {
-				console.log(nickname);				
+				console.log(nickname);
 				if (nickname) {
 					nickname = this.nickName;
 					console.log("userInfo.nickname：", nickname);
@@ -334,9 +326,15 @@
 		display: flex;
 		box-sizing: border-box;
 		flex-direction: column;
+		// background-image: -webkit-linear-gradient(-77deg, rgba(213, 230, 249, 1) 0%, rgba(247, 248, 250, 1) 100%);
 	}
 
 	/* #endif */
+	
+	.content {
+		background-image: -webkit-linear-gradient(-77deg, rgba(213, 230, 249, 1) 0%, rgba(247, 248, 250, 1) 100%);
+	}
+	
 	.item {
 		width: 750rpx;
 		flex-direction: row;
@@ -344,13 +342,41 @@
 		align-items: center;
 	}
 
-	.chooseAvatar {
-		border: dotted 1px #ddd;
-		border-radius: 10px;
-		text-align: center;
-		width: 50px;
-		height: 50px;
-		line-height: 50px;
+	.avatar-wrapper {
+		border: none;
+		/* 去掉边框 */
+		background-color: transparent;
+		/* 背景透明 */
+		padding: 0;
+		/* 去掉内边距 */
+		cursor: pointer;
+		/* 鼠标指针样式 */
+		width: 90rpx;
+		/* 设置宽度 */
+		height: 90rpx;
+		/* 设置高度 */
+		border-radius: 50%;
+		/* 圆形 */
+		display: flex;
+		/* 使用 flexbox 以居中对齐内容 */
+		justify-content: center;
+		/* 水平居中 */
+		align-items: center;
+		/* 垂直居中 */
+	}
+
+	.avatar-wrapper-1 {
+		border-radius: 50%;
+		// align-self: flex-start;
+		width: 90rpx;
+		height: 90rpx;
+
+		// width: 100rpx;
+		// height: 100rpx;
+		// -moz-box-shadow: 2px 2px 10px #bababa;
+		// -webkit-box-shadow: 2px 2px 10px #bababa;
+		// box-shadow: 2px 2px 10px #bababa;
+		// border-radius: 50%;
 	}
 
 	// .popup-content {

@@ -6,7 +6,7 @@
 			{
 				"path": "pages/index/index",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTitleText": "首页",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
@@ -29,7 +29,7 @@
 			{
 				"path": "pages/index/front",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTitleText": "位置选择",
 					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
@@ -40,8 +40,8 @@
 			{
 				"path": "pages/index/search",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
-					"navigationBarTextStyle": "white",
+					"navigationBarBackgroundColor": "#DBE9FA",
+					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
 					"navigationBarTitleText": "服务搜索"
@@ -50,7 +50,7 @@
 			{
 				"path": "pages/order/OrderList",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -77,15 +77,16 @@
 				// 	"navigationBarTitleText": "订单详情"
 				// },
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTitleText": "订单详情",
+					"navigationBarTextStyle": "black",
 					"navigationStyle": "default"
 				}
 			},
 			{
 				"path": "pages/order/OrderEvaluate",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -95,7 +96,7 @@
 			{
 				"path": "pages/order/MoreEvaluate",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTextStyle": "white",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
@@ -113,7 +114,7 @@
 				"path": "pages/messge/messge",
 				"style": {
 					"navigationBarTitleText": "消息中心",
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTextStyle": "white"
 				}
 			},
@@ -143,6 +144,7 @@
 			},
 			{
 				"path": "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
+				"navigationBarTextStyle": "black",
 				"style": {
 					"navigationBarTitleText": "意见反馈",
 					"enablePullDownRefresh": false
@@ -152,7 +154,7 @@
 			{
 				"path": "pages/coupon-card/coupon-card",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
+					"navigationBarBackgroundColor": "#DBE9FA",
 					"navigationBarTitleText": "优惠券"
 				}
 			},
@@ -160,8 +162,8 @@
 			{
 				"path": "pages/home/ucenter",
 				"style": {
-					"navigationBarBackgroundColor": "#f7f8fa",
-					"navigationBarTextStyle": "white",
+					"navigationBarBackgroundColor": "#DBE9FA",
+					"navigationBarTextStyle": "black",
 					"enablePullDownRefresh": false,
 					"navigationStyle": "default",
 					"navigationBarTitleText": "个人中心"
@@ -170,21 +172,21 @@
 		,{
     "path": "uni_modules/uni-pay/pages/success/success",
     "style": {
-        "backgroundColor": "#F8F8F8",
+        "backgroundColor": "#DBE9FA",
         "navigationBarTitleText": "支付成功"
     }
 }
 ,{
     "path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
     "style": {
-        "backgroundColor": "#F8F8F8",
+        "backgroundColor": "#DBE9FA",
         "navigationBarTitleText": "ad"
     }
 }
 ,{
     "path": "uni_modules/uni-pay/pages/pay-desk/pay-desk",
     "style": {
-        "backgroundColor": "#F8F8F8",
+        "backgroundColor": "#DBE9FA",
         "navigationBarTitleText": "收银台"
     }
 }
@@ -196,21 +198,23 @@
 					{
 						"path": "hushizhan/hushizhan",
 						"style": {
-							"navigationBarBackgroundColor": "#f7f8fa",
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": "服务"
 						}
 					},
 					{
 						"path": "function/voucher_center_",
 						"style": {
-							"navigationBarBackgroundColor": "#f7f8fa",
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": "支付中心"
 						}
 					},
 					{
 						"path": "city/city",
 						"style": {
-							"navigationBarBackgroundColor": "#f7f8fa",
+							"navigationBarBackgroundColor": "#DBE9FA",
 							"navigationBarTextStyle": "white",
 							"enablePullDownRefresh": false,
 							"navigationStyle": "default",
@@ -220,16 +224,18 @@
 					{
 						"path": "servicedetails/servicedetails",
 						"style": {
-							"navigationBarBackgroundColor": "#f7f8fa",
+							"navigationBarBackgroundColor": "#DBE9FA",
 							"navigationBarTitleText": "服务详情",
+							"navigationBarTextStyle": "black",
 							"navigationStyle": "default"
 						}
 					},
 					{
 						"path": "appointment/appointment",
 						"style": {
-							"navigationBarBackgroundColor": "#f7f8fa",
+							"navigationBarBackgroundColor": "#DBE9FA",
 							"navigationBarTitleText": "预约",
+							"navigationBarTextStyle": "black",
 							"navigationStyle": "default"
 						}
 					}
@@ -252,13 +258,18 @@
 					{
 						"path": "userinfo/bind-mobile/bind-mobile",
 						"style": {
-							"navigationBarTitleText": "绑定手机号码"
+							"navigationBarTitleText": "绑定手机号码",
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black"
+							
 						}
 					},
 					{
 						"path": "about/about",
 						"style": {
 							"navigationBarTitleText": "关于",
+							"navigationBarTextStyle": "black",
+							"navigationBarBackgroundColor": "#DBE9FA",
 							"app-plus": {
 								"titleNView": {
 									"buttons": [
@@ -273,42 +284,55 @@
 					{
 						"path": "settings/settings",
 						"style": {
-							"navigationBarTitleText": "设置"
+							"navigationBarTitleText": "设置",
+							"navigationBarTextStyle": "black"
 						}
 					},
 					{
 						"path": "userinfo/userinfo",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": "个人资料"
 						}
 					},
 					{
 						"path": "userinfo/cropImage",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationStyle": "custom"
 						}
 					},
 					{
 						"path": "login-page/pwd-login/pwd-login",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": ""
 						}
 					},
 					{
 						"path": "login-page/pwd-retrieve/pwd-retrieve",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": "重置密码"
 						}
 					},
 					{
 						"path": "login-page/phone-code/phone-code",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": ""
 						}
 					},
 					{
 						"path": "login-page/register/register",
 						"style": {
+							"navigationBarBackgroundColor": "#DBE9FA",
+							"navigationBarTextStyle": "black",
 							"navigationBarTitleText": "注册",
 							"enablePullDownRefresh": false
 						}
@@ -350,7 +374,7 @@
 	},
 	"tabBar": {
 		"color": "#7A7E83",
-		"selectedColor": "#f7f8fa",
+		"selectedColor": "blue",
 		"borderStyle": "black",
 		"backgroundColor": "#FFFFFF",
 		"list": [{
