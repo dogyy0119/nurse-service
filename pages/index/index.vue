@@ -109,8 +109,9 @@
 			</uni-grid-item>
 		</uni-grid> -->
 
+		<!-- <view class="title" v-if="serviceKinds">{{serviceKinds[navIndex].name}}</view> -->
+
 		<view class="tips">
-			<!-- <view class="title" v-if="serviceKinds">{{serviceKinds[navIndex].name}}</view> -->
 			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view>
 
@@ -776,6 +777,7 @@
 	}
 
 	.header {
+		margin-top: 26rpx;
 		margin-left: 26rpx;
 		display: flex;
 		flex-direction: row;
@@ -834,7 +836,7 @@
 	.info-search {
 		margin-top: -92rpx;
 		/* align-self: center; */
-		width: 400rpx;
+		width: 340rpx;
 		height: 27rpx;
 		margin-left: 200rpx;
 		/* background-color: white; */
