@@ -776,12 +776,12 @@
 	}
 
 	.header {
-
+		margin-left: 26rpx;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-self: flex-start;
-		width: 100%;
+		width: 93%;
 		height: 93rpx;
 		padding: 20rpx 12rpx;
 		background-image: url(@/static/images/images-home/img_15.png);
@@ -897,6 +897,310 @@
 
 	.position {
 		margin-top: 8px;
+	}
+
+	.body {
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: flex-start;
+	    align-self: flex-start;
+	    width: 96%;
+	    padding-top: 27rpx;
+	    box-sizing: border-box;
+		margin-left: 26rpx;
+	}
+	
+	.wrapper-2 {
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: space-between;
+	    align-self: flex-start;
+	    width: 693rpx;
+	    box-sizing: border-box;
+	}
+	
+	.group {
+	    position: relative;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: flex-start;
+	    align-self: center;
+	    height: 163rpx;
+	    box-sizing: border-box;
+	}
+	
+	.action-bg {
+	    align-self: flex-start;
+	    width: 333rpx;
+	    height: 163rpx;
+	}
+	
+	.logo {
+	    position: absolute;
+	    left: 34rpx;
+	    top: 38rpx;
+	    width: 135rpx;
+	    height: 32rpx;
+	}
+	
+	.label-wrapper {
+	    position: absolute;
+	    display: flex;
+	    left: 30rpx;
+	    bottom: 28rpx;
+	    flex-direction: row;
+	    justify-content: center;
+	    width: 129rpx;
+	    height: 47rpx;
+	    padding: 13rpx 12rpx 10rpx;
+	    background-image: url(@/static/images/images-home/img_17.png);
+	    background-size: 100% 100%;
+	    box-sizing: border-box;
+	    background-repeat: no-repeat;
+	    background-position: 0 0;
+	    background-origin: padding-box;
+	}
+	
+	.label {
+	    align-self: flex-start;
+	    overflow: hidden;
+	    max-width: 103rpx;
+	    margin-left: 1rpx;
+	    font-family: 'MiSans-Medium';
+	    font-size: 22rpx;
+	    font-style: normal;
+	    font-weight: 400;
+	    line-height: 26rpx;
+	    color: rgba(255, 255, 255, 1);
+	    text-align: left;
+	    text-decoration: none;
+	    letter-spacing: 0.66rpx;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	
+	.picture {
+	    position: absolute;
+	    right: 12rpx;
+	    bottom: 1rpx;
+	    width: 95rpx;
+	    height: 89rpx;
+	}
+	
+	.group-1 {
+	    position: relative;
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: flex-start;
+	    align-self: center;
+	    height: 163rpx;
+	    box-sizing: border-box;
+	}
+	
+	.button-bg {
+	    align-self: flex-start;
+	    width: 333rpx;
+	    height: 163rpx;
+	}
+	
+	.logo-1 {
+	    position: absolute;
+	    left: 33rpx;
+	    top: 38rpx;
+	    width: 137rpx;
+	    height: 31rpx;
+	}
+	
+	.tag-wrapper {
+	    position: absolute;
+	    display: flex;
+	    left: 30rpx;
+	    bottom: 28rpx;
+	    flex-direction: row;
+	    justify-content: center;
+	    width: 129rpx;
+	    height: 47rpx;
+	    padding: 13rpx 12rpx 10rpx;
+	    background-image: url(@/static/images/images-home/img_18.png);
+	    background-size: 100% 100%;
+	    box-sizing: border-box;
+	    background-repeat: no-repeat;
+	    background-position: 0 0;
+	    background-origin: padding-box;
+	}
+	
+	.tag {
+	    align-self: flex-start;
+	    overflow: hidden;
+	    max-width: 103rpx;
+	    margin-left: 1rpx;
+	    font-family: 'MiSans-Medium';
+	    font-size: 22rpx;
+	    font-style: normal;
+	    font-weight: 400;
+	    line-height: 26rpx;
+	    color: rgba(255, 255, 255, 1);
+	    text-align: left;
+	    text-decoration: none;
+	    letter-spacing: 0.66rpx;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	
+	.image {
+	    position: absolute;
+	    right: 15rpx;
+	    bottom: 12rpx;
+	    width: 87rpx;
+	    height: 86rpx;
+	}
+	
+	.wrapper-3 {
+	    display: flex;
+	    flex-direction: row;
+	    justify-content: space-between;
+	    align-self: flex-start;
+	    width: 693rpx;
+	    margin-top: 27rpx;
+	    box-sizing: border-box;
+	}
+	
+	.group-2 {
+	    position: relative;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: flex-start;
+	    align-self: center;
+	    height: 173rpx;
+	    padding-bottom: 10rpx;
+	    box-sizing: border-box;
+	}
+	
+	.action-bg-1 {
+	    align-self: flex-start;
+	    width: 333rpx;
+	    height: 163rpx;
+	}
+	
+	.logo-2 {
+	    position: absolute;
+	    left: 33rpx;
+	    top: 38rpx;
+	    width: 137rpx;
+	    height: 32rpx;
+	}
+	
+	.tag-wrapper-1 {
+	    position: absolute;
+	    display: flex;
+	    left: 30rpx;
+	    bottom: 38rpx;
+	    flex-direction: row;
+	    justify-content: center;
+	    width: 129rpx;
+	    height: 47rpx;
+	    padding: 13rpx 12rpx 10rpx;
+	    background-image: url(@/static/images/images-home/img_19.png);
+	    background-size: 100% 100%;
+	    box-sizing: border-box;
+	    background-repeat: no-repeat;
+	    background-position: 0 0;
+	    background-origin: padding-box;
+	}
+	
+	.tag-1 {
+	    align-self: flex-start;
+	    overflow: hidden;
+	    max-width: 103rpx;
+	    margin-left: 1rpx;
+	    font-family: 'MiSans-Medium';
+	    font-size: 22rpx;
+	    font-style: normal;
+	    font-weight: 400;
+	    line-height: 26rpx;
+	    color: rgba(255, 255, 255, 1);
+	    text-align: left;
+	    text-decoration: none;
+	    letter-spacing: 0.66rpx;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	
+	.figure {
+	    position: absolute;
+	    right: 3rpx;
+	    bottom: 0;
+	    width: 108rpx;
+	    height: 108rpx;
+	}
+	
+	.group-3 {
+	    position: relative;
+	    display: flex;
+	    flex-direction: column;
+	    justify-content: flex-start;
+	    align-self: center;
+	    height: 173rpx;
+	    padding-bottom: 10rpx;
+	    box-sizing: border-box;
+	}
+	
+	.button-bg-1 {
+	    align-self: flex-start;
+	    width: 333rpx;
+	    height: 163rpx;
+	}
+	
+	.logo-3 {
+	    position: absolute;
+	    left: 33rpx;
+	    top: 38rpx;
+	    width: 137rpx;
+	    height: 32rpx;
+	}
+	
+	.word-wrapper {
+	    position: absolute;
+	    display: flex;
+	    left: 30rpx;
+	    bottom: 38rpx;
+	    flex-direction: row;
+	    justify-content: center;
+	    width: 129rpx;
+	    height: 47rpx;
+	    padding: 13rpx 12rpx 10rpx;
+	    background-image: url(@/static/images/images-home/img_20.png);
+	    background-size: 100% 100%;
+	    box-sizing: border-box;
+	    background-repeat: no-repeat;
+	    background-position: 0 0;
+	    background-origin: padding-box;
+	}
+	
+	.word {
+	    align-self: flex-start;
+	    overflow: hidden;
+	    max-width: 103rpx;
+	    margin-left: 1rpx;
+	    font-family: 'MiSans-Medium';
+	    font-size: 22rpx;
+	    font-style: normal;
+	    font-weight: 400;
+	    line-height: 26rpx;
+	    color: rgba(255, 255, 255, 1);
+	    text-align: left;
+	    text-decoration: none;
+	    letter-spacing: 0.66rpx;
+	    white-space: nowrap;
+	    text-overflow: ellipsis;
+	}
+	
+	.large-icon {
+	    position: absolute;
+	    right: 22rpx;
+	    bottom: 20rpx;
+	    width: 78rpx;
+	    height: 92rpx;
 	}
 
 	example-body {
