@@ -78,7 +78,7 @@ s<template>
 				</ul>
 			</view>
 		</view>
-		<tabbar index="1"></tabbar>
+		<!-- <tabbar index="1"></tabbar> -->
 	</view>
 </template>
 <script>

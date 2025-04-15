@@ -376,7 +376,7 @@
 		"color": "#7A7E83",
 		"selectedColor": "blue",
 		"borderStyle": "black",
-		"backgroundColor": "#FFFFFF",
+		"backgroundColor": "#DBE9FA",
 		"list": [{
 			"pagePath": "pages/index/index",
 			"iconPath": "static/tabbar/home.png",

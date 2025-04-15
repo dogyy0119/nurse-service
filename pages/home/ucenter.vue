@@ -63,7 +63,7 @@
 			</view>
 		</view>
 		<view class="myclass">
-			<tabbar index="2" class="horizontal-tabbar"></tabbar>
+			<!-- <tabbar index="2" class="horizontal-tabbar"></tabbar> -->
 		</view>
 	</view>
 </template>

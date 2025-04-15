@@ -3,48 +3,22 @@
 	<view class="content">
 		<!-- <uni-nav-bar left-text="返回" right-text="设置" title="标题" /> -->
 		<!-- <uni-nav-bar left-icon="left" height="120rpx" right-icon="cart" title="标题" /> -->
-		<uni-nav-bar dark :fixed="true" shadow background-color="#f7f8fa" status-bar title="首页" color="black" @clickLeft="selectCity"
-			left-text-style="font-size: 120rpx;" title-style="font-size: 120rpx;" />
+		<uni-nav-bar dark :fixed="true" shadow background-color="#DBE9FA" status-bar title="首页" color="black"
+			@clickLeft="selectCity" left-text-style="font-size: 120rpx;" title-style="font-size: 120rpx;" />
 
 		<view class="col-posi">
-			<uni-row class="demo-uni-row">
+			<!-- <uni-row class="demo-uni-row">
 				<uni-col :span="2">
 					<view class="icon-item">
 						<view class="position" @click="handleClick">
-						<!-- 	<uni-icons @click="showDrawer('showRight')" customPrefix="customicons" type="location"
-								color="#1CBBB4" :size="38" /> -->
+						
 						<uni-icons @click="pickCity" customPrefix="customicons" type="location"
 							color="#1CBBB4" :size="38" />		
-								
-							<!-- <uni-drawer ref="showRight" mode="right" :mask-click="false"
-								@change="change($event,'showRight')">
-								<view class="scroll-view">
-									<scroll-view class="scroll-view-box" scroll-y="true">
-										<view class="my-info">
-										</view>
-										<view class="info">
-											<text class="info-text">请选择您所在城市 ：</text>
-										</view>
-										<view class="container">
-
-											<view class="info-content"  @click="chooseCity(item)" v-for="item in array" :key="item">
-												<text class="info-content-text" >
-													{{item.name}}</text>
-											</view>
-										</view>
-										<view class="close">
-											<button class="word-btn-white"
-												@click="closeDrawer('showRight')"><text>关闭</text></button>
-										</view>
-									</scroll-view>
-								</view>
-							</uni-drawer> -->
 						</view>
 					</view>
 				</uni-col>
 
 				<uni-col :span="10">
-					<!-- <view @click="showDrawer('showRight')" class="icon-item"> -->
 					<view @click="pickCity" class="icon-item">
 						<label class="readonly-label">{{ cityName || '城市' }}</label>
 
@@ -58,7 +32,24 @@
 					</view>
 				</uni-col>
 
-			</uni-row>
+			</uni-row> -->
+
+			<div class="header" :index="12">
+				<div class="wrapper">
+					<text class="location-own" :index="1" @click="pickCity"> {{ cityName || '城市' }} </text>
+					<image class="icon-down" :index="0" src="@/static/images/images-home/img_0.png" @click="pickCity" />
+					<image class="vertical-line" :index="7" src="@/static/images/images-home/img_1.png" />
+					<image class="icon-search" :index="8" src="@/static/images/images-home/img_2.png"
+						@click="searchIcon" />
+					<!-- <text class="info-my" :index="10">请输入要搜索的关键词 </text> -->
+					<view class="info-search">
+						<cc-headerSearch @searchClick="searchClick" @rigIconClick="rigIconClick"></cc-headerSearch>
+					</view>
+				</div>
+				<div class="wrapper-1" :index="11">
+					<text class="search" :index="9" @click="searchIcon">搜索 </text>
+				</div>
+			</div>
 		</view>
 
 		<!-- 		<picker @change="bindPickerChange" :value="indexItem" :range="array">
@@ -76,21 +67,54 @@
 
 		<!-- icon: 右侧菜单图标 @searchClick：搜索点击  @rigIconClick：右侧菜单点击 -->
 
-
-		<uni-grid class="grid" :column="4" :highlight="true" :showBorder="false" :square="true"
+		<view>
+			<div class="body">
+				<div class="wrapper-2">
+					<div class="group">
+						<image class="action-bg" :index="6" src="@/static/images/images-home/img_3.png" />
+						<image class="logo" :index="0" src="@/static/images/images-home/img_4.png" />
+						<div class="label-wrapper" :index="1"><text class="label" :index="0">立即查看 </text></div>
+						<image class="picture" :index="1" src="@/static/images/images-home/img_5.png" />
+					</div>
+					<div class="group-1">
+						<image class="button-bg" :index="5" src="@/static/images/images-home/img_6.png" />
+						<image class="logo-1" :index="0" src="@/static/images/images-home/img_7.png" />
+						<div class="tag-wrapper" :index="1"><text class="tag" :index="0">立即查看 </text></div>
+						<image class="image" :index="0" src="@/static/images/images-home/img_8.png" />
+					</div>
+				</div>
+				<div class="wrapper-3">
+					<div class="group-2">
+						<image class="action-bg-1" :index="5" src="@/static/images/images-home/img_9.png" />
+						<image class="logo-2" :index="4" src="@/static/images/images-home/img_10.png" />
+						<div class="tag-wrapper-1" :index="3"><text class="tag-1" :index="2">立即查看 </text></div>
+						<image class="figure" :index="0" src="@/static/images/images-home/img_11.png" />
+					</div>
+					<div class="group-3">
+						<image class="button-bg-1" :index="4" src="@/static/images/images-home/img_12.png" />
+						<image class="logo-3" :index="3" src="@/static/images/images-home/img_13.png" />
+						<div class="word-wrapper" :index="2"><text class="word" :index="1">立即查看 </text></div>
+						<image class="large-icon" :index="0" src="@/static/images/images-home/img_14.png" />
+					</div>
+				</div>
+			</div>
+		</view>
+		
+		<!-- <uni-grid class="grid" :column="4" :highlight="true" :showBorder="false" :square="true"
 			custom-style="opacity:1">
 			<uni-grid-item class="item" v-for="(item,indexItem) in serviceKinds"
 				:class="{ active: activeIndex === indexItem }" @click.native="tapGrid(indexItem)" :key="indexItem">
 				<uni-icons class="icon" color="#1cbbb4" :type=iconName[indexItem%4] size="34"></uni-icons>
 				<text style="color:#1cbbb4;font-size: 18px;">{{item.name}}</text>
 			</uni-grid-item>
-		</uni-grid>
+		</uni-grid> -->
+
 		<view class="tips">
-			<view class="title" v-if="serviceKinds">{{serviceKinds[navIndex].name}}</view>
+			<!-- <view class="title" v-if="serviceKinds">{{serviceKinds[navIndex].name}}</view> -->
 			<cc-waterListView :proList="projectList" @click="goProDetail"></cc-waterListView>
 		</view>
 
-		<tabbar index="0"></tabbar>
+		<!-- <tabbar index="0"></tabbar> -->
 	</view>
 </template>
 
@@ -126,49 +150,49 @@
 
 		async onLoad(event) {
 			try {
-			    await Promise.all([
-			        this.getCitylist(),
-			        this.checkLocationPermission(),
-			        this.getCid()
-			    ]);
-			
-			    // uni.navigateTo({
-			    //     url: '/pages/index/front'
-			    // });
+				await Promise.all([
+					this.getCitylist(),
+					this.checkLocationPermission(),
+					this.getCid()
+				]);
+
+				// uni.navigateTo({
+				//     url: '/pages/index/front'
+				// });
 			} catch (error) {
-			    console.error('Error during initialization:', error);
-			    // Handle error, possibly show a message to the user
+				console.error('Error during initialization:', error);
+				// Handle error, possibly show a message to the user
 			}
 		},
 
 		async onShow() {
-			if(!this.hasLocate) {
+			if (!this.hasLocate) {
 				console.log("onShow ready to autoGetLoaction ...")
 				this.autoGetLocation();
 				this.hasLocate = true;
 			}
 			this.cityName = uni.getStorageSync('cityName');
 			this.cityCode = uni.getStorageSync('cityCode');
-			
+
 			console.log("onShow getStorageSync:", this.cityName);
 			console.log("onShow getStorageSync:", this.cityCode);
-			
 
-			
-			this.navIndex = 0;			
+
+
+			this.navIndex = 0;
 			this.getServiceKind()
-			
-			if ( this.cityCode === null || this.cityCode === '') {
+
+			if (this.cityCode === null || this.cityCode === '') {
 				console.log("onShow cityCode is null navigateTo /pages/index/front");
-				
+
 				uni.navigateTo({
-				    url: '/pages/index/front'
+					url: '/pages/index/front'
 				});
 			} else {
 				console.log("onShow cityCode is not null ", this.cityCode);
-				
+
 			}
-			
+
 		},
 
 
@@ -177,21 +201,28 @@
 		},
 
 		methods: {
+
+			searchIcon() {
+				uni.navigateTo({
+					url: './search'
+				})
+			},
+
 			pickCity() {
 				console.log("pickCity:");
 				uni.navigateTo({
 					url: '/pages/index/front'
 				});
 			},
-			
+
 			chooseCity(item) {
 				console.log("choosecity:", item.name);
 				console.log("cityCode:", item.code);
 				this.cityName = item.name;
 				this.cityCode = item.code;
 				this.closeDrawer("showRight");
-				
-				this.getServiceKind() 
+
+				this.getServiceKind()
 			},
 
 			// 打开窗口
@@ -233,7 +264,7 @@
 				console.log("this.cityName:", this.cityName)
 				//console.log("serviceKinds[this.navIndex].name:", this.serviceKinds)
 			},
-			
+
 			truncateAddress(address) {
 				if (address.length > 3) {
 					// 截取前五个字符
@@ -249,15 +280,15 @@
 			matchCityCode(cityCode) {
 				console.log("matchCityCode:", cityCode);
 				var findCityCode = false;
-				
+
 				for (let i = 0; i < this.array.length; i++) {
-				    if(this.array[i].code === cityCode) {
+					if (this.array[i].code === cityCode) {
 						findCityCode = true;
 						this.cityCode = this.array[i].code
 						this.cityName = this.array[i].name
 					}
 				}
-									
+
 				if (!findCityCode) {
 					// console.log("matchCityCode: navigateTo");
 					// uni.navigateTo({
@@ -270,9 +301,9 @@
 			},
 
 			autoGetLocation() {
-				
+
 				console.log("autoGetLocation start...")
-				
+
 				this.amapPlugin = new amap.AMapWX({
 					key: this.key
 				});
@@ -296,44 +327,44 @@
 						} else {
 							// citycode 不在 validCitycodes 数组中
 							const addressDesc = data[0].regeocodeData.addressComponent.city || '定位城市';
-							uni.setStorageSync("location", addressDesc);							
-						}						
+							uni.setStorageSync("location", addressDesc);
+						}
 						var mycityCode = data[0].regeocodeData.addressComponent.adcode || '';
-		
+
 						let prefix = mycityCode.substring(0, 4);
-						
+
 						// 默认使用 '00' 补充后两位
 						let suffix = '00';
-						
+
 						console.log("prefix: ", prefix);
-						
+
 						// 拼接前四位和后两位
 						var cityCode = prefix + suffix;
-						
+
 						console.log("this.cityCode: ", cityCode)
 						// uni.setStorageSync("cityCode", this.cityCode);
-						
+
 						this.matchCityCode(cityCode);
 						uni.hideLoading();
-						
+
 						//this.showPosition();
 					},
 					fail: (err) => {
-						
+
 						console.log("autoGetLocation fail... : ", err)
-						
-					      // 处理失败情况
-					      uni.showToast({
-					        title: '获取位置信息失败，请稍后重试',
-					        icon: 'none'
-					      });
-						  
-						  // console.log("autoGetLocation  fail: navigateTo ")
-						  // uni.navigateTo({
-						  // 	url: '/pages/index/front'
-						  // });
-						  
-					      uni.hideLoading();
+
+						// 处理失败情况
+						uni.showToast({
+							title: '获取位置信息失败，请稍后重试',
+							icon: 'none'
+						});
+
+						// console.log("autoGetLocation  fail: navigateTo ")
+						// uni.navigateTo({
+						// 	url: '/pages/index/front'
+						// });
+
+						uni.hideLoading();
 					}
 				});
 
@@ -346,7 +377,7 @@
 						if (res.authSetting['scope.userLocation']) {
 							// 用户已授权  
 							console.log('已授权定位权限');
-							
+
 							// this.hasLocate = true;
 							// this.autoGetLocation();
 
@@ -375,9 +406,9 @@
 									}
 								}
 							});
-							
+
 							// console.log('checkLocationPermission: navigateTo');
-							
+
 							// uni.navigateTo({
 							// 	url: '/pages/index/front'
 							// });
@@ -388,7 +419,7 @@
 						// uni.navigateTo({
 						// 	url: '/pages/index/front'
 						// });
-						
+
 						console.error('获取设置失败', err);
 						this.shouldHidePositionButton = false;
 					}
@@ -409,9 +440,9 @@
 				})
 
 			},
-			
+
 			getCitylist() {
-			
+
 				uniCloud.callFunction({
 					name: "nurse-open-city-list-get",
 					data: {},
@@ -426,7 +457,7 @@
 						// console.log("请求完成");
 					}
 				});
-			
+
 			},
 
 			selectCity() {
@@ -444,7 +475,7 @@
 					data: {},
 					success: (res) => {
 						// this.serviceKinds = res.result.data
-						
+
 						this.serviceKinds = [];
 						res.result.data.forEach(item => {
 							if ((item?.is_index_show ?? false) === true) {
@@ -553,6 +584,7 @@
 				this.projectList = [];
 
 			},
+
 
 			searchClick: function() {
 				console.log("点击了搜索框");
@@ -743,6 +775,126 @@
 		background-color: white;
 	}
 
+	.header {
+
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-self: flex-start;
+		width: 100%;
+		height: 93rpx;
+		padding: 20rpx 12rpx;
+		background-image: url(@/static/images/images-home/img_15.png);
+		background-size: 100% 100%;
+		box-sizing: border-box;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-origin: padding-box;
+	}
+
+	.location-own {
+		align-self: center;
+		margin-top: 1rpx;
+		font-family: 'MiSans-Medium';
+		font-size: 26rpx;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 29rpx;
+		color: rgba(0, 0, 0, 1);
+		text-align: left;
+		text-decoration: none;
+		letter-spacing: 0.72rpx;
+		white-space: nowrap;
+		margin-left: 5rpx;
+	}
+
+	.icon-down {
+		align-self: center;
+		width: 16rpx;
+		height: 11rpx;
+		margin-left: 10rpx;
+	}
+
+	.vertical-line {
+		align-self: center;
+		width: 4rpx;
+		height: 33rpx;
+		margin-left: 27rpx;
+	}
+
+	.icon-search {
+		margin-top: 10rpx;
+		align-self: center;
+		width: 32rpx;
+		height: 30rpx;
+		margin-left: 10rpx;
+		margin-top: 10rpx;
+	}
+
+	.info-search {
+		margin-top: -92rpx;
+		/* align-self: center; */
+		width: 400rpx;
+		height: 27rpx;
+		margin-left: 200rpx;
+		/* background-color: white; */
+		/* height: 130upx; */
+		/* display: flex; */
+		/* align-items: center; */
+		background-color: black;
+		opacity: 0.5;
+	}
+
+	.info-my {
+		align-self: center;
+		margin: 1rpx 0 0 19rpx;
+		font-family: 'MiSans-Normal';
+		font-size: 24rpx;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 29rpx;
+		color: rgba(102, 102, 102, 1);
+		text-align: left;
+		text-decoration: none;
+		letter-spacing: 0.72rpx;
+		white-space: nowrap;
+	}
+
+	.wrapper-1 {
+		display: flex;
+		flex-direction: row;
+		justify-content: center;
+		align-self: center;
+		width: 93rpx;
+		height: 53rpx;
+		padding: 13rpx 12rpx 12rpx;
+		margin-right: 8rpx;
+		background-image: url(@/static/images/images-home/img_16.png);
+		background-size: 100% 100%;
+		box-sizing: border-box;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-origin: padding-box;
+	}
+
+	.search {
+		align-self: flex-start;
+		overflow: hidden;
+		max-width: 67rpx;
+		margin-left: 1rpx;
+		font-family: 'MiSans-Medium';
+		font-size: 24rpx;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 29rpx;
+		color: rgba(255, 255, 255, 1);
+		text-align: left;
+		text-decoration: none;
+		letter-spacing: 0.72rpx;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+
 	.position {
 		margin-top: 8px;
 	}
@@ -766,7 +918,7 @@
 		/* justify-content: flex-start; */
 		/* flex: 1;
 		position: absolute; */
-/* 		top: 0;
+		/* 		top: 0;
 		right: 0;
 		bottom: 0;
 		left: 0; */
@@ -776,8 +928,8 @@
 
 		padding: 20px;
 		/* margin-top: 60px; */
-		margin-bottom: 60px;	 
-		
+		margin-bottom: 60px;
+
 		/* 增加内边距 */
 		margin: 10px 0;
 		/* 增加上下边距 */
@@ -795,8 +947,8 @@
 
 		padding: 15px;
 		/* margin-top: 60px; */
-		margin-bottom: 60px;	 
-		
+		margin-bottom: 60px;
+
 		/* 增加内边距 */
 		margin: 10px 0;
 		/* 增加上下边距 */
@@ -813,7 +965,7 @@
 	.info-text {
 		/* margin-top: 60px; */
 		/* margin-bottom: 60px;	 */
-		
+
 		font-size: 18px;
 		/* 字体大小 */
 		font-weight: bold;
@@ -871,7 +1023,8 @@
 		/* 字体大小 */
 		color: #333;
 		/* 字体颜色 */
-		position: relative; /* 确保层叠上下文不会影响事件 */
+		position: relative;
+		/* 确保层叠上下文不会影响事件 */
 		z-index: 1;
 	}
 
