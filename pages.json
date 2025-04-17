@@ -382,25 +382,7 @@
 			"iconPath": "static/tabbar/home.png",
 			"selectedIconPath": "static/tabbar/homefill.png",
 			"text": "首页"
-		}, 
-		// {
-		// 	"pagePath": "pages/hospital/hospital",
-		// 	"iconPath": "static/tabbar/we.png",
-		// 	"selectedIconPath": "static/tabbar/wefill.png",
-		// 	"text": "护士站"
-		// }, 
-		// {
-		// 	"pagePath": "pages/join/join",
-		// 	"iconPath": "static/tabbar/add.png",
-		// 	"selectedIconPath": "static/tabbar/add.png",
-		// 	"text": "加入"
-		// }, 
-		// {
-		// 	"pagePath": "pages/messge/messge",
-		// 	"iconPath": "static/tabbar/message.png",
-		// 	"selectedIconPath": "static/tabbar/messagefill.png",
-		// 	"text": "订单"
-		// }, 
+		},
 		{
 			"pagePath": "pages/order/OrderList",
 			"iconPath": "static/tabbar/message.png",

@@ -3,7 +3,7 @@
 	        初始化
 	 ==================== */
 		body {
-			background-color: #f1f1f1;
+			background-color: #DBE9FA;
 			font-size: 20px;
 			color: #333333;
 			font-family: Helvetica Neue, Helvetica, sans-serif;
@@ -88,7 +88,8 @@
 		.text-cyan,
 		.line-cyan,
 		.lines-cyan {
-			color: #1cbbb4;
+			/* color: #1cbbb4; */
+			color: #0081ff;
 		}
 		.text-blue,
 		.line-blue,
