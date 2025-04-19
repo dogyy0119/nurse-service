@@ -84,45 +84,45 @@
 				"navigationBarTitleText": "更多评价"
 			}
 		},
-		{
-			"path": "pages/common/webview/webview",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-		},
-		{
-			"path": "pages/messge/messge",
-			"style": {
-				"navigationBarTitleText": "消息中心",
-				"navigationBarBackgroundColor": "#DBE9FA",
-				"navigationBarTextStyle": "white"
-			}
-		},
-		{
-			"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
-			"style": {
-				"disableScroll": true,
-				"app-plus": {
-					"backgroundColorTop": "transparent",
-					"background": "transparent",
-					"titleNView": false,
-					"scrollIndicator": false,
-					"popGesture": "none",
-					"animationType": "fade-in",
-					"animationDuration": 200
-				}
-			}
-		},
-		{
-			"path": "pages/uni-agree/uni-agree",
-			"style": {
-				"navigationStyle": "custom",
-				"app-plus": {
-					"popGesture": "none"
-				}
-			}
-		},
+		// {
+		// 	"path": "pages/common/webview/webview",
+		// 	"style": {
+		// 		"navigationBarTitleText": "",
+		// 		"enablePullDownRefresh": false
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/messge/messge",
+		// 	"style": {
+		// 		"navigationBarTitleText": "消息中心",
+		// 		"navigationBarBackgroundColor": "#DBE9FA",
+		// 		"navigationBarTextStyle": "white"
+		// 	}
+		// },
+		// {
+		// 	"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
+		// 	"style": {
+		// 		"disableScroll": true,
+		// 		"app-plus": {
+		// 			"backgroundColorTop": "transparent",
+		// 			"background": "transparent",
+		// 			"titleNView": false,
+		// 			"scrollIndicator": false,
+		// 			"popGesture": "none",
+		// 			"animationType": "fade-in",
+		// 			"animationDuration": 200
+		// 		}
+		// 	}
+		// },
+		// {
+		// 	"path": "pages/uni-agree/uni-agree",
+		// 	"style": {
+		// 		"navigationStyle": "custom",
+		// 		"app-plus": {
+		// 			"popGesture": "none"
+		// 		}
+		// 	}
+		// },
 		{
 			"path": "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
 			"navigationBarTextStyle": "black",
@@ -132,13 +132,13 @@
 			}
 		},
 
-		{
-			"path": "pages/coupon-card/coupon-card",
-			"style": {
-				"navigationBarBackgroundColor": "#DBE9FA",
-				"navigationBarTitleText": "优惠券"
-			}
-		},
+		// {
+		// 	"path": "pages/coupon-card/coupon-card",
+		// 	"style": {
+		// 		"navigationBarBackgroundColor": "#DBE9FA",
+		// 		"navigationBarTitleText": "优惠券"
+		// 	}
+		// },
 
 		{
 			"path": "pages/home/ucenter",
@@ -155,13 +155,16 @@
 				"backgroundColor": "#DBE9FA",
 				"navigationBarTitleText": "支付成功"
 			}
-		}, {
-			"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
-			"style": {
-				"backgroundColor": "#DBE9FA",
-				"navigationBarTitleText": "ad"
-			}
-		}, {
+		},
+		// {
+		// 	"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+		// 	"style": {
+		// 		"backgroundColor": "#DBE9FA",
+		// 		"navigationBarTitleText": "ad"
+		// 	}
+		// }, 
+		
+		{
 			"path": "uni_modules/uni-pay/pages/pay-desk/pay-desk",
 			"style": {
 				"backgroundColor": "#DBE9FA",
@@ -171,14 +174,15 @@
 	],
 	"subPackages": [{
 			"root": "pages/service/",
-			"pages": [{
-					"path": "hushizhan/hushizhan",
-					"style": {
-						"navigationBarBackgroundColor": "#DBE9FA",
-						"navigationBarTextStyle": "black",
-						"navigationBarTitleText": "服务"
-					}
-				},
+			"pages": [
+				// {
+				// 	"path": "hushizhan/hushizhan",
+				// 	"style": {
+				// 		"navigationBarBackgroundColor": "#DBE9FA",
+				// 		"navigationBarTextStyle": "black",
+				// 		"navigationBarTitleText": "服务"
+				// 	}
+				// },
 				{
 					"path": "function/voucher_center_",
 					"style": {
@@ -187,16 +191,16 @@
 						"navigationBarTitleText": "支付中心"
 					}
 				},
-				{
-					"path": "city/city",
-					"style": {
-						"navigationBarBackgroundColor": "#DBE9FA",
-						"navigationBarTextStyle": "white",
-						"enablePullDownRefresh": false,
-						"navigationStyle": "default",
-						"navigationBarTitleText": "选择城市"
-					}
-				},
+				// {
+				// 	"path": "city/city",
+				// 	"style": {
+				// 		"navigationBarBackgroundColor": "#DBE9FA",
+				// 		"navigationBarTextStyle": "white",
+				// 		"enablePullDownRefresh": false,
+				// 		"navigationStyle": "default",
+				// 		"navigationBarTitleText": "选择城市"
+				// 	}
+				// },
 				{
 					"path": "servicedetails/servicedetails",
 					"style": {
@@ -220,7 +224,8 @@
 
 		{
 			"root": "pages/ucenter/",
-			"pages": [{
+			"pages": [
+				{
 					"path": "login-page/index/index",
 					"style": {
 						"navigationBarTitleText": "",
@@ -310,13 +315,13 @@
 						"enablePullDownRefresh": false
 					}
 				},
-				{
-					"path": "read-news-log/read-news-log",
-					"style": {
-						"navigationBarTitleText": "阅读记录",
-						"enablePullDownRefresh": true
-					}
-				},
+				// {
+				// 	"path": "read-news-log/read-news-log",
+				// 	"style": {
+				// 		"navigationBarTitleText": "阅读记录",
+				// 		"enablePullDownRefresh": true
+				// 	}
+				// },
 				{
 					"path": "invite/invite",
 					"style": {
