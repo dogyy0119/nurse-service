@@ -29,9 +29,22 @@
 			</scroll-view>
 		</view> -->
 
-		<view class="content">
+		<!-- <view class="content">
 			<cc-waterListView :proList="projectList" @click="goProDetail(item)"></cc-waterListView>
-		</view>
+		</view> -->
+		
+		<div v-for="(item, mindex) in projectList" :key="mindex" class="group-item-0-list">
+			<image class="entry-pic-list" :index="0" :src="(item.proImg)" />
+			<div class="price-wrapper-list">
+				<text class="item-title-list" :index="1">{{item.proName}} </text>
+				<text class="price-list" :index="0">￥{{item.proPrice/100}} </text>
+			</div>
+			<div class="view-list" :index="1">
+				<text v-if="true" class="detail-list" :index="0" @click="goProDetail(item)">查看详情
+				</text>
+			</div>
+		</div>
+		
 	</view>
 </template>
 
@@ -116,7 +129,7 @@
 				forbid: '',
 
 				shows: false,
-				colors: ''
+				colors: '#4179FF'
 			};
 		},
 
@@ -323,7 +336,7 @@
 			goProDetail(item) {
 				console.log("goProDetail: goProDetail")
 				uni.navigateTo({
-					url: `/pages/servicedetails/servicedetails?item=${item}`,
+					url: `/pages/service/servicedetails/servicedetails?item=${item.id}`,
 					success: res => {},
 					fail: () => {},
 					complete: () => {}
@@ -516,5 +529,99 @@
 		top: 50%;
 		transform: translateY(-50%);
 		z-index: 100;
+	}
+	
+	
+	.group-item-0-list {
+		/* top: 50rpx; */
+		position: relative;
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-start;
+		align-self: center;
+		width: 95%;
+		height: 183rpx;
+		padding: 22rpx 12rpx 21rpx;
+		margin-top: 27rpx;
+		background-image: url(@/static/images/images-list/img_6.png);
+		background-size: 100% 100%;
+		box-sizing: border-box;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-origin: padding-box;
+		margin-left: 10rpx;
+	}
+	
+	.entry-pic-list {
+		align-self: center;
+		width: 231rpx;
+		height: 140rpx;
+		margin-left: 10rpx;
+	}
+	
+	.price-wrapper-list {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		align-self: center;
+		width: 241rpx;
+		height: 140rpx;
+		padding: 29rpx 0 27.5rpx;
+		box-sizing: border-box;
+	}
+	
+	.item-title-list {
+		align-self: flex-start;
+		overflow: hidden;
+		max-width: 241rpx;
+		font-family: 'MiSans-Medium';
+		font-size: 32rpx;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 32rpx;
+		color: rgba(0, 0, 0, 1);
+		text-align: left;
+		text-decoration: none;
+		letter-spacing: 0.84rpx;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		margin-left: 43rpx;
+	}
+	
+	.price-list {
+		align-self: flex-start;
+		overflow: hidden;
+		max-width: 241rpx;
+		margin-top: 20rpx;
+		font-family: 'MiSans-Bold';
+		font-size: 42rpx;
+		font-style: normal;
+		font-weight: 400;
+		line-height: 34rpx;
+		color: rgba(0, 101, 231, 1);
+		text-align: left;
+		text-decoration: none;
+		letter-spacing: 1.02rpx;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+		margin-left: 40rpx;
+	}
+	
+	.view-list {
+		position: absolute;
+		display: flex;
+		right: 0;
+		bottom: 0;
+		flex-direction: row;
+		justify-content: center;
+		width: 147rpx;
+		height: 63rpx;
+		padding: 21rpx 12rpx 18rpx;
+		background-image: url(@/static/images/images-list/img_7.png);
+		background-size: 100% 100%;
+		box-sizing: border-box;
+		background-repeat: no-repeat;
+		background-position: 0 0;
+		background-origin: padding-box;
 	}
 </style>

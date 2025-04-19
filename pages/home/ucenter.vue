@@ -1,36 +1,6 @@
 <template>
 	<view class="">
 		<view class="center">
-<!-- 
-			<view class="userInfo" @click.capture="toUserInfo">
-				<view class="userInfo-center">
-					<view style="circle">
-						<image class="logo-img" v-if="userInfo.avatar_file&&userInfo.avatar_file.url"
-							:src="userInfo.avatar_file.url"></image>
-						<image v-else class="logo-img" src="@/static/uni-center/defaultAvatarUrl.png"></image>
-					</view>
-					<view class="logo-title">
-						<text class="uer-name"
-							v-if="hasLogin">{{userInfo.nickname||userInfo.username||userInfo.mobile}}</text>
-						<text class="uer-name" v-else>{{$t('mine.notLogged')}}</text>
-					</view>
-					<uni-icons type="gear" color="blue" size="26"></uni-icons>
-				</view>
-			</view>
-
-			<uni-list class="center-list" v-for="(sublist , index) in ucenterList" :key="index">
-				<uni-list-item v-for="(item,i) in sublist" :title="item.title" link :rightText="item.rightText" :key="i"
-					:clickable="true" :to="item.to" @click="ucenterListClick(item)" :show-extra-icon="true"
-					:extraIcon="{type:item.icon,color:'#999'}">
-					<template v-slot:footer>
-						<view v-if="item.showBadge" class="item-footer">
-							<text class="item-footer-text">{{item.rightText}}</text>
-							<view class="item-footer-badge"></view>
-						</view>
-					</template>
-				</uni-list-item>
-			</uni-list> -->
-
 			<view class="group">
 				<div class="empty" :index="8" />
 				<div class="view" :index="0">
@@ -61,9 +31,6 @@
 				<image class="large-icon-2" :index="0" src="@/static/images/images-front/img_1.png" />
 
 			</view>
-		</view>
-		<view class="myclass">
-			<!-- <tabbar index="2" class="horizontal-tabbar"></tabbar> -->
 		</view>
 	</view>
 </template>
@@ -103,34 +70,6 @@
 			return {
 				ucenterList: [
 					[
-						// {
-						// 	"title": "每日签到",
-						// 	"event": 'signIn',
-						// 	"icon": "compose"
-						// },
-						// {
-						// 	"title": "我的阅读",
-						// 	"to": '/pages/ucenter/read-news-log/read-news-log',
-						// 	"icon": "flag"
-						// },
-						// {
-						// 	"title": "我的订单",
-						// 	"to": '/pages/order/OrderList',
-						// 	"icon": "flag"
-						// },
-
-						// {
-						// 	"title": "我的积分",
-						// 	"to": '',
-						// 	"event": 'getScore',
-						// 	"icon": "paperplane"
-						// },
-						// {
-						// 	"title": "优惠券",
-						// 	"to": '/pages/coupon-card/coupon-card', 
-						// 	"event": 'getScore',
-						// 	"icon": "paperplane"
-						// }
 						// #ifdef APP-PLUS
 						, {
 							"title": "在线分享",
@@ -148,11 +87,6 @@
 						"to": '/pages/ucenter/settings/settings',
 						"icon": "gear"
 					}],
-					// [{
-					// 	"title": "订单详情",
-					// 	"to": '/pages/service/OrderList',
-					// 	"icon": "info"
-					// }]
 				],
 				listStyles: {
 					"height": "150rpx", // 边框高度
@@ -387,101 +321,7 @@
 </script>
 
 <style lang="scss" scoped>
-	.horizontal-tabbar {
-		display: flex;
-		flex-direction: row;
-	}
 
-	.uni-list-item-title {
-		font-size: 20px !important;
-		/* 使用 !important 确保样式应用 */
-	}
-
-	.chat-custom-right {
-		flex: 1;
-		/* #ifndef APP-NVUE */
-		display: flex;
-		/* #endif */
-		flex-direction: column;
-		justify-content: space-between;
-		align-items: flex-end;
-	}
-
-	.user-recharge-wrapper {
-		background: #ffffff;
-		border-radius: 20rpx;
-		padding: 30rpx;
-		margin: 20rpx;
-
-		.user-recharge-box {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			/* 让元素在两端对齐 */
-			margin-bottom: 20rpx;
-
-			.recharge-info {
-				.info-title {
-					color: #333;
-					font-size: 20px;
-					font-weight: bold;
-				}
-
-				.info-content {
-					color: #999;
-					font-size: 20px;
-				}
-			}
-
-			.recharge-button {
-				/* background: #ff4131; */
-				color: #333;
-				padding: 10rpx 20rpx;
-				font-size: 22rpx;
-				border-radius: 50rpx;
-				flex-shrink: 0;
-				border: 1rpx solid #dadbde;
-			}
-		}
-
-		.recharge-user-money {
-			display: flex;
-			flex-direction: row;
-			align-items: center;
-			justify-content: space-between;
-			margin-top: 20rpx;
-			font-size: 20px;
-			color: #333;
-
-			.recharge-money {
-				font-weight: bold;
-				font-size: 20px;
-			}
-
-			.recharge-money::first-letter {
-				font-size: 20px;
-			}
-		}
-	}
-
-	.chat-custom-text {
-		font-size: 20px;
-		color: #999;
-	}
-
-	/* #ifndef APP-NVUE */
-	view {
-		display: flex;
-		box-sizing: border-box;
-		flex-direction: column;
-	}
-
-	page {
-		background-color: #f8f8f8;
-	}
-
-	/* #endif*/
 
 	.center {
 		flex: 1;
@@ -490,63 +330,7 @@
 		// background-color: #f8f8f8;
 	}
 
-	.userInfo {
-		// background-image: linear-gradient(to top, #00aaff, #1cbbb4);
-		background-image: linear-gradient(to top, #f7f8fa, #f7f8fa);
-	}
-
-	.userInfo-center {
-		padding: 60rpx 40rpx;
-		align-items: center;
-		flex-direction: row;
-	}
-
-	.circle {
-		width: 120rpx;
-		height: 120rpx;
-		border-radius: 50%;
-		overflow: hidden;
-	}
-
-	.logo-img {
-		width: 100rpx;
-		height: 100rpx;
-		-moz-box-shadow: 2px 2px 10px #bababa;
-		-webkit-box-shadow: 2px 2px 10px #bababa;
-		box-shadow: 2px 2px 10px #bababa;
-		border-radius: 50%;
-	}
-
-	.logo-title {
-		flex: 1;
-		margin-left: 20rpx;
-		justify-content: flex-start;
-		flex-direction: column;
-	}
-
-	.uer-name {
-		height: 80rpx;
-		line-height: 80rpx;
-		font-size: 20px;
-		color: black;
-	}
-
-	.cmp-name {
-		font-size: 20px;
-		color: #dadada;
-	}
-
-	.center-list {
-		margin-bottom: 30rpx;
-		background-color: #f9f9f9;
-	}
-
-	.center-list-cell {
-		width: 750rpx;
-		background-color: #007AFF;
-		height: 40rpx;
-	}
-
+	
 	.group {
 		position: relative;
 		display: flex;
@@ -646,10 +430,15 @@
 
 
 			.uer-name {
+				margin-top: 25rpx;	
+				margin-left: 15rpx;
 				height: 80rpx;
-				line-height: 80rpx;
-				font-size: 32rpx;
-				margin-left: 10rpx;
+				font-family: 'MiSans-Bold';
+				font-size: 44rpx;
+				font-style: normal;
+				font-weight: 400;
+				line-height: 34rpx;
+				color: black;
 			}
 
 		}

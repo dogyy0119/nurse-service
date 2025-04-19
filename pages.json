@@ -2,405 +2,374 @@
 	"easycom": {
 		"^u-(.*)": "uview-ui/components/u-$1/u-$1.vue"
 	},
-	"pages": [
-			{
-				"path": "pages/index/index",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTitleText": "首页",
-					"navigationBarTextStyle": "white",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "custom",
-					"app-plus": {
-						"titleNView": {
-							"buttons": [
-								{
-									"color": "#fff",
-									"float": "left",
-									"fontSize": "15",
-									"text": "北京",
-									"select": true
-								}
-							]
-						}
+	"pages": [{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "首页",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"app-plus": {
+					"titleNView": {
+						"buttons": [{
+							"color": "#fff",
+							"float": "left",
+							"fontSize": "15",
+							"text": "北京",
+							"select": true
+						}]
 					}
 				}
-			},
-			{
-				"path": "pages/index/front",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTitleText": "位置选择",
-					"navigationBarTextStyle": "black",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default"
-				}
-			},
-			
-			{
-				"path": "pages/index/search",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "black",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "服务搜索"
-				}
-			},
-			{
-				"path": "pages/order/OrderList",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "black",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "订单列表"
-				}
-			}, 
-			// {
-			// 	"path": "pages/order/OrderDetails/OrderDetails",
-			// 	"style": {
-			// 		"navigationBarBackgroundColor": "#1cbbb4",
-			// 		"navigationBarTextStyle": "white",
-			// 		"enablePullDownRefresh": false,
-			// 		"navigationStyle": "default",
-			// 		"navigationBarTitleText": "订单详情"
-			// 	}
-			// },
-			{
-				"path": "pages/order/OrderDetails/OrderDetail/OrderDetail",
-				// "style": {
-				// 	"navigationBarBackgroundColor": "#1cbbb4",
-				// 	"navigationBarTextStyle": "white",
-				// 	"enablePullDownRefresh": false,
-				// 	"navigationStyle": "default",
-				// 	"navigationBarTitleText": "订单详情"
-				// },
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTitleText": "订单详情",
-					"navigationBarTextStyle": "black",
-					"navigationStyle": "default"
-				}
-			},
-			{
-				"path": "pages/order/OrderEvaluate",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "white",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "评价"
-				}
-			},
-			{
-				"path": "pages/order/MoreEvaluate",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "white",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "更多评价"
-				}
-			},
-			{
-				"path": "pages/common/webview/webview",
-				"style": {
-					"navigationBarTitleText": "",
-					"enablePullDownRefresh": false
-				}
-			},
-			{
-				"path": "pages/messge/messge",
-				"style": {
-					"navigationBarTitleText": "消息中心",
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "white"
-				}
-			},
-			{
-				"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
-				"style": {
-					"disableScroll": true,
-					"app-plus": {
-						"backgroundColorTop": "transparent",
-						"background": "transparent",
-						"titleNView": false,
-						"scrollIndicator": false,
-						"popGesture": "none",
-						"animationType": "fade-in",
-						"animationDuration": 200
-					}
-				}
-			},
-			{
-				"path": "pages/uni-agree/uni-agree",
-				"style": {
-					"navigationStyle": "custom",
-					"app-plus": {
-						"popGesture": "none"
-					}
-				}
-			},
-			{
-				"path": "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
+			}
+		},
+		{
+			"path": "pages/index/front",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "位置选择",
 				"navigationBarTextStyle": "black",
-				"style": {
-					"navigationBarTitleText": "意见反馈",
-					"enablePullDownRefresh": false
-				}
-			},
-			
-			{
-				"path": "pages/coupon-card/coupon-card",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTitleText": "优惠券"
-				}
-			},
-			
-			{
-				"path": "pages/home/ucenter",
-				"style": {
-					"navigationBarBackgroundColor": "#DBE9FA",
-					"navigationBarTextStyle": "black",
-					"enablePullDownRefresh": false,
-					"navigationStyle": "default",
-					"navigationBarTitleText": "个人中心"
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default"
+			}
+		},
+
+		{
+			"path": "pages/index/search",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "服务搜索"
+			}
+		},
+		{
+			"path": "pages/order/OrderList",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "订单列表"
+			}
+		},
+	
+		{
+			"path": "pages/order/OrderDetails/OrderDetail/OrderDetail",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "订单详情",
+				"navigationBarTextStyle": "black",
+				"navigationStyle": "default"
+			}
+		},
+		{
+			"path": "pages/order/OrderEvaluate",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "评价"
+			}
+		},
+		{
+			"path": "pages/order/MoreEvaluate",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "white",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "更多评价"
+			}
+		},
+		{
+			"path": "pages/common/webview/webview",
+			"style": {
+				"navigationBarTitleText": "",
+				"enablePullDownRefresh": false
+			}
+		},
+		{
+			"path": "pages/messge/messge",
+			"style": {
+				"navigationBarTitleText": "消息中心",
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "white"
+			}
+		},
+		{
+			"path": "uni_modules/uni-upgrade-center-app/pages/upgrade-popup",
+			"style": {
+				"disableScroll": true,
+				"app-plus": {
+					"backgroundColorTop": "transparent",
+					"background": "transparent",
+					"titleNView": false,
+					"scrollIndicator": false,
+					"popGesture": "none",
+					"animationType": "fade-in",
+					"animationDuration": 200
 				}
 			}
-		,{
-    "path": "uni_modules/uni-pay/pages/success/success",
-    "style": {
-        "backgroundColor": "#DBE9FA",
-        "navigationBarTitleText": "支付成功"
-    }
-}
-,{
-    "path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
-    "style": {
-        "backgroundColor": "#DBE9FA",
-        "navigationBarTitleText": "ad"
-    }
-}
-,{
-    "path": "uni_modules/uni-pay/pages/pay-desk/pay-desk",
-    "style": {
-        "backgroundColor": "#DBE9FA",
-        "navigationBarTitleText": "收银台"
-    }
-}
-],
-		"subPackages": [
-			{
-			    "root": "pages/service/",
-			    "pages": [
-					{
-						"path": "hushizhan/hushizhan",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": "服务"
-						}
-					},
-					{
-						"path": "function/voucher_center_",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": "支付中心"
-						}
-					},
-					{
-						"path": "city/city",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "white",
-							"enablePullDownRefresh": false,
-							"navigationStyle": "default",
-							"navigationBarTitleText": "选择城市"
-						}
-					},
-					{
-						"path": "servicedetails/servicedetails",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTitleText": "服务详情",
-							"navigationBarTextStyle": "black",
-							"navigationStyle": "default"
-						}
-					},
-					{
-						"path": "appointment/appointment",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTitleText": "预约",
-							"navigationBarTextStyle": "black",
-							"navigationStyle": "default"
-						}
-					}
-			    ]
-			},
-			
-			{
-				"root": "pages/ucenter/",
-				"pages": [
-					{
-						"path": "login-page/index/index",
-						"style": {
-							"navigationBarTitleText": "",
-							"app-plus": {
-								"animationType": "none",
-								"popGesture": "none"
-							}
-						}
-					},
-					{
-						"path": "userinfo/bind-mobile/bind-mobile",
-						"style": {
-							"navigationBarTitleText": "绑定手机号码",
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black"
-							
-						}
-					},
-					{
-						"path": "about/about",
-						"style": {
-							"navigationBarTitleText": "关于",
-							"navigationBarTextStyle": "black",
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"app-plus": {
-								"titleNView": {
-									"buttons": [
-										{
-											"type": "share"
-										}
-									]
-								}
-							}
-						}
-					},
-					{
-						"path": "settings/settings",
-						"style": {
-							"navigationBarTitleText": "设置",
-							"navigationBarTextStyle": "black"
-						}
-					},
-					{
-						"path": "userinfo/userinfo",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": "个人资料"
-						}
-					},
-					{
-						"path": "userinfo/cropImage",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationStyle": "custom"
-						}
-					},
-					{
-						"path": "login-page/pwd-login/pwd-login",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": ""
-						}
-					},
-					{
-						"path": "login-page/pwd-retrieve/pwd-retrieve",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": "重置密码"
-						}
-					},
-					{
-						"path": "login-page/phone-code/phone-code",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": ""
-						}
-					},
-					{
-						"path": "login-page/register/register",
-						"style": {
-							"navigationBarBackgroundColor": "#DBE9FA",
-							"navigationBarTextStyle": "black",
-							"navigationBarTitleText": "注册",
-							"enablePullDownRefresh": false
-						}
-					},
-					{
-						"path": "read-news-log/read-news-log",
-						"style": {
-							"navigationBarTitleText": "阅读记录",
-							"enablePullDownRefresh": true
-						}
-					},
-					{
-						"path": "invite/invite",
-						"style": {
-							"navigationStyle": "custom",
-							"enablePullDownRefresh": false
-						}
-					},
-					{
-						"path": "settings/deactivate/deactivate",
-						"style": {
-							"navigationBarTitleText": "注销提醒",
-							"enablePullDownRefresh": false
-						}
-					}
-				]
+		},
+		{
+			"path": "pages/uni-agree/uni-agree",
+			"style": {
+				"navigationStyle": "custom",
+				"app-plus": {
+					"popGesture": "none"
+				}
 			}
-		],
+		},
+		{
+			"path": "uni_modules/uni-feedback/pages/opendb-feedback/opendb-feedback",
+			"navigationBarTextStyle": "black",
+			"style": {
+				"navigationBarTitleText": "意见反馈",
+				"enablePullDownRefresh": false
+			}
+		},
+
+		{
+			"path": "pages/coupon-card/coupon-card",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "优惠券"
+			}
+		},
+
+		{
+			"path": "pages/home/ucenter",
+			"style": {
+				"navigationBarBackgroundColor": "#DBE9FA",
+				"navigationBarTextStyle": "black",
+				"enablePullDownRefresh": false,
+				"navigationStyle": "default",
+				"navigationBarTitleText": "个人中心"
+			}
+		}, {
+			"path": "uni_modules/uni-pay/pages/success/success",
+			"style": {
+				"backgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "支付成功"
+			}
+		}, {
+			"path": "uni_modules/uni-pay/pages/ad-interactive-webview/ad-interactive-webview",
+			"style": {
+				"backgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "ad"
+			}
+		}, {
+			"path": "uni_modules/uni-pay/pages/pay-desk/pay-desk",
+			"style": {
+				"backgroundColor": "#DBE9FA",
+				"navigationBarTitleText": "收银台"
+			}
+		}
+	],
+	"subPackages": [{
+			"root": "pages/service/",
+			"pages": [{
+					"path": "hushizhan/hushizhan",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": "服务"
+					}
+				},
+				{
+					"path": "function/voucher_center_",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": "支付中心"
+					}
+				},
+				{
+					"path": "city/city",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "white",
+						"enablePullDownRefresh": false,
+						"navigationStyle": "default",
+						"navigationBarTitleText": "选择城市"
+					}
+				},
+				{
+					"path": "servicedetails/servicedetails",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTitleText": "服务详情",
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "default"
+					}
+				},
+				{
+					"path": "appointment/appointment",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTitleText": "预约",
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "default"
+					}
+				}
+			]
+		},
+
+		{
+			"root": "pages/ucenter/",
+			"pages": [{
+					"path": "login-page/index/index",
+					"style": {
+						"navigationBarTitleText": "",
+						"app-plus": {
+							"animationType": "none",
+							"popGesture": "none"
+						}
+					}
+				},
+				{
+					"path": "userinfo/bind-mobile/bind-mobile",
+					"style": {
+						"navigationBarTitleText": "绑定手机号码",
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black"
+
+					}
+				},
+				{
+					"path": "about/about",
+					"style": {
+						"navigationBarTitleText": "关于",
+						"navigationBarTextStyle": "black",
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"app-plus": {
+							"titleNView": {
+								"buttons": [{
+									"type": "share"
+								}]
+							}
+						}
+					}
+				},
+				{
+					"path": "settings/settings",
+					"style": {
+						"navigationBarTitleText": "设置",
+						"navigationBarTextStyle": "black"
+					}
+				},
+				{
+					"path": "userinfo/userinfo",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": "个人资料"
+					}
+				},
+				{
+					"path": "userinfo/cropImage",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationStyle": "custom"
+					}
+				},
+				{
+					"path": "login-page/pwd-login/pwd-login",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": ""
+					}
+				},
+				{
+					"path": "login-page/pwd-retrieve/pwd-retrieve",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": "重置密码"
+					}
+				},
+				{
+					"path": "login-page/phone-code/phone-code",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": ""
+					}
+				},
+				{
+					"path": "login-page/register/register",
+					"style": {
+						"navigationBarBackgroundColor": "#DBE9FA",
+						"navigationBarTextStyle": "black",
+						"navigationBarTitleText": "注册",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "read-news-log/read-news-log",
+					"style": {
+						"navigationBarTitleText": "阅读记录",
+						"enablePullDownRefresh": true
+					}
+				},
+				{
+					"path": "invite/invite",
+					"style": {
+						"navigationStyle": "custom",
+						"enablePullDownRefresh": false
+					}
+				},
+				{
+					"path": "settings/deactivate/deactivate",
+					"style": {
+						"navigationBarTitleText": "注销提醒",
+						"enablePullDownRefresh": false
+					}
+				}
+			]
+		}
+	],
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "uni-starter",
 		"navigationBarBackgroundColor": "#FFFFFF",
 		"backgroundColor": "#F8F8F8",
 		"enablePullDownRefresh": false
-		// "maxWidth":375,
-		// "rpxCalcMaxDeviceWidth": 375,
-		// "rpxCalcBaseDeviceWidth": 375
-		// "rpxCalcIncludeWidth":0
 	},
 	"tabBar": {
-		"color": "#7A7E83",
-		"selectedColor": "blue",
-		"borderStyle": "black",
-		"backgroundColor": "#DBE9FA",
+		"color": "#999999", // 默认字体颜色
+		"selectedColor": "#007AFF", // 选中时的字体颜色
+		"backgroundColor": "#ffffff", // 背景颜色
+		"borderStyle": "black", // 边框颜色
 		"list": [{
-			"pagePath": "pages/index/index",
-			"iconPath": "static/tabbar/home.png",
-			"selectedIconPath": "static/tabbar/homefill.png",
-			"text": "首页"
-		},
-		{
-			"pagePath": "pages/order/OrderList",
-			"iconPath": "static/tabbar/message.png",
-			"selectedIconPath": "static/tabbar/messagefill.png",
-			"text": "订单"
-		}, 
-		{
-			"pagePath": "pages/home/ucenter",
-			"iconPath": "static/tabbar/my.png",
-			"selectedIconPath": "static/tabbar/myfill.png",
-			"text": "我的"
-		}]
-	},
-	
-	"condition" : {
-		"current": 0,
-		"list": [
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/homefill.png",
+				"text": "首页"
+			},
 			{
+				"pagePath": "pages/order/OrderList",
+				"iconPath": "static/tabbar/message.png",
+				"selectedIconPath": "static/tabbar/messagefill.png",
+				"text": "订单"
+			},
+			{
+				"pagePath": "pages/home/ucenter",
+				"iconPath": "static/tabbar/my.png",
+				"selectedIconPath": "static/tabbar/myfill.png",
+				"text": "我的"
+			}
+		]
+	},
+
+	"condition": {
+		"current": 0,
+		"list": [{
 				"name": "位置选择",
 				"path": "pages/index/front",
 				"query": ""

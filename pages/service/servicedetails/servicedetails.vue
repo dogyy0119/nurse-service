@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="detail">
-			<view class="pic">
+			<view class="pic-1">
 				<image :src="detailObj.service_thumb" mode="widthFix"></image>
 			</view>
 
@@ -15,11 +15,11 @@
 			<view class="section_2 ">
 				<text class="text_5">{{detailObj.name}}</text>
 				<text class="text_6" v-if="detailObj.service_desc">
-				    {{ detailObj.service_desc }}
+					{{ detailObj.service_desc }}
 				</text>
 			</view>
 
-	        <view class="group_2 flex-col"></view>
+			<view class="group_2 flex-col"></view>
 
 			<!-- 		<uni-section :title="detailObj.name" type="line">
 				<view class="example-body">
@@ -42,7 +42,7 @@
 
 			</view> -->
 
-<!-- 			<view class="tool" v-if="toolObj.length">
+			<!-- 			<view class="tool" v-if="toolObj.length">
 				<view class="author">选择耗材：</view>
 				<view class="uni-px-5">
 					<uni-data-checkbox mode="button" v-model="haocaiValue" :localdata="haocai"
@@ -429,32 +429,51 @@
 
 <style lang="scss">
 	.detail {
+		display: flex;
+		flex-direction: column;
 		// padding:50rpx 30rpx;
 
 		/* 假设 <uni-section> 的标题有一个名为 .uni-section-title 的类名 */
+		background-color: #F6F7F7;
 
+		.pic-1{
+			image {
+				width: 100%;
+				height: 100%;
+			}
+			
+		}
+		
 		.section_1 {
+			// position: absolute;
 			position: relative;
 			width: auto;
 			height: auto;
+			display: flex;
+			flex-direction: column;
+			border-radius: 40rpx; /* 设置圆角 */
+			// margin-top: -20rpx;
 		}
 
 		.section_2 {
 			display: flex;
-			flex-direction: column; /* 或使用 class "flex-col" */
+			flex-direction: column;
+			/* 或使用 class "flex-col" */
 			position: relative;
 			width: auto;
 			height: auto;
 			margin-bottom: 30rpx;
+			border-radius: 20rpx;
+
 		}
 
 		.group_2 {
-		  background-color: rgba(242, 244, 247, 1);
-		  width: 750rpx;
-		  height: 16rpx;
-		  margin-top: 26rpx;
+			background-color: rgba(242, 244, 247, 1);
+			width: 750rpx;
+			height: 16rpx;
+			margin-top: 26rpx;
 		}
-		
+
 		.text-wrapper_1 {
 			width: auto;
 			height: auto;
@@ -522,6 +541,7 @@
 			margin: 24rpx 0 0 31rpx;
 
 		}
+
 		.popup-height {
 			// @include height;
 			width: 100px;
@@ -549,14 +569,14 @@
 				width: 100%;
 				height: 100%;
 			}
-			
+
 			.group_3 {
-			  background-color: rgba(242, 244, 247, 1);
-			  width: 750rpx;
-			  height: 16rpx;
-			  margin-top: 26rpx;
+				background-color: rgba(242, 244, 247, 1);
+				width: 750rpx;
+				height: 16rpx;
+				margin-top: 26rpx;
 			}
-			
+
 		}
 
 		.example-body {

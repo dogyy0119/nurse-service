@@ -1,7 +1,7 @@
 <template>
 	<view class="content">
-		<uni-list>
-			<uni-list-item class="item">
+		<uni-list class="fat-item">
+			<uni-list-item class="item"  :border="false">
 				<template v-slot:body>
 					<view class="item">
 						<text>{{$t('userinfo.ProfilePhoto')}}</text>
@@ -13,12 +13,12 @@
 				</template>
 			</uni-list-item>
 
-			<uni-list-item type="nickname" class="weui-input" @click="setNickname('')" :title="$t('userinfo.nickname')"
-				:rightText="userInfo.nickname||$t('userinfo.notSet')" link>
+			<uni-list-item  class="item" @click="setNickname('')" :title="$t('userinfo.nickname')"
+				:rightText="userInfo.nickname||$t('userinfo.notSet')" link :border="false">
 
 			</uni-list-item>
 			<uni-list-item class="item" @click="bindMobile" :title="$t('userinfo.phoneNumber')"
-				:rightText="userInfo.mobile||$t('userinfo.notSpecified')" link>
+				:rightText="userInfo.mobile||$t('userinfo.notSpecified')" link :border="false">
 			</uni-list-item>
 		</uni-list>
 
@@ -330,12 +330,20 @@
 	}
 
 	/* #endif */
-	
+
 	.content {
 		background-image: -webkit-linear-gradient(-77deg, rgba(213, 230, 249, 1) 0%, rgba(247, 248, 250, 1) 100%);
 	}
+
+	.fat-item {
+		// all: unset;
+		// outline: none !important;
+		// border: none !important;
+	}
 	
 	.item {
+		// outline: none !important;
+		// border: none !important;
 		width: 750rpx;
 		flex-direction: row;
 		justify-content: space-between;
@@ -343,7 +351,11 @@
 	}
 
 	.avatar-wrapper {
-		border: none;
+		all: unset;
+		border: none !important;
+		/* 强制去掉边框 */
+		outline: none !important;
+		/* 强制去掉轮廓 */
 		/* 去掉边框 */
 		background-color: transparent;
 		/* 背景透明 */
@@ -363,6 +375,7 @@
 		/* 水平居中 */
 		align-items: center;
 		/* 垂直居中 */
+		margin-right: 20rpx;
 	}
 
 	.avatar-wrapper-1 {

@@ -14,7 +14,7 @@
 						<image :src="tabbarIndex==k?v.selectedIconPath:v.iconPath">
 						</image>
 					</view>
-					<text style="font-size: 30upx; color: blue;">{{v.text}}</text>
+					<!-- <text style="font-size: 30upx; color: blue;">{{v.text}}</text> -->
 				</view>
 			</block>
 		</view>

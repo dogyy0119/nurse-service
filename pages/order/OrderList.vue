@@ -479,10 +479,10 @@ s<template>
 					margin-right: 20upx;
 					align-items: center;
 				}
-
+				
 				.pay {
-					background-color: #1cbbb4;
-					border: 1px solid #1cbbb4;
+					background-color: #0764d2;
+					border: 1px solid #DBE9FA;
 					color: #ffffff;
 				}
 			}
