@@ -112,12 +112,9 @@
 	var app = getApp();
 
 	const db = uniCloud.database();
-	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
 
 	export default {
-		components: {
-			CcWaterListView
-		},
+
 		data() {
 			return {
 				projectList: [],

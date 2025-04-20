@@ -87,13 +87,11 @@
 
 <script>
 	import CcHeaderSearch from '@/node_modules/cc-headerSearch/components/cc-headerSearch/cc-headerSearch.vue';
-	import CcWaterListView from '@/node_modules/cc-waterListView/components/cc-waterListView/cc-waterListView.vue';
 	import amap from '../../components/amap-wx.130.js';
 
 	export default {
 		components: {
 			CcHeaderSearch,
-			CcWaterListView,
 		},
 		data() {
 			return {
